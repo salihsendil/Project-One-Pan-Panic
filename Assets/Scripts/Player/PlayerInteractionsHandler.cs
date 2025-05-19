@@ -1,28 +1,44 @@
 using UnityEngine;
+using Unity;
+using UnityEditor;
 
 public class PlayerInteractionsHandler : MonoBehaviour
 {
+    [SerializeField] private float maxRayDistance = 1.25f;
+    [SerializeField] private float capsuleRadius = 0.15f;
+    [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
+    private RaycastHit hit;
+
     void Start()
     {
-
-    }
-    void Update()
-    {
-
+        InputHandler.OnInteractionsKeyPressed += TryInteract;
     }
 
     private void TryInteract()
     {
-        //send ray when press some button
-        //we need to send ray when we have smthng on my hand
+        Vector3 center = transform.position + rayOffset;
+        bool isSphereCastHit = Physics.SphereCast(center, capsuleRadius, transform.forward, out hit, maxRayDistance);
+        if (isSphereCastHit)
+        {
+            IInteractables interactables = hit.collider.gameObject.GetComponent<IInteractables>();
+            if (interactables!=null)
+            {
+                interactables.Interact();
+            }
+
+            //Debug.Log($"i hit: {hit.point}");
+            //Debug.Log($"i hit: {hit.collider.name}");
+            //Debug.Log($"distance from player: {Vector3.Distance(transform.position, hit.point)}");
+        }
     }
 
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
-            Debug.DrawLine(transform.position, transform.position + transform.forward * 2f, Color.green);
+            Gizmos.DrawWireSphere(transform.position + rayOffset, capsuleRadius);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(hit.point, Vector3.one / 5);
         }
     }
-
 }

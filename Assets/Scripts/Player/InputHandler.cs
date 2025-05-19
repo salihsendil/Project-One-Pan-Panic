@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
+    public static event Action OnInteractionsKeyPressed;
+
     [Header("References")]
     private PlayerInput playerInput;
 
@@ -22,6 +24,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Player.Movement.started += Movement;
         playerInput.Player.Movement.performed += Movement;
         playerInput.Player.Movement.canceled += Movement;
+        playerInput.Player.Interactions.performed += PlayerInteractions;
     }
 
     private void OnDisable()
@@ -29,6 +32,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Player.Movement.started -= Movement;
         playerInput.Player.Movement.performed -= Movement;
         playerInput.Player.Movement.canceled -= Movement;
+        playerInput.Player.Interactions.performed -= PlayerInteractions;
         playerInput.Disable();
     }
 
@@ -42,5 +46,12 @@ public class InputHandler : MonoBehaviour
     {
         return new Vector3(input.x, 0f, input.y);
     }
+
+    private void PlayerInteractions(InputAction.CallbackContext callback)
+    {
+        Debug.Log("input handler performed");
+        OnInteractionsKeyPressed?.Invoke();
+    }
+
 
 }

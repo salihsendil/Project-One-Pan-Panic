@@ -534,6 +534,24 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1409813991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4021287575955853087, guid: e57b0d77ad97a4b4298c7d375a4cddfb, type: 3}
+  m_PrefabInstance: {fileID: 5346336235017892914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1409813996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409813991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3330932db42b682478759af96872e517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cabinetSO: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
 --- !u!1 &1439250105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6103205045104785985, guid: 25c6904105be95e43b359a73b2856d12, type: 3}
@@ -551,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93558c1166eeda40bec9a67ae5c1894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cabinetSO: {fileID: 0}
+  cabinetSO: {fileID: 11400000, guid: 56237d5c952ca794ba62492b2ec19d5c, type: 2}
 --- !u!1 &1439983384
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +924,7 @@ GameObject:
   - component: {fileID: 603057427252887200}
   - component: {fileID: 603057427252887199}
   - component: {fileID: 603057427252887198}
+  - component: {fileID: 603057427252887203}
   - component: {fileID: 603057427252887201}
   m_Layer: 2
   m_Name: Player
@@ -1036,7 +1055,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085518998505c940894803e1eaac99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  acceleration: 350
+  maxSpeed: 3.25
+  canMove: 0
+  showVelocityDebug: 0
   rotationSpeed: 15
 --- !u!136 &603057427252887199
 CapsuleCollider:
@@ -1070,7 +1092,7 @@ Rigidbody:
   m_GameObject: {fileID: 222274128502187047}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 13
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1125,6 +1147,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &603057427252887203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222274128502187047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b96a1c50cdb890478ff69872688661b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &686131755682846686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1897,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4021287575955853087, guid: e57b0d77ad97a4b4298c7d375a4cddfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1409813996}
   m_SourcePrefab: {fileID: 100100000, guid: e57b0d77ad97a4b4298c7d375a4cddfb, type: 3}
 --- !u!1 &5463718816107747151
 GameObject:

@@ -49,9 +49,6 @@ public class InputHandler : MonoBehaviour
 
     private void PlayerInteractions(InputAction.CallbackContext callback)
     {
-        Debug.Log("input handler performed");
         OnInteractionsKeyPressed?.Invoke();
     }
-
-
 }

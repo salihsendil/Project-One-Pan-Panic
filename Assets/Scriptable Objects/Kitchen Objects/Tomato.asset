@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653354faf1d0e6e4f957130399654f3f, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
-  objectVisual: {fileID: 21300000, guid: 0b46ef0bd59125e42adf9435febdf4c4, type: 3}
   objectName: Tomato
+  objectIcon: {fileID: 0}
+  objectPrefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  isCuttable: 1
+  isCookable: 0

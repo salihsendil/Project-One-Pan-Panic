@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5794595011928288872}
   - component: {fileID: 4595736831447017913}
   - component: {fileID: 266030154982772788}
-  - component: {fileID: 3655257857055865768}
+  - component: {fileID: 7226471949157653026}
+  - component: {fileID: 8869361479586513238}
   m_Layer: 0
   m_Name: LettuceCabinet
   m_TagString: Untagged
@@ -29,11 +30,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.15, z: 1.85}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1814278702801382440}
-  - {fileID: 4701296091391755871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4595736831447017913
@@ -89,8 +89,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3655257857055865768
-MeshCollider:
+--- !u!65 &7226471949157653026
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,10 +107,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5340113442875233775, guid: 4e01f213806b39044bd585fa087b0569, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
+  m_Center: {x: -0.000008508563, y: 0.41176274, z: 0.03666002}
+--- !u!114 &8869361479586513238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692483292191224590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
 --- !u!1 &2231130257725372735
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,11 +149,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2231130257725372735}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.0000004172325, y: -1.4438228e-11, z: -6.1390892e-12, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4701296091391755871}
   m_Father: {fileID: 5794595011928288872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1035175032842780544
@@ -223,11 +236,11 @@ Transform:
   m_GameObject: {fileID: 4687611672404214820}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000242331, y: 0.0000037849006, z: 1, w: 0.0000018755353}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.32}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalPosition: {x: 0, y: 0.4000011, z: 0.32000002}
+  m_LocalScale: {x: 0.08, y: 0.07999999, z: 0.080000006}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 5794595011928288872}
+  m_Father: {fileID: 1814278702801382440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &6600050689781361041
 SpriteRenderer:

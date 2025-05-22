@@ -10,7 +10,7 @@ public class RunState : IAnimState
     {
         if (!animationController.IsRunning)
         {
-            animationController.SwitchState(new IdleState());
+            animationController.SwitchState(animationController.StateFactory.IdleState);
         }
     }
 

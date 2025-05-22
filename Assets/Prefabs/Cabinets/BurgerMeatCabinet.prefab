@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4547968557450331520}
   m_Father: {fileID: 4395792483960765128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9072088257362508158
@@ -97,7 +98,8 @@ GameObject:
   - component: {fileID: 4395792483960765128}
   - component: {fileID: 5002649958560460354}
   - component: {fileID: 7623379198054555510}
-  - component: {fileID: 2501623288795171658}
+  - component: {fileID: 5219981937808700508}
+  - component: {fileID: 3369937590270234654}
   m_Layer: 0
   m_Name: BurgerMeatCabinet
   m_TagString: Untagged
@@ -115,11 +117,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.15, z: 1.85}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1029660501584473373}
-  - {fileID: 4547968557450331520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5002649958560460354
@@ -175,8 +176,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2501623288795171658
-MeshCollider:
+--- !u!65 &5219981937808700508
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -193,10 +194,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5340113442875233775, guid: 4e01f213806b39044bd585fa087b0569, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
+  m_Center: {x: -0.000008508563, y: 0.41175893, z: 0.03666002}
+--- !u!114 &3369937590270234654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852075629610090935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 3709d71e0cd5dc6458fd0d20d4af5e5a, type: 2}
 --- !u!1 &8637679868233104863
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,11 +236,11 @@ Transform:
   m_GameObject: {fileID: 8637679868233104863}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000015279214, y: 0.0000035464814, z: 1, w: 0.0000020493894}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.32}
-  m_LocalScale: {x: 0.007, y: 0.007, z: 0.007}
+  m_LocalPosition: {x: 0, y: 0.4000011, z: 0.32000002}
+  m_LocalScale: {x: 0.0070000007, y: 0.007, z: 0.0070000007}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4395792483960765128}
+  m_Father: {fileID: 1029660501584473373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &146586548673834859
 SpriteRenderer:

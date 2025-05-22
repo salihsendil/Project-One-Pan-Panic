@@ -7,10 +7,13 @@ public class PlayerInteractionsHandler : MonoBehaviour
     [SerializeField] private float maxRayDistance = 1.25f;
     [SerializeField] private float capsuleRadius = 0.15f;
     [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
-    private RaycastHit hit;
+    private PlayerCarryHandler playerCarryHandler;
+
+    private RaycastHit hit; //just for draw gizmos, delete when job done!!
 
     void Start()
     {
+        playerCarryHandler = GetComponent<PlayerCarryHandler>();
         InputHandler.OnInteractionsKeyPressed += TryInteract;
     }
 
@@ -20,10 +23,10 @@ public class PlayerInteractionsHandler : MonoBehaviour
         bool isSphereCastHit = Physics.SphereCast(center, capsuleRadius, transform.forward, out hit, maxRayDistance);
         if (isSphereCastHit)
         {
-            IInteractables interactables = hit.collider.gameObject.GetComponent<IInteractables>();
-            if (interactables!=null)
+            IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-                interactables.Interact();
+                interactable.Interact(playerCarryHandler);
             }
 
             //Debug.Log($"i hit: {hit.point}");

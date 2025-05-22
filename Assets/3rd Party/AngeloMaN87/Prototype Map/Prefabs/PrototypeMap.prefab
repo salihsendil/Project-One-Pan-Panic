@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrototypeMap
       objectReference: {fileID: 0}
+    - target: {fileID: 2735449627401653163, guid: be3ed9816d019ff4a85901f7a3aae376, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 1340953740809455843}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000003686364, y: 0.000003725297, z: 1, w: 0.0000027026672}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.32}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalPosition: {x: 0, y: 0.4000011, z: 0.32000002}
+  m_LocalScale: {x: 0.08, y: 0.07999999, z: 0.080000006}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2966910317312309511}
+  m_Father: {fileID: 3360163712000321994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &8085866660422443222
 SpriteRenderer:
@@ -117,7 +117,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6940766381300972650}
   m_Father: {fileID: 2966910317312309511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5640819841579544
@@ -184,7 +185,8 @@ GameObject:
   - component: {fileID: 2966910317312309511}
   - component: {fileID: 2051326810401875395}
   - component: {fileID: 5905791789952324143}
-  - component: {fileID: 2262401770435348350}
+  - component: {fileID: 1558823913263639094}
+  - component: {fileID: 1211928378472064554}
   m_Layer: 0
   m_Name: TomatoCabinet
   m_TagString: Untagged
@@ -202,11 +204,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.15, z: 1.85}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3360163712000321994}
-  - {fileID: 6940766381300972650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2051326810401875395
@@ -262,8 +263,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2262401770435348350
-MeshCollider:
+--- !u!65 &1558823913263639094
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -280,7 +281,19 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5340113442875233775, guid: 4e01f213806b39044bd585fa087b0569, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
+  m_Center: {x: -0.000008508563, y: 0.41176274, z: 0.03666002}
+--- !u!114 &1211928378472064554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358769353655843514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}

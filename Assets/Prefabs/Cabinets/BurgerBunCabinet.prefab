@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7623658508706286939}
   - component: {fileID: 7512777559367104809}
   m_Layer: 0
-  m_Name: Img
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 382582215396756926}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000019493152, y: -0.0000032782546, z: -1, w: 0.000003113599}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.32}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalPosition: {x: 0, y: 0.4000011, z: 0.32000002}
+  m_LocalScale: {x: 0.08, y: 0.07999999, z: 0.080000006}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8263207429619479825}
+  m_Father: {fileID: 7266887377755729743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!212 &7512777559367104809
 SpriteRenderer:
@@ -98,7 +98,8 @@ GameObject:
   - component: {fileID: 8263207429619479825}
   - component: {fileID: 4080970466810541539}
   - component: {fileID: 1250098471934868520}
-  - component: {fileID: 8451436485125082835}
+  - component: {fileID: 8194202530802496230}
+  - component: {fileID: 3016599495330794139}
   m_Layer: 0
   m_Name: BurgerBunCabinet
   m_TagString: Untagged
@@ -116,11 +117,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.15, z: 1.85}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7266887377755729743}
-  - {fileID: 7623658508706286939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4080970466810541539
@@ -176,8 +176,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8451436485125082835
-MeshCollider:
+--- !u!65 &8194202530802496230
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -194,10 +194,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5340113442875233775, guid: 4e01f213806b39044bd585fa087b0569, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
+  m_Center: {x: -0.000008508563, y: 0.41176274, z: 0.03666002}
+--- !u!114 &3016599495330794139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103205045104785985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 56237d5c952ca794ba62492b2ec19d5c, type: 2}
 --- !u!1 &8774957440319624352
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +240,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7623658508706286939}
   m_Father: {fileID: 8263207429619479825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5414587026338004710

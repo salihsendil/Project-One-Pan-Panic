@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSpeed = 5.5f;
     [SerializeField] private bool canMove;
     [SerializeField] private bool showVelocityDebug;
-    public bool CanMove { get => canMove; }
-
-    private Vector3 movementVector => inputHandler.MovementVector;
-
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 15f;
 
+    [Header("Getter - Setter")]
+    public bool CanMove { get => canMove; }
+    private Vector3 movementVector => inputHandler.MovementVector;
 
     private void Awake()
     {
@@ -55,8 +54,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log($"hýz: {rb.linearVelocity}");
         }
-        //Vector3 force = movementVector * Time.fixedDeltaTime * speed + transform.position;
-        //rb.MovePosition(force);
     }
 
     private void PlayerRotation()

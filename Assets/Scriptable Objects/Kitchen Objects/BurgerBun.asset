@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653354faf1d0e6e4f957130399654f3f, type: 3}
   m_Name: BurgerBun
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 6530758574615387552, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
-  objectVisual: {fileID: 21300000, guid: 30ccd3dd846e7ea4b9fefbf49d0396dc, type: 3}
   objectName: Burger Bun
+  objectIcon: {fileID: 0}
+  objectPrefab: {fileID: 6530758574615387552, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
+  isCuttable: 1
+  isCookable: 0

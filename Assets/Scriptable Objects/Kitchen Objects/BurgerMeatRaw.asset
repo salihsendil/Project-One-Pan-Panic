@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653354faf1d0e6e4f957130399654f3f, type: 3}
   m_Name: BurgerMeatRaw
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 6808599801469802662, guid: 714cbdecdcb0a4645891357863b99738, type: 3}
-  objectVisual: {fileID: 21300000, guid: 538b8b21856b81644b794ac4542ecf56, type: 3}
   objectName: Burger Meat Raw
+  objectIcon: {fileID: 0}
+  objectPrefab: {fileID: 6808599801469802662, guid: 714cbdecdcb0a4645891357863b99738, type: 3}
+  isCuttable: 0
+  isCookable: 1

@@ -2,43 +2,32 @@ using UnityEngine;
 
 public class PlayerCarryHandler : MonoBehaviour
 {
-    [SerializeField] private bool isCarrying;
+    [SerializeField] private bool hasKitchenObject;
     [SerializeField] private Transform holdPointTransform;
-    [SerializeField] private GameObject currentCarryObj;
+    [SerializeField] private GameObject currentCarryObject;
 
-    public bool IsCarrying { get => isCarrying; }
+    public bool HasKitchenObject { get => hasKitchenObject; }
+    public GameObject CurrentCarryObject { get => currentCarryObject; }
 
     void Start()
     {
-        BaseCabinet.OnCabinetInteractionRequested += HoldSpawnObject;
+        BaseKitchenStation.OnObjectPickUpRequest += PickUpKitchenObject;
+        BaseKitchenStation.OnObjectDropRequest += DropKitchenObject;
     }
 
-    void Update()
+    private void PickUpKitchenObject(GameObject kitchenObject)
     {
-        
+        hasKitchenObject = true;
+        currentCarryObject = kitchenObject;
+        currentCarryObject.transform.position = holdPointTransform.position;
+        currentCarryObject.transform.SetParent(holdPointTransform);
     }
 
-    private void HoldSpawnObject(GameObject gameObject)
+    private GameObject DropKitchenObject()
     {
-        currentCarryObj = gameObject;
-        //currentCarryObj.transform = holdPointTransform;
+        var temp = currentCarryObject;
+        currentCarryObject = null;
+        hasKitchenObject = false;
+        return temp;        
     }
-
-    private void SetCarriedObject(GameObject gameObject)
-    {
-
-    }
-
-    private void GetCarriedObject()
-    {
-
-    }
-
-    private void DropCarriedObject()
-    {
-
-    }
-
-
-
 }

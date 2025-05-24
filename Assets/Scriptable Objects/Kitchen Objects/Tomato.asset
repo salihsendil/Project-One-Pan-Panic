@@ -15,5 +15,11 @@ MonoBehaviour:
   objectName: Tomato
   objectIcon: {fileID: 0}
   objectPrefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
-  isCuttable: 1
-  isCookable: 0
+  kitchenObjectState: 0
+  processRules:
+  - kitchenStationType: 2
+    inputKitchenObjectState: 0
+    outputKitchenObjectState: 2
+    outputKitchenObjectMesh: {fileID: -3824287831501168549, guid: b17dcdfd91e7bfc438c89c0e492afec1, type: 3}
+    processTimer: 5
+    processStepCounter: 3

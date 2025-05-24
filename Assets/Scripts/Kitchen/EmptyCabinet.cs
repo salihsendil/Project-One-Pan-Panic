@@ -2,20 +2,18 @@ using UnityEngine;
 
 public class EmptyCabinet : BaseKitchenStation
 {
+    protected override KitchenStationType kitchenStationType => KitchenStationType.EmptyCabinet;
+
     public override void Interact(PlayerCarryHandler interactor)
     {
         if (interactor.HasKitchenObject && !HasKitchenObject())
         {
-            currentKitchenObject = OnObjectDropRequest?.Invoke();
-            currentKitchenObject.transform.position = kitchenObjectPickUpPoint.position;
-            currentKitchenObject.transform.SetParent(kitchenObjectPickUpPoint);
+            SetCurrentObject();
         }
 
         else if (!interactor.HasKitchenObject && HasKitchenObject())
         {
-            OnObjectPickUpRequest?.Invoke(currentKitchenObject.gameObject);
-            currentKitchenObject = null;
-            //Destroy(currentKitchenObject.gameObject);
+            RemoveCurrentObject();
         }
     }
 }

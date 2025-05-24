@@ -4,10 +4,12 @@ public class PlayerCarryHandler : MonoBehaviour
 {
     [SerializeField] private bool hasKitchenObject;
     [SerializeField] private Transform holdPointTransform;
-    [SerializeField] private GameObject currentCarryObject;
+    [SerializeField] private GameObject currentCarryGameObject;
+    [SerializeField] private KitchenObject currentCarryKitchenObject;
 
     public bool HasKitchenObject { get => hasKitchenObject; }
-    public GameObject CurrentCarryObject { get => currentCarryObject; }
+    public GameObject CurrentCarryGameObject { get => currentCarryGameObject; }
+    public KitchenObject CurrentCarryKitchenObject { get => currentCarryGameObject.GetComponent<KitchenObject>(); }
 
     void Start()
     {
@@ -18,16 +20,20 @@ public class PlayerCarryHandler : MonoBehaviour
     private void PickUpKitchenObject(GameObject kitchenObject)
     {
         hasKitchenObject = true;
-        currentCarryObject = kitchenObject;
-        currentCarryObject.transform.position = holdPointTransform.position;
-        currentCarryObject.transform.SetParent(holdPointTransform);
+        currentCarryGameObject = kitchenObject;
+        currentCarryGameObject.transform.position = holdPointTransform.position;
+        currentCarryGameObject.transform.SetParent(holdPointTransform);
+        Debug.Log("gameobject: " + currentCarryGameObject);
+        Debug.Log("kitchen object: " + CurrentCarryKitchenObject);
     }
 
-    private GameObject DropKitchenObject()
+    private KitchenObject DropKitchenObject()
     {
-        var temp = currentCarryObject;
-        currentCarryObject = null;
+        var temp = CurrentCarryKitchenObject;
+        Debug.Log($"before null{temp}");
+        currentCarryGameObject = null;
         hasKitchenObject = false;
-        return temp;        
+        Debug.Log($"after null{temp}");
+        return temp;
     }
 }

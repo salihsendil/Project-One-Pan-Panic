@@ -15,5 +15,5 @@ MonoBehaviour:
   objectName: Burger Bun
   objectIcon: {fileID: 0}
   objectPrefab: {fileID: 6530758574615387552, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
-  isCuttable: 1
-  isCookable: 0
+  kitchenObjectState: 0
+  processRules: []

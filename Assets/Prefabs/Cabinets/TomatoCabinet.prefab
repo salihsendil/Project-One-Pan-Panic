@@ -296,4 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentKitchenObject: {fileID: 0}
+  kitchenObjectPickUpPoint: {fileID: 0}
+  baseMaterial: {fileID: 0}
+  selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
   ingredient: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}

@@ -15,5 +15,11 @@ MonoBehaviour:
   objectName: Lettuce
   objectIcon: {fileID: 0}
   objectPrefab: {fileID: 5261863767446500540, guid: 5022b8a616d4fa34bbb0fe2e2f175184, type: 3}
-  isCuttable: 1
-  isCookable: 0
+  kitchenObjectState: 0
+  processRules:
+  - kitchenStationType: 2
+    inputKitchenObjectState: 0
+    outputKitchenObjectState: 2
+    outputKitchenObjectMesh: {fileID: -682357888511628354, guid: e11d9cbcb51649a4d8f186784d5a4f97, type: 3}
+    processTimer: 6
+    processStepCounter: 6

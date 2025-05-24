@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity;
 using UnityEditor;
+using System;
 
 public class PlayerInteractionsHandler : MonoBehaviour
 {
@@ -8,8 +9,9 @@ public class PlayerInteractionsHandler : MonoBehaviour
     [SerializeField] private float capsuleRadius = 0.15f;
     [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
     private PlayerCarryHandler playerCarryHandler;
-
-    private RaycastHit hit; //just for draw gizmos, delete when job done!!
+    private RaycastHit hit; //for debug line, delete when job done !!!!
+    private IInteractable currentInteractable;
+    private IInteractable previousInteractable;
 
     void Start()
     {
@@ -17,21 +19,37 @@ public class PlayerInteractionsHandler : MonoBehaviour
         InputHandler.OnInteractionsKeyPressed += TryInteract;
     }
 
-    private void TryInteract()
+    private void Update()
+    {
+        InteractionRay();
+    }
+
+    private void InteractionRay()
     {
         Vector3 center = transform.position + rayOffset;
         bool isSphereCastHit = Physics.SphereCast(center, capsuleRadius, transform.forward, out hit, maxRayDistance);
-        if (isSphereCastHit)
-        {
-            IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
-            if (interactable != null)
-            {
-                interactable.Interact(playerCarryHandler);
-            }
 
-            //Debug.Log($"i hit: {hit.point}");
-            //Debug.Log($"i hit: {hit.collider.name}");
-            //Debug.Log($"distance from player: {Vector3.Distance(transform.position, hit.point)}");
+        if (isSphereCastHit && hit.collider.gameObject.TryGetComponent<IInteractable>(out currentInteractable))
+        {
+            currentInteractable.HandleRayHit(true);
+        }
+        else
+        {
+            currentInteractable = null;
+        }
+
+        if (currentInteractable != previousInteractable)
+        {
+            previousInteractable?.HandleRayHit(false);
+            currentInteractable?.HandleRayHit(true);
+            previousInteractable = currentInteractable;
+        }
+    }
+    private void TryInteract()
+    {
+        if (currentInteractable != null)
+        {
+            currentInteractable.Interact(playerCarryHandler);
         }
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5308449195566083431}
   - component: {fileID: 6109735920416409366}
   - component: {fileID: 8491534589434847728}
-  - component: {fileID: -2181066609687056442}
+  - component: {fileID: -3365331117140940918}
   m_Layer: 0
   m_Name: burgerBun_Sesame
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2181066609687056442
+--- !u!114 &-3365331117140940918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,3 +100,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectData: {fileID: 11400000, guid: 56237d5c952ca794ba62492b2ec19d5c, type: 2}
+  currentState: 0

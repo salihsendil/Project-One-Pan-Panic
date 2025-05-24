@@ -15,5 +15,11 @@ MonoBehaviour:
   objectName: Cheese
   objectIcon: {fileID: 0}
   objectPrefab: {fileID: 2146596931312261464, guid: d712746603da90d49aba97bf99029f64, type: 3}
-  isCuttable: 1
-  isCookable: 0
+  kitchenObjectState: 0
+  processRules:
+  - kitchenStationType: 2
+    inputKitchenObjectState: 0
+    outputKitchenObjectState: 2
+    outputKitchenObjectMesh: {fileID: 196799057122308809, guid: c77e13b355f72044683605dafb23df16, type: 3}
+    processTimer: 4
+    processStepCounter: 3

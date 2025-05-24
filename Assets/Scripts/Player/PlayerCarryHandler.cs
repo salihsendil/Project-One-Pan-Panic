@@ -23,17 +23,13 @@ public class PlayerCarryHandler : MonoBehaviour
         currentCarryGameObject = kitchenObject;
         currentCarryGameObject.transform.position = holdPointTransform.position;
         currentCarryGameObject.transform.SetParent(holdPointTransform);
-        Debug.Log("gameobject: " + currentCarryGameObject);
-        Debug.Log("kitchen object: " + CurrentCarryKitchenObject);
     }
 
     private KitchenObject DropKitchenObject()
     {
         var temp = CurrentCarryKitchenObject;
-        Debug.Log($"before null{temp}");
         currentCarryGameObject = null;
         hasKitchenObject = false;
-        Debug.Log($"after null{temp}");
         return temp;
     }
 }

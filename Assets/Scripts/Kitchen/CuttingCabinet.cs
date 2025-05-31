@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CuttingCabinet : BaseKitchenStation
 {
+    private bool isProcessDone = true;
     protected override KitchenStationType kitchenStationType => KitchenStationType.CuttingCabinet;
 
     public override void Interact(PlayerCarryHandler interactor)
@@ -11,36 +12,31 @@ public class CuttingCabinet : BaseKitchenStation
         {
             if (interactor.CurrentCarryKitchenObject.ObjectData.IsProcessableAtStation(kitchenStationType, interactor.CurrentCarryKitchenObject.CurrentState))
             {
+                isProcessDone = false;
                 SetCurrentObject();
                 int stepCount = currentKitchenObject.ObjectData.GetMatch(
                                                                 kitchenStationType,
                                                                 currentKitchenObject.CurrentState).processStepCounter;
-                CutKitchenObject(stepCount);
-                ProcessIngredient();
+                StartCoroutine(CuttingProgress(stepCount));
             }
         }
 
-        else if (!interactor.HasKitchenObject && HasKitchenObject())
+        else if (!interactor.HasKitchenObject && HasKitchenObject() && isProcessDone)
         {
             RemoveCurrentObject();
         }
     }
 
-    private void CutKitchenObject(int number)
+    private IEnumerator CuttingProgress(int stepCount)
     {
-        StartCoroutine(CuttingProgress(number));
-    }
-
-    private IEnumerator CuttingProgress(int againCounter)
-    {
-        int counter = 0;
-        while (counter < againCounter)
+        float counter = 0f;
+        while (counter < stepCount)
         {
-            Debug.Log("kesiyorum.");
-            counter++;
-            yield return new WaitForSeconds(0.5f);
-
+            counter += Time.deltaTime;
+            //update UI
+            yield return null;
         }
+        ProcessIngredient();
+        isProcessDone = true;
     }
-
 }

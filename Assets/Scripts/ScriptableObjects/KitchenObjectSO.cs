@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +46,14 @@ public class KitchenObjectSO : ScriptableObject
 
     public ProcessRule GetMatch(KitchenStationType stationType, KitchenObjectState objectState)
     {
-        return processRules.Find(rule => stationType == rule.kitchenStationType && objectState == rule.inputKitchenObjectState); 
+        ProcessRule rule = processRules.Find(rule => stationType == rule.kitchenStationType && objectState == rule.inputKitchenObjectState);
+        if (rule!=null)
+        {
+            return rule;
+        }
+        else
+        {
+            throw new Exception("No matches found for the process.");
+        }
     }
-
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum KitchenStationType { EmptyCabinet, IngredientCabinet, CuttingCabinet, Stove, TrashBin }
+public enum KitchenStationType { EmptyCabinet, IngredientCabinet, CuttingCabinet, StoveCabinet, TrashBin }
 
 public abstract class BaseKitchenStation : MonoBehaviour, IInteractable
 {

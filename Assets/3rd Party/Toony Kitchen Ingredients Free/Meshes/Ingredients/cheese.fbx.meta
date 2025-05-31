@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: c77e13b355f72044683605dafb23df16
+AssetOrigin:
+  serializedVersion: 1
+  productId: 301805
+  packageName: Toony Kitchen & Ingredients Model FREE
+  packageVersion: 1.0
+  assetPath: Assets/Toony Kitchen Ingredients Free/Meshes/Ingredients/cheese.fbx
+  uploadId: 708770
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -21,8 +28,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -112,10 +117,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 301805
-  packageName: Toony Kitchen & Ingredients Model FREE
-  packageVersion: 1.0
-  assetPath: Assets/Toony Kitchen Ingredients Free/Meshes/Ingredients/cheese.fbx
-  uploadId: 708770

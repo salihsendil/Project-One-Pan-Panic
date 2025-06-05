@@ -87,6 +87,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7041018862475762762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3540012078165365323}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3540012078165365323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041018862475762762}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000011986389, y: 0.34782904, z: 0.40983605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4395792483960765128}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7852075629610090935
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +130,7 @@ GameObject:
   - component: {fileID: 5002649958560460354}
   - component: {fileID: 7623379198054555510}
   - component: {fileID: 5219981937808700508}
-  - component: {fileID: 3369937590270234654}
+  - component: {fileID: 1563485833918048254}
   m_Layer: 0
   m_Name: BurgerMeatCabinet
   m_TagString: Untagged
@@ -121,6 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1029660501584473373}
+  - {fileID: 3540012078165365323}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5002649958560460354
@@ -197,7 +229,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
   m_Center: {x: -0.000008508563, y: 0.41175893, z: 0.03666002}
---- !u!114 &3369937590270234654
+--- !u!114 &1563485833918048254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,14 +238,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7852075629610090935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c4afd566e914264594edea6ba484396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 0}
+  kitchenItemPoint: {fileID: 3540012078165365323}
+  currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
-  ingredient: {fileID: 11400000, guid: 3709d71e0cd5dc6458fd0d20d4af5e5a, type: 2}
+  kitchenItemSO: {fileID: 11400000, guid: d3c6840dbaab058418435e02648f0c3c, type: 2}
 --- !u!1 &8637679868233104863
 GameObject:
   m_ObjectHideFlags: 0

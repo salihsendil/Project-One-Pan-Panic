@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446247254260781234}
   m_Layer: 0
-  m_Name: Cabinet Top Holder
+  m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 7185436468139404125}
   - component: {fileID: 4104130885424570017}
   - component: {fileID: 7816551367606794783}
-  - component: {fileID: 7353444827361728976}
   m_Layer: 0
   m_Name: StoveCabinet
   m_TagString: Untagged
@@ -143,22 +142,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001713, y: 0.8235256, z: 0.67332006}
   m_Center: {x: -0.0000085532665, y: 0.4117628, z: 0.036660016}
---- !u!114 &7353444827361728976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4466606053152007720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bc7fe4079219a4b81d38634b067a45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 446247254260781234}
-  baseMaterial: {fileID: 0}
-  selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
 --- !u!1001 &6961100556368977846
 PrefabInstance:
   m_ObjectHideFlags: 0

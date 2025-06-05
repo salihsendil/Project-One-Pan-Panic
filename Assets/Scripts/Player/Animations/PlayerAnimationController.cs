@@ -21,7 +21,7 @@ public class PlayerAnimationController : MonoBehaviour
     public Animator Animator { get => animator; }
     public bool IsRunning { get => playerController.CanMove; }
     public int IsRunningHash { get => isRunningHash; }
-    public bool IsCarrying { get => playerCarryHandler.HasKitchenObject; }
+    public bool IsCarrying { get => playerCarryHandler.HasKitchenItem; }
     public int IsCarryingHash { get => isCarryingHash; }
     public AnimationStateFactory StateFactory { get => stateFactory; }
 

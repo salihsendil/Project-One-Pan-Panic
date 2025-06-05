@@ -9,17 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653354faf1d0e6e4f957130399654f3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 48f75a693c128c5499a307fd99474d9a, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  objectName: Tomato
-  objectIcon: {fileID: 0}
-  objectPrefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
-  kitchenObjectState: 0
-  processRules:
-  - kitchenStationType: 2
-    inputKitchenObjectState: 0
-    outputKitchenObjectState: 2
-    outputKitchenObjectMesh: {fileID: -3824287831501168549, guid: b17dcdfd91e7bfc438c89c0e492afec1, type: 3}
-    processTimer: 5
-    processStepCounter: 3
+  Name: Tomato
+  Icon: {fileID: 21300000, guid: 0b46ef0bd59125e42adf9435febdf4c4, type: 3}
+  Prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  processTime: 5

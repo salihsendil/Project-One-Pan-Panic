@@ -10,8 +10,8 @@ public class PlayerInteractionsHandler : MonoBehaviour
     [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
     private PlayerCarryHandler playerCarryHandler;
     private RaycastHit hit; //for debug line, delete when job done !!!!
-    private IInteractable currentInteractable;
-    private IInteractable previousInteractable;
+    [SerializeField] private IStationInteractable currentInteractableStation;
+    [SerializeField] private IStationInteractable previousInteractableStation;
 
     void Start()
     {
@@ -29,27 +29,30 @@ public class PlayerInteractionsHandler : MonoBehaviour
         Vector3 center = transform.position + rayOffset;
         bool isSphereCastHit = Physics.SphereCast(center, capsuleRadius, transform.forward, out hit, maxRayDistance);
 
-        if (isSphereCastHit && hit.collider.gameObject.TryGetComponent<IInteractable>(out currentInteractable))
+        if (isSphereCastHit && hit.collider.gameObject.TryGetComponent<IStationInteractable>(out currentInteractableStation))
         {
-            currentInteractable.HandleRayHit(true);
+            currentInteractableStation.HandleRayHit(true);
         }
         else
         {
-            currentInteractable = null;
+            currentInteractableStation = null;
         }
 
-        if (currentInteractable != previousInteractable)
+        if (currentInteractableStation != previousInteractableStation)
         {
-            previousInteractable?.HandleRayHit(false);
-            currentInteractable?.HandleRayHit(true);
-            previousInteractable = currentInteractable;
+            previousInteractableStation?.HandleRayHit(false);
+            currentInteractableStation?.HandleRayHit(true);
+            previousInteractableStation = currentInteractableStation;
         }
     }
     private void TryInteract()
     {
-        if (currentInteractable != null)
+        if (currentInteractableStation != null && playerCarryHandler != null)
         {
-            currentInteractable.Interact(playerCarryHandler);
+            if (currentInteractableStation is KitchenStation station)
+            {
+                playerCarryHandler.InteractWithStation(station);
+            }
         }
     }
 

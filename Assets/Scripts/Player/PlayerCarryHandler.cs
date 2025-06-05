@@ -1,35 +1,43 @@
 using UnityEngine;
 
-public class PlayerCarryHandler : MonoBehaviour
+public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
 {
-    [SerializeField] private bool hasKitchenObject;
+    [Header("Hold Point")]
     [SerializeField] private Transform holdPointTransform;
-    [SerializeField] private GameObject currentCarryGameObject;
-    [SerializeField] private KitchenObject currentCarryKitchenObject;
 
-    public bool HasKitchenObject { get => hasKitchenObject; }
-    public GameObject CurrentCarryGameObject { get => currentCarryGameObject; }
-    public KitchenObject CurrentCarryKitchenObject { get => currentCarryGameObject.GetComponent<KitchenObject>(); }
+    [Header("Currently Holding")]
+    [SerializeField] private KitchenItem currentKitchenItem;
 
-    void Start()
+    public bool HasKitchenItem => currentKitchenItem != null;
+
+    public bool TryPlaceKitchenItem(out KitchenItem kitchenItem)
     {
-        BaseKitchenStation.OnObjectPickUpRequest += PickUpKitchenObject;
-        BaseKitchenStation.OnObjectDropRequest += DropKitchenObject;
+        if (!HasKitchenItem)
+        {
+            kitchenItem = null;
+            return false;
+        }
+        kitchenItem = currentKitchenItem;
+        currentKitchenItem = null; //burasý buglu, her iki tarafta doluken objeyi býrakýyor, animasyon da býrakýyor, üstüne obje alabiliyor, unchild yapmýyor.
+        return true;
     }
 
-    private void PickUpKitchenObject(GameObject kitchenObject)
+    public void ReceiveKitchenItem(KitchenItem kitchenItem)
     {
-        hasKitchenObject = true;
-        currentCarryGameObject = kitchenObject;
-        currentCarryGameObject.transform.position = holdPointTransform.position;
-        currentCarryGameObject.transform.SetParent(holdPointTransform);
+        if (kitchenItem == null) { return; }
+
+        currentKitchenItem = kitchenItem;
+        currentKitchenItem.transform.SetParent(holdPointTransform);
+        currentKitchenItem.transform.position = holdPointTransform.position;
     }
 
-    private KitchenObject DropKitchenObject()
+    public void InteractWithStation(KitchenStation station)
     {
-        var temp = CurrentCarryKitchenObject;
-        currentCarryGameObject = null;
-        hasKitchenObject = false;
-        return temp;
+        if (station == null) { return; }
+
+        station.SetTransferItemHandler(this);
+        station.Interact();
     }
+
+
 }

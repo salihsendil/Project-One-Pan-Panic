@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5465100509164251790}
   - component: {fileID: 1786320174639005995}
   - component: {fileID: 8981355878292726870}
-  - component: {fileID: 7280386021914757616}
+  - component: {fileID: 5629181092785121083}
+  - component: {fileID: 6026504546020422125}
   m_Layer: 0
   m_Name: groundBeef_Raw
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7280386021914757616
+--- !u!114 &5629181092785121083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,8 +97,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6808599801469802662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504797206aaaa4e48be69d0df0540b4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0950a90871d0afb47bfd7bdc5a4917cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData: {fileID: 11400000, guid: 3709d71e0cd5dc6458fd0d20d4af5e5a, type: 2}
+  kitchenItemData: {fileID: 11400000, guid: d3c6840dbaab058418435e02648f0c3c, type: 2}
+--- !u!114 &6026504546020422125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808599801469802662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaee60d1de0627d4b9c5fa759e9d2f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   currentState: 0
+  cookDuration: 0
+  cookProgress: 0

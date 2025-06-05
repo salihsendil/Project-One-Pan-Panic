@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7025806816802519694}
   m_Layer: 0
-  m_Name: Cabinet Top Holder
+  m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 200227662376270354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.018, y: 0.8991, z: -0.015}
+  m_LocalPosition: {x: 0.018, y: 0.95, z: -0.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7242837184386764896}
   - component: {fileID: 6606463204119349465}
   - component: {fileID: 7967918700040841333}
-  - component: {fileID: 3339898263568980244}
+  - component: {fileID: 8666030451154837605}
   m_Layer: 0
   m_Name: CuttingCabinet
   m_TagString: Untagged
@@ -143,7 +143,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001713, y: 0.8235256, z: 0.67332006}
   m_Center: {x: -0.0000085532665, y: 0.4117628, z: 0.036660016}
---- !u!114 &3339898263568980244
+--- !u!114 &8666030451154837605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,11 +152,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1067599315946478066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596b101584dae9246802d3a620178826, type: 3}
+  m_Script: {fileID: 11500000, guid: 44e8f7cfd0fc9e843b70db672bcd34ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 7025806816802519694}
+  kitchenItemPoint: {fileID: 7025806816802519694}
+  currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
 --- !u!1 &3253730309071987951

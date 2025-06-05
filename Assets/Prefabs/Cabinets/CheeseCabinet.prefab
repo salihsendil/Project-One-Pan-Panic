@@ -87,6 +87,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3311848843785939327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6146686258763108129}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6146686258763108129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311848843785939327}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000011986389, y: 0.34782904, z: 0.40983605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8854563557599341102}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3514972444317608652
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +217,7 @@ GameObject:
   - component: {fileID: 2811511023889297193}
   - component: {fileID: 2506125337339463515}
   - component: {fileID: 2781716264758987048}
-  - component: {fileID: 108316106215914351}
+  - component: {fileID: 3153950765651445376}
   m_Layer: 0
   m_Name: CheeseCabinet
   m_TagString: Untagged
@@ -208,6 +239,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2952687729725129511}
+  - {fileID: 6146686258763108129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2811511023889297193
@@ -284,7 +316,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
   m_Center: {x: -0.000008508563, y: 0.41175893, z: 0.03666002}
---- !u!114 &108316106215914351
+--- !u!114 &3153950765651445376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,11 +325,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4021287575955853087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c4afd566e914264594edea6ba484396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 0}
+  kitchenItemPoint: {fileID: 6146686258763108129}
+  currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
-  ingredient: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
+  kitchenItemSO: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}

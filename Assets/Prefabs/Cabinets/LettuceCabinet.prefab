@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4595736831447017913}
   - component: {fileID: 266030154982772788}
   - component: {fileID: 7226471949157653026}
-  - component: {fileID: 8869361479586513238}
+  - component: {fileID: 91867658859902814}
   m_Layer: 0
   m_Name: LettuceCabinet
   m_TagString: Untagged
@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1814278702801382440}
+  - {fileID: 5080091587068407909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4595736831447017913
@@ -110,7 +111,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
   m_Center: {x: -0.000008508563, y: 0.41176274, z: 0.03666002}
---- !u!114 &8869361479586513238
+--- !u!114 &91867658859902814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,14 +120,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 692483292191224590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c4afd566e914264594edea6ba484396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 0}
+  kitchenItemPoint: {fileID: 5080091587068407909}
+  currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
-  ingredient: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
+  kitchenItemSO: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
 --- !u!1 &2231130257725372735
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +215,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2475693870652025670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5080091587068407909}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5080091587068407909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475693870652025670}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000011986389, y: 0.34782904, z: 0.40983605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5794595011928288872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4687611672404214820
 GameObject:
   m_ObjectHideFlags: 0

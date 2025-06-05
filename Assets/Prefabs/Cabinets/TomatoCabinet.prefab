@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2051326810401875395}
   - component: {fileID: 5905791789952324143}
   - component: {fileID: 1558823913263639094}
-  - component: {fileID: 1211928378472064554}
+  - component: {fileID: 710404776881674185}
   m_Layer: 0
   m_Name: TomatoCabinet
   m_TagString: Untagged
@@ -208,6 +208,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3360163712000321994}
+  - {fileID: 8669268864089888070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2051326810401875395
@@ -284,7 +285,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001695, y: 0.8235255, z: 0.67332006}
   m_Center: {x: -0.000008508563, y: 0.41176274, z: 0.03666002}
---- !u!114 &1211928378472064554
+--- !u!114 &710404776881674185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,11 +294,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 3358769353655843514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11d6f76b4b5cbe4889888453195887e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c4afd566e914264594edea6ba484396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentKitchenObject: {fileID: 0}
-  kitchenObjectPickUpPoint: {fileID: 0}
+  kitchenItemPoint: {fileID: 8669268864089888070}
+  currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
-  ingredient: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}
+  kitchenItemSO: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}
+--- !u!1 &3638418388111887960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8669268864089888070}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8669268864089888070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638418388111887960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0000011986389, y: 0.34782904, z: 0.40983605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2966910317312309511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

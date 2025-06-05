@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8648562965124889627}
   - component: {fileID: 1525717378539401595}
   - component: {fileID: 1286230637540229943}
-  - component: {fileID: 1886238413651016410}
+  - component: {fileID: 7454775907611186376}
   m_Layer: 0
   m_Name: cheeseTriangle_Hole
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1886238413651016410
+--- !u!114 &7454775907611186376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,8 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2146596931312261464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504797206aaaa4e48be69d0df0540b4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0950a90871d0afb47bfd7bdc5a4917cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
-  currentState: 0
+  kitchenItemData: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}

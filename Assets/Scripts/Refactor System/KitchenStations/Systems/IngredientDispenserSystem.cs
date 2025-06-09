@@ -6,9 +6,9 @@ public class IngredientDispenserSystem : KitchenStation
 
     public override void Interact()
     {
-        base.Interact();
+        if (transferItemHandler == null) { return; }
 
-        if (!IsOccupied()) //dolap üstü boþ
+        if (!IsOccupied) //dolap üstü boþ
         {
             if (!transferItemHandler.HasKitchenItem) //karakter boþ
             {

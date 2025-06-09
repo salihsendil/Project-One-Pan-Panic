@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    public static event Action OnInteractionsKeyPressed;
+    public static event Action<bool> OnInteractionTriggered;
 
     [Header("References")]
     private PlayerInput playerInput;
@@ -25,6 +25,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Player.Movement.performed += Movement;
         playerInput.Player.Movement.canceled += Movement;
         playerInput.Player.Interactions.performed += PlayerInteractions;
+        playerInput.Player.Interaction_Alternate.performed += PlayerInteractions_Alternate;
     }
 
     private void OnDisable()
@@ -33,6 +34,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Player.Movement.performed -= Movement;
         playerInput.Player.Movement.canceled -= Movement;
         playerInput.Player.Interactions.performed -= PlayerInteractions;
+        playerInput.Player.Interaction_Alternate.performed -= PlayerInteractions_Alternate;
         playerInput.Disable();
     }
 
@@ -49,6 +51,10 @@ public class InputHandler : MonoBehaviour
 
     private void PlayerInteractions(InputAction.CallbackContext callback)
     {
-        OnInteractionsKeyPressed?.Invoke();
+        OnInteractionTriggered?.Invoke(false);
+    }
+    private void PlayerInteractions_Alternate(InputAction.CallbackContext callback)
+    {
+        OnInteractionTriggered?.Invoke(true);
     }
 }

@@ -18,7 +18,8 @@ public abstract class KitchenStation : MonoBehaviour, IStationInteractable
     [SerializeField] protected ITransferItemHandler transferItemHandler;
 
     private MeshRenderer meshRenderer => GetComponent<MeshRenderer>();
-    protected bool IsOccupied() => currentKitchenItem != null;
+    public bool IsOccupied => currentKitchenItem != null;
+
 
     private void Awake()
     {
@@ -31,7 +32,12 @@ public abstract class KitchenStation : MonoBehaviour, IStationInteractable
     }
     public virtual void Interact()
     {
-        if (transferItemHandler == null) { return; }
+        
+    }
+
+    public virtual void InteractAlternate()
+    {
+
     }
 
     protected void PlaceKitchenItem(KitchenItem kitchenItem)
@@ -52,4 +58,5 @@ public abstract class KitchenStation : MonoBehaviour, IStationInteractable
     {
         meshRenderer.material = isHit ? selectedMaterial : baseMaterial;
     }
+
 }

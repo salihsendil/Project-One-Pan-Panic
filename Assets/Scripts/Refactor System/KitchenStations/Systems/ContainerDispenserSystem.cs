@@ -4,7 +4,7 @@ public class ContainerDispenserSystem : KitchenStation
 {
     public override void Interact()
     {
-        base.Interact();
+        if (transferItemHandler == null) { return; }
 
         if (true)
         {

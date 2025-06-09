@@ -4,31 +4,34 @@ public class CookingSystem : KitchenStation
 {
     public override void Interact()
     {
-        base.Interact();
+        if (transferItemHandler == null) { return; }
 
-        if (!IsOccupied() && transferItemHandler.HasKitchenItem)
+        if (!IsOccupied && transferItemHandler.HasKitchenItem)
         {
             transferItemHandler.GiveKitchenItem(out var kitchenItem);
             PlaceKitchenItem(kitchenItem);
-
-            if (kitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
-            {
-                if (kitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
-                {
-                    cookableItem.StartCook(rule);
-                }
-            }
-            else
-            {
-                //ui warning pop up
-                Debug.Log("Bu eþya piþirilemez!");
-            }
-
         }
 
-        else if (IsOccupied() && !transferItemHandler.HasKitchenItem)
+        else if (IsOccupied && !transferItemHandler.HasKitchenItem)
         {
             transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+        }
+    }
+
+    public override void InteractAlternate()
+    {
+        if (currentKitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
+        {
+            if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+            {
+                cookableItem.StartCook(rule);
+            }
+        }
+
+        else
+        {
+            //ui warning pop up
+            Debug.Log("Bu eþya piþirilemez!");
         }
     }
 

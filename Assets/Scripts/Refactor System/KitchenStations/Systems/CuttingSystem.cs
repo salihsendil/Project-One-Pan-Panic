@@ -5,23 +5,15 @@ public class CuttingSystem : KitchenStation
 {
     public override void Interact()
     {
-        base.Interact();
+        if (transferItemHandler == null) { return; }
 
-        if (!IsOccupied()) //dolap boþ
+        if (!IsOccupied) //dolap boþ
         {
             if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
                 Debug.Log("tezgah boþ, eþya koyulabilir.");
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
-
-                if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem)) // kesilebilir mi? koyma ve etkileþim tuþu ayýrýlýnca burayý deðiþtir.
-                {
-                    if (kitchenItem.KitchenItemData.GetProcessRuleMatch(cuttableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
-                    {
-                        cuttableItem.StartCut(rule);
-                    }
-                }
             }
         }
 
@@ -35,6 +27,22 @@ public class CuttingSystem : KitchenStation
             else //karakter boþ
             {
                 transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+            }
+        }
+    }
+
+    public override void InteractAlternate()
+    {
+
+        if (currentKitchenItem == null) { return; }
+
+        Debug.Log("kitchen Station override girdim");
+        if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem)) // kesilebilir mi? koyma ve etkileþim tuþu ayýrýlýnca burayý deðiþtir.
+        {
+            Debug.Log("cuttable item buldum");
+            if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cuttableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+            {
+                cuttableItem.StartCut(rule);
             }
         }
     }

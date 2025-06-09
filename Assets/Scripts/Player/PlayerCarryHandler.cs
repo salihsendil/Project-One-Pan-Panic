@@ -13,7 +13,7 @@ public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
     public void GiveKitchenItem(out KitchenItem kitchenItem)
     {
         kitchenItem = currentKitchenItem;
-        currentKitchenItem = null; //burasý buglu, her iki tarafta doluken objeyi býrakýyor, animasyon da býrakýyor, üstüne obje alabiliyor, unchild yapmýyor.
+        currentKitchenItem = null;
     }
 
     public void ReceiveKitchenItem(KitchenItem kitchenItem)
@@ -25,11 +25,18 @@ public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
         currentKitchenItem.transform.position = holdPointTransform.position;
     }
 
-    public void InteractWithStation(KitchenStation station)
+    public void HandleStationInteraction(KitchenStation station, bool isAlternate)
     {
         if (station == null) { return; }
 
         station.SetTransferItemHandler(this);
-        station.Interact();
+        if (isAlternate)
+        {
+            station.InteractAlternate();
+        }
+        else
+        {
+            station.Interact();
+        }
     }
 }

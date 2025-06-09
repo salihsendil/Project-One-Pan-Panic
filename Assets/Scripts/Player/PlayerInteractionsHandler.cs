@@ -16,7 +16,7 @@ public class PlayerInteractionsHandler : MonoBehaviour
     void Start()
     {
         playerCarryHandler = GetComponent<PlayerCarryHandler>();
-        InputHandler.OnInteractionsKeyPressed += TryInteract;
+        InputHandler.OnInteractionTriggered += TryInteract;
     }
 
     private void Update()
@@ -45,13 +45,13 @@ public class PlayerInteractionsHandler : MonoBehaviour
             previousInteractableStation = currentInteractableStation;
         }
     }
-    private void TryInteract()
+    private void TryInteract(bool isAlternate)
     {
         if (currentInteractableStation != null && playerCarryHandler != null)
         {
             if (currentInteractableStation is KitchenStation station)
             {
-                playerCarryHandler.InteractWithStation(station);
+                playerCarryHandler.HandleStationInteraction(station, isAlternate);
             }
         }
     }

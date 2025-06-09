@@ -16,3 +16,12 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 538b8b21856b81644b794ac4542ecf56, type: 3}
   Prefab: {fileID: 6808599801469802662, guid: 714cbdecdcb0a4645891357863b99738, type: 3}
   processTime: 8
+  processRules:
+  - inputState: 2
+    outputState: 5
+    outputMesh: {fileID: -6038754365277113221, guid: 367bab942037468409d91209a6d73770, type: 3}
+    processTime: 8
+  - inputState: 5
+    outputState: 6
+    outputMesh: {fileID: 5206871348096782535, guid: 367bab942037468409d91209a6d73770, type: 3}
+    processTime: 6

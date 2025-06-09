@@ -3,6 +3,7 @@ using UnityEngine;
 public class KitchenItem : MonoBehaviour
 {
     [SerializeField] private KitchenItemSO kitchenItemData;
+    [SerializeField] private MeshFilter meshFilter;
 
     public KitchenItemSO KitchenItemData { get => kitchenItemData; }
 
@@ -10,7 +11,7 @@ public class KitchenItem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        TryGetComponent(out meshFilter);
     }
 
     // Update is called once per frame
@@ -19,8 +20,8 @@ public class KitchenItem : MonoBehaviour
         
     }
 
-    private void UpdateVisual()
+    public void UpdateVisual(Mesh newMesh)
     {
-
+        meshFilter.mesh = newMesh;
     }
 }

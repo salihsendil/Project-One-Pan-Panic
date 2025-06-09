@@ -6,23 +6,25 @@ public class EmptyCounterSystem : KitchenStation
     {
         base.Interact();
 
-        if (transferItemHandler.TryPlaceKitchenItem(out var kitchenItem)) //karakter dolu, dolap boþ
+        if (!IsOccupied() && transferItemHandler.HasKitchenItem) //dolap boþ, karakter dolu
         {
-            if (!HasKitchenItem())
+            Debug.Log("tezgah boþ, eþya koyulabilir.");
+            transferItemHandler.GiveKitchenItem(out var kitchenItem);
+            PlaceKitchenItem(kitchenItem);
+        }
+
+        else if (IsOccupied()) //dolap dolu, karakter boþ/dolu
+        {
+            if (!transferItemHandler.HasKitchenItem)
             {
-                Debug.Log("tezgah boþ, eþya koyulabilir.");
-                PlaceKitchenItem(kitchenItem);
+                Debug.Log("tezgahta eþya var eþya alýnabilir.");
+                transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
             }
+
             else
             {
                 Debug.Log("tabak durumu");
             }
-        }
-
-        else if (HasKitchenItem()) // karakter boþ, dolap dolu
-        {
-            Debug.Log("tezgahta eþya var eþya alýnabilir.");
-            transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
         }
     }
 }

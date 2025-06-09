@@ -1,50 +1,49 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class CuttableBehaviour : MonoBehaviour, ICuttableItem
 {
-    public event Action OnCutProgresStarted;
-    public event Action<float> OnCutProgressChanged;
-    public event Action OnCutProgressEnded;
-
-    [SerializeField] private CuttingState currentState = CuttingState.Whole;
+    [SerializeField] private KitchenItem kitchenItem;
+    [SerializeField] private KitchenItemState currentState = KitchenItemState.Whole;
     [SerializeField] private float cutDuration;
     [SerializeField] private float cutProgress;
     [SerializeField] private Coroutine cuttingCoroutine;
 
-    public CuttingState CurrentState { get => currentState; set => currentState = value; }
+    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
 
-    public void StartCut()
+    private void Awake()
     {
-        cutDuration = GetComponent<KitchenItem>().KitchenItemData.processTime;
+        TryGetComponent(out kitchenItem);
+    }
+
+    public void StartCut(KitchenItemSO.ProcessRule processRule)
+    {
         cutProgress = 0f;
+        cutDuration = processRule.processTime;
         Debug.Log("kesme baþladý.");
         // karakteri kitle
         // ui göster
         // animation state machine baþlat
-        OnCutProgresStarted?.Invoke();
-        cuttingCoroutine = StartCoroutine(CuttingProgress());
+        cuttingCoroutine = StartCoroutine(CuttingProgress(processRule));
     }
 
-    public IEnumerator CuttingProgress()
+    public IEnumerator CuttingProgress(KitchenItemSO.ProcessRule processRule)
     {
         while (cutProgress < cutDuration)
         {
             cutProgress += Time.deltaTime;
             Debug.Log(cutProgress);
-            OnCutProgressChanged?.Invoke(cutProgress);
             yield return null;
         }
 
-        OnCutComplete();
+        OnCutComplete(processRule);
     }
 
-    public void OnCutComplete()
+    public void OnCutComplete(KitchenItemSO.ProcessRule processRule)
     {
         Debug.Log("kesme bitti");
         StopCoroutine(cuttingCoroutine);
-        currentState = CuttingState.Chopped;
-        OnCutProgressEnded?.Invoke();
+        kitchenItem.UpdateVisual(processRule.outputMesh);
+        currentState = processRule.outputState;
     }
 }

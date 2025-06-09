@@ -8,28 +8,33 @@ public class IngredientDispenserSystem : KitchenStation
     {
         base.Interact();
 
-        if (transferItemHandler.TryPlaceKitchenItem(out var kitchenItem))
+        if (!IsOccupied()) //dolap üstü boþ
         {
-            if (!HasKitchenItem())
+            if (!transferItemHandler.HasKitchenItem) //karakter boþ
             {
+                GameObject item = Instantiate(kitchenItemSO.Prefab, kitchenItemPoint.position, Quaternion.identity);
+                PlaceKitchenItem(item.GetComponent<KitchenItem>());
+                transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+            }
+
+            else //karakter dolu
+            {
+                transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
             }
-            else // HasKitchenItem()
+        }
+
+        else //dolap üstü dolu
+        {
+            if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
                 Debug.Log("tabak durumu");
             }
-        }
 
-        else if (HasKitchenItem())
-        {
-            transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
-        }
-
-        else 
-        {
-            GameObject item = Instantiate(kitchenItemSO.Prefab, kitchenItemPoint.position, Quaternion.identity);
-            PlaceKitchenItem(item.GetComponent<KitchenItem>());
-            transferItemHandler.ReceiveKitchenItem(currentKitchenItem);
+            else //karakter boþ
+            {
+                transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+            }
         }
     }
 }

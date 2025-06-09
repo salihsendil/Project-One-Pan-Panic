@@ -16,3 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Prefab: {fileID: 3702283098375289871, guid: d41373a2293462542a8e0a938c149d46, type: 3}
   processTime: 0
+  processRules: []

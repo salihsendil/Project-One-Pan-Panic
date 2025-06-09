@@ -18,7 +18,7 @@ public abstract class KitchenStation : MonoBehaviour, IStationInteractable
     [SerializeField] protected ITransferItemHandler transferItemHandler;
 
     private MeshRenderer meshRenderer => GetComponent<MeshRenderer>();
-    protected bool HasKitchenItem() => currentKitchenItem != null;
+    protected bool IsOccupied() => currentKitchenItem != null;
 
     private void Awake()
     {

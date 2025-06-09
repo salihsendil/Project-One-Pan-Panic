@@ -7,35 +7,35 @@ public class CuttingSystem : KitchenStation
     {
         base.Interact();
 
-        if (transferItemHandler.TryPlaceKitchenItem(out var kitchenItem)) // karakter dolu, dolap boþ
+        if (!IsOccupied()) //dolap boþ
         {
-            if (!HasKitchenItem())
+            if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
                 Debug.Log("tezgah boþ, eþya koyulabilir.");
+                transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
 
-                if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem)) // koyma ve etkileþim tuþu ayýrýlýnca burayý deðiþtir.
+                if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem)) // kesilebilir mi? koyma ve etkileþim tuþu ayýrýlýnca burayý deðiþtir.
                 {
-                    if (cuttableItem.CurrentState == CuttingState.Chopped)
+                    if (kitchenItem.KitchenItemData.GetProcessRuleMatch(cuttableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
                     {
-                        Debug.Log("Eþya zaten kesilmiþ!");
-                        return;
+                        cuttableItem.StartCut(rule);
                     }
-                    cuttableItem.StartCut();
                 }
-            }
-
-            else
-            {
-                Debug.Log("tabak durumu");
             }
         }
 
-        else if (HasKitchenItem()) // karakter boþ, dolap dolu
+        else //dolap dolu
         {
-            Debug.Log("tezgahta eþya var eþya alýnabilir.");
+            if (transferItemHandler.HasKitchenItem) //karakter dolu
+            {
+                Debug.Log("tabak durumu");
+            }
 
-            transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+            else //karakter boþ
+            {
+                transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
+            }
         }
     }
 }

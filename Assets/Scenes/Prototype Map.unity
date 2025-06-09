@@ -409,34 +409,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892738846}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1439983385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &902959290 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4466606053152007720, guid: 8c2fa0f21a4428143a666c77b51372e1, type: 3}
-  m_PrefabInstance: {fileID: 8826354106604198617}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &902959295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902959290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba6cd0feab7b20469c7ebec5a39faf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kitchenItemPoint: {fileID: 1435344469}
-  currentKitchenItem: {fileID: 0}
-  baseMaterial: {fileID: 0}
-  selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
 --- !u!1 &944951558
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +477,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1439983385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1024786602
 MonoBehaviour:
@@ -633,11 +612,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!4 &1435344469 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 446247254260781234, guid: 8c2fa0f21a4428143a666c77b51372e1, type: 3}
-  m_PrefabInstance: {fileID: 8826354106604198617}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1439983384
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +640,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 892738849}
+  - {fileID: 1024786601}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514859964
@@ -2688,10 +2664,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: lettuceButterhead
       objectReference: {fileID: 0}
-    - target: {fileID: 5918893721308600003, guid: 5022b8a616d4fa34bbb0fe2e2f175184, type: 3}
-      propertyPath: kitchenItemData
-      value: 
-      objectReference: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3169,10 +3141,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4466606053152007720, guid: 8c2fa0f21a4428143a666c77b51372e1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 902959295}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c2fa0f21a4428143a666c77b51372e1, type: 3}
 --- !u!4 &9029364441514434797
 Transform:
@@ -3283,8 +3252,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1572726071}
   - {fileID: 1439983385}
-  - {fileID: 892738849}
-  - {fileID: 1024786601}
   - {fileID: 944951559}
   - {fileID: 603057427252887197}
   - {fileID: 8354416668599502667}

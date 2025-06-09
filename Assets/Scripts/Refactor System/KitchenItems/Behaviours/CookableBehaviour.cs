@@ -3,41 +3,50 @@ using UnityEngine;
 
 public class CookableBehaviour : MonoBehaviour, ICookableItem
 {
-    [SerializeField] private CookingState currentState = CookingState.Raw;
+    [SerializeField] private KitchenItem kitchenItem;
+    [SerializeField] private KitchenItemState currentState = KitchenItemState.Raw;
     [SerializeField] private float cookDuration;
     [SerializeField] private float cookProgress;
     [SerializeField] private Coroutine cookingCoroutine;
 
-    public CookingState CurrentState { get => currentState; set => currentState = value; }
+    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
 
-    public void StartCook()
+    private void Awake()
     {
-        cookDuration = GetComponent<KitchenItem>().KitchenItemData.processTime;
+        TryGetComponent(out kitchenItem);
+    }
+
+    public void StartCook(KitchenItemSO.ProcessRule processRule)
+    {
         cookProgress = 0f;
+        cookDuration = processRule.processTime;
         Debug.Log("piþirme baþladý.");
         // karakteri kitle
         // ui göster
         // animation state machine baþlat
-        //OnCutProgresStarted?.Invoke();
-        cookingCoroutine = StartCoroutine(CookingProgress());
+        cookingCoroutine = StartCoroutine(CookingProgress(processRule));
     }
-    public IEnumerator CookingProgress()
+    public IEnumerator CookingProgress(KitchenItemSO.ProcessRule processRule)
     {
         while (cookProgress < cookDuration)
         {
             cookProgress += Time.deltaTime;
             Debug.Log(cookProgress);
-            //OnCutProgressChanged?.Invoke(cutProgress);
             yield return null;
         }
 
-        OnCookComplete();
+        OnCookComplete(processRule);
     }
-    public void OnCookComplete()
+    public void OnCookComplete(KitchenItemSO.ProcessRule processRule)
     {
         Debug.Log("piþirme bitti");
         StopCoroutine(cookingCoroutine);
-        currentState = CookingState.Cooked;
-        //OnCutProgressEnded?.Invoke();
+        kitchenItem.UpdateVisual(processRule.outputMesh);
+        currentState = processRule.outputState;
+
+        if (kitchenItem.KitchenItemData.GetProcessRuleMatch(currentState, out KitchenItemSO.ProcessRule rule))
+        {
+            StartCook(rule);
+        }
     }
 }

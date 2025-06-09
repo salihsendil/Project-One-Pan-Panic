@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6109735920416409366}
   - component: {fileID: 8491534589434847728}
   - component: {fileID: 2071423088853521607}
+  - component: {fileID: -2196052866993600960}
   m_Layer: 0
   m_Name: burgerBun_Sesame
   m_TagString: Untagged
@@ -100,3 +101,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItemData: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
+  meshFilter: {fileID: 0}
+--- !u!114 &-2196052866993600960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530758574615387552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9676d23cc3ed74fa3c03ee62422dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitchenItem: {fileID: 0}
+  currentState: 1
+  cutDuration: 0
+  cutProgress: 0

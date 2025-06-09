@@ -2,8 +2,8 @@ using System.Collections;
 
 public interface ICuttableItem 
 {
-    public CuttingState CurrentState { get; set; }
-    public void StartCut();
-    public IEnumerator CuttingProgress();
-    public void OnCutComplete();
+    public KitchenItemState CurrentState { get; set; }
+    public void StartCut(KitchenItemSO.ProcessRule processRule);
+    public IEnumerator CuttingProgress(KitchenItemSO.ProcessRule processRule);
+    public void OnCutComplete(KitchenItemSO.ProcessRule processRule);
 }

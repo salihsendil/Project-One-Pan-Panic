@@ -14,12 +14,19 @@ public class CookingSystem : KitchenStation
 
         else if (IsOccupied && !transferItemHandler.HasKitchenItem)
         {
+            if (currentKitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
+            {
+                cookableItem.CancelCook();
+            }
+
             transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
         }
     }
 
     public override void InteractAlternate()
     {
+        if (currentKitchenItem == null) { return; }
+
         if (currentKitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
         {
             if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))

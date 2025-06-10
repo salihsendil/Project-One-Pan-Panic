@@ -10,6 +10,8 @@ public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
 
     public bool HasKitchenItem => currentKitchenItem != null;
 
+    public KitchenItem GetKitchenItem => currentKitchenItem;
+
     public void GiveKitchenItem(out KitchenItem kitchenItem)
     {
         kitchenItem = currentKitchenItem;

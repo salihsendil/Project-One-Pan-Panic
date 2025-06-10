@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6690343859084317193}
   - component: {fileID: 7296934568736654277}
   - component: {fileID: 2686411568190160350}
+  - component: {fileID: 3024518455180851949}
   m_Layer: 0
   m_Name: trash_Big
   m_TagString: Untagged
@@ -110,6 +111,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.874235, y: 4.034661, z: 3.4692655}
   m_Center: {x: -0.0000009536744, y: 2.01733, z: -0.29751542}
+--- !u!114 &3024518455180851949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342393604571997155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bbdc8d8cc8c08f4e90c612ff4090a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitchenItemPoint: {fileID: 0}
+  currentKitchenItem: {fileID: 0}
+  baseMaterial: {fileID: 0}
+  selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
 --- !u!1 &3347283627411076976
 GameObject:
   m_ObjectHideFlags: 0

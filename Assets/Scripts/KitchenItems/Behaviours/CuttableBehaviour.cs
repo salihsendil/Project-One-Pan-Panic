@@ -18,6 +18,8 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
 
     public void StartCut(KitchenItemSO.ProcessRule processRule)
     {
+        if (cuttingCoroutine != null) { return; }
+
         cutProgress = 0f;
         cutDuration = processRule.processTime;
         Debug.Log("kesme baþladý.");
@@ -45,5 +47,7 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
         StopCoroutine(cuttingCoroutine);
         kitchenItem.UpdateVisual(processRule.outputMesh);
         currentState = processRule.outputState;
+        cuttingCoroutine = null;
+        kitchenItem.isProcessed = true;
     }
 }

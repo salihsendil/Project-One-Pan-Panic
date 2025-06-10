@@ -23,7 +23,14 @@ public class EmptyCounterSystem : KitchenStation
 
             else
             {
-                Debug.Log("tabak durumu");
+                if (currentKitchenItem.TryGetComponent<ContainerBehaviour>(out var container))
+                {
+                    if (container.CanPuttableOnPlate(transferItemHandler.GetKitchenItem))
+                    {
+                        transferItemHandler.GiveKitchenItem(out var kitchenItem);
+                        container.PutOnPlate(kitchenItem);
+                    }
+                }
             }
         }
     }

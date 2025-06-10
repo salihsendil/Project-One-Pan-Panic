@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7296388131849602554}
   - component: {fileID: 3989755899249625799}
   - component: {fileID: 4274034269487011764}
+  - component: {fileID: 2290199910766008255}
   m_Layer: 0
   m_Name: ContainerPlate
   m_TagString: Untagged
@@ -100,3 +101,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItemData: {fileID: 11400000, guid: 40ac84f22e60c9a4780966d383d69d0e, type: 2}
+  meshFilter: {fileID: 0}
+--- !u!114 &2290199910766008255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702283098375289871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca5157491b418049a9fa59755f6c585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

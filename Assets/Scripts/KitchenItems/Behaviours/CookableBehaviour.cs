@@ -9,7 +9,7 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem
     [SerializeField] private float cookProgress;
     [SerializeField] private Coroutine cookingCoroutine;
 
-    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
+    public KitchenItemState CurrentState { get => currentState; }
 
     private void Awake()
     {
@@ -18,6 +18,8 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem
 
     public void StartCook(KitchenItemSO.ProcessRule processRule)
     {
+        if (cookingCoroutine != null) { return; }
+
         cookProgress = 0f;
         cookDuration = processRule.processTime;
         Debug.Log("piþirme baþladý.");
@@ -41,12 +43,23 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem
     {
         Debug.Log("piþirme bitti");
         StopCoroutine(cookingCoroutine);
+        cookingCoroutine = null;
         kitchenItem.UpdateVisual(processRule.outputMesh);
         currentState = processRule.outputState;
+        kitchenItem.isProcessed = true;
 
         if (kitchenItem.KitchenItemData.GetProcessRuleMatch(currentState, out KitchenItemSO.ProcessRule rule))
         {
             StartCook(rule);
+        }
+    }
+
+    public void CancelCook()
+    {
+        if (cookingCoroutine != null)
+        {
+            StopCoroutine(cookingCoroutine);
+            cookingCoroutine = null;
         }
     }
 }

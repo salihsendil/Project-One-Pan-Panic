@@ -6,4 +6,5 @@ public class AnimationStateFactory
     public readonly RunState RunState = new RunState();
     public readonly EmptySubState EmptySubState = new EmptySubState();
     public readonly CarrySubState CarrySubState = new CarrySubState();
+    public readonly CuttingProcessSubState CuttingProcessSubState = new CuttingProcessSubState();
 }

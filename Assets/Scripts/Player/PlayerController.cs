@@ -12,15 +12,18 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float acceleration = 350f;
     [SerializeField] private float maxSpeed = 5.5f;
-    [SerializeField] private bool canMove;
+    [SerializeField] private bool hasBusy = false;
+    [SerializeField] private bool isMoving;
     [SerializeField] private bool showVelocityDebug;
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 15f;
 
     [Header("Getter - Setter")]
-    public bool CanMove { get => canMove; }
+    public bool HasBusy { get => hasBusy; set => hasBusy = value; }
+    public bool IsMoving { get => isMoving; }
     private Vector3 movementVector => inputHandler.MovementVector;
+
 
     private void Awake()
     {
@@ -29,31 +32,40 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (IsMovementValueValid())
+        if (!hasBusy && IsMovementValueValid())
         {
             PlayerMove();
             PlayerRotation();
+        }
+
+        else
+        {
+            isMoving = false;
         }
     }
 
     private bool IsMovementValueValid()
     {
-        canMove = movementVector != Vector3.zero;
-        return canMove;
+        return movementVector != Vector3.zero;
     }
 
     private void PlayerMove()
     {
         Vector3 newVelocity = movementVector * Time.fixedDeltaTime * acceleration;
+
         if (newVelocity.magnitude > maxSpeed)
         {
             newVelocity = newVelocity.normalized * maxSpeed;
         }
+
         rb.linearVelocity = newVelocity;
+
         if (showVelocityDebug)
         {
             Debug.Log($"hýz: {rb.linearVelocity}");
         }
+
+        isMoving = true;
     }
 
     private void PlayerRotation()
@@ -67,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, rb.linearVelocity.magnitude * movementVector + transform.position);
+            //Gizmos.DrawLine(transform.position, rb.linearVelocity.magnitude * movementVector + transform.position);
         }
     }
 }

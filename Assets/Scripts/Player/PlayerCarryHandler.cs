@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
 {
+    private PlayerController playerController;
+
     [Header("Hold Point")]
     [SerializeField] private Transform holdPointTransform;
 
@@ -11,6 +13,13 @@ public class PlayerCarryHandler : MonoBehaviour, ITransferItemHandler
     public bool HasKitchenItem => currentKitchenItem != null;
 
     public KitchenItem GetKitchenItem => currentKitchenItem;
+
+    public bool HasBusyForProcess { get => playerController.HasBusy; set => playerController.HasBusy = value; }
+
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     public void GiveKitchenItem(out KitchenItem kitchenItem)
     {

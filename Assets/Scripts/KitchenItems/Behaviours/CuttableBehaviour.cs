@@ -9,27 +9,28 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
     [SerializeField] private float cutProgress;
     [SerializeField] private Coroutine cuttingCoroutine;
 
-    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
+    public KitchenItemState CurrentState { get => currentState; }
 
     private void Awake()
     {
         TryGetComponent(out kitchenItem);
     }
 
-    public void StartCut(KitchenItemSO.ProcessRule processRule)
+    public void StartCut(KitchenItemSO.ProcessRule processRule, ITransferItemHandler player)
     {
         if (cuttingCoroutine != null) { return; }
 
         cutProgress = 0f;
         cutDuration = processRule.processTime;
         Debug.Log("kesme baþladý.");
+        player.HasBusyForProcess = true;
         // karakteri kitle
         // ui göster
         // animation state machine baþlat
-        cuttingCoroutine = StartCoroutine(CuttingProgress(processRule));
+        cuttingCoroutine = StartCoroutine(CuttingProgress(processRule, player));
     }
 
-    public IEnumerator CuttingProgress(KitchenItemSO.ProcessRule processRule)
+    public IEnumerator CuttingProgress(KitchenItemSO.ProcessRule processRule, ITransferItemHandler player)
     {
         while (cutProgress < cutDuration)
         {
@@ -38,10 +39,10 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
             yield return null;
         }
 
-        OnCutComplete(processRule);
+        OnCutComplete(processRule, player);
     }
 
-    public void OnCutComplete(KitchenItemSO.ProcessRule processRule)
+    public void OnCutComplete(KitchenItemSO.ProcessRule processRule, ITransferItemHandler player)
     {
         Debug.Log("kesme bitti");
         StopCoroutine(cuttingCoroutine);
@@ -49,5 +50,6 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
         currentState = processRule.outputState;
         cuttingCoroutine = null;
         kitchenItem.isProcessed = true;
+        player.HasBusyForProcess = false;
     }
 }

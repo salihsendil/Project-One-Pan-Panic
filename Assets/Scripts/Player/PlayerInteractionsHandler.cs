@@ -9,9 +9,10 @@ public class PlayerInteractionsHandler : MonoBehaviour
     [SerializeField] private float capsuleRadius = 0.15f;
     [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
     private PlayerCarryHandler playerCarryHandler;
-    private RaycastHit hit; //for debug line, delete when job done !!!!
     [SerializeField] private IStationInteractable currentInteractableStation;
     [SerializeField] private IStationInteractable previousInteractableStation;
+
+    private RaycastHit hit; //for debug line, delete when job done !!!!
 
     void Start()
     {

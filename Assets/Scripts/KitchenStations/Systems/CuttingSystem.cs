@@ -49,7 +49,7 @@ public class CuttingSystem : KitchenStation
             Debug.Log("cuttable item buldum");
             if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cuttableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
             {
-                cuttableItem.StartCut(rule);
+                cuttableItem.StartCut(rule, transferItemHandler);
             }
         }
     }

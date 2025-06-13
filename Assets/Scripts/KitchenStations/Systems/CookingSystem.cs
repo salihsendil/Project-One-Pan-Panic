@@ -8,8 +8,23 @@ public class CookingSystem : KitchenStation
 
         if (!IsOccupied && transferItemHandler.HasKitchenItem)
         {
-            transferItemHandler.GiveKitchenItem(out var kitchenItem);
-            PlaceKitchenItem(kitchenItem);
+            if (transferItemHandler.GetKitchenItem.TryGetComponent<ICookableItem>(out var cookableItem))
+            {
+                transferItemHandler.GiveKitchenItem(out var kitchenItem);
+                PlaceKitchenItem(kitchenItem);
+
+                if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+                {
+                    cookableItem.StartCook(rule);
+                }
+            }
+
+            else
+            {
+                //ui warning pop up
+                Debug.Log("Bu eþya piþirilemez!");
+            }
+
         }
 
         else if (IsOccupied && !transferItemHandler.HasKitchenItem)
@@ -21,26 +36,18 @@ public class CookingSystem : KitchenStation
 
             transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
         }
-    }
 
-    public override void InteractAlternate()
-    {
-        if (currentKitchenItem == null) { return; }
-
-        if (currentKitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
+        else if (IsOccupied && transferItemHandler.HasKitchenItem)
         {
-            if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+            if (transferItemHandler.GetKitchenItem.TryGetComponent<IContainerItem>(out var containerItem))
             {
-                cookableItem.StartCook(rule);
+                if (containerItem.CanPuttableOnPlate(currentKitchenItem))
+                {
+                    currentKitchenItem.TryGetComponent<ICookableItem>(out var cookable);
+                    cookable.CancelCook();
+                    containerItem.PutOnPlate(RemoveKitchenItem());
+                }
             }
         }
-
-        else
-        {
-            //ui warning pop up
-            Debug.Log("Bu eþya piþirilemez!");
-        }
     }
-
-
 }

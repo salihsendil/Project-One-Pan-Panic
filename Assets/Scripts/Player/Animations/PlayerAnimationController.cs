@@ -17,12 +17,16 @@ public class PlayerAnimationController : MonoBehaviour
     private int isRunningHash;
     private bool isCarrying;
     private int isCarryingHash;
+    private bool isCuttingProcess;
+    private int isCuttingProcessHash;
 
     public Animator Animator { get => animator; }
-    public bool IsRunning { get => playerController.CanMove; }
+    public bool IsRunning { get => playerController.IsMoving; }
     public int IsRunningHash { get => isRunningHash; }
     public bool IsCarrying { get => playerCarryHandler.HasKitchenItem; }
     public int IsCarryingHash { get => isCarryingHash; }
+    public bool IsCuttingProcess { get => playerCarryHandler.HasBusyForProcess; }
+    public int IsCuttingProcessHash { get => isCuttingProcessHash; }
     public AnimationStateFactory StateFactory { get => stateFactory; }
 
     void Start()
@@ -40,12 +44,14 @@ public class PlayerAnimationController : MonoBehaviour
 
         isRunningHash = Animator.StringToHash("isRunning");
         isCarryingHash = Animator.StringToHash("isCarrying");
+        isCuttingProcessHash = Animator.StringToHash("isCuttingProcess");
     }
 
     void Update()
     {
         currentState.UpdateState(this);
         currentSubState.UpdateSubState(this);
+        //Debug.Log($"iscuttingprocess: {IsCuttingProcess}");
     }
 
     public void SwitchState(IAnimState newState)

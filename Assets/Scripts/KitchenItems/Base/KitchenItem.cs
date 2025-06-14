@@ -4,7 +4,7 @@ public class KitchenItem : MonoBehaviour
 {
     [SerializeField] private KitchenItemSO kitchenItemData;
     [SerializeField] private MeshFilter meshFilter;
-    [SerializeField] public bool isProcessed = false;
+    [SerializeField] public bool IsProcessed = false;
 
     public KitchenItemSO KitchenItemData { get => kitchenItemData; }
 

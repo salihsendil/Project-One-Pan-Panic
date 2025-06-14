@@ -5,5 +5,19 @@ using UnityEngine;
 public class RecipeSO : ScriptableObject
 {
     public string recipeName;
-    [SerializeField] public List<KitchenItemSO> recipeList = new List<KitchenItemSO>();
+    public int successfullPoint;
+    [SerializeField] public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+
+    [System.Serializable]
+    public struct RecipeIngredient
+    {
+        public KitchenItemSO kitchenItemSO;
+        public KitchenItemState kitchenItemState;
+
+        public RecipeIngredient(KitchenItemSO kitchenItemSO, KitchenItemState kitchenItemState)
+        {
+            this.kitchenItemSO = kitchenItemSO;
+            this.kitchenItemState = kitchenItemState;
+        }
+    }
 }

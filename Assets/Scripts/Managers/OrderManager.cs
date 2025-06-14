@@ -10,13 +10,20 @@ public class OrderManager : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent<OrderGenerator>(out orderGenerator);
+        if (!TryGetComponent<OrderGenerator>(out orderGenerator))
+        {
+            Debug.LogError(this.name + " cannot find any Order Generator references!");
+        }
     }
 
     private void Start()
     {
-        currentOrderList.Add(orderGenerator.GenerateRandomRecipe());
-        currentOrderList.Add(orderGenerator.GenerateRandomRecipe());
+        GenerateOrder();
     }
 
+    private void GenerateOrder()
+    {
+        RecipeSO recipeSO = orderGenerator.GenerateRandomRecipe();
+        currentOrderList.Add(recipeSO);
+    }
 }

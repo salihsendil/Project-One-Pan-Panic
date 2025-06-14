@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CookableBehaviour : MonoBehaviour, ICookableItem
+public class CookableBehaviour : MonoBehaviour, ICookableItem, IKitchenItemStateProvider
 {
     [SerializeField] private KitchenItem kitchenItem;
     [SerializeField] private KitchenItemState currentState = KitchenItemState.Raw;
@@ -9,7 +9,7 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem
     [SerializeField] private float cookProgress;
     [SerializeField] private Coroutine cookingCoroutine;
 
-    public KitchenItemState CurrentState { get => currentState; }
+    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem
         cookingCoroutine = null;
         kitchenItem.UpdateVisual(processRule.outputMesh);
         currentState = processRule.outputState;
-        kitchenItem.isProcessed = true;
+        kitchenItem.IsProcessed = true;
 
         if (kitchenItem.KitchenItemData.GetProcessRuleMatch(currentState, out KitchenItemSO.ProcessRule rule))
         {

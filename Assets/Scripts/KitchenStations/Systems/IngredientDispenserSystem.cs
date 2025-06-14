@@ -33,7 +33,8 @@ public class IngredientDispenserSystem : KitchenStation
                     if (container.CanPuttableOnPlate(transferItemHandler.GetKitchenItem))
                     {
                         transferItemHandler.GiveKitchenItem(out var kitchenItem);
-                        container.PutOnPlate(kitchenItem);
+                        kitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+                        container.PutOnPlate(kitchenItem, stateProvider);
                     }
                 }
             }

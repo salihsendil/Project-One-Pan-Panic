@@ -102,6 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kitchenItemData: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}
   meshFilter: {fileID: 0}
+  isProcessed: 0
+  currentState: 1
 --- !u!114 &1896224744325031267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +117,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItem: {fileID: 0}
-  currentState: 1
   cutDuration: 0
   cutProgress: 0

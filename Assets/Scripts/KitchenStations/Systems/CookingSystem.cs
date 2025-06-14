@@ -13,7 +13,9 @@ public class CookingSystem : KitchenStation
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
 
-                if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cookableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+                currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+
+                if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(stateProvider.CurrentState, out KitchenItemSO.ProcessRule rule))
                 {
                     cookableItem.StartCook(rule);
                 }
@@ -45,7 +47,8 @@ public class CookingSystem : KitchenStation
                 {
                     currentKitchenItem.TryGetComponent<ICookableItem>(out var cookable);
                     cookable.CancelCook();
-                    containerItem.PutOnPlate(RemoveKitchenItem());
+                    currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+                    containerItem.PutOnPlate(RemoveKitchenItem(), stateProvider);
                 }
             }
         }

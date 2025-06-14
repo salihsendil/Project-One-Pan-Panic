@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CuttableBehaviour : MonoBehaviour, ICuttableItem
+public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemStateProvider
 {
     [SerializeField] private KitchenItem kitchenItem;
     [SerializeField] private KitchenItemState currentState = KitchenItemState.Whole;
@@ -9,7 +9,7 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
     [SerializeField] private float cutProgress;
     [SerializeField] private Coroutine cuttingCoroutine;
 
-    public KitchenItemState CurrentState { get => currentState; }
+    public KitchenItemState CurrentState { get => currentState; set => currentState = value; }
 
     private void Awake()
     {
@@ -24,9 +24,7 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
         cutDuration = processRule.processTime;
         Debug.Log("kesme baþladý.");
         player.HasBusyForProcess = true;
-        // karakteri kitle
         // ui göster
-        // animation state machine baþlat
         cuttingCoroutine = StartCoroutine(CuttingProgress(processRule, player));
     }
 
@@ -49,7 +47,7 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem
         kitchenItem.UpdateVisual(processRule.outputMesh);
         currentState = processRule.outputState;
         cuttingCoroutine = null;
-        kitchenItem.isProcessed = true;
+        kitchenItem.IsProcessed = true;
         player.HasBusyForProcess = false;
     }
 }

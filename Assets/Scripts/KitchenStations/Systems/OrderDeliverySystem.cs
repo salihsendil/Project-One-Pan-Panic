@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 using Zenject;
 using UnityEngine;
+using System.Linq;
 
 public class OrderDeliverySystem : KitchenStation
 {
     [Inject] private OrderManager orderManager;
+    private readonly RecipeIngredientComparer comparer = new RecipeIngredientComparer();
+
     public override void Interact()
     {
         if (transferItemHandler == null) { return; }
@@ -31,19 +33,23 @@ public class OrderDeliverySystem : KitchenStation
         }
     }
 
-    private bool CheckDeliveryInOrderList(List<KitchenItemSO> order, List<RecipeSO> orderList, out RecipeSO matchedRecipe)
+    private bool CheckDeliveryInOrderList(HashSet<RecipeSO.RecipeIngredient> order, List<RecipeSO> orderList, out RecipeSO matchedRecipe)
     {
         matchedRecipe = null;
-        foreach (RecipeSO recipe in orderList)
-        {
-            var sortedList1 = recipe.recipeList.OrderBy(x => x.name).ToList();
-            var sortedList2 = order.OrderBy(x => x.name).ToList();
 
-            if (sortedList1.SequenceEqual(sortedList2))
+        foreach (var recipe in orderList)
+        {
+            var recipeSet = new HashSet<RecipeSO.RecipeIngredient>(recipe.recipeIngredients, comparer);
+
+            Debug.Log("Tarif: " + string.Join(", ", recipeSet.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
+            Debug.Log("Oyuncu: " + string.Join(", ", order.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
+
+            if (recipeSet.SetEquals(order))
             {
                 matchedRecipe = recipe;
+                Debug.Log("tamamen eþleþti");
                 return true;
-            }
+            };
         }
         return false;
     }

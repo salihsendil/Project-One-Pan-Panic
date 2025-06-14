@@ -11,7 +11,6 @@ public class CuttingSystem : KitchenStation
         {
             if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
-                Debug.Log("tezgah boþ, eþya koyulabilir.");
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
             }
@@ -26,12 +25,15 @@ public class CuttingSystem : KitchenStation
                     if (container.CanPuttableOnPlate(transferItemHandler.GetKitchenItem))
                     {
                         transferItemHandler.GiveKitchenItem(out var kitchenItem);
-                        container.PutOnPlate(kitchenItem);
+
+                        kitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+
+                        container.PutOnPlate(kitchenItem, stateProvider);
                     }
                 }
             }
 
-            else //karakter boþ
+            else if (!transferItemHandler.HasBusyForProcess) //karakter 
             {
                 transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
             }
@@ -40,14 +42,13 @@ public class CuttingSystem : KitchenStation
 
     public override void InteractAlternate()
     {
-
         if (currentKitchenItem == null) { return; }
 
-        Debug.Log("kitchen Station override girdim");
-        if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem)) // kesilebilir mi? koyma ve etkileþim tuþu ayýrýlýnca burayý deðiþtir.
+        if (currentKitchenItem.TryGetComponent<ICuttableItem>(out ICuttableItem cuttableItem))
         {
-            Debug.Log("cuttable item buldum");
-            if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(cuttableItem.CurrentState, out KitchenItemSO.ProcessRule rule))
+            currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+
+            if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(stateProvider.CurrentState, out KitchenItemSO.ProcessRule rule))
             {
                 cuttableItem.StartCut(rule, transferItemHandler);
             }

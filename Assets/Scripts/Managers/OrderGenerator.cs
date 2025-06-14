@@ -7,8 +7,8 @@ public class OrderGenerator : MonoBehaviour
 
     public RecipeSO GenerateRandomRecipe()
     {
-        Debug.Log($"capacity: {recipeList.Capacity} ");
-        Debug.Log($"count: {recipeList.Count} ");
+        if (recipeList.Count <= 0) { return null; }
+
         return recipeList[Random.Range(0, recipeList.Capacity)];
     }
 

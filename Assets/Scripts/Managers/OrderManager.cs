@@ -1,12 +1,13 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class OrderManager : MonoBehaviour
 {
+    [Inject] private GameManager gameManager;
+    [Inject] private GameStatsManager gameStatsManager;
     private OrderGenerator orderGenerator;
-    [SerializeField] private List<RecipeSO> currentOrderList = new List<RecipeSO>();
-
-    public List<RecipeSO> CurrentOrderList { get => currentOrderList; }
+    private Coroutine orderCoroutine;
 
     private void Awake()
     {
@@ -18,12 +19,33 @@ public class OrderManager : MonoBehaviour
 
     private void Start()
     {
-        GenerateOrder();
+        orderCoroutine = StartCoroutine(GenerateOrder());
     }
 
-    private void GenerateOrder()
+    private IEnumerator GenerateOrder()
     {
-        RecipeSO recipeSO = orderGenerator.GenerateRandomRecipe();
-        currentOrderList.Add(recipeSO);
+        yield return new WaitForSeconds(gameManager.Settings.FirstOrderDelay);
+
+        while (gameManager.Settings.MAX_ORDER_COUNT > gameStatsManager.CurrentOrderInstances.Count)
+        {
+            OrderInstance orderInstance = new OrderInstance();
+
+            orderInstance.SetOrderInstance(orderGenerator.GenerateRandomRecipe());
+
+            gameStatsManager.AddOrder(orderInstance);
+
+            yield return new WaitForSeconds(Random.Range(gameManager.Settings.MinOrderDelay, gameManager.Settings.maxOrderDelay));
+        }
     }
+
+    private void DeleteOrder()
+    {
+        // expired or delivered doesnt matter
+
+
+
+    }
+
+
+
 }

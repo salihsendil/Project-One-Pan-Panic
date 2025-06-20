@@ -8,7 +8,6 @@ public class EmptyCounterSystem : KitchenStation
 
         if (!IsOccupied && transferItemHandler.HasKitchenItem) //dolap boþ, karakter dolu
         {
-            Debug.Log("tezgah boþ, eþya koyulabilir.");
             transferItemHandler.GiveKitchenItem(out var kitchenItem);
             PlaceKitchenItem(kitchenItem);
         }
@@ -17,7 +16,6 @@ public class EmptyCounterSystem : KitchenStation
         {
             if (!transferItemHandler.HasKitchenItem)
             {
-                Debug.Log("tezgahta eþya var eþya alýnabilir.");
                 transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
             }
 

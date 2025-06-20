@@ -22,7 +22,6 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem, IKitchenItemState
 
         cookProgress = 0f;
         cookDuration = processRule.processTime;
-        Debug.Log("piþirme baþladý.");
         // karakteri kitle
         // ui göster
         // animation state machine baþlat
@@ -33,7 +32,6 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem, IKitchenItemState
         while (cookProgress < cookDuration)
         {
             cookProgress += Time.deltaTime;
-            Debug.Log(cookProgress);
             yield return null;
         }
 
@@ -41,7 +39,6 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem, IKitchenItemState
     }
     public void OnCookComplete(KitchenItemSO.ProcessRule processRule)
     {
-        Debug.Log("piþirme bitti");
         StopCoroutine(cookingCoroutine);
         cookingCoroutine = null;
         kitchenItem.UpdateVisual(processRule.outputMesh);

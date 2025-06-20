@@ -7,8 +7,6 @@ public class KitchenItemSO : ScriptableObject
     public string Name;
     public Sprite Icon;
     public GameObject Prefab;
-    [Tooltip("How many seconds does it take to process the item?")]
-    public float processTime;
 
     [System.Serializable]
     public class ProcessRule

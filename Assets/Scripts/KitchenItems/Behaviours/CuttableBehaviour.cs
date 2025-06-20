@@ -22,7 +22,6 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemState
 
         cutProgress = 0f;
         cutDuration = processRule.processTime;
-        Debug.Log("kesme baþladý.");
         player.HasBusyForProcess = true;
         // ui göster
         cuttingCoroutine = StartCoroutine(CuttingProgress(processRule, player));
@@ -33,7 +32,6 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemState
         while (cutProgress < cutDuration)
         {
             cutProgress += Time.deltaTime;
-            Debug.Log(cutProgress);
             yield return null;
         }
 
@@ -42,7 +40,6 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemState
 
     public void OnCutComplete(KitchenItemSO.ProcessRule processRule, ITransferItemHandler player)
     {
-        Debug.Log("kesme bitti");
         StopCoroutine(cuttingCoroutine);
         kitchenItem.UpdateVisual(processRule.outputMesh);
         currentState = processRule.outputState;

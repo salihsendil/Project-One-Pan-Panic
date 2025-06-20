@@ -51,7 +51,6 @@ public class PlayerAnimationController : MonoBehaviour
     {
         currentState.UpdateState(this);
         currentSubState.UpdateSubState(this);
-        //Debug.Log($"iscuttingprocess: {IsCuttingProcess}");
     }
 
     public void SwitchState(IAnimState newState)

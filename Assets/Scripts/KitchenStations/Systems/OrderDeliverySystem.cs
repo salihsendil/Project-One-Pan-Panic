@@ -6,6 +6,7 @@ using System.Linq;
 public class OrderDeliverySystem : KitchenStation
 {
     [Inject] private OrderManager orderManager;
+    [Inject] private GameStatsManager gameStatsManager;
     private readonly RecipeIngredientComparer comparer = new RecipeIngredientComparer();
 
     public override void Interact()
@@ -14,15 +15,12 @@ public class OrderDeliverySystem : KitchenStation
 
         if (transferItemHandler.HasKitchenItem && transferItemHandler.GetKitchenItem.TryGetComponent<IContainerItem>(out var containerItem))
         {
-            if (CheckDeliveryInOrderList(containerItem.KitchemItemsDatas, orderManager.CurrentOrderList, out RecipeSO recipe))
+            if (CheckDeliveryInOrderList(containerItem.KitchemItemsDatas, gameStatsManager.CurrentOrderInstances, out OrderInstance recipe))
             {
-                Debug.Log("eþleþme bulundu.");
-
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
-                orderManager.CurrentOrderList.Remove(recipe);
+                gameStatsManager.DeleteOrder(recipe);
                 Destroy(kitchenItem.gameObject, 2f);
-                Debug.Log("sipariþ teslim edildi.");
             }
 
             else
@@ -33,13 +31,15 @@ public class OrderDeliverySystem : KitchenStation
         }
     }
 
-    private bool CheckDeliveryInOrderList(HashSet<RecipeSO.RecipeIngredient> order, List<RecipeSO> orderList, out RecipeSO matchedRecipe)
+    private bool CheckDeliveryInOrderList(HashSet<RecipeSO.RecipeIngredient> order, List<OrderInstance> orderList, out OrderInstance matchedRecipe)
     {
         matchedRecipe = null;
 
         foreach (var recipe in orderList)
         {
-            var recipeSet = new HashSet<RecipeSO.RecipeIngredient>(recipe.recipeIngredients, comparer);
+            if (recipe.RecipeSO.recipeIngredients.Count != order.Count) { continue; }
+
+            var recipeSet = new HashSet<RecipeSO.RecipeIngredient>(recipe.RecipeSO.recipeIngredients, comparer);
 
             Debug.Log("Tarif: " + string.Join(", ", recipeSet.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
             Debug.Log("Oyuncu: " + string.Join(", ", order.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
@@ -47,7 +47,6 @@ public class OrderDeliverySystem : KitchenStation
             if (recipeSet.SetEquals(order))
             {
                 matchedRecipe = recipe;
-                Debug.Log("tamamen eþleþti");
                 return true;
             };
         }

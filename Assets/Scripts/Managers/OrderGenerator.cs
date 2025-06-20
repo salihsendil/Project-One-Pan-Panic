@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class OrderGenerator : MonoBehaviour
 {
-    [SerializeField] private List<RecipeSO> recipeList = new List<RecipeSO>();
+    [Inject] private GameManager gameManager;
 
     public RecipeSO GenerateRandomRecipe()
     {
-        if (recipeList.Count <= 0) { return null; }
+        if (gameManager.Settings.RecipeList.Count <= 0) { return null; }
 
-        return recipeList[Random.Range(0, recipeList.Capacity)];
+        return gameManager.Settings.RecipeList[Random.Range(0, gameManager.Settings.RecipeList.Count)];
     }
-
 }

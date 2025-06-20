@@ -6,6 +6,7 @@ public class RecipeSO : ScriptableObject
 {
     public string recipeName;
     public int successfullPoint;
+    public float preparationTime;
     [SerializeField] public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
 
     [System.Serializable]

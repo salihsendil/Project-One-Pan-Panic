@@ -20,12 +20,6 @@ public abstract class KitchenStation : MonoBehaviour, IStationInteractable
     private MeshRenderer meshRenderer => GetComponent<MeshRenderer>();
     public bool IsOccupied => currentKitchenItem != null;
 
-
-    private void Awake()
-    {
-        baseMaterial = meshRenderer.material;
-    }
-
     public void SetTransferItemHandler(ITransferItemHandler handler)
     {
         transferItemHandler = handler;

@@ -15,9 +15,8 @@ MonoBehaviour:
   Name: Cheese
   Icon: {fileID: 21300000, guid: 7c56f36d5a1c4fe4f9cdd42692c40605, type: 3}
   Prefab: {fileID: 2146596931312261464, guid: d712746603da90d49aba97bf99029f64, type: 3}
-  processTime: 0
   processRules:
   - inputState: 1
     outputState: 4
     outputMesh: {fileID: 196799057122308809, guid: c77e13b355f72044683605dafb23df16, type: 3}
-    processTime: 4
+    processTime: 10

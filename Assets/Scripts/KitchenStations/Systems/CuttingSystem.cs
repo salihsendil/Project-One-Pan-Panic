@@ -1,8 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CuttingSystem : KitchenStation
 {
+    [SerializeField] private IStationTimerDisplayer timerDisplayer;
+
+    private void Awake()
+    {
+        TryGetComponent(out timerDisplayer);
+    }
+
     public override void Interact()
     {
         if (transferItemHandler == null) { return; }
@@ -50,7 +58,7 @@ public class CuttingSystem : KitchenStation
 
             if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(stateProvider.CurrentState, out KitchenItemSO.ProcessRule rule))
             {
-                cuttableItem.StartCut(rule, transferItemHandler);
+                cuttableItem.StartCut(rule, transferItemHandler, timerDisplayer);
             }
         }
     }

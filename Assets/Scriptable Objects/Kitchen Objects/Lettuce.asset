@@ -15,9 +15,8 @@ MonoBehaviour:
   Name: Lettuce
   Icon: {fileID: 21300000, guid: ef3f27a5cd15c59478767a4ca88f0e80, type: 3}
   Prefab: {fileID: 5261863767446500540, guid: 5022b8a616d4fa34bbb0fe2e2f175184, type: 3}
-  processTime: 6
   processRules:
   - inputState: 1
     outputState: 4
     outputMesh: {fileID: -682357888511628354, guid: e11d9cbcb51649a4d8f186784d5a4f97, type: 3}
-    processTime: 6
+    processTime: 1

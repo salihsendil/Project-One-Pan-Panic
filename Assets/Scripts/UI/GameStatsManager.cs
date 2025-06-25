@@ -6,20 +6,19 @@ using Zenject;
 public class GameStatsManager : MonoBehaviour
 {
     [Inject] private GameManager gameManager;
- 
+
     [Header("Timer")]
     [SerializeField] private float time;
     public event Action<float> OnTimerValueChanged;
 
-    [Header("Order")]
-    [SerializeField] private List<RecipeSO> currentOrderRecipe = new List<RecipeSO>();//just for debugging, DELETE!!
-    [SerializeField] private List<OrderInstance> currentOrderInstances = new List<OrderInstance>(5);
-    public event Action<OrderInstance> OnOrderListValuesChanged;
-    public List<OrderInstance> CurrentOrderInstances { get => currentOrderInstances; }
+    [Header("Score")]
+    [SerializeField] private int score;
+    public event Action<int> OnScoreValueChanged;
 
     private void Awake()
     {
-        time = gameManager.Settings.GameTime;
+        time = gameManager.GameConfig.GameTime;
+        score = gameManager.GameConfig.StartScore;
     }
 
     private void Update()
@@ -28,16 +27,10 @@ public class GameStatsManager : MonoBehaviour
         OnTimerValueChanged?.Invoke(time);
     }
 
-    public void AddOrder(OrderInstance newOrder)
+    public void UpdateScore(int addScore)
     {
-        currentOrderRecipe.Add(newOrder.RecipeSO); //just for debugging, DELETE!!
-        currentOrderInstances.Add(newOrder);
-        OnOrderListValuesChanged?.Invoke(newOrder);
+        score += addScore;
+        OnScoreValueChanged?.Invoke(score);
     }
 
-    public void DeleteOrder(OrderInstance order)
-    {
-        currentOrderInstances.Remove(order);
-        currentOrderRecipe.Remove(order.RecipeSO); //just for debugging, DELETE!!
-    }
 }

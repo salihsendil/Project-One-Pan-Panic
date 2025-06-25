@@ -3,13 +3,16 @@ using Zenject;
 
 public class OrderTimerController : MonoBehaviour
 {
-    [Inject] private GameStatsManager gameStats;
+    [Inject] private OrderManager orderManager;
 
     void Update()
     {
-        for (int i = 0; i < gameStats.CurrentOrderInstances.Count; i++)
+        for (int i = 0; i < orderManager.OrderInstances.Count; i++)
         {
-            gameStats.CurrentOrderInstances[i].Tick(Time.deltaTime);
+            if (!orderManager.OrderInstances[i].HasOrderExpired)
+            {
+                orderManager.OrderInstances[i].Tick(Time.deltaTime);
+            }
         }
     }
 }

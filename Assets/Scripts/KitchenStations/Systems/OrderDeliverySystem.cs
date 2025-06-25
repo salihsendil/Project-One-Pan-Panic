@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
-using System.Linq;
 
 public class OrderDeliverySystem : KitchenStation
 {
     [Inject] private OrderManager orderManager;
-    [Inject] private GameStatsManager gameStatsManager;
     private readonly RecipeIngredientComparer comparer = new RecipeIngredientComparer();
 
     public override void Interact()
@@ -15,11 +13,11 @@ public class OrderDeliverySystem : KitchenStation
 
         if (transferItemHandler.HasKitchenItem && transferItemHandler.GetKitchenItem.TryGetComponent<IContainerItem>(out var containerItem))
         {
-            if (CheckDeliveryInOrderList(containerItem.KitchemItemsDatas, gameStatsManager.CurrentOrderInstances, out OrderInstance recipe))
+            if (CheckDeliveryInOrderList(containerItem.KitchemItemsDatas, orderManager.OrderInstances, out OrderInstance orderInstance))
             {
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
-                gameStatsManager.DeleteOrder(recipe);
+                orderManager.OrderDelivered(orderInstance);
                 Destroy(kitchenItem.gameObject, 2f);
             }
 
@@ -37,12 +35,14 @@ public class OrderDeliverySystem : KitchenStation
 
         foreach (var recipe in orderList)
         {
+            if (recipe.HasOrderExpired) { continue; }
+
             if (recipe.RecipeSO.recipeIngredients.Count != order.Count) { continue; }
 
             var recipeSet = new HashSet<RecipeSO.RecipeIngredient>(recipe.RecipeSO.recipeIngredients, comparer);
 
-            Debug.Log("Tarif: " + string.Join(", ", recipeSet.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
-            Debug.Log("Oyuncu: " + string.Join(", ", order.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
+            //Debug.Log("Tarif: " + string.Join(", ", recipeSet.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
+            //Debug.Log("Oyuncu: " + string.Join(", ", order.Select(x => x.kitchenItemSO.name + "-" + x.kitchenItemState)));
 
             if (recipeSet.SetEquals(order))
             {

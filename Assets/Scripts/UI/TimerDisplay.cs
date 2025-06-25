@@ -9,9 +9,14 @@ public class TimerDisplay : MonoBehaviour
     [Header("Timer")]
     [SerializeField] private TMP_Text timerText;
 
-    void Start()
+    void OnEnable()
     {
         gameStatsManager.OnTimerValueChanged += UpdateTimer;
+    }
+
+    private void OnDisable()
+    {
+        gameStatsManager.OnTimerValueChanged -= UpdateTimer;
     }
 
     private void UpdateTimer(float newTime)

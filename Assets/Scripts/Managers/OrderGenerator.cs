@@ -8,8 +8,8 @@ public class OrderGenerator : MonoBehaviour
 
     public RecipeSO GenerateRandomRecipe()
     {
-        if (gameManager.Settings.RecipeList.Count <= 0) { return null; }
+        if (gameManager.GameConfig.RecipeList.Count <= 0) { return null; }
 
-        return gameManager.Settings.RecipeList[Random.Range(0, gameManager.Settings.RecipeList.Count)];
+        return gameManager.GameConfig.RecipeList[Random.Range(0, gameManager.GameConfig.RecipeList.Count)];
     }
 }

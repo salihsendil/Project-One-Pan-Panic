@@ -243,5 +243,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kitchenItemPoint: {fileID: 337332359531469321}
   currentKitchenItem: {fileID: 0}
-  baseMaterial: {fileID: 0}
+  baseMaterial: {fileID: 2100000, guid: 1e296b1cd7a13a8438594c76bf343b34, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}

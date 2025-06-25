@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class OrderDisplay : MonoBehaviour
 {
@@ -12,18 +11,17 @@ public class OrderDisplay : MonoBehaviour
     [SerializeField] private float orderTimer;
     [SerializeField] private Image timerSlider;
 
-    private static char[] tmpCharBuffer = new char[32];
+    public OrderInstance Order { get => order; }
+    public Image Image { get; private set; }
+    public RectTransform RectTransform { get; private set; }
 
     private void Awake()
     {
-        orderName.alpha = 0f;
+        Image = GetComponent<Image>();
 
-        for (int i = 0; i < ingredientIcons.Count; i++)
-        {
-            ingredientIcons[i].color = new Color(ingredientIcons[i].color.r, ingredientIcons[i].color.g, ingredientIcons[i].color.b, 0f);
-        }
+        RectTransform = GetComponent<RectTransform>();
 
-        timerSlider.color = new Color(timerSlider.color.r, timerSlider.color.g, timerSlider.color.b, 0f);
+        HideOrderPanel();
     }
 
     public void ShowOrderPanel(OrderInstance newOrder)
@@ -41,11 +39,24 @@ public class OrderDisplay : MonoBehaviour
 
         timerSlider.color = new Color(timerSlider.color.r, timerSlider.color.g, timerSlider.color.b, 1f);
         orderTimer = order.RecipeSO.preparationTime;
+        timerSlider.fillAmount = 1f;
+    }
+
+    public void HideOrderPanel()
+    {
+        orderName.alpha = 0f;
+
+        for (int i = 0; i < ingredientIcons.Count; i++)
+        {
+            ingredientIcons[i].color = new Color(ingredientIcons[i].color.r, ingredientIcons[i].color.g, ingredientIcons[i].color.b, 0f);
+        }
+
+        timerSlider.color = new Color(timerSlider.color.r, timerSlider.color.g, timerSlider.color.b, 0f);
     }
 
     private void Update()
     {
-        if (order != null && timerSlider.fillAmount > 0)
+        if (order != null)
         {
             timerSlider.fillAmount = order.RemainingTime / orderTimer;
         }

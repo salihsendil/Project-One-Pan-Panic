@@ -125,8 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kitchenItemPoint: {fileID: 0}
   currentKitchenItem: {fileID: 0}
-  baseMaterial: {fileID: 0}
-  selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
+  baseMaterial: {fileID: 2100000, guid: b3737475b3717db4cabb07581e28a3bf, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: e4b2a93944c644d458de099fdd18f616, type: 2}
 --- !u!1 &3347283627411076976
 GameObject:
   m_ObjectHideFlags: 0

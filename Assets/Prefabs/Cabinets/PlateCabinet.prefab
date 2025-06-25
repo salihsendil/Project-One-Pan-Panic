@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kitchenItemPoint: {fileID: 1915798307788955}
   currentKitchenItem: {fileID: 0}
-  baseMaterial: {fileID: 0}
+  baseMaterial: {fileID: 2100000, guid: 1e296b1cd7a13a8438594c76bf343b34, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
   prefab: {fileID: 3702283098375289871, guid: d41373a2293462542a8e0a938c149d46, type: 3}
   spawnOffset: {x: 0, y: 0.05, z: 0}

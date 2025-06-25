@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class CookingSystem : KitchenStation
 {
+    [SerializeField] private IStationTimerDisplayer timerDisplayer;
+
+    private void Awake()
+    {
+        TryGetComponent(out timerDisplayer);
+    }
+
     public override void Interact()
     {
         if (transferItemHandler == null) { return; }
@@ -17,7 +24,7 @@ public class CookingSystem : KitchenStation
 
                 if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(stateProvider.CurrentState, out KitchenItemSO.ProcessRule rule))
                 {
-                    cookableItem.StartCook(rule);
+                    cookableItem.StartCook(rule, timerDisplayer);
                 }
             }
 
@@ -33,7 +40,7 @@ public class CookingSystem : KitchenStation
         {
             if (currentKitchenItem.gameObject.TryGetComponent<ICookableItem>(out var cookableItem))
             {
-                cookableItem.CancelCook();
+                cookableItem.CancelCook(timerDisplayer);
             }
 
             transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
@@ -46,7 +53,7 @@ public class CookingSystem : KitchenStation
                 if (containerItem.CanPuttableOnPlate(currentKitchenItem))
                 {
                     currentKitchenItem.TryGetComponent<ICookableItem>(out var cookable);
-                    cookable.CancelCook();
+                    cookable.CancelCook(timerDisplayer);
                     currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
                     containerItem.PutOnPlate(RemoveKitchenItem(), stateProvider);
                 }

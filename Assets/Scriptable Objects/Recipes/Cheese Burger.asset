@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Cheese Burger
   m_EditorClassIdentifier: 
   recipeName: Cheese Burger
-  successfullPoint: 40
-  preparationTime: 36
+  successfulOrderPoint: 48
+  failedOrderPenaltyPoint: -40
+  preparationTime: 5
   recipeIngredients:
   - kitchenItemSO: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
     kitchenItemState: 4

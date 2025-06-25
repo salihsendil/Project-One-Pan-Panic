@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameSettings gameSettings;
-
-    public GameSettings Settings  => gameSettings;
+    [SerializeField] private GameConfigurationSO gameConfig;
+    public GameConfigurationSO GameConfig => gameConfig;
 }

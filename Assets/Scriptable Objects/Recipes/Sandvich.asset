@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Sandvich
   m_EditorClassIdentifier: 
   recipeName: Sandvich
-  successfullPoint: 0
-  preparationTime: 46
+  successfulOrderPoint: 72
+  failedOrderPenaltyPoint: -62
+  preparationTime: 100
   recipeIngredients:
   - kitchenItemSO: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
     kitchenItemState: 4

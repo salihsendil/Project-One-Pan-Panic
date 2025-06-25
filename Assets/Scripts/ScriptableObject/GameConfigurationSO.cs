@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="New Game Settings", menuName ="Scriptable Object/New Game Settings")]
-public class GameSettings : ScriptableObject
+[CreateAssetMenu(fileName = "New Game Configuration", menuName = "Scriptable Object/New Game Configuration")]
+public class GameConfigurationSO : ScriptableObject
 {
     [Header("Order Settings")]
     public int MAX_ORDER_COUNT = 5;
@@ -17,4 +17,7 @@ public class GameSettings : ScriptableObject
     [Header("Score")]
     public int StartScore = 0;
 
+    [Header("Timer Visuals")]
+    [SerializeField] public Color orderTimerUIColor;
+    [SerializeField] public Color stationTimerUIColor;
 }

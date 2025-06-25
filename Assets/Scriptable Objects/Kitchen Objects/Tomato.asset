@@ -15,9 +15,8 @@ MonoBehaviour:
   Name: Tomato
   Icon: {fileID: 21300000, guid: 0b46ef0bd59125e42adf9435febdf4c4, type: 3}
   Prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
-  processTime: 5
   processRules:
   - inputState: 1
     outputState: 4
     outputMesh: {fileID: 4300000, guid: 7cea6d5a971cba04c9de7e2ad2178b6a, type: 2}
-    processTime: 7
+    processTime: 1

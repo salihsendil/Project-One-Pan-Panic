@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3753e4236387fa847ace34a01824ed63, type: 3}
+  m_Script: {fileID: 11500000, guid: 881ec6f216b37e842bb9988b30652743, type: 3}
   m_Name: Game Configuration
   m_EditorClassIdentifier: 
   MAX_ORDER_COUNT: 5
@@ -22,3 +22,6 @@ MonoBehaviour:
   MinOrderDelay: 12
   maxOrderDelay: 20
   GameTime: 400
+  StartScore: 0
+  orderTimerUIColor: {r: 0.14901961, g: 0.7529412, b: 0.9529412, a: 1}
+  stationTimerUIColor: {r: 0.039215688, g: 0.74509805, b: 0, a: 1}

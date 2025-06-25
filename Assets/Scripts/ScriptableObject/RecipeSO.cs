@@ -5,7 +5,8 @@ using UnityEngine;
 public class RecipeSO : ScriptableObject
 {
     public string recipeName;
-    public int successfullPoint;
+    public int successfulOrderPoint;
+    public int failedOrderPenaltyPoint;
     public float preparationTime;
     [SerializeField] public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
 

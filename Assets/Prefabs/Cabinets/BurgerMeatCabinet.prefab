@@ -245,7 +245,7 @@ MonoBehaviour:
   currentKitchenItem: {fileID: 0}
   baseMaterial: {fileID: 2100000, guid: 1e296b1cd7a13a8438594c76bf343b34, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
-  kitchenItemSO: {fileID: 11400000, guid: d3c6840dbaab058418435e02648f0c3c, type: 2}
+  kitchenItemType: 1
 --- !u!1 &8637679868233104863
 GameObject:
   m_ObjectHideFlags: 0

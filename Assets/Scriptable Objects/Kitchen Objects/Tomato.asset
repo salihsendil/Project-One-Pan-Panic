@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   Name: Tomato
+  KitchenItemType: 5
   Icon: {fileID: 21300000, guid: 0b46ef0bd59125e42adf9435febdf4c4, type: 3}
-  Prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  Prefab: {fileID: 3008280549523837191, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  baseMesh: {fileID: 4300000, guid: 4666246b42578b84cbb3eb711a50c9f7, type: 2}
+  baseState: 1
   processRules:
   - inputState: 1
     outputState: 4

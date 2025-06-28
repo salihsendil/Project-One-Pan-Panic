@@ -5,8 +5,11 @@ using UnityEngine;
 public class KitchenItemSO : ScriptableObject
 {
     public string Name;
+    public KitchenItemType KitchenItemType;
     public Sprite Icon;
-    public GameObject Prefab;
+    public KitchenItem Prefab;
+    public Mesh baseMesh;
+    public KitchenItemState baseState;
 
     [System.Serializable]
     public class ProcessRule

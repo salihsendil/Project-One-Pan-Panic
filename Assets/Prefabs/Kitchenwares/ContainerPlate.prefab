@@ -100,8 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0950a90871d0afb47bfd7bdc5a4917cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kitchenItemType: 4
   kitchenItemData: {fileID: 11400000, guid: 40ac84f22e60c9a4780966d383d69d0e, type: 2}
   meshFilter: {fileID: 0}
+  IsProcessed: 0
 --- !u!114 &2290199910766008255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +116,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca5157491b418049a9fa59755f6c585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlateList: []

@@ -15,7 +15,7 @@ MonoBehaviour:
   recipeName: Salad
   successfulOrderPoint: 22
   failedOrderPenaltyPoint: -32
-  preparationTime: 20
+  preparationTime: 100
   recipeIngredients:
   - kitchenItemSO: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
     kitchenItemState: 4

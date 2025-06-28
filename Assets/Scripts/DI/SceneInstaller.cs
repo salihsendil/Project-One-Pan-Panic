@@ -8,5 +8,8 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<OrderManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<GameStatsManager>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<KitchenItemPoolManager>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<ContainerDispenserSystem>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<KitchenItemRestorer>().AsSingle();
     }
 }

@@ -2,10 +2,9 @@ using UnityEngine;
 
 public enum KitchenItemState
 {
-    Empty,
+    None,
     Whole,
     Raw,
-    Full,
     Chopped,
     Cooked,
     Burnt

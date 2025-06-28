@@ -9,6 +9,8 @@ public class ContainerBehaviour : MonoBehaviour, IContainerItem
 
     public HashSet<RecipeSO.RecipeIngredient> KitchemItemsDatas => kitchemItemsDatas;
 
+    public List<KitchenItem> OnContainerList => onPlateList;
+
     public bool CanPuttableOnPlate(KitchenItem kitchenItem)
     {
         return kitchenItem.IsProcessed && !onPlateList.Any(x => x.KitchenItemData == kitchenItem.KitchenItemData);
@@ -16,7 +18,6 @@ public class ContainerBehaviour : MonoBehaviour, IContainerItem
 
     public void PutOnPlate(KitchenItem kitchenItem, IKitchenItemStateProvider stateProvider)
     {
-
         kitchenItem.transform.position = transform.position + Vector3.up / 10;
         kitchenItem.transform.SetParent(transform);
         onPlateList.Add(kitchenItem);

@@ -1,8 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class IngredientDispenserSystem : KitchenStation
 {
-    [SerializeField] private KitchenItemSO kitchenItemSO;
+    [Inject] private KitchenItemPoolManager poolManager;
+    [SerializeField] private KitchenItemType kitchenItemType;
 
     public override void Interact()
     {
@@ -12,8 +14,8 @@ public class IngredientDispenserSystem : KitchenStation
         {
             if (!transferItemHandler.HasKitchenItem) //karakter boþ
             {
-                GameObject item = Instantiate(kitchenItemSO.Prefab, kitchenItemPoint.position, Quaternion.identity);
-                PlaceKitchenItem(item.GetComponent<KitchenItem>());
+                KitchenItem item = poolManager.GetKitchenItemFromPool(kitchenItemType);
+                PlaceKitchenItem(item);
                 transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
             }
 

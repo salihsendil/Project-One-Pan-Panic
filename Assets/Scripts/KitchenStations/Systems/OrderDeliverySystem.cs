@@ -5,6 +5,7 @@ using UnityEngine;
 public class OrderDeliverySystem : KitchenStation
 {
     [Inject] private OrderManager orderManager;
+    [Inject] private KitchenItemRestorer itemRestorer;
     private readonly RecipeIngredientComparer comparer = new RecipeIngredientComparer();
 
     public override void Interact()
@@ -18,7 +19,7 @@ public class OrderDeliverySystem : KitchenStation
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
                 PlaceKitchenItem(kitchenItem);
                 orderManager.OrderDelivered(orderInstance);
-                Destroy(kitchenItem.gameObject, 2f);
+                itemRestorer.RestoreKitchenItemByType(RemoveKitchenItem());
             }
 
             else

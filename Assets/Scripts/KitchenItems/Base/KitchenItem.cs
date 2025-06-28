@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KitchenItem : MonoBehaviour
 {
+    [SerializeField] private KitchenItemType kitchenItemType;
     [SerializeField] private KitchenItemSO kitchenItemData;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] public bool IsProcessed = false;

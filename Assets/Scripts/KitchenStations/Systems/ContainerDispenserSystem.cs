@@ -1,27 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ContainerDispenserSystem : KitchenStation
 {
-    private const int CONTAINER_POOL_SIZE = 5;
-
-    [SerializeField] private GameObject prefab;
-    private Stack<GameObject> plateStack = new Stack<GameObject>();
+    [Inject] private KitchenItemPoolManager poolManager;
+    private Stack<KitchenItem> plateStack = new Stack<KitchenItem>();
     [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 0.05f, 0f);
-    private Coroutine reSpawnCoroutine;
-    [SerializeField] private float reSpawnDelay = 8f;
-
 
     private void Start()
     {
+        InitPlates(poolManager.PoolDictionary[KitchenItemType.Plate].Count);
+    }
 
-        for (int i = 0; i < CONTAINER_POOL_SIZE; i++)
+    private void InitPlates(int size)
+    {
+        Debug.Log(poolManager.PoolDictionary[KitchenItemType.Plate].Count);
+
+        for (int i = 0; i < size; i++)
         {
-            FillTheStack(i);
+            KitchenItem plate = poolManager.GetKitchenItemFromPool(KitchenItemType.Plate);
+            AddPlateToStack(plate);
         }
-
-        StartCoroutine(ReSpawnPlate());
     }
 
     public override void Interact()
@@ -30,42 +30,41 @@ public class ContainerDispenserSystem : KitchenStation
 
         if (IsOccupied && !transferItemHandler.HasKitchenItem)
         {
-            transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
-            plateStack.Pop();
-            if (plateStack.Count > 0)
-            {
-                plateStack.Peek().TryGetComponent(out currentKitchenItem);
-            }
-            else
-            {
-                currentKitchenItem = null;
-            }
+            transferItemHandler.ReceiveKitchenItem(GetPlateFromStack());
         }
 
         else if (!IsOccupied && transferItemHandler.HasKitchenItem)
         {
-            
+
         }
     }
 
-    private IEnumerator ReSpawnPlate()
+    private void AddPlateToStack(KitchenItem item)
     {
-        while (true)
-        {
-            yield return new WaitUntil(() => plateStack.Count < CONTAINER_POOL_SIZE);
+        item.transform.position = kitchenItemPoint.position + spawnOffset * plateStack.Count;
 
-            yield return new WaitForSeconds(reSpawnDelay);
+        item.transform.SetParent(gameObject.transform);
 
-            FillTheStack(plateStack.Count);
-        }
+        plateStack.Push(item);
+
+        currentKitchenItem = item;
     }
 
-    private void FillTheStack(int spawnIndex)
+    public KitchenItem GetPlateFromStack()
     {
-        GameObject container = Instantiate(prefab, kitchenItemPoint.position, Quaternion.identity);
-        container.transform.position += spawnOffset * spawnIndex;
-        container.transform.SetParent(kitchenItemPoint);
-        plateStack.Push(container);
-        plateStack.Peek().TryGetComponent(out currentKitchenItem);
+        if (plateStack.Count == 0) { return null; }
+
+        KitchenItem plate = plateStack.Pop();
+
+        RemoveKitchenItem();
+
+        plateStack.TryPeek(out currentKitchenItem);
+
+        return plate;
+    }
+
+    public void ReturnPlateToStack(KitchenItem plate)
+    {
+        AddPlateToStack(plate);
     }
 }

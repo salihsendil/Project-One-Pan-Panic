@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Burger Meat
   m_EditorClassIdentifier: 
   Name: Burger Meat
+  KitchenItemType: 1
   Icon: {fileID: 21300000, guid: 538b8b21856b81644b794ac4542ecf56, type: 3}
-  Prefab: {fileID: 6808599801469802662, guid: 714cbdecdcb0a4645891357863b99738, type: 3}
+  Prefab: {fileID: 5629181092785121083, guid: 714cbdecdcb0a4645891357863b99738, type: 3}
+  baseMesh: {fileID: -8794997232909900580, guid: 367bab942037468409d91209a6d73770, type: 3}
+  baseState: 2
   processRules:
   - inputState: 2
     outputState: 5

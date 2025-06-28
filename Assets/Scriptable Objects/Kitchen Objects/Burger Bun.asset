@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Burger Bun
   m_EditorClassIdentifier: 
   Name: Burger Bun
+  KitchenItemType: 0
   Icon: {fileID: 21300000, guid: 30ccd3dd846e7ea4b9fefbf49d0396dc, type: 3}
-  Prefab: {fileID: 6530758574615387552, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
+  Prefab: {fileID: 2071423088853521607, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
+  baseMesh: {fileID: 7768090395952822846, guid: 3f85a287d1d712348aad8d756c7c3bfe, type: 3}
+  baseState: 1
   processRules:
   - inputState: 1
     outputState: 4

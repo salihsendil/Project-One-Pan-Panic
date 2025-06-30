@@ -24,7 +24,7 @@ public class KitchenItemPoolManager : MonoBehaviour
     public void ReturnKitchenItemToPool(KitchenItem item)
     {
         item.gameObject.SetActive(false);
-
+        item.transform.position = Vector3.zero;
         if (poolDictionary.TryGetValue(item.KitchenItemData.KitchenItemType, out var pool))
         {
             pool.Push(item);

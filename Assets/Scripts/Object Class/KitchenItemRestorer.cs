@@ -24,6 +24,7 @@ public class KitchenItemRestorer
         else
         {
             RestoreKitchenItem(item);
+            poolManager.ReturnKitchenItemToPool(item);
         }
 
     }

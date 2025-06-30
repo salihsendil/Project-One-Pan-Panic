@@ -1444,22 +1444,22 @@ MonoBehaviour:
   itemPool:
   - kitchenItemType: 4
     kitchenItemData: {fileID: 11400000, guid: 40ac84f22e60c9a4780966d383d69d0e, type: 2}
-    initalSize: 12
+    initalSize: 5
   - kitchenItemType: 0
     kitchenItemData: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
-    initalSize: 5
+    initalSize: 2
   - kitchenItemType: 1
     kitchenItemData: {fileID: 11400000, guid: d3c6840dbaab058418435e02648f0c3c, type: 2}
-    initalSize: 3
+    initalSize: 2
   - kitchenItemType: 2
     kitchenItemData: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
     initalSize: 2
   - kitchenItemType: 3
     kitchenItemData: {fileID: 11400000, guid: 461e88b475e8867439533b61417763be, type: 2}
-    initalSize: 5
+    initalSize: 2
   - kitchenItemType: 5
     kitchenItemData: {fileID: 11400000, guid: 612021f0f966a3e429d5f3272d19c6c7, type: 2}
-    initalSize: 1
+    initalSize: 2
 --- !u!1 &1572726070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bae848eaa0f1245bd6d458e3e14571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderInstances: []
   currentOrderRecipes: []
   currentOrderCount: 0
 --- !u!114 &1802701372

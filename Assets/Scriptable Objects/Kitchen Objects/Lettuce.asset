@@ -20,6 +20,6 @@ MonoBehaviour:
   baseState: 1
   processRules:
   - inputState: 1
-    outputState: 4
+    outputState: 3
     outputMesh: {fileID: -682357888511628354, guid: e11d9cbcb51649a4d8f186784d5a4f97, type: 3}
     processTime: 1

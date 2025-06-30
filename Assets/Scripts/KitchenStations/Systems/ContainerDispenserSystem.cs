@@ -43,7 +43,7 @@ public class ContainerDispenserSystem : KitchenStation
     {
         item.transform.position = kitchenItemPoint.position + spawnOffset * plateStack.Count;
 
-        item.transform.SetParent(gameObject.transform);
+        item.transform.SetParent(kitchenItemPoint.transform);
 
         plateStack.Push(item);
 

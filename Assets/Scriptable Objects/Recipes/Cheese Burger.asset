@@ -18,8 +18,8 @@ MonoBehaviour:
   preparationTime: 100
   recipeIngredients:
   - kitchenItemSO: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
-    kitchenItemState: 4
+    kitchenItemState: 3
   - kitchenItemSO: {fileID: 11400000, guid: d3c6840dbaab058418435e02648f0c3c, type: 2}
-    kitchenItemState: 5
-  - kitchenItemSO: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
     kitchenItemState: 4
+  - kitchenItemSO: {fileID: 11400000, guid: 2cc55858ba18d7f42855d9cbc9fdd265, type: 2}
+    kitchenItemState: 3

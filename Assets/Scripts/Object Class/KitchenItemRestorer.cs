@@ -17,8 +17,8 @@ public class KitchenItemRestorer
 
             RestoreKitchenItem(item);
             containerItem.OnContainerList.Clear(); //check profiller for gc
+            containerItem.KitchemItemsDatas.Clear();
             containerDispenser.ReturnPlateToStack(item);
-
         }
 
         else
@@ -29,9 +29,7 @@ public class KitchenItemRestorer
 
     }
 
-
-
-    public void RestoreKitchenItem(KitchenItem item)
+    private void RestoreKitchenItem(KitchenItem item)
     {
         if (item.TryGetComponent(out IKitchenItemStateProvider stateProvider))
         {

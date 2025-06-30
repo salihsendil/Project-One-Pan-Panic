@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 5797917830027263032}
   - component: {fileID: 2704047593062550872}
   - component: {fileID: 8220937270618791138}
-  - component: {fileID: 4049197908644821720}
+  - component: {fileID: 907649343713895487}
   m_Layer: 0
   m_Name: OrderDeliveryCabinet
   m_TagString: Untagged
@@ -229,7 +229,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60001713, y: 0.8235256, z: 0.67332006}
   m_Center: {x: -0.0000085532665, y: 0.4117628, z: 0.036660016}
---- !u!114 &4049197908644821720
+--- !u!114 &907649343713895487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

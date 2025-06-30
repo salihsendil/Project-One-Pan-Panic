@@ -23,9 +23,6 @@ public class CookableBehaviour : MonoBehaviour, ICookableItem, IKitchenItemState
         cookProgress = 0f;
         cookDuration = processRule.processTime;
         timerDisplayer.SetTimer(cookDuration);
-        // karakteri kitle
-        // ui göster
-        // animation state machine baþlat
         cookingCoroutine = StartCoroutine(CookingProgress(processRule, timerDisplayer));
     }
     public IEnumerator CookingProgress(KitchenItemSO.ProcessRule processRule, IStationTimerDisplayer timerDisplayer)

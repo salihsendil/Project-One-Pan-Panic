@@ -12,5 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Prototype Map.unity
     guid: 03ed3121c080d904885ea5bc4c0cfcf3
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 83b427ae3817cb342b59b3a72f35cd22, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 08c041ab9012a924eb1f5a22f9808db3, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: cebee960cb7e22c4e8f7a706af5d88b9, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 17f446be8339e6a41af9189134a2395d, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3814d0985611e6f4aaf6a560fccfccc6, type: 3}
   m_UseUCBPForAssetBundles: 0

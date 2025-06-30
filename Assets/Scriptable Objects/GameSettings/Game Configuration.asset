@@ -15,12 +15,10 @@ MonoBehaviour:
   MAX_ORDER_COUNT: 5
   RecipeList:
   - {fileID: 11400000, guid: 5c9998fca2376be4a89a29da273d10d7, type: 2}
-  - {fileID: 11400000, guid: fcae127a4a642144e916ee514b50be00, type: 2}
   - {fileID: 11400000, guid: 8df4a2db78333824a952202b27ec933f, type: 2}
-  - {fileID: 11400000, guid: 78e24f4879e3bc245b456229fc9e61d0, type: 2}
-  FirstOrderDelay: 5
-  MinOrderDelay: 12
-  maxOrderDelay: 20
+  FirstOrderDelay: 2
+  MinOrderDelay: 5
+  maxOrderDelay: 15
   GameTime: 400
   StartScore: 0
   orderTimerUIColor: {r: 0.14901961, g: 0.7529412, b: 0.9529412, a: 1}

@@ -18,6 +18,8 @@ public class KitchenItemRestorer
             RestoreKitchenItem(item);
             containerItem.OnContainerList.Clear(); //check profiller for gc
             containerItem.KitchemItemsDatas.Clear();
+            item.TryGetComponent(out ContainerIconBillboarding containerIcon);
+            containerIcon.ClearUI();
             containerDispenser.ReturnPlateToStack(item);
         }
 
@@ -26,7 +28,6 @@ public class KitchenItemRestorer
             RestoreKitchenItem(item);
             poolManager.ReturnKitchenItemToPool(item);
         }
-
     }
 
     private void RestoreKitchenItem(KitchenItem item)

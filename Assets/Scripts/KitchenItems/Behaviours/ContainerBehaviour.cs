@@ -6,9 +6,9 @@ public class ContainerBehaviour : MonoBehaviour, IContainerItem
 {
     [SerializeField] private List<KitchenItem> onPlateList = new List<KitchenItem>();
     [SerializeField] private HashSet<RecipeSO.RecipeIngredient> kitchemItemsDatas = new HashSet<RecipeSO.RecipeIngredient>();
+    [SerializeField] private ContainerIconBillboarding containerIcon;
 
     public HashSet<RecipeSO.RecipeIngredient> KitchemItemsDatas => kitchemItemsDatas;
-
     public List<KitchenItem> OnContainerList => onPlateList;
 
     public bool CanPuttableOnPlate(KitchenItem kitchenItem)
@@ -21,6 +21,7 @@ public class ContainerBehaviour : MonoBehaviour, IContainerItem
         kitchenItem.transform.position = transform.position + Vector3.up / 10;
         kitchenItem.transform.SetParent(transform);
         onPlateList.Add(kitchenItem);
+        containerIcon.SetUIIconImage(kitchenItem.KitchenItemData.Icon);
         kitchemItemsDatas.Add(new RecipeSO.RecipeIngredient(kitchenItem.KitchenItemData, stateProvider.CurrentState));
     }
 }

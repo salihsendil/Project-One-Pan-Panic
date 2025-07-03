@@ -5,6 +5,7 @@ using Zenject;
 public class ContainerDispenserSystem : KitchenStation
 {
     [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private BillboardManager billboardManager;
     private Stack<KitchenItem> plateStack = new Stack<KitchenItem>();
     [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 0.05f, 0f);
 
@@ -48,6 +49,11 @@ public class ContainerDispenserSystem : KitchenStation
         plateStack.Push(item);
 
         currentKitchenItem = item;
+
+        item.TryGetComponent(out ContainerIconBillboarding containerIcon);
+
+        billboardManager.UnRegisterContainerToBillBoarding(containerIcon);
+
     }
 
     public KitchenItem GetPlateFromStack()
@@ -60,6 +66,10 @@ public class ContainerDispenserSystem : KitchenStation
 
         plateStack.TryPeek(out currentKitchenItem);
 
+        plate.TryGetComponent(out ContainerIconBillboarding containerIcon);
+
+        billboardManager.RegisterContainerToBillBoarding(containerIcon);
+        
         return plate;
     }
 

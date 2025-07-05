@@ -8,16 +8,16 @@ public class ContainerDispenserSystem : KitchenStation
     [Inject] private BillboardManager billboardManager;
     private Stack<KitchenItem> plateStack = new Stack<KitchenItem>();
     [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 0.05f, 0f);
+    [SerializeField] private int plateStackInitSize;
 
     private void Start()
     {
-        InitPlates(poolManager.PoolDictionary[KitchenItemType.Plate].Count);
+        plateStackInitSize = poolManager.PoolDictionary[KitchenItemType.Plate].Count;
+        InitPlates(plateStackInitSize);
     }
 
     private void InitPlates(int size)
     {
-        Debug.Log(poolManager.PoolDictionary[KitchenItemType.Plate].Count);
-
         for (int i = 0; i < size; i++)
         {
             KitchenItem plate = poolManager.GetKitchenItemFromPool(KitchenItemType.Plate);
@@ -34,14 +34,41 @@ public class ContainerDispenserSystem : KitchenStation
             transferItemHandler.ReceiveKitchenItem(GetPlateFromStack());
         }
 
-        else if (!IsOccupied && transferItemHandler.HasKitchenItem)
+        else if (transferItemHandler.HasKitchenItem)
         {
+            var kitchenItem = transferItemHandler.GetKitchenItem;
 
+            if (!kitchenItem.TryGetComponent(out ContainerBehaviour container))
+            {
+                return;
+            }
+
+            transferItemHandler.GiveKitchenItem(out kitchenItem);
+
+            if (kitchenItem.TryGetComponent(out ContainerBehaviour plate))
+            {
+                AddPlateToStack(kitchenItem);
+                return;
+            }
+
+            if (currentKitchenItem.TryGetComponent(out ContainerBehaviour containerBehaviour) && containerBehaviour.CanPuttableOnPlate(kitchenItem))
+            {
+                if (kitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider))
+                {
+                    containerBehaviour.PutOnPlate(kitchenItem, stateProvider);
+                }
+            }
         }
     }
 
     private void AddPlateToStack(KitchenItem item)
     {
+        if (plateStack.Count >= plateStackInitSize)
+        {
+            Destroy(item.gameObject);
+            return;
+        }
+
         item.transform.position = kitchenItemPoint.position + spawnOffset * plateStack.Count;
 
         item.transform.SetParent(kitchenItemPoint.transform);
@@ -53,7 +80,6 @@ public class ContainerDispenserSystem : KitchenStation
         item.TryGetComponent(out ContainerIconBillboarding containerIcon);
 
         billboardManager.UnRegisterContainerToBillBoarding(containerIcon);
-
     }
 
     public KitchenItem GetPlateFromStack()
@@ -69,7 +95,7 @@ public class ContainerDispenserSystem : KitchenStation
         plate.TryGetComponent(out ContainerIconBillboarding containerIcon);
 
         billboardManager.RegisterContainerToBillBoarding(containerIcon);
-        
+
         return plate;
     }
 

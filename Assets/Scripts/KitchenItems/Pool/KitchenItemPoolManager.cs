@@ -9,6 +9,8 @@ public class KitchenItemPoolManager : MonoBehaviour
 
     public Dictionary<KitchenItemType, Stack<KitchenItem>> PoolDictionary => poolDictionary;
 
+    public List<KitchenItemPool> ItemPool { get => itemPool; }
+
     private void Awake()
     {
         FillTheDictionary();

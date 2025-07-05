@@ -15,13 +15,16 @@ public class IngredientDispenserSystem : KitchenStation
             if (!transferItemHandler.HasKitchenItem) //karakter boþ
             {
                 KitchenItem item = poolManager.GetKitchenItemFromPool(kitchenItemType);
+
                 PlaceKitchenItem(item);
+
                 transferItemHandler.ReceiveKitchenItem(RemoveKitchenItem());
             }
 
             else //karakter dolu
             {
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
+
                 PlaceKitchenItem(kitchenItem);
             }
         }
@@ -30,15 +33,28 @@ public class IngredientDispenserSystem : KitchenStation
         {
             if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
-                if (currentKitchenItem.TryGetComponent<ContainerBehaviour>(out var container))
+                if (currentKitchenItem.TryGetComponent(out ContainerBehaviour container))
                 {
                     if (container.CanPuttableOnPlate(transferItemHandler.GetKitchenItem))
                     {
                         transferItemHandler.GiveKitchenItem(out var kitchenItem);
-                        kitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+
+                        kitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider);
+
                         container.PutOnPlate(kitchenItem, stateProvider);
                     }
                 }
+
+                else if (transferItemHandler.GetKitchenItem.TryGetComponent(out ContainerBehaviour containerBehaviour))
+                {
+                    if (containerBehaviour.CanPuttableOnPlate(currentKitchenItem))
+                    {
+                        currentKitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider);
+
+                        containerBehaviour.PutOnPlate(RemoveKitchenItem(), stateProvider);
+                    }
+                }
+
             }
 
             else //karakter boþ

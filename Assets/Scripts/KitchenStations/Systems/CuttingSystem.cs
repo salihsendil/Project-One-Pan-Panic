@@ -39,6 +39,16 @@ public class CuttingSystem : KitchenStation
                         container.PutOnPlate(kitchenItem, stateProvider);
                     }
                 }
+
+                else if (transferItemHandler.GetKitchenItem.TryGetComponent(out ContainerBehaviour containerBehaviour))
+                {
+                    if (containerBehaviour.CanPuttableOnPlate(currentKitchenItem))
+                    {
+                        currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+
+                        containerBehaviour.PutOnPlate(RemoveKitchenItem(), stateProvider);
+                    }
+                }
             }
 
             else if (!transferItemHandler.HasBusyForProcess) //karakter 

@@ -1,23 +1,25 @@
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(CapsuleCollider))]
+//[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [Inject] private InputHandler inputHandler;
-    private Rigidbody rb;
+    //private Rigidbody rb;
 
     [Header("Movement")]
-    [SerializeField] private float acceleration = 350f;
-    [SerializeField] private float maxSpeed = 4.5f;
+    [SerializeField] private float playerSize = 0.5f;
+    //[SerializeField] private float acceleration = 350f;
+    //[SerializeField] private float maxSpeed = 4.5f;
+    [SerializeField] private float speed = 3.5f;
     [SerializeField] private bool hasBusy = false;
     [SerializeField] private bool isMoving;
     [SerializeField] private bool showVelocityDebug;
 
     [Header("Rotation")]
-    [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private float rotationSpeed = 20f;
 
     [Header("Getter - Setter")]
     public bool HasBusy { get => hasBusy; set => hasBusy = value; }
@@ -27,21 +29,31 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         if (!hasBusy && IsMovementValueValid())
         {
-            PlayerMove();
             PlayerRotation();
+
+            if (CanMove())
+            {
+                isMoving = true;
+                PlayerMove();
+            }
         }
 
         else
         {
             isMoving = false;
         }
+    }
+
+    private bool CanMove()
+    {
+        return !Physics.Raycast(transform.position, movementVector, playerSize);
     }
 
     private bool IsMovementValueValid()
@@ -51,22 +63,25 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        Vector3 newVelocity = movementVector * Time.fixedDeltaTime * acceleration;
-
-        if (newVelocity.magnitude > maxSpeed)
-        {
-            newVelocity = newVelocity.normalized * maxSpeed;
-        }
-
-        rb.linearVelocity = newVelocity;
-
-        if (showVelocityDebug)
-        {
-            Debug.Log($"hýz: {rb.linearVelocity}");
-        }
-
-        isMoving = true;
+        transform.position += movementVector * speed * Time.deltaTime;
     }
+
+    //private void PlayerMove()
+    //{
+    //    Vector3 newVelocity = movementVector * Time.fixedDeltaTime * acceleration;
+
+    //    if (newVelocity.magnitude > maxSpeed)
+    //    {
+    //        newVelocity = newVelocity.normalized * maxSpeed;
+    //    }
+
+    //    rb.linearVelocity = newVelocity;
+
+    //    if (showVelocityDebug)
+    //    {
+    //        Debug.Log($"hýz: {rb.linearVelocity}");
+    //    }
+    //}
 
     private void PlayerRotation()
     {
@@ -79,6 +94,8 @@ public class PlayerController : MonoBehaviour
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
+            Ray ray = new Ray(transform.position, transform.position + movementVector * playerSize);
+            Gizmos.DrawRay(ray);
             //Gizmos.DrawLine(transform.position, rb.linearVelocity.magnitude * movementVector + transform.position);
         }
     }

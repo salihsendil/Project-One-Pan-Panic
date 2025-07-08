@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -10,13 +9,17 @@ public class GameUIManager : MonoBehaviour
     [Inject] private OrderManager orderManager;
 
     [Header("Order Display")]
-    [SerializeField] private GameObject orderDisplayPanelPrefab;
-    [SerializeField] private Vector2 orderDisplayStartPosition = new Vector2(50, -50);
+    [SerializeField] private Vector2 orderDisplayStartPosition = new Vector2(200, -50);
     [SerializeField] private Vector2 orderDisplayOffset = new Vector2(300, 0);
     [SerializeField] private List<OrderDisplay> orderDisplays = new List<OrderDisplay>();
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject pausePanel;
+
     private void Start()
     {
+        pausePanel.SetActive(false);
+
         FillOrderDisplayList();
 
         orderManager.OnOrderListValueAdded += ActiveOrderPanel;
@@ -89,16 +92,21 @@ public class GameUIManager : MonoBehaviour
     {
         for (int i = 0; i < gameManager.GameConfig.MAX_ORDER_COUNT; i++)
         {
-            GameObject panel = Instantiate(orderDisplayPanelPrefab, transform.position, Quaternion.identity);
+            //GameObject panel = Instantiate(orderDisplayPanelPrefab, transform.position, Quaternion.identity);
 
-            panel.transform.SetParent(transform);
+            //panel.transform.SetParent(transform);
 
-            panel.TryGetComponent(out OrderDisplay orderDisplay);
+            //panel.TryGetComponent(out OrderDisplay orderDisplay);
 
-            orderDisplays.Add(orderDisplay);
+            //orderDisplays.Add(orderDisplay);
             
             orderDisplays[i].Image.color = Color.clear;
         }
     }
 
+    public void ChangeGamePauseStatus()
+    {
+        pausePanel.SetActive(!pausePanel.activeSelf);
+        Time.timeScale = pausePanel.activeSelf ? 0 : 1;
+    }
 }

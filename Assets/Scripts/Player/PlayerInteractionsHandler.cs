@@ -1,7 +1,4 @@
 using UnityEngine;
-using Unity;
-using UnityEditor;
-using System;
 
 public class PlayerInteractionsHandler : MonoBehaviour
 {
@@ -61,7 +58,7 @@ public class PlayerInteractionsHandler : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-            Gizmos.DrawWireSphere(transform.position + rayOffset, capsuleRadius);
+            //Gizmos.DrawWireSphere(transform.position + rayOffset, capsuleRadius);
             Gizmos.color = Color.blue;
             Gizmos.DrawCube(hit.point, Vector3.one / 5);
         }

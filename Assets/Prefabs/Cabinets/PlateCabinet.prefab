@@ -148,7 +148,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 43, y: -1, z: 48.977}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.41}
+  m_LocalScale: {x: 1.5800002, y: 1, z: 1.41}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5056088782026434271}
@@ -246,3 +246,4 @@ MonoBehaviour:
   baseMaterial: {fileID: 2100000, guid: 1e296b1cd7a13a8438594c76bf343b34, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 1782f2ac02f442f4bb545cbf83b7a3ce, type: 2}
   spawnOffset: {x: 0, y: 0.05, z: 0}
+  plateStackInitSize: 0

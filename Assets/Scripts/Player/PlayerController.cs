@@ -1,18 +1,15 @@
 using UnityEngine;
 using Zenject;
 
-//[RequireComponent(typeof(CapsuleCollider))]
-//[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [Inject] private InputHandler inputHandler;
-    //private Rigidbody rb;
 
     [Header("Movement")]
     [SerializeField] private float playerSize = 0.5f;
-    //[SerializeField] private float acceleration = 350f;
-    //[SerializeField] private float maxSpeed = 4.5f;
     [SerializeField] private float speed = 3.5f;
     [SerializeField] private bool hasBusy = false;
     [SerializeField] private bool isMoving;
@@ -25,12 +22,6 @@ public class PlayerController : MonoBehaviour
     public bool HasBusy { get => hasBusy; set => hasBusy = value; }
     public bool IsMoving { get => isMoving; }
     private Vector3 movementVector => inputHandler.MovementVector;
-
-
-    private void Awake()
-    {
-        //rb = GetComponent<Rigidbody>();
-    }
 
     void FixedUpdate()
     {
@@ -65,23 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position += movementVector * speed * Time.deltaTime;
     }
-
-    //private void PlayerMove()
-    //{
-    //    Vector3 newVelocity = movementVector * Time.fixedDeltaTime * acceleration;
-
-    //    if (newVelocity.magnitude > maxSpeed)
-    //    {
-    //        newVelocity = newVelocity.normalized * maxSpeed;
-    //    }
-
-    //    rb.linearVelocity = newVelocity;
-
-    //    if (showVelocityDebug)
-    //    {
-    //        Debug.Log($"hýz: {rb.linearVelocity}");
-    //    }
-    //}
 
     private void PlayerRotation()
     {

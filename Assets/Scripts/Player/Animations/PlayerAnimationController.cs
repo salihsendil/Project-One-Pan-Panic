@@ -1,6 +1,9 @@
 using UnityEngine;
-using Zenject;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerCarryHandler))]
 public class PlayerAnimationController : MonoBehaviour
 {
     [Header("References")]

@@ -91,15 +91,7 @@ public class GameUIManager : MonoBehaviour
     private void FillOrderDisplayList()
     {
         for (int i = 0; i < gameManager.GameConfig.MAX_ORDER_COUNT; i++)
-        {
-            //GameObject panel = Instantiate(orderDisplayPanelPrefab, transform.position, Quaternion.identity);
-
-            //panel.transform.SetParent(transform);
-
-            //panel.TryGetComponent(out OrderDisplay orderDisplay);
-
-            //orderDisplays.Add(orderDisplay);
-            
+        {            
             orderDisplays[i].Image.color = Color.clear;
         }
     }

@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 45.39, y: -1, z: 48.977}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.41}
+  m_LocalScale: {x: 1.58, y: 1, z: 1.41}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2136053080826298859}
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2906b8ff1603c4b8fa8407e10904fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2334365271709585799}
   timerBackGround: {fileID: 6121435542511566022}
   timerImage: {fileID: 850598421821438134}
 --- !u!1 &2365919921286194211
@@ -210,7 +211,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.8, y: 0.2}
+  m_SizeDelta: {x: 0.8, y: 0.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &877275886645071549
 CanvasRenderer:
@@ -459,7 +460,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.8, y: 0.2}
+  m_SizeDelta: {x: 0.8, y: 0.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3228654986948692969
 CanvasRenderer:

@@ -8,12 +8,16 @@ public class BillboardManager : MonoBehaviour
     public void RegisterContainerToBillBoarding(ContainerIconBillboarding container) => containerInUseList.Add(container);
     public void UnRegisterContainerToBillBoarding(ContainerIconBillboarding container) => containerInUseList.Remove(container);
 
+    public void CanvasLookAtCamera(Canvas canvas)
+    {
+        canvas.transform.rotation = Quaternion.LookRotation(mainCameraTransform.forward);
+    }
+
     void Update()
     {
         foreach (var container in containerInUseList)
         {
-            container.ContainerCanvas.transform.rotation = Quaternion.LookRotation(mainCameraTransform.forward);
+            CanvasLookAtCamera(container.ContainerCanvas);
         }
     }
-
 }

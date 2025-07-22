@@ -24,6 +24,7 @@ public class CookingSystem : KitchenStation
 
                 if (currentKitchenItem.KitchenItemData.GetProcessRuleMatch(stateProvider.CurrentState, out KitchenItemSO.ProcessRule rule))
                 {
+                    timerDisplayer.ShowTimer();
                     cookableItem.StartCook(rule, timerDisplayer);
                 }
             }
@@ -54,7 +55,7 @@ public class CookingSystem : KitchenStation
                 {
                     currentKitchenItem.TryGetComponent<ICookableItem>(out var cookable);
                     cookable.CancelCook(timerDisplayer);
-                    currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+                    currentKitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider);
                     containerItem.PutOnPlate(RemoveKitchenItem(), stateProvider);
                 }
             }

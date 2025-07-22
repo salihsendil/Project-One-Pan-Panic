@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof (KitchenItem))]
 public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemStateProvider
 {
     [SerializeField] private KitchenItem kitchenItem;
@@ -24,6 +25,7 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemState
         cutProgress = 0f;
         cutDuration = processRule.processTime;
         player.HasBusyForProcess = true;
+        timerDisplayer.ShowTimer();
         timerDisplayer.SetTimer(cutDuration);
         cuttingCoroutine = StartCoroutine(CuttingProgress(processRule, player, timerDisplayer));
     }
@@ -50,4 +52,5 @@ public class CuttableBehaviour : MonoBehaviour, ICuttableItem, IKitchenItemState
         kitchenItem.IsProcessed = true;
         player.HasBusyForProcess = false;
     }
+
 }

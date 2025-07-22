@@ -1,0 +1,19 @@
+cutting system tıkladıkça kesme işlemi yapacak şekilde güncellenmeli
+
+save-load sistem eklenmeli
+
+menü tasarımları tamamlanmalı
+
+karakter giydirme sistemi kurulmalı
+
+ses müzik gibi oyuncu tercihleri eklenmeli
+
+assetler güncellenmeli
+
+map tasarımı yapılmalı
+
+game balance ayarlanmalı
+
+süre bitince oyun bitmeli ve farklı bi sahneye geçilmeli
+
+

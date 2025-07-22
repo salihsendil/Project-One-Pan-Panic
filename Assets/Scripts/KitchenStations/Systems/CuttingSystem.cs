@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CuttingSystem : KitchenStation
 {
@@ -20,6 +18,7 @@ public class CuttingSystem : KitchenStation
             if (transferItemHandler.HasKitchenItem) //karakter dolu
             {
                 transferItemHandler.GiveKitchenItem(out var kitchenItem);
+
                 PlaceKitchenItem(kitchenItem);
             }
         }
@@ -34,7 +33,7 @@ public class CuttingSystem : KitchenStation
                     {
                         transferItemHandler.GiveKitchenItem(out var kitchenItem);
 
-                        kitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+                        kitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider);
 
                         container.PutOnPlate(kitchenItem, stateProvider);
                     }
@@ -44,7 +43,7 @@ public class CuttingSystem : KitchenStation
                 {
                     if (containerBehaviour.CanPuttableOnPlate(currentKitchenItem))
                     {
-                        currentKitchenItem.TryGetComponent<IKitchenItemStateProvider>(out IKitchenItemStateProvider stateProvider);
+                        currentKitchenItem.TryGetComponent(out IKitchenItemStateProvider stateProvider);
 
                         containerBehaviour.PutOnPlate(RemoveKitchenItem(), stateProvider);
                     }

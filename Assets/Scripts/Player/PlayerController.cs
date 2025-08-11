@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [Inject] private InputHandler inputHandler;
 
     [Header("Movement")]
-    [SerializeField] private float playerSize = 0.5f;
-    [SerializeField] private float speed = 3.5f;
+    [SerializeField] private float playerSize = 0.1f;
+    [SerializeField] private float speed = 1.75f;
     [SerializeField] private bool hasBusy = false;
     [SerializeField] private bool isMoving;
     [SerializeField] private bool showVelocityDebug;

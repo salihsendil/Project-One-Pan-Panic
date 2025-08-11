@@ -19,14 +19,14 @@ MonoBehaviour:
   m_RendererDataList:
   - {fileID: 11400000, guid: 65bc7dbf4170f435aa868c779acfb082, type: 2}
   m_DefaultRendererIndex: 0
-  m_RequireDepthTexture: 0
-  m_RequireOpaqueTexture: 0
-  m_OpaqueDownsampling: 0
+  m_RequireDepthTexture: 1
+  m_RequireOpaqueTexture: 1
+  m_OpaqueDownsampling: 1
   m_SupportsTerrainHoles: 1
   m_SupportsHDR: 1
   m_HDRColorBufferPrecision: 0
-  m_MSAA: 1
-  m_RenderScale: 0.8
+  m_MSAA: 2
+  m_RenderScale: 1
   m_UpscalingFilter: 3
   m_FsrOverrideSharpness: 0
   m_FsrSharpness: 0.92
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_ProbeVolumeSHBands: 1
   m_MainLightRenderingMode: 1
   m_MainLightShadowsSupported: 1
-  m_MainLightShadowmapResolution: 1024
+  m_MainLightShadowmapResolution: 2048
   m_AdditionalLightsRenderingMode: 1
   m_AdditionalLightsPerObjectLimit: 4
   m_AdditionalLightShadowsSupported: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_MaxPixelLights: 0
   m_ShadowAtlasResolution: 256
   m_VolumeFrameworkUpdateMode: 0
-  m_VolumeProfile: {fileID: 11400000, guid: 5d68992f16cd92d4f8f7e9a18df5115c, type: 2}
+  m_VolumeProfile: {fileID: 11400000, guid: 41fba6d887ed28c43b9745a2eaa2101b, type: 2}
   apvScenesData:
     obsoleteSceneBounds:
       m_Keys: []

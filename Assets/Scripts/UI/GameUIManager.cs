@@ -9,8 +9,8 @@ public class GameUIManager : MonoBehaviour
     [Inject] private OrderManager orderManager;
 
     [Header("Order Display")]
-    [SerializeField] private Vector2 orderDisplayStartPosition = new Vector2(200, -50);
-    [SerializeField] private Vector2 orderDisplayOffset = new Vector2(300, 0);
+    [SerializeField] private Vector2 orderDisplayStartPosition = new Vector2(50, -50);
+    [SerializeField] private Vector2 orderDisplayOffset = new Vector2(0, -120);
     [SerializeField] private List<OrderDisplay> orderDisplays = new List<OrderDisplay>();
 
     [Header("Pause Menu")]

@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0950a90871d0afb47bfd7bdc5a4917cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kitchenItemType: 0
   kitchenItemData: {fileID: 11400000, guid: 5b7db552e76611b47ac933caf0002c53, type: 2}
   meshFilter: {fileID: 0}
-  isProcessed: 0
-  currentState: 1
+  IsProcessed: 0
 --- !u!114 &-2196052866993600960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,5 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItem: {fileID: 0}
+  currentState: 1
   cutDuration: 0
   cutProgress: 0

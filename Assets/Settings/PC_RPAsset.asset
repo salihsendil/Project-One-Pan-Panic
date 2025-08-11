@@ -91,7 +91,7 @@ MonoBehaviour:
   m_MaxPixelLights: 0
   m_ShadowAtlasResolution: 256
   m_VolumeFrameworkUpdateMode: 0
-  m_VolumeProfile: {fileID: 11400000, guid: 5d68992f16cd92d4f8f7e9a18df5115c, type: 2}
+  m_VolumeProfile: {fileID: 0}
   apvScenesData:
     obsoleteSceneBounds:
       m_Keys: []

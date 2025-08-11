@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerInteractionsHandler : MonoBehaviour
 {
-    [SerializeField] private float maxRayDistance = 1.25f;
-    [SerializeField] private float capsuleRadius = 0.15f;
-    [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.5f, 0f);
+    [SerializeField] private float maxRayDistance = 0.35f;
+    [SerializeField] private float capsuleRadius = 0.1f;
+    [SerializeField] private Vector3 rayOffset = new Vector3(0f, 0.25f, 0f);
     private PlayerCarryHandler playerCarryHandler;
     [SerializeField] private IStationInteractable currentInteractableStation;
     [SerializeField] private IStationInteractable previousInteractableStation;

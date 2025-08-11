@@ -7,7 +7,7 @@ public class ContainerDispenserSystem : KitchenStation
     [Inject] private KitchenItemPoolManager poolManager;
     [Inject] private BillboardManager billboardManager;
     private Stack<KitchenItem> plateStack = new Stack<KitchenItem>();
-    [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 0.05f, 0f);
+    [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 0.015f, 0f);
     [SerializeField] private int plateStackInitSize;
 
     private void Start()

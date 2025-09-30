@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee838ed46a379ad4584179422a6de5aa, type: 3}
+  m_Name: Mustaches
+  m_EditorClassIdentifier: 
+  variants:
+  - id: 5b0fd2f6-ec87-4138-a47e-6f141f030970
+    mesh: {fileID: 3131188959575262684, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+    cost: 0
+  - id: c30b75e9-1bec-4d4c-8174-358011ab7ea0
+    mesh: {fileID: -3811569408259832331, guid: 7f08cab61f953cd4693ac58a98b96079, type: 3}
+    cost: 50
+  - id: 9ea1908a-613a-48d3-b27c-8ad0943df4af
+    mesh: {fileID: 2912484300477787147, guid: b4d34f152c73703499b03a8b9beab646, type: 3}
+    cost: 100

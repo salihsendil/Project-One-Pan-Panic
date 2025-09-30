@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee838ed46a379ad4584179422a6de5aa, type: 3}
+  m_Name: Outwears
+  m_EditorClassIdentifier: 
+  variants:
+  - id: 4b6a9cc7-4ee1-4c74-95a7-4b587d2b9de2
+    mesh: {fileID: -5866934017332945184, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+    cost: 0
+  - id: fc5b95cc-c006-41a6-aa24-096eb65c87a2
+    mesh: {fileID: 1617087265200637012, guid: e79b799a85000cd4ea6d2332153cbd7b, type: 3}
+    cost: 100
+  - id: 9b6c566a-a294-44a8-8d09-31f784fcca0a
+    mesh: {fileID: 9053217031431064551, guid: 5a531847cd74a654b97ef249cb9306d5, type: 3}
+    cost: 150
+  - id: 78855893-e380-488e-bd4a-1a4c2cf81d70
+    mesh: {fileID: -3950228387462889971, guid: d0367ce8ac8ac514a9278f7eb0ed66ac, type: 3}
+    cost: 250
+  - id: 87760fcf-37d9-4e33-b357-ed96863825b8
+    mesh: {fileID: 9154480696012802162, guid: de746c65be1d3594384300bbc4f9e168, type: 3}
+    cost: 400

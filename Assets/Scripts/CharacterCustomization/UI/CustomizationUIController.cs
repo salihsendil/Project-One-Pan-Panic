@@ -20,7 +20,21 @@ public class CustomizationUIController : MonoBehaviour
     [Header("Buy-Equip")]
     [SerializeField] private TMP_Text buyCostText;
 
-    private void Awake()
+
+
+
+
+
+
+}
+
+
+
+
+/*
+ 
+ 
+     private void Awake()
     {
         currentCategoryIndex = currentVariantIndex = 0;
     }
@@ -88,5 +102,6 @@ public class CustomizationUIController : MonoBehaviour
     {
         buyCostText.text = cost.ToString();
     }
-
-}
+ 
+ 
+ */

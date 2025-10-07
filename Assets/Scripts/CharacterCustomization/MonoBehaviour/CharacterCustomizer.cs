@@ -28,7 +28,6 @@ public class CharacterCustomizer : MonoBehaviour
         {
             bodyPartSlots[part.BodyPartType] = part;
         }
-
     }
 
     private void Update()
@@ -49,11 +48,6 @@ public class CharacterCustomizer : MonoBehaviour
         OnCustomizeChanged?.Invoke(targetPart.BodyPartType, category.category.variants[index].id);
         Debug.Log("apply data worked");
 
-    }
-
-    private void OnDisable()
-    {
-        //JsonDataHandler.Instance.SaveJson(bodyPartSlots);
     }
 
     private void DressUpCharacter(HashSet<CustomizeData> customizeData)

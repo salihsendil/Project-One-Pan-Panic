@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a91eaaae03acb448a9cf473c3e485d7, type: 3}
+  m_Name: Gloves
+  m_EditorClassIdentifier: 
+  variants:
+  - id: ad472b939cd48144e9521d873c2e3018
+    mesh: {fileID: -9073019736851073122, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+    cost: 0
+  - id: ed3cc8f7b4705704db2e46eff03dd968
+    mesh: {fileID: 4388357067006938284, guid: ed3cc8f7b4705704db2e46eff03dd968, type: 3}
+    cost: 30
+  - id: 47ba93e4fb1b05e418fa1918bf34ed85
+    mesh: {fileID: -2628522999209309539, guid: 47ba93e4fb1b05e418fa1918bf34ed85, type: 3}
+    cost: 50

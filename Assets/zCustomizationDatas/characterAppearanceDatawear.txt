@@ -1,0 +1,49 @@
+{
+    "appearanceDataList": [
+        {
+            "partType": 0,
+            "id": "106c56f4b86971e4393de6fb97ee6cdb",
+            "index": 2
+        },
+        {
+            "partType": 1,
+            "id": "e4f543c638ecbfd40b8dc37cd298e48a",
+            "index": 2
+        },
+        {
+            "partType": 2,
+            "id": "8ce1c24b95f214d4bb53ebe8be080a49",
+            "index": 2
+        },
+        {
+            "partType": 3,
+            "id": "ad472b939cd48144e9521d873c2e3018",
+            "index": 0
+        },
+        {
+            "partType": 4,
+            "id": "ad472b939cd48144e9521d873c2e3018",
+            "index": 0
+        },
+        {
+            "partType": 5,
+            "id": "ad472b939cd48144e9521d873c2e3018",
+            "index": 0
+        },
+        {
+            "partType": 6,
+            "id": "5a531847cd74a654b97ef249cb9306d5",
+            "index": 3
+        },
+        {
+            "partType": 7,
+            "id": "0f24f9714abd24a4596c28822aaa7a39",
+            "index": 2
+        },
+        {
+            "partType": 8,
+            "id": "0fc9184e885899c408b2467848981766",
+            "index": 4
+        }
+    ]
+}

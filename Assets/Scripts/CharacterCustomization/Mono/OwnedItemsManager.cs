@@ -31,14 +31,6 @@ public class OwnedItemsManager : MonoBehaviour
         saveManager.OnOwnedItemDataLoaded -= SyncOwnedItemsData;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            saveManager.SaveOwnedItemsData(ownedItems);
-        }
-    }
-
     public bool IsOwnedItem(CharacterPartType partType, string id)
     {
         return ownedItems.TryGetValue(partType, out var set) && set.Contains(id);

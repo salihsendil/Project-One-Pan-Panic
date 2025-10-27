@@ -33,9 +33,6 @@ public class AppearanceManager : MonoBehaviour
     private Dictionary<CharacterPartType, CharacterPartHandler> characterParts = new();
     private Dictionary<CharacterPartType, AppearanceData> appearanceDataValues = new();
 
-    //Getters
-    public Dictionary<CharacterPartType, AppearanceData> AppearanceDataValues { get => appearanceDataValues; }
-
     private void Awake()
     {
         var parts = GetComponentsInChildren<CharacterPartHandler>();
@@ -49,14 +46,14 @@ public class AppearanceManager : MonoBehaviour
     private void OnEnable()
     {
         saveManager.OnAppearanceDataLoaded += LoadAppearance;
-        customizationUI.OnVariantChanged += ApplyEquipmentVariant;
+        customizationUI.OnCustomizationSelectionChanged += ApplyEquipmentVariant;
         customizationUI.OnEquipRequest += SyncAppearanceDataValues;
     }
 
     private void OnDisable()
     {
         saveManager.OnAppearanceDataLoaded -= LoadAppearance;
-        customizationUI.OnVariantChanged -= ApplyEquipmentVariant;
+        customizationUI.OnCustomizationSelectionChanged -= ApplyEquipmentVariant;
         customizationUI.OnEquipRequest -= SyncAppearanceDataValues;
     }
 

@@ -46,7 +46,6 @@ public class EquipmentSO : ScriptableObject
             v?.EnsureID();
 
         EditorUtility.SetDirty(this);
-        AssetDatabase.SaveAssets();//bilemiyorum bu sorun çýkarýyor olabilir görünmezlik problemi
     }
 #endif
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,13 +8,13 @@ using Zenject;
 public class CustomizationUIController : MonoBehaviour
 {
     //References
-    [Inject] private CustomizationDataProvider dataProvider;
-    [Inject] private OwnedItemsManager ownedItemsManager;
-    [Inject] private AppearanceManager appearanceManager;
+    [Inject] private readonly CustomizationSaveManager saveManager;
+    [Inject] private readonly CustomizationDataProvider dataProvider;
+    [Inject] private readonly OwnedItemsManager ownedItemsManager;
+    [Inject] private readonly AppearanceManager appearanceManager;
 
     //Events
-    public event Action<CharacterPartType, int> OnVariantChanged; //güncellencek
-
+    public event Action<CharacterPartType, int> OnCustomizationSelectionChanged;
     public event Action<CharacterPartType, string, int> OnEquipRequest;
     public event Action<CharacterPartType, string, int> OnPurchaseRequested;
 
@@ -35,6 +34,7 @@ public class CustomizationUIController : MonoBehaviour
     [Header("Data")]
     private List<CharacterPartType> customizationSet = new();
     private int currentSetIndex = 0;
+    private CharacterPartType currentPartType = CharacterPartType.Accessories;
     private int currentVariantIndex = 0;
     private int currentVariantCount;
 
@@ -42,38 +42,27 @@ public class CustomizationUIController : MonoBehaviour
     private bool isCurrentItemOwned;
 
     [Header("Test Buttons")]
-    [Inject] CustomizationSaveManager saveManager;
     [SerializeField] private Button saveAppearanceButton;
     [SerializeField] private Button loadAppearanceButton;
 
     private void OnEnable()
     {
-        //Event Invokes
+        //Events
         dataProvider.OnCustomizationDataLoaded += InitializeCustomizationDataCache;
         saveManager.OnAllDataLoaded += InitializeUIElements;
 
         //Button Actions
         BindUIButtons();
-        equipmentButton.onClick.AddListener(() => InvokeEquipButtonEvent(isCurrentItemOwned));
-
-        //TEST EVENTS
-        saveAppearanceButton.onClick.AddListener(() => SaveAppearanceEvent());
-        loadAppearanceButton.onClick.AddListener(() => LoadAppearanceEvent());
     }
 
     private void OnDisable()
     {
-        //Event Invokes
+        //Events
         dataProvider.OnCustomizationDataLoaded -= InitializeCustomizationDataCache;
         saveManager.OnAllDataLoaded -= InitializeUIElements;
 
         //Button Actions
         UnBindUIButtons();
-        equipmentButton.onClick.RemoveListener(() => InvokeEquipButtonEvent(isCurrentItemOwned));
-
-        //TEST EVENTS
-        saveAppearanceButton.onClick.RemoveListener(() => SaveAppearanceEvent());
-        loadAppearanceButton.onClick.RemoveListener(() => LoadAppearanceEvent());
     }
 
     private void InitializeCustomizationDataCache()
@@ -96,39 +85,53 @@ public class CustomizationUIController : MonoBehaviour
     private void BindUIButtons()
     {
         #region Customization Set Buttons
-        customizationSetRightButton.onClick.AddListener(() => OnRightCustomizationSetButton());
-        customizationSetLeftButton.onClick.AddListener(() => OnLeftCustomizationSetButton());
+        customizationSetRightButton.onClick.AddListener(OnRightCustomizationSetButton);
+        customizationSetLeftButton.onClick.AddListener(OnLeftCustomizationSetButton);
         #endregion
 
         #region Customization Variant Buttons
-        equipmentRightButton.onClick.AddListener(() => OnRightEquipmentVariantButton());
-        equipmentLeftButton.onClick.AddListener(() => OnLeftEquipmentVariantButton());
+        equipmentRightButton.onClick.AddListener(OnRightEquipmentVariantButton);
+        equipmentLeftButton.onClick.AddListener(OnLeftEquipmentVariantButton);
+        #endregion
+
+        #region Equipment Button
+        equipmentButton.onClick.AddListener(OnEquipmentButtonPressed);
         #endregion
     }
 
     private void UnBindUIButtons()
     {
         #region Customization Set Buttons
-        customizationSetRightButton.onClick.RemoveListener(() => OnRightCustomizationSetButton());
-        customizationSetLeftButton.onClick.RemoveListener(() => OnLeftCustomizationSetButton());
+        customizationSetRightButton.onClick.RemoveListener(OnRightCustomizationSetButton);
+        customizationSetLeftButton.onClick.RemoveListener(OnLeftCustomizationSetButton);
         #endregion
 
         #region Customization Variant Buttons
-        equipmentRightButton.onClick.RemoveListener(() => OnRightEquipmentVariantButton());
-        equipmentLeftButton.onClick.RemoveListener(() => OnLeftEquipmentVariantButton());
+        equipmentRightButton.onClick.RemoveListener(OnRightEquipmentVariantButton);
+        equipmentLeftButton.onClick.RemoveListener(OnLeftEquipmentVariantButton);
+        #endregion
+
+        #region Equipment Button
+        equipmentButton.onClick.RemoveListener(OnEquipmentButtonPressed);
         #endregion
     }
 
-    private void OnRightCustomizationSetButton() => SwithCustomizationSet(true);
-    private void OnLeftCustomizationSetButton() => SwithCustomizationSet(false);
-    private void SwithCustomizationSet(bool forward)
+
+    private void OnRightCustomizationSetButton() => SwitchCustomizationSet(true);
+    private void OnLeftCustomizationSetButton() => SwitchCustomizationSet(false);
+    private void SwitchCustomizationSet(bool forward)
     {
-        CharacterPartType partType = customizationSet[currentSetIndex];
-        OnVariantChanged?.Invoke(partType, appearanceManager.GetSelectedVariantIndex(partType));
+        if (!appearanceManager.IsItemCurrentlyEquipped(currentPartType, dataProvider.GetVariantID(currentPartType, currentVariantIndex)))
+        {
+            OnCustomizationSelectionChanged?.Invoke(currentPartType, appearanceManager.GetSelectedVariantIndex(currentPartType));
+        }
+
         currentSetIndex = GetNextIndex(currentSetIndex, customizationSet.Count, forward);
-        currentVariantIndex = appearanceManager.GetSelectedVariantIndex(partType);
-        currentVariantCount = dataProvider.GetVariantCount(customizationSet[currentSetIndex]);
-        customizationSetText.text = customizationSet[currentSetIndex].ToString();
+        currentPartType = customizationSet[currentSetIndex];
+        currentVariantCount = dataProvider.GetVariantCount(currentPartType);
+        currentVariantIndex = appearanceManager.GetSelectedVariantIndex(currentPartType);
+        customizationSetText.text = currentPartType.ToString();
+        OnCustomizationSelectionChanged?.Invoke(currentPartType, currentVariantIndex);
         RefreshEquipmentButtonVisual();
     }
 
@@ -138,23 +141,21 @@ public class CustomizationUIController : MonoBehaviour
     private void SwitchEquipmentVariant(bool forward)
     {
         currentVariantIndex = GetNextIndex(currentVariantIndex, currentVariantCount, forward);
+        OnCustomizationSelectionChanged?.Invoke(currentPartType, currentVariantIndex);
         RefreshEquipmentButtonVisual();
-        OnVariantChanged?.Invoke(customizationSet[currentSetIndex], currentVariantIndex);
     }
 
     private void RefreshEquipmentButtonVisual()
     {
-        CharacterPartType partType = customizationSet[currentSetIndex];
-        string id = dataProvider.GetVariantID(partType, currentVariantIndex);
-        isCurrentItemOwned = ownedItemsManager.IsOwnedItem(partType, id);
-
+        string id = dataProvider.GetVariantID(customizationSet[currentSetIndex], currentVariantIndex);
+        isCurrentItemOwned = ownedItemsManager.IsOwnedItem(currentPartType, id);
         if (isCurrentItemOwned)
         {
             equipmentLockedImage.enabled = false;
-            if (appearanceManager.IsItemCurrentlyEquipped(partType, id))
+            if (appearanceManager.IsItemCurrentlyEquipped(currentPartType, id))
             {
-                equipmentButtonText.text = "Equipped";
                 equipmentButton.interactable = false;
+                equipmentButtonText.text = "Equipped";
             }
 
             else
@@ -168,23 +169,24 @@ public class CustomizationUIController : MonoBehaviour
         {
             equipmentButton.interactable = true;
             equipmentLockedImage.enabled = true;
-            equipmentButtonText.text = dataProvider.GetVariantCost(partType, currentVariantIndex).ToString();
+            equipmentButtonText.text = dataProvider.GetVariantCost(currentPartType, currentVariantIndex).ToString();
         }
     }
 
-    private void InvokeEquipButtonEvent(bool isOwned)
+
+    private void OnEquipmentButtonPressed() => HandleEquipmentButtonPressed(isCurrentItemOwned);
+    private void HandleEquipmentButtonPressed(bool isOwned)
     {
-        CharacterPartType partType = customizationSet[currentSetIndex];
-        EquipmentVariant variant = dataProvider.GetVariant(partType, currentVariantIndex);
+        EquipmentVariant variant = dataProvider.GetVariant(currentPartType, currentVariantIndex);
 
         if (isOwned)
         {
-            OnEquipRequest?.Invoke(partType, variant.id, currentVariantIndex);
+            OnEquipRequest?.Invoke(currentPartType, variant.id, currentVariantIndex);
         }
 
         else
         {
-            OnPurchaseRequested?.Invoke(partType, variant.id, variant.cost);
+            OnPurchaseRequested?.Invoke(currentPartType, variant.id, variant.cost);
         }
 
         RefreshEquipmentButtonVisual();
@@ -201,16 +203,5 @@ public class CustomizationUIController : MonoBehaviour
         {
             return (current - 1 + count) % count;
         }
-    }
-
-    //Test Methods
-    private void SaveAppearanceEvent()
-    {
-        saveManager.SaveAppearanceData(appearanceManager.AppearanceDataValues.Values.ToList());
-    }
-
-    private void LoadAppearanceEvent()
-    {
-        saveManager.LoadAppearanceData();
     }
 }

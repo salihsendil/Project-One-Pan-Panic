@@ -77,8 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManagerPrefab: {fileID: 3185872361588838559, guid: f4e542472bffdb646a91cab65f6659f2, type: 3}
   GameStatsManagerPrefab: {fileID: 7806304660206840975, guid: 81d00da8bd62c9c4eb3722b531692013, type: 3}
-  UICommandControllerPrefab: {fileID: 7469984991433486859, guid: c9368865d236b2149bc93b31a9a5e7e8, type: 3}
-  SceneServicePrefab: {fileID: 7187466093666013460, guid: d850a22a5071c7640aa8ef62313d9e10, type: 3}
+  generalUIServicePrefab: {fileID: 145071926051568881, guid: 3288e80eae94eae478adfd3d16ba8a39, type: 3}
 --- !u!114 &3496302463154994006
 MonoBehaviour:
   m_ObjectHideFlags: 0

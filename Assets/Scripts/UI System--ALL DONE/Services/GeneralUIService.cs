@@ -65,7 +65,6 @@ public class GeneralUIService : MonoBehaviour
 
     private void OnSceneLoaded(ScenesEnum scene)
     {
-        Debug.Log("onsceneLoaded");
         GameObject sceneUIPrefab = uiConfig.GetSceneUIPrefab(scene);
 
         if (currentUI != null)

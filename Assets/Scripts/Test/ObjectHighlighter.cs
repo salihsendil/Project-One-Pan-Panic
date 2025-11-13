@@ -20,15 +20,15 @@ public class ObjectHighlighter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            HighlightObject(true);
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    HighlightObject(true);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            HighlightObject(false);
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    HighlightObject(false);
+        //}
     }
 
     private void HighlightObject(bool isOn)

@@ -9,7 +9,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private Vector3 rayOffset = new(0f, 0.75f, 0f);
 
     //Events
-    public event Action<IInteractableModule> OnInteractionRequest;
+    public event Action<BaseCounter> OnInteractionRequest;
 
 
     void Start()
@@ -32,9 +32,9 @@ public class PlayerInteractor : MonoBehaviour
         Ray ray = new(rayOrigin, rayDir);
         if (Physics.SphereCast(ray, rayRadius, out RaycastHit hit, maxDistance))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IInteractableModule interactable))
+            if (hit.collider.gameObject.TryGetComponent(out BaseCounter counter))
             {
-                OnInteractionRequest?.Invoke(interactable);
+                OnInteractionRequest?.Invoke(counter);
             }
         }
     }

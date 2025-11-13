@@ -29,9 +29,9 @@ public class PlayerCarryingController : MonoBehaviour, IItemHolder
         return tempItem;
     }
 
-    private void TestMethod(IInteractableModule interactable)
+    private void TestMethod(BaseCounter counter)
     {
-        interactable.TryInteract(this);
+        counter.Interact(this);
     }
 
 }

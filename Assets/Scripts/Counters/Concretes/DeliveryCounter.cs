@@ -7,7 +7,7 @@ public class DeliveryCounter : BaseCounter
     {
         base.Awake();
         TryGetComponent(out DeliveryModule deliveryModule);
-        counterModules[1] = deliveryModule;
+        counterModules[0] = deliveryModule;
     }
 
     public override void Interact(PlayerCarryingController player)

@@ -7,7 +7,7 @@ public class PlateDispenserCounter : BaseCounter
     {
         base.Awake();
         TryGetComponent(out PlateDispenserModule plateDispenserModule);
-        counterModules[1] = plateDispenserModule;
+        counterModules[0] = plateDispenserModule;
     }
 
     public override void Interact(PlayerCarryingController player)

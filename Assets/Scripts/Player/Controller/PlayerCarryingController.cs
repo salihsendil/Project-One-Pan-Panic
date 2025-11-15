@@ -1,37 +1,25 @@
 using UnityEngine;
 
-public class PlayerCarryingController : MonoBehaviour, IItemHolder
+[RequireComponent(typeof(ItemSocket))]
+public class PlayerCarryingController : MonoBehaviour
 {
-    [SerializeField] private Transform holdPoint;
-    [SerializeField] private GameObject currentItem;
-    [SerializeField] private PlayerInteractor playerInteractor;
+    private ItemSocket itemSocket;
 
-    private void OnEnable()
+    private void Awake()
     {
-        playerInteractor.OnInteractionRequest += TestMethod;
-        SetItem(currentItem);
+        TryGetComponent(out itemSocket);
     }
 
-    public bool HasItem() => currentItem != null;
-    public GameObject GetItem() { return currentItem; }
-
-    public void SetItem(GameObject obj)
+    private void OnEnable() //debug
     {
-        currentItem = obj;
-        currentItem.transform.position = holdPoint.position;
-        currentItem.transform.SetParent(holdPoint);
+        SetItem(GetItem());
     }
 
-    public GameObject RemoveItem()
-    {
-        var tempItem = currentItem;
-        currentItem = null;
-        return tempItem;
-    }
+    public bool HasItem() => itemSocket.HasItem();
 
-    private void TestMethod(BaseCounter counter)
-    {
-        counter.Interact(this);
-    }
+    public GameObject GetItem() => itemSocket.GetItem();
 
+    public void SetItem(GameObject obj) => itemSocket.SetItem(obj);
+
+    public GameObject RemoveItem() => itemSocket.RemoveItem();
 }

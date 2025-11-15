@@ -1,37 +1,19 @@
 using UnityEngine;
 
-public class ObjectHighlighter : MonoBehaviour
+public class CounterHighlighter : MonoBehaviour
 {
     private Renderer _renderer;
     private Material _material;
     [SerializeField] private Color originalEmission = Color.clear;
-    [SerializeField] public Color highlightColor;
+    [SerializeField] public Color highlightColor = new Color(0.1f, 0.1f, 0.1f, 0.4f);
 
     private void Awake()
     {
         TryGetComponent(out _renderer);
-    }
-
-    void Start()
-    {
         _material = _renderer.material;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    HighlightObject(true);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    HighlightObject(false);
-        //}
-    }
-
-    private void HighlightObject(bool isOn)
+    public void HighlightObject(bool isOn)
     {
         if (_material == null || !_material.HasProperty("_EmissionColor"))
         {
@@ -50,5 +32,4 @@ public class ObjectHighlighter : MonoBehaviour
         }
 
     }
-
 }

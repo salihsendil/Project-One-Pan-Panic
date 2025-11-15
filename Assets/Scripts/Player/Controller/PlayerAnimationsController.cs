@@ -22,8 +22,6 @@ public class PlayerAnimationsController : MonoBehaviour
 
     private void Awake()
     {
-        if (inputHandler == null) { Debug.LogError("Input Handler not found!"); }
-
         TryGetComponent(out animator);
     }
 

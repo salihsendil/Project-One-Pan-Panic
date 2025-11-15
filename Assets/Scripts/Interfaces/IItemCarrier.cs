@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IItemHolder /*: IInteractableModule - basecounterda itemholdermodule'u zorunlu tutmamak için kullanabiliriz*/
+public interface IItemCarrier
 {
     public bool HasItem();
     public GameObject GetItem();

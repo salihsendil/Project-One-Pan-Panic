@@ -16,15 +16,19 @@ public class PlayerInteractor : MonoBehaviour
 
     //Events
     public event Action<IInteractable<PlayerCarryingController>> OnCounterInteractionRequest;
+    public event Action<IInteractableAlternate> OnCounterInteractionAlternateRequest;
 
     private void OnEnable()
     {
         inputHandler.OnInteractionButtonPressed += HandleInteraction;
+        inputHandler.OnInteractionAlternateButtonPressed += HandleInteractionAlternate;
     }
 
     private void OnDisable()
     {
         inputHandler.OnInteractionButtonPressed -= HandleInteraction;
+        inputHandler.OnInteractionAlternateButtonPressed -= HandleInteractionAlternate;
+
     }
 
     void Update()
@@ -58,16 +62,31 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
-    private void HandleInteraction()
+    private Ray InteractionRay()
     {
         Vector3 rayOrigin = transform.position + rayOffset;
         Vector3 rayDir = transform.forward * maxRayDistance;
-        Ray ray = new(rayOrigin, rayDir);
-        if (Physics.SphereCast(ray, rayRadius, out RaycastHit hit, maxRayDistance))
+        return new(rayOrigin, rayDir);
+    }
+
+    private void HandleInteraction()
+    {
+        if (Physics.SphereCast(InteractionRay(), rayRadius, out RaycastHit hit, maxRayDistance))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IInteractable<PlayerCarryingController> interactable ))
+            if (hit.collider.gameObject.TryGetComponent(out IInteractable<PlayerCarryingController> interactable))
             {
                 OnCounterInteractionRequest?.Invoke(interactable);
+            }
+        }
+    }
+
+    private void HandleInteractionAlternate()
+    {
+        if (Physics.SphereCast(InteractionRay(), rayRadius, out RaycastHit hit, maxRayDistance))
+        {
+            if (hit.collider.gameObject.TryGetComponent(out IInteractableAlternate interactableAlternate))
+            {
+                OnCounterInteractionAlternateRequest?.Invoke(interactableAlternate);
             }
         }
     }

@@ -1,5 +1,5 @@
 
-public enum KitchemItemType 
+public enum KitchenItemType
 {
     Tomato,
     Lettuce

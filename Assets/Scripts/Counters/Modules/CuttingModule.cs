@@ -1,10 +1,24 @@
 using UnityEngine;
 
-public class CuttingModule : MonoBehaviour, IInteractableModule
+public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
 {
-    public bool TryInteract(PlayerCarryingController player)
+    private ProcessType processType = ProcessType.Cut;
+
+    public bool CanInteractAlternate(KitchenItem kitchenItem)
     {
-        Debug.Log("cutting counter cut anything in here");
+        if (kitchenItem.CanProcess(processType)) { return true; }
+        return false;
+    }
+
+    public bool TryInteractAlternate(KitchenItem kitchenItem)
+    {
+        if (!CanInteractAlternate(kitchenItem)) { return false; }
+
+        else
+        {
+            kitchenItem.StartProcess(processType);
+        }
+
         return true;
     }
 }

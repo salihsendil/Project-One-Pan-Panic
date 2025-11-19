@@ -3,19 +3,19 @@ using UnityEngine;
 public class ItemSocket : MonoBehaviour, IItemCarrier
 {
     [SerializeField] private Transform holdPoint;
-    [SerializeField] private GameObject currentItem;
+    [SerializeField] private KitchenItem currentItem;
 
     public bool HasItem() => currentItem != null;
-    public GameObject GetItem() { return currentItem; }
+    public KitchenItem GetItem() { return currentItem; }
 
-    public void SetItem(GameObject obj)
+    public void SetItem(KitchenItem obj)
     {
         currentItem = obj;
         currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         currentItem.transform.SetParent(holdPoint);
     }
 
-    public GameObject RemoveItem()
+    public KitchenItem RemoveItem()
     {
         var tempItem = currentItem;
         currentItem = null;

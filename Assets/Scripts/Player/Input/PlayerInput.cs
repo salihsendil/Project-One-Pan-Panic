@@ -183,6 +183,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractionAlternate"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6396da8-90aa-41e6-9fcc-bbda8501e81b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7317068-0015-4d29-80ac-13ffdf46992b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionAlternate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -208,6 +228,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
         m_Interactions_Interaction = m_Interactions.FindAction("Interaction", throwIfNotFound: true);
+        m_Interactions_InteractionAlternate = m_Interactions.FindAction("InteractionAlternate", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -386,6 +407,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interactions;
     private List<IInteractionsActions> m_InteractionsActionsCallbackInterfaces = new List<IInteractionsActions>();
     private readonly InputAction m_Interactions_Interaction;
+    private readonly InputAction m_Interactions_InteractionAlternate;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interactions".
     /// </summary>
@@ -401,6 +423,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interactions/Interaction".
         /// </summary>
         public InputAction @Interaction => m_Wrapper.m_Interactions_Interaction;
+        /// <summary>
+        /// Provides access to the underlying input action "Interactions/InteractionAlternate".
+        /// </summary>
+        public InputAction @InteractionAlternate => m_Wrapper.m_Interactions_InteractionAlternate;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -430,6 +456,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
+            @InteractionAlternate.started += instance.OnInteractionAlternate;
+            @InteractionAlternate.performed += instance.OnInteractionAlternate;
+            @InteractionAlternate.canceled += instance.OnInteractionAlternate;
         }
 
         /// <summary>
@@ -444,6 +473,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
+            @InteractionAlternate.started -= instance.OnInteractionAlternate;
+            @InteractionAlternate.performed -= instance.OnInteractionAlternate;
+            @InteractionAlternate.canceled -= instance.OnInteractionAlternate;
         }
 
         /// <summary>
@@ -506,5 +538,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteraction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "InteractionAlternate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteractionAlternate(InputAction.CallbackContext context);
     }
 }

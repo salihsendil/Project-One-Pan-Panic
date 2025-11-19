@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68e29709679d544bbddd79ed1060e4c, type: 3}
   m_Name: Lettuce
   m_EditorClassIdentifier: 
-  kitchemItemType: 1
+  itemName: Lettuce
   prefab: {fileID: 0}
   icon: {fileID: 0}
+  processRules:
+  - processType: 0
+    fromStage: 0
+    toStage: 1
+    processTime: 10
+    outputMesh: {fileID: 0}

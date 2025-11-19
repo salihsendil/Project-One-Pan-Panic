@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(CounterHighlighter))]
 public abstract class BaseCounter : MonoBehaviour, IInteractable<PlayerCarryingController>
 {
-
     protected ItemSocket itemSocket;
     protected IInteractableModule[] counterModules = new IInteractableModule[2];
 

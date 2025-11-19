@@ -17,9 +17,9 @@ public class PlayerCarryingController : MonoBehaviour
 
     public bool HasItem() => itemSocket.HasItem();
 
-    public GameObject GetItem() => itemSocket.GetItem();
+    public KitchenItem GetItem() => itemSocket.GetItem();
 
-    public void SetItem(GameObject obj) => itemSocket.SetItem(obj);
+    public void SetItem(KitchenItem obj) => itemSocket.SetItem(obj);
 
-    public GameObject RemoveItem() => itemSocket.RemoveItem();
+    public KitchenItem RemoveItem() => itemSocket.RemoveItem();
 }

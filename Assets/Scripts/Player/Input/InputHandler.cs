@@ -11,6 +11,7 @@ public class InputHandler : MonoBehaviour
     public Vector3 MovementVector { get => movementVector; }
 
     public event Action OnInteractionButtonPressed;
+    public event Action OnInteractionAlternateButtonPressed;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Movement.Move.performed += Move;
         playerInput.Movement.Move.canceled += Move;
         playerInput.Interactions.Interaction.performed += Interaction;
+        playerInput.Interactions.InteractionAlternate.performed += InteractionAlternate;
     }
 
     private void OnDisable()
@@ -32,6 +34,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Movement.Move.performed -= Move;
         playerInput.Movement.Move.canceled -= Move;
         playerInput.Interactions.Interaction.performed -= Interaction;
+        playerInput.Interactions.InteractionAlternate.performed -= InteractionAlternate;
         playerInput.Disable();
     }
 
@@ -44,6 +47,11 @@ public class InputHandler : MonoBehaviour
     private void Interaction(InputAction.CallbackContext callbackContext)
     {
         OnInteractionButtonPressed?.Invoke();
+    }
+
+    private void InteractionAlternate(InputAction.CallbackContext callbackContext)
+    {
+        OnInteractionAlternateButtonPressed?.Invoke();
     }
 
     private Vector3 ConvertMovementVector(Vector2 input)

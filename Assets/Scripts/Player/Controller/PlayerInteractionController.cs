@@ -18,16 +18,23 @@ public class PlayerInteractionController : MonoBehaviour
     private void OnEnable()
     {
         playerInteractor.OnCounterInteractionRequest += InteractionRequestRouter;
+        playerInteractor.OnCounterInteractionAlternateRequest += InteractionAlternateRequestRouter;
     }
 
     private void OnDisable()
     {
         playerInteractor.OnCounterInteractionRequest -= InteractionRequestRouter;
+        playerInteractor.OnCounterInteractionAlternateRequest -= InteractionAlternateRequestRouter;
     }
 
     private void InteractionRequestRouter(IInteractable<PlayerCarryingController> interactable)
     {
         interactable.Interact(playerCarryingController);
+    }
+
+    private void InteractionAlternateRequestRouter(IInteractableAlternate interactableAlternate)
+    {
+        interactableAlternate.InteractAlternate();
     }
 
 }

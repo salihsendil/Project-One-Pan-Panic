@@ -1,13 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KitchenItem : MonoBehaviour
 {
     private MeshFilter meshFilter;
-    private int currentStageIndex = 0;
+    private ItemStage itemStage = ItemStage.Raw;
+    private WorkStage workStage = WorkStage.Idle;
     [SerializeField] private KitchenItemSO kitchenItemSO;
     private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
-    private Dictionary<(ProcessType, int), ProcessRule> ruleMap = new();
+    private Dictionary<(ProcessType, ItemStage), ProcessRule> ruleMap = new();
+
+
+    public ItemStage ItemStage { get => itemStage; }
+    public WorkStage WorkStage { get => workStage; set => workStage = value; }
 
     private void Awake()
     {
@@ -15,7 +21,6 @@ public class KitchenItem : MonoBehaviour
         InitializeProcessRules();
         InitializeBehaviours();
     }
-
     private void InitializeProcessRules()
     {
         if (kitchenItemSO.processRules.Count <= 0) { return; }
@@ -44,15 +49,27 @@ public class KitchenItem : MonoBehaviour
 
     public void StartProcess(ProcessType processType)
     {
-        ruleMap.TryGetValue((processType, currentStageIndex), out ProcessRule rule);
+        ruleMap.TryGetValue((processType, itemStage), out ProcessRule rule);
         if (rule == null) { return; }
 
-        IItemBehaviour behaviour = behavioursDict[rule.processType];
-        behaviour.StartProcess(this, rule);
+        behavioursDict.TryGetValue(rule.processType, out IItemBehaviour behaviour);
+        if (behaviour == null) { return; }
+
+        behaviour.OnProcessComplete -= HandleProcessComplete;
+        behaviour.OnProcessComplete += HandleProcessComplete;
+        behaviour.HandleProcess(this, rule);
+    }
+
+    private void HandleProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
+    {
+        behaviour.OnProcessComplete -= HandleProcessComplete;
+        workStage = WorkStage.Idle;
+        itemStage = rule.toStage;
+        UpdateMesh(rule.outputMesh);
     }
 
     public bool CanProcess(ProcessType type)
     {
-        return ruleMap.ContainsKey((type, currentStageIndex));
+        return ruleMap.ContainsKey((type, itemStage));
     }
 }

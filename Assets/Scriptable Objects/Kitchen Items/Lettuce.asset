@@ -19,5 +19,5 @@ MonoBehaviour:
   - processType: 0
     fromStage: 0
     toStage: 1
-    processTime: 10
-    outputMesh: {fileID: 0}
+    processTime: 5
+    outputMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

@@ -11,13 +11,25 @@ public class ItemInteractionModule : MonoBehaviour, IInteractableModule
 
     public bool TryInteract(PlayerCarryingController player)
     {
-        if (!itemSocket.HasItem() && !player.HasItem()) { return false; }
+        var item = itemSocket.GetItem();
+        bool hasItem = item != null;
+        bool playerHasItem = player.HasItem();
 
-        else if (itemSocket.HasItem() && !player.HasItem()) { player.SetItem(itemSocket.RemoveItem()); return true; }
+        if (!hasItem && !playerHasItem) { return false; }
 
-        else if (!itemSocket.HasItem() && player.HasItem()) { itemSocket.SetItem(player.RemoveItem()); return true; }
+        if (hasItem && item.WorkStage == WorkStage.Processing) { return false; }
 
-        else if (itemSocket.HasItem() && player.HasItem()) { Debug.Log("Player has plate!"); return true; }
+        if (!hasItem)
+        {
+            if (playerHasItem) { itemSocket.SetItem(player.RemoveItem()); return true; }
+        }
+
+        else if (hasItem)
+        {
+            if (!player.HasItem()) { player.SetItem(itemSocket.RemoveItem()); return true; }
+
+            else { Debug.Log("Player has plate!"); return true; }
+        }
 
         return false;
     }

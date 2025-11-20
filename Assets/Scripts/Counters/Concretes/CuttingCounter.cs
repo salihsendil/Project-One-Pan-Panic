@@ -30,9 +30,10 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
 
     public void InteractAlternate()
     {
+        if (!itemSocket.HasItem()) { return; }
+
         foreach (var module in alternateModules)
         {
-            if (!itemSocket.HasItem()) { return; }
 
             if (module.TryInteractAlternate(itemSocket.GetItem()))
             {

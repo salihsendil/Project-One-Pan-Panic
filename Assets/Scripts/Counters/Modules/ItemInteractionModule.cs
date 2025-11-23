@@ -17,7 +17,7 @@ public class ItemInteractionModule : MonoBehaviour, IInteractableModule
 
         if (!hasItem && !playerHasItem) { return false; }
 
-        if (hasItem && item.WorkStage == WorkStage.Processing) { return false; }
+        if (hasItem && item.WorkStage == WorkStage.Cutting) { return false; }
 
         if (!hasItem)
         {
@@ -30,7 +30,6 @@ public class ItemInteractionModule : MonoBehaviour, IInteractableModule
 
             else { Debug.Log("Player has plate!"); return true; }
         }
-
         return false;
     }
 }

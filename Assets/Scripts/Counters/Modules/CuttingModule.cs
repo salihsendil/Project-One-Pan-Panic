@@ -10,15 +10,8 @@ public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
         return false;
     }
 
-    public bool TryInteractAlternate(KitchenItem kitchenItem)
+    public void InteractAlternate(KitchenItem kitchenItem)
     {
-        if (!CanInteractAlternate(kitchenItem)) { return false; }
-
-        else
-        {
-            kitchenItem.StartProcess(processType);
-        }
-
-        return true;
+        kitchenItem.StartProcess(processType);
     }
 }

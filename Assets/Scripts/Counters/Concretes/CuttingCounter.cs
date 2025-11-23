@@ -21,7 +21,9 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
     {
         foreach (var module in counterModules)
         {
-            if (module.TryInteract(player))
+            if (module == null) { continue; }
+
+            else if (module.TryInteract(player))
             {
                 break;
             }
@@ -32,11 +34,15 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
     {
         if (!itemSocket.HasItem()) { return; }
 
+        var kitchenItem = itemSocket.GetItem();
+
         foreach (var module in alternateModules)
         {
+            if (module == null) { continue; }
 
-            if (module.TryInteractAlternate(itemSocket.GetItem()))
+            if (module.CanInteractAlternate(kitchenItem))
             {
+                module.InteractAlternate(kitchenItem);
                 break;
             }
         }

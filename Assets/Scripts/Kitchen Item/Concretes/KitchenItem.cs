@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KitchenItem : MonoBehaviour
 {
     private MeshFilter meshFilter;
-    private ItemStage itemStage = ItemStage.Raw;
-    private WorkStage workStage = WorkStage.Idle;
+    [SerializeField] private ItemStage itemStage = ItemStage.Raw;
+    [SerializeField] private WorkStage workStage = WorkStage.Idle;
     [SerializeField] private KitchenItemSO kitchenItemSO;
     private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
     private Dictionary<(ProcessType, ItemStage), ProcessRule> ruleMap = new();
@@ -47,6 +46,11 @@ public class KitchenItem : MonoBehaviour
         }
     }
 
+    public bool CanProcess(ProcessType type)
+    {
+        return ruleMap.ContainsKey((type, itemStage));
+    }
+
     public void StartProcess(ProcessType processType)
     {
         ruleMap.TryGetValue((processType, itemStage), out ProcessRule rule);
@@ -66,10 +70,7 @@ public class KitchenItem : MonoBehaviour
         workStage = WorkStage.Idle;
         itemStage = rule.toStage;
         UpdateMesh(rule.outputMesh);
+        StartProcess(rule.processType); //????
     }
 
-    public bool CanProcess(ProcessType type)
-    {
-        return ruleMap.ContainsKey((type, itemStage));
-    }
 }

@@ -2,5 +2,7 @@
 public enum WorkStage 
 {
     Idle,
-    Processing
+    Cutting,
+    Cooking,
+    Burning
 }

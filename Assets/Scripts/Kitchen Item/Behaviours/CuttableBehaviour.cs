@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CuttableBehaviours : MonoBehaviour, IItemBehaviour
+public class CuttableBehaviour : MonoBehaviour, IItemBehaviour
 {
     private bool isPaused;
     private bool isProcessing;
@@ -19,7 +19,6 @@ public class CuttableBehaviours : MonoBehaviour, IItemBehaviour
         if (!isProcessing)
         {
             StartProcess(item, rule);
-            Debug.Log("baþladý");
             return;
         }
 
@@ -28,10 +27,8 @@ public class CuttableBehaviours : MonoBehaviour, IItemBehaviour
 
     public void StartProcess(KitchenItem kitchenItem, ProcessRule rule)
     {
-        if (isProcessing) { return; }
-
         processRule = rule;
-        kitchenItem.WorkStage = WorkStage.Processing;
+        kitchenItem.WorkStage = WorkStage.Cutting;
         processTimer.SetTimer(processRule.processTime);
         isProcessing = true;
         coroutine = TickProcess();
@@ -55,13 +52,12 @@ public class CuttableBehaviours : MonoBehaviour, IItemBehaviour
         StopCoroutine(coroutine);
         coroutine = null;
         OnProcessComplete?.Invoke(this, processRule);
-        Debug.Log("timer resetted: " + processTimer.Remaining);
     }
 
     public void PauseProcess(KitchenItem kitchenItem)
     {
         isPaused = !isPaused;
 
-        kitchenItem.WorkStage = isPaused ? WorkStage.Idle: WorkStage.Processing;
+        kitchenItem.WorkStage = isPaused ? WorkStage.Idle : WorkStage.Cutting;
     }
 }

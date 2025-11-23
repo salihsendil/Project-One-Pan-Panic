@@ -1,10 +1,17 @@
 using UnityEngine;
 
-public class CookingModule : MonoBehaviour, IInteractableModule
+public class CookingModule : MonoBehaviour, IInteractableAlternateModule
 {
-    public bool TryInteract(PlayerCarryingController player)
+    private ProcessType processType = ProcessType.Cook;
+
+    public bool CanInteractAlternate(KitchenItem kitchenItem)
     {
-        Debug.Log("cooking process is here");
-        return true;
+        if (kitchenItem.CanProcess(processType)) { return true; }
+        return false;
+    }
+
+    public void InteractAlternate(KitchenItem kitchenItem)
+    {
+        kitchenItem.StartProcess(processType);
     }
 }

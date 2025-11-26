@@ -1,17 +1,29 @@
 using UnityEngine;
 
-public class CookingModule : MonoBehaviour, IInteractableAlternateModule
+public class CookingModule : MonoBehaviour, IInteractableAutoModule
 {
-    private ProcessType processType = ProcessType.Cook;
+    private ProcessType[] processTypes = { ProcessType.Cook, ProcessType.Burn };
 
-    public bool CanInteractAlternate(KitchenItem kitchenItem)
+    public bool CanInteractableAuto(KitchenItem kitchenItem)
     {
-        if (kitchenItem.CanProcess(processType)) { return true; }
+        foreach (var process in processTypes)
+        {
+            if (kitchenItem.CanProcess(process))
+            {
+                return true;
+            }
+        }
         return false;
     }
 
-    public void InteractAlternate(KitchenItem kitchenItem)
+    public void TryInteractAuto(KitchenItem kitchenItem)
     {
-        kitchenItem.StartProcess(processType);
+        foreach (var process in processTypes)
+        {
+            if (kitchenItem.TryHandleProcess(process))
+            {
+                break;
+            }
+        }
     }
 }

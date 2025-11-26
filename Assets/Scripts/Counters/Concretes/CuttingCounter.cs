@@ -17,20 +17,7 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
         alternateModules[0] = cuttingModule;
     }
 
-    public override void Interact(PlayerCarryingController player)
-    {
-        foreach (var module in counterModules)
-        {
-            if (module == null) { continue; }
-
-            else if (module.TryInteract(player))
-            {
-                break;
-            }
-        }
-    }
-
-    public void InteractAlternate()
+    public void InteractAlternate(PlayerController playerController)
     {
         if (!itemSocket.HasItem()) { return; }
 
@@ -42,7 +29,7 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
 
             if (module.CanInteractAlternate(kitchenItem))
             {
-                module.InteractAlternate(kitchenItem);
+                module.InteractAlternate(kitchenItem, playerController);
                 break;
             }
         }

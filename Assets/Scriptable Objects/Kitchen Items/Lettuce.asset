@@ -16,7 +16,8 @@ MonoBehaviour:
   prefab: {fileID: 0}
   icon: {fileID: 0}
   processRules:
-  - processType: 0
+  - currentProcessType: 0
+    nextProcessType: 0
     fromStage: 0
     toStage: 1
     processTime: 5

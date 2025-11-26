@@ -15,7 +15,8 @@ public class KitchenItemSO : ScriptableObject
 [Serializable]
 public class ProcessRule
 {
-    public ProcessType processType;
+    public ProcessType currentProcessType;
+    public ProcessType nextProcessType;
     public ItemStage fromStage;
     public ItemStage toStage;
     public float processTime;

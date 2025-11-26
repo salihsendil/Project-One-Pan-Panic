@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CookingModule))]
 public class CookingCounter : BaseCounter
 {
-    private IInteractableAlternateModule[] alternateModules = new IInteractableAlternateModule[2];
+    private CookingModule cookingModule;
 
     protected override void Awake()
     {
@@ -13,43 +13,31 @@ public class CookingCounter : BaseCounter
         TryGetComponent(out ItemInteractionModule itemInteractionModule);
         counterModules[0] = itemInteractionModule;
 
-        TryGetComponent(out CookingModule cookingModule);
-        alternateModules[0] = cookingModule;
+        TryGetComponent(out cookingModule);
     }
+
 
     public override void Interact(PlayerCarryingController player)
     {
-        var kitchenItem = player.HasItem() ? player.GetItem() : itemSocket.GetItem();
+        bool hasItem = itemSocket.HasItem();
+        bool playerHasItem = player.HasItem();
 
-        if (kitchenItem == null) { return; }
-
-        GetInteractableAlternateModule(kitchenItem, out IInteractableAlternateModule alternateModule);
-
-        foreach (var module in counterModules)
+        if (hasItem)
         {
-            if (module == null) { return; }
-            if (module.TryInteract(player))
+            cookingModule.TryInteractAuto(itemSocket.GetItem());
+            base.Interact(player);
+            return;
+        }
+
+        if (!playerHasItem) { return; }
+
+        else
+        {
+            if (cookingModule.CanInteractableAuto(player.GetItem()))
             {
-                alternateModule?.InteractAlternate(kitchenItem);
-                break;
+                base.Interact(player);
+                cookingModule.TryInteractAuto(itemSocket.GetItem());
             }
         }
-    }
-
-    private void GetInteractableAlternateModule(KitchenItem kitchenItem, out IInteractableAlternateModule module)
-    {
-        IInteractableAlternateModule alternateModule = null;
-
-        foreach (var alternate in alternateModules)
-        {
-            if (alternate == null) { continue; }
-
-            if (alternate.CanInteractAlternate(kitchenItem))
-            {
-                alternateModule = alternate;
-                break;
-            }
-        }
-        module = alternateModule;
     }
 }

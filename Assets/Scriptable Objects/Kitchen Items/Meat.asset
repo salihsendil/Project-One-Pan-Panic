@@ -16,12 +16,14 @@ MonoBehaviour:
   prefab: {fileID: 0}
   icon: {fileID: 0}
   processRules:
-  - processType: 1
+  - currentProcessType: 1
+    nextProcessType: 2
     fromStage: 0
     toStage: 2
     processTime: 3
     outputMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  - processType: 1
+  - currentProcessType: 2
+    nextProcessType: 2
     fromStage: 2
     toStage: 3
     processTime: 5

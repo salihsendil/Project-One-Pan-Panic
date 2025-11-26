@@ -9,15 +9,4 @@ public class DeliveryCounter : BaseCounter
         TryGetComponent(out DeliveryModule deliveryModule);
         counterModules[0] = deliveryModule;
     }
-
-    public override void Interact(PlayerCarryingController player)
-    {
-        foreach (var module in counterModules)
-        {
-            if (module.TryInteract(player))
-            {
-                break;
-            }
-        }
-    }
 }

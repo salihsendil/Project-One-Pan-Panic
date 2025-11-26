@@ -10,8 +10,11 @@ public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
         return false;
     }
 
-    public void InteractAlternate(KitchenItem kitchenItem)
+    public void InteractAlternate(KitchenItem kitchenItem, PlayerController playerController)
     {
-        kitchenItem.StartProcess(processType);
+        if (kitchenItem.TryHandleProcess(processType))
+        {
+            kitchenItem.UpdatePlayerBusyState(playerController);
+        }
     }
 }

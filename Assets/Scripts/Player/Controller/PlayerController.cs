@@ -12,12 +12,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 movementVector => inputHandler.MovementVector;
     [SerializeField] private float speed = 4f;
 
+    private bool isBusy;
+    public void SetBusyState() => isBusy = !isBusy;
+
+
     //Rotation Variables
     [SerializeField] private float rotationSpeed = 20f;
 
     private void FixedUpdate()
     {
-        if (movementVector != Vector3.zero)
+        if (movementVector != Vector3.zero && !isBusy)
         {
             HandleMovement();
             HandleRotation();

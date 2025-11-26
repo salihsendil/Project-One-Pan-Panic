@@ -14,15 +14,4 @@ public class IngredientDispenserCounter : BaseCounter
         counterModules[0] = itemInteractionModule;
         counterModules[1] = ingredientDispenserModule;
     }
-
-    public override void Interact(PlayerCarryingController player)
-    {
-        foreach (var module in counterModules)
-        {
-            if (module.TryInteract(player))
-            {
-                break;
-            }
-        }
-    }
 }

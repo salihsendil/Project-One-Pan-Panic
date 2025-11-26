@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class PlayerInteractionController : MonoBehaviour
 {
+    private PlayerController playerController;
     private PlayerInteractor playerInteractor;
     private PlayerCarryingController playerCarryingController;
 
     private void Awake()
     {
+        TryGetComponent(out playerController);
         TryGetComponent(out playerInteractor);
         TryGetComponent(out playerCarryingController);
 
+        if (playerController == null) { Debug.LogWarning("Please add PlayerController.cs component"); }
         if (playerInteractor == null) { Debug.LogWarning("Please add PlayerInteractor.cs component"); }
         if (playerCarryingController == null) { Debug.LogWarning("Please add PlayerCarryingController.cs component"); }
 
@@ -34,7 +37,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void InteractionAlternateRequestRouter(IInteractableAlternate interactableAlternate)
     {
-        interactableAlternate.InteractAlternate();
+        interactableAlternate.InteractAlternate(playerController);
     }
 
 }

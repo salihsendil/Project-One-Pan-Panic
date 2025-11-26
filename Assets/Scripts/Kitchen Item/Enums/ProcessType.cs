@@ -2,5 +2,6 @@
 public enum ProcessType
 {
     Cut,
-    Cook
+    Cook,
+    Burn
 }

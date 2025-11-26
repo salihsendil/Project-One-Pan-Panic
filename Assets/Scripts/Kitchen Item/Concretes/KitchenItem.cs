@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class KitchenItem : MonoBehaviour
 {
+    private bool hasProcess;
+    private IItemBehaviour currentBehaviour;
+
     private MeshFilter meshFilter;
-    [SerializeField] private ItemStage itemStage = ItemStage.Raw;
-    [SerializeField] private WorkStage workStage = WorkStage.Idle;
+    private ItemStage itemStage = ItemStage.Raw;
+    private WorkStage workStage = WorkStage.Idle;
+    private PlayerController playerController;
     [SerializeField] private KitchenItemSO kitchenItemSO;
     private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
     private Dictionary<(ProcessType, ItemStage), ProcessRule> ruleMap = new();
 
-
-    public ItemStage ItemStage { get => itemStage; }
     public WorkStage WorkStage { get => workStage; set => workStage = value; }
 
     private void Awake()
@@ -25,7 +27,7 @@ public class KitchenItem : MonoBehaviour
         if (kitchenItemSO.processRules.Count <= 0) { return; }
         foreach (var rule in kitchenItemSO.processRules)
         {
-            ruleMap.TryAdd((rule.processType, rule.fromStage), rule);
+            ruleMap.TryAdd((rule.currentProcessType, rule.fromStage), rule);
         }
     }
 
@@ -51,26 +53,81 @@ public class KitchenItem : MonoBehaviour
         return ruleMap.ContainsKey((type, itemStage));
     }
 
-    public void StartProcess(ProcessType processType)
+    public bool TryHandleProcess(ProcessType processType)
     {
-        ruleMap.TryGetValue((processType, itemStage), out ProcessRule rule);
-        if (rule == null) { return; }
+        if (!hasProcess)
+        {
+            if (TryGetAppropriateProcess(processType, out currentBehaviour, out ProcessRule rule))
+            {
+                hasProcess = true;
+                StartProcess(rule);
+                return true;
+            }
+            return false;
+        }
 
-        behavioursDict.TryGetValue(rule.processType, out IItemBehaviour behaviour);
-        if (behaviour == null) { return; }
-
-        behaviour.OnProcessComplete -= HandleProcessComplete;
-        behaviour.OnProcessComplete += HandleProcessComplete;
-        behaviour.HandleProcess(this, rule);
+        currentBehaviour.HandlePauseState(this);
+        return true;
     }
 
-    private void HandleProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
+    public bool TryGetAppropriateProcess(ProcessType processType, out IItemBehaviour behaviour, out ProcessRule rule)
     {
-        behaviour.OnProcessComplete -= HandleProcessComplete;
+        behaviour = null;
+        rule = null;
+
+        if (!ruleMap.TryGetValue((processType, itemStage), out ProcessRule processRule)) { return false; }
+
+        if (behavioursDict.TryGetValue(processRule.currentProcessType, out IItemBehaviour itemBehaviour))
+        {
+            behaviour = itemBehaviour;
+            rule = processRule;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void StartProcess(ProcessRule rule)
+    {
+        currentBehaviour.OnProcessStarted += HandleProcessStarted;
+        currentBehaviour.OnProcessComplete += ProcessComplete;
+        currentBehaviour.StartProcess(this, rule);
+    }
+
+    private void HandleProcessStarted(WorkStage behaviourWorkStage)
+    {
+        workStage = behaviourWorkStage;
+        currentBehaviour.OnProcessStarted -= HandleProcessStarted;
+    }
+
+    public void HandlePauseProcess(bool isPaused, WorkStage behaviourWorkStage)
+    {
+        workStage = isPaused ? WorkStage.Idle : behaviourWorkStage;
+    }
+
+    private void ProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
+    {
+        hasProcess = false;
+        currentBehaviour = null;
+        behaviour.OnProcessComplete -= ProcessComplete;
         workStage = WorkStage.Idle;
         itemStage = rule.toStage;
+
         UpdateMesh(rule.outputMesh);
-        StartProcess(rule.processType); //????
+
+        //burasý uygun deðil ya 
+        if (rule.currentProcessType == ProcessType.Cut)
+        {
+            UpdatePlayerBusyState(playerController);
+        }
+
+        TryHandleProcess(rule.nextProcessType);
     }
 
+    //burasý uygun deðil ya 
+    public void UpdatePlayerBusyState(PlayerController player)
+    {
+        playerController = player;
+        playerController.SetBusyState(); 
+    }
 }

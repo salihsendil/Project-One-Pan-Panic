@@ -12,5 +12,16 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable<PlayerCarryingC
         TryGetComponent(out itemSocket);
     }
 
-    public abstract void Interact(PlayerCarryingController player);
+    public virtual void Interact(PlayerCarryingController player)
+    {
+        foreach (var module in counterModules)
+        {
+            if (module == null) { continue; }
+
+            if (module.TryInteract(player))
+            {
+                break;
+            }
+        }
+    }
 }

@@ -2,5 +2,5 @@
 public interface IInteractableAlternateModule
 {
     public bool CanInteractAlternate(KitchenItem kitchemItem);
-    public void InteractAlternate(KitchenItem kitchenItem);
+    public void InteractAlternate(KitchenItem kitchenItem, PlayerController playerController);
 }

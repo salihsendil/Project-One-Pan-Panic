@@ -42,9 +42,9 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
         OnProcessComplete?.Invoke(this, processRule);
     }
 
-    public void HandlePauseState(KitchenItem kitchenItem)
+    public void HandlePauseProcess(KitchenItem kitchenItem)
     {
         isPaused = !isPaused;
-        kitchenItem.HandlePauseProcess(isPaused, GetWorkStage());
+        kitchenItem.HandleProcessPauseState(isPaused, GetWorkStage());
     }
 }

@@ -17,9 +17,9 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
         alternateModules[0] = cuttingModule;
     }
 
-    public void InteractAlternate(PlayerController playerController)
+    public void InteractAlternate(PlayerCarryingController playerCarrying, PlayerController playerController)
     {
-        if (!itemSocket.HasItem()) { return; }
+        if (!itemSocket.HasItem() || playerCarrying.HasItem()) { return; }
 
         var kitchenItem = itemSocket.GetItem();
 

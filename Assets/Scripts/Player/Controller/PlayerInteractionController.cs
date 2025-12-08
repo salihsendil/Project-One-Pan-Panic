@@ -37,7 +37,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void InteractionAlternateRequestRouter(IInteractableAlternate interactableAlternate)
     {
-        interactableAlternate.InteractAlternate(playerController);
+        interactableAlternate.InteractAlternate(playerCarryingController, playerController);
     }
 
 }

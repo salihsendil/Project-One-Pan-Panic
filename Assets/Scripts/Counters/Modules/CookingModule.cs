@@ -20,10 +20,22 @@ public class CookingModule : MonoBehaviour, IInteractableAutoModule
     {
         foreach (var process in processTypes)
         {
-            if (kitchenItem.TryHandleProcess(process))
+            if (kitchenItem.TryStartProcess(process))
             {
                 break;
             }
         }
+    }
+
+    public bool TryInteractPause(KitchenItem kitchenItem)
+    {
+        foreach (var process in processTypes)
+        {
+            if (kitchenItem.TryPauseProcess(process))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

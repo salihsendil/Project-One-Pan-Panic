@@ -1,5 +1,5 @@
 
 public interface IInteractableAlternate
 {
-    public void InteractAlternate(PlayerController playerController);
+    public void InteractAlternate(PlayerCarryingController playerCarrying, PlayerController playerController);
 }

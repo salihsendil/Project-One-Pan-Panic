@@ -11,5 +11,5 @@ public interface IItemBehaviour
     public void StartProcess(KitchenItem kitchenItem, ProcessRule rule);
     public IEnumerator TickProcess();
     public void FinishProcess();
-    public void HandlePauseState(KitchenItem kitchenItem);
+    public void HandlePauseProcess(KitchenItem kitchenItem);
 }

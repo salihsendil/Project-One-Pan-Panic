@@ -48,12 +48,13 @@ public class KitchenItem : MonoBehaviour
         }
     }
 
+    #region Handle Start Process
     public bool CanProcess(ProcessType type)
     {
         return ruleMap.ContainsKey((type, itemStage));
     }
 
-    public bool TryHandleProcess(ProcessType processType)
+    public bool TryStartProcess(ProcessType processType)
     {
         if (!hasProcess)
         {
@@ -63,11 +64,8 @@ public class KitchenItem : MonoBehaviour
                 StartProcess(rule);
                 return true;
             }
-            return false;
         }
-
-        currentBehaviour.HandlePauseState(this);
-        return true;
+        return false;
     }
 
     public bool TryGetAppropriateProcess(ProcessType processType, out IItemBehaviour behaviour, out ProcessRule rule)
@@ -83,9 +81,29 @@ public class KitchenItem : MonoBehaviour
             rule = processRule;
             return true;
         }
-
         return false;
     }
+
+    #endregion
+
+    #region Handle Process Pause
+
+    public bool TryPauseProcess(ProcessType processType)
+    {
+        if (!behavioursDict.TryGetValue(processType, out IItemBehaviour itemBehaviour)) { return false; }
+
+        if (currentBehaviour != itemBehaviour) { return false; }
+
+        currentBehaviour.HandlePauseProcess(this);
+        return true;
+    }
+
+    public void HandleProcessPauseState(bool isPaused, WorkStage behaviourWorkStage)
+    {
+        workStage = isPaused ? WorkStage.Idle : behaviourWorkStage;
+    }
+
+    #endregion
 
     private void StartProcess(ProcessRule rule)
     {
@@ -98,11 +116,6 @@ public class KitchenItem : MonoBehaviour
     {
         workStage = behaviourWorkStage;
         currentBehaviour.OnProcessStarted -= HandleProcessStarted;
-    }
-
-    public void HandlePauseProcess(bool isPaused, WorkStage behaviourWorkStage)
-    {
-        workStage = isPaused ? WorkStage.Idle : behaviourWorkStage;
     }
 
     private void ProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
@@ -121,13 +134,13 @@ public class KitchenItem : MonoBehaviour
             UpdatePlayerBusyState(playerController);
         }
 
-        TryHandleProcess(rule.nextProcessType);
+        TryStartProcess(rule.nextProcessType);
     }
 
     //burasý uygun deðil ya 
     public void UpdatePlayerBusyState(PlayerController player)
     {
         playerController = player;
-        playerController.SetBusyState(); 
+        playerController.SetBusyState();
     }
 }

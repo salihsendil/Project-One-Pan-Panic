@@ -19,25 +19,34 @@ public class CookingCounter : BaseCounter
 
     public override void Interact(PlayerCarryingController player)
     {
-        bool hasItem = itemSocket.HasItem();
+        bool counterHasItem = itemSocket.HasItem();
         bool playerHasItem = player.HasItem();
 
-        if (hasItem)
+
+        if (!playerHasItem)
         {
-            cookingModule.TryInteractAuto(itemSocket.GetItem());
+            if (!counterHasItem) { return; }
+
+            cookingModule.TryInteractPause(itemSocket.GetItem());
             base.Interact(player);
             return;
         }
 
-        if (!playerHasItem) { return; }
-
-        else
+        if (counterHasItem)
         {
-            if (cookingModule.CanInteractableAuto(player.GetItem()))
+            if (cookingModule.TryInteractPause(itemSocket.GetItem()))
             {
                 base.Interact(player);
-                cookingModule.TryInteractAuto(itemSocket.GetItem());
+                return;
             }
+        }
+
+
+        if (cookingModule.CanInteractableAuto(player.GetItem()))
+        {
+            base.Interact(player);
+            cookingModule.TryInteractAuto(itemSocket.GetItem());
+            return;
         }
     }
 }

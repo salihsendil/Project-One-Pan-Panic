@@ -1,20 +1,28 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KitchenItem : MonoBehaviour
 {
-    private bool hasProcess;
-    private IItemBehaviour currentBehaviour;
-
+    //References
     private MeshFilter meshFilter;
-    private ItemStage itemStage = ItemStage.Raw;
-    private WorkStage workStage = WorkStage.Idle;
-    private PlayerController playerController;
+
+    //Data
     [SerializeField] private KitchenItemSO kitchenItemSO;
+
+    //Stages
+    [SerializeField] private ItemStage itemStage = ItemStage.Raw;
+    [SerializeField] private WorkStage workStage = WorkStage.Idle;
+
+    //Data-Lookup
     private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
     private Dictionary<(ProcessType, ItemStage), ProcessRule> ruleMap = new();
 
-    public WorkStage WorkStage { get => workStage; set => workStage = value; }
+    //Getter
+    public WorkStage WorkStage => workStage;
+
+    //Events
+    public event Action<KitchenItem> OnItemProcessComplete;
 
     private void Awake()
     {
@@ -48,99 +56,67 @@ public class KitchenItem : MonoBehaviour
         }
     }
 
-    #region Handle Start Process
     public bool CanProcess(ProcessType type)
     {
-        return ruleMap.ContainsKey((type, itemStage));
+        return ruleMap.ContainsKey((type, itemStage)) && behavioursDict.ContainsKey(type);
     }
 
-    public bool TryStartProcess(ProcessType processType)
+    public void HandleProcessStart(ProcessType processType)
     {
-        if (!hasProcess)
-        {
-            if (TryGetAppropriateProcess(processType, out currentBehaviour, out ProcessRule rule))
-            {
-                hasProcess = true;
-                StartProcess(rule);
-                return true;
-            }
-        }
-        return false;
+        if (!ruleMap.TryGetValue((processType, itemStage), out ProcessRule rule)) { return; }
+
+        if (!behavioursDict.TryGetValue(processType, out IItemBehaviour behaviour)) { return; }
+
+        workStage = WorkStage.Processing;
+
+        behaviour.OnProcessComplete += HandleProcessComplete;
+
+        behaviour.StartProcess(this, rule);
     }
 
-    public bool TryGetAppropriateProcess(ProcessType processType, out IItemBehaviour behaviour, out ProcessRule rule)
+    private void HandleProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
     {
-        behaviour = null;
-        rule = null;
+        behaviour.OnProcessComplete -= HandleProcessComplete;
 
-        if (!ruleMap.TryGetValue((processType, itemStage), out ProcessRule processRule)) { return false; }
-
-        if (behavioursDict.TryGetValue(processRule.currentProcessType, out IItemBehaviour itemBehaviour))
-        {
-            behaviour = itemBehaviour;
-            rule = processRule;
-            return true;
-        }
-        return false;
-    }
-
-    #endregion
-
-    #region Handle Process Pause
-
-    public bool TryPauseProcess(ProcessType processType)
-    {
-        if (!behavioursDict.TryGetValue(processType, out IItemBehaviour itemBehaviour)) { return false; }
-
-        if (currentBehaviour != itemBehaviour) { return false; }
-
-        currentBehaviour.HandlePauseProcess(this);
-        return true;
-    }
-
-    public void HandleProcessPauseState(bool isPaused, WorkStage behaviourWorkStage)
-    {
-        workStage = isPaused ? WorkStage.Idle : behaviourWorkStage;
-    }
-
-    #endregion
-
-    private void StartProcess(ProcessRule rule)
-    {
-        currentBehaviour.OnProcessStarted += HandleProcessStarted;
-        currentBehaviour.OnProcessComplete += ProcessComplete;
-        currentBehaviour.StartProcess(this, rule);
-    }
-
-    private void HandleProcessStarted(WorkStage behaviourWorkStage)
-    {
-        workStage = behaviourWorkStage;
-        currentBehaviour.OnProcessStarted -= HandleProcessStarted;
-    }
-
-    private void ProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
-    {
-        hasProcess = false;
-        currentBehaviour = null;
-        behaviour.OnProcessComplete -= ProcessComplete;
-        workStage = WorkStage.Idle;
         itemStage = rule.toStage;
+
+        workStage = WorkStage.Idle;
 
         UpdateMesh(rule.outputMesh);
 
-        //burasý uygun deðil ya 
-        if (rule.currentProcessType == ProcessType.Cut)
-        {
-            UpdatePlayerBusyState(playerController);
-        }
-
-        TryStartProcess(rule.nextProcessType);
+        OnItemProcessComplete?.Invoke(this);
     }
 
-    //burasý uygun deðil ya 
-    public void UpdatePlayerBusyState(PlayerController player)
+    public void HandlePauseProcess(ProcessType processType)
     {
-        playerController = player;
-        playerController.SetBusyState();
+        if (!TryGetBehaviour(processType, out IItemBehaviour behaviour)) { return; }
+
+        behaviour.OnProcessComplete -= HandleProcessComplete;
+
+        behaviour.SetProcessPause(true);
+
+        workStage = WorkStage.Paused;
+    }
+
+    public void HandleResumeProcess(ProcessType processType)
+    {
+        if (!TryGetBehaviour(processType, out IItemBehaviour behaviour)) { return; }
+
+        behaviour.OnProcessComplete += HandleProcessComplete;
+
+        behaviour.SetProcessPause(false);
+
+        workStage = WorkStage.Processing;
+    }
+
+    private bool TryGetBehaviour(ProcessType processType, out IItemBehaviour behaviour)
+    {
+        behaviour = null;
+
+        if (!CanProcess(processType)) { return false; }
+
+        if (!behavioursDict.TryGetValue(processType, out behaviour)) { return false; }
+
+        return true;
     }
 }

@@ -16,37 +16,40 @@ public class CookingCounter : BaseCounter
         TryGetComponent(out cookingModule);
     }
 
-
     public override void Interact(PlayerCarryingController player)
     {
-        bool counterHasItem = itemSocket.HasItem();
-        bool playerHasItem = player.HasItem();
-
-
-        if (!playerHasItem)
+        if (!player.HasItem())
         {
-            if (!counterHasItem) { return; }
+            if (!itemSocket.HasItem()) { return; }
 
-            cookingModule.TryInteractPause(itemSocket.GetItem());
-            base.Interact(player);
-            return;
-        }
-
-        if (counterHasItem)
-        {
-            if (cookingModule.TryInteractPause(itemSocket.GetItem()))
+            else if (!cookingModule.IsProcessing())
             {
                 base.Interact(player);
                 return;
             }
+
+            else if (cookingModule.TryInteractPause(itemSocket.GetItem()))
+            {
+                base.Interact(player);
+            }
         }
 
-
-        if (cookingModule.CanInteractableAuto(player.GetItem()))
+        else //player.HasItem()
         {
-            base.Interact(player);
-            cookingModule.TryInteractAuto(itemSocket.GetItem());
-            return;
+            if (!itemSocket.HasItem())
+            {
+                if (cookingModule.CanInteractableAuto(player.GetItem()))
+                {
+                    base.Interact(player);
+                    cookingModule.InteractAuto(itemSocket.GetItem());
+                    return;
+                }
+            }
+
+            Debug.Log("Player plate state");
+            //if(tryinteract)
+            //pauseprocess
+            //interact
         }
     }
 }

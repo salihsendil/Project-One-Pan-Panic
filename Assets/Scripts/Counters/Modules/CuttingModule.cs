@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
 {
+    private bool isProcessing;
+    public bool IsProcessing() => isProcessing;
+
     private ProcessType processType = ProcessType.Cut;
 
     public bool CanInteractAlternate(KitchenItem kitchenItem)
@@ -12,19 +15,30 @@ public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
 
     public void InteractAlternate(KitchenItem kitchenItem, PlayerController playerController)
     {
-        if (kitchenItem.TryStartProcess(processType))
+        if (kitchenItem.WorkStage == WorkStage.Paused)
         {
-            kitchenItem.UpdatePlayerBusyState(playerController);
+            kitchenItem.HandleResumeProcess(processType);
         }
 
         else
         {
-            InteractPause(kitchenItem);
+            kitchenItem.HandleProcessStart(processType);
         }
+
+        kitchenItem.OnItemProcessComplete += OnModuleProcessComplete;
+        isProcessing = true;
     }
 
     public void InteractPause(KitchenItem kitchenItem)
     {
-        kitchenItem.TryPauseProcess(processType);
+        kitchenItem.OnItemProcessComplete -= OnModuleProcessComplete;
+        kitchenItem.HandlePauseProcess(processType);
+        isProcessing = false;
+    }
+
+    public void OnModuleProcessComplete(KitchenItem kitchenItem)
+    {
+        kitchenItem.OnItemProcessComplete -= OnModuleProcessComplete;
+        isProcessing = false;
     }
 }

@@ -1,16 +1,28 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class CuttingCounterAnimationsController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //References
+    private Animator animator;
+
+    //Animator Variables
+    private bool isCutting;
+    private int isCuttingHash;
+
+    private void Awake()
     {
-        
+        TryGetComponent(out animator);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        isCuttingHash = Animator.StringToHash("isCutting");
+    }
+
+    public void UpdateAnimationState(bool value)
+    {
+        isCutting = value;
+        animator.SetBool(isCuttingHash, isCutting);
     }
 }

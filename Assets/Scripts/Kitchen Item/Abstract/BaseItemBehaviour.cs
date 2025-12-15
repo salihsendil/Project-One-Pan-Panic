@@ -9,15 +9,12 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     private ProcessRule processRule;
     private ProcessTimer processTimer = new();
 
-    public event Action<WorkStage> OnProcessStarted;
     public event Action<IItemBehaviour, ProcessRule> OnProcessComplete;
 
     public abstract ProcessType GetProcessType();
-    public abstract WorkStage GetWorkStage();
 
     public void StartProcess(KitchenItem kitchenItem, ProcessRule rule)
     {
-        OnProcessStarted?.Invoke(GetWorkStage());
         processRule = rule;
         processTimer.SetTimer(processRule.processTime);
         coroutine = TickProcess();
@@ -42,9 +39,8 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
         OnProcessComplete?.Invoke(this, processRule);
     }
 
-    public void HandlePauseProcess(KitchenItem kitchenItem)
+    public void SetProcessPause(bool pause)
     {
-        isPaused = !isPaused;
-        kitchenItem.HandleProcessPauseState(isPaused, GetWorkStage());
+        isPaused = pause;
     }
 }

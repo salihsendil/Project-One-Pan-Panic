@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationsController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerAnimationsController : MonoBehaviour
     //References
     private Animator animator;
     private IAnimState currentState;
+    private PlayerController playerController;
     private AnimationStateFactory stateFactory;
 
     //Animator Variables
@@ -23,6 +25,7 @@ public class PlayerAnimationsController : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out animator);
+        TryGetComponent(out playerController);
     }
 
     void Start()
@@ -36,7 +39,7 @@ public class PlayerAnimationsController : MonoBehaviour
 
     void Update()
     {
-        isWalking = inputHandler.MovementVector != Vector3.zero;
+        isWalking = (!playerController.IsBusy) && (inputHandler.MovementVector != Vector3.zero);
         
         currentState.UpdateState(this, stateFactory);
     }

@@ -15,13 +15,12 @@ public class ItemInteractionModule : MonoBehaviour, IInteractableModule
         bool hasItem = item != null;
         bool playerHasItem = player.HasItem();
 
-        if (!hasItem && !playerHasItem) { return false; }
-
-        if (hasItem && item.WorkStage == WorkStage.Cutting) { return false; }
-
         if (!hasItem)
         {
-            if (playerHasItem) { itemSocket.SetItem(player.RemoveItem()); return true; }
+            if (!playerHasItem) { return false; }
+
+            itemSocket.SetItem(player.RemoveItem());
+            return true;
         }
 
         else if (hasItem)

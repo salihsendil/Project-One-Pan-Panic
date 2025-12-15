@@ -17,7 +17,10 @@ public class ProcessTimer
     public void TickTimer()
     {
         Remaining -= Time.deltaTime;
-        Debug.Log("remaining time in processtimer:" + Remaining);
+        if (Remaining < 2)
+        {
+            Debug.Log("remaining time in processtimer:" + Remaining);
+        }
     }
 
     public void ResetTimer()

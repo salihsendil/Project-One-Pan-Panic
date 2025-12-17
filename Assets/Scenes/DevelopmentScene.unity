@@ -1107,9 +1107,10 @@ GameObject:
   - component: {fileID: 957341544}
   - component: {fileID: 957341543}
   - component: {fileID: 957341542}
-  - component: {fileID: 957341546}
-  - component: {fileID: 957341547}
-  - component: {fileID: 957341548}
+  - component: {fileID: 957341550}
+  - component: {fileID: 957341553}
+  - component: {fileID: 957341552}
+  - component: {fileID: 957341551}
   m_Layer: 0
   m_Name: meat
   m_TagString: Untagged
@@ -1206,7 +1207,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &957341546
+--- !u!114 &957341550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1215,13 +1216,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 957341541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ddcd1d2c9cb064f841845a2fc3acf1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0245e824bda1dd340aa675bb6017a202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItemSO: {fileID: 11400000, guid: 84c0a56f05dc71b449d0212235858974, type: 2}
-  itemStage: 0
-  workStage: 0
---- !u!114 &957341547
+--- !u!114 &957341551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957341541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59876f0d77378f4bbfa1382d3d43727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &957341552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1233,7 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5622637f863a4e547a40b63ea594a92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &957341548
+--- !u!114 &957341553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1242,7 +1253,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 957341541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c59876f0d77378f4bbfa1382d3d43727, type: 3}
+  m_Script: {fileID: 11500000, guid: c3a951efa4cd82e4f88459a0ef6767f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &962004718
@@ -3387,6 +3398,7 @@ GameObject:
   - component: {fileID: 5772702383025595089}
   - component: {fileID: 224448004410319331}
   - component: {fileID: 4873603299421293736}
+  - component: {fileID: 5772702383025595092}
   - component: {fileID: 5772702383025595091}
   - component: {fileID: 5772702383025595090}
   m_Layer: 0
@@ -5255,12 +5267,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 482619768057924173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ddcd1d2c9cb064f841845a2fc3acf1, type: 3}
+  m_Script: {fileID: 11500000, guid: c3a951efa4cd82e4f88459a0ef6767f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5772702383025595092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482619768057924173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0245e824bda1dd340aa675bb6017a202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenItemSO: {fileID: 11400000, guid: fac659c1648ff9d4ea17bac929770e9b, type: 2}
-  itemStage: 0
-  workStage: 0
 --- !u!4 &6063901864191246884
 Transform:
   m_ObjectHideFlags: 0
@@ -6367,7 +6389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 1846906123}
-  currentItem: {fileID: 5772702383025595091}
+  currentItem: {fileID: 5772702383025595092}
 --- !u!114 &9012741796470865887
 MonoBehaviour:
   m_ObjectHideFlags: 0

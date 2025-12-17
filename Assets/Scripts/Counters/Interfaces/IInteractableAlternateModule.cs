@@ -2,8 +2,8 @@
 public interface IInteractableAlternateModule
 {
     public bool IsProcessing();
-    public bool CanInteractAlternate(KitchenItem kitchemItem);
-    public void InteractAlternate(KitchenItem kitchenItem, PlayerController playerController);
-    public void InteractPause(KitchenItem kitchenItem);
-    public void OnModuleProcessComplete(KitchenItem kitchemItem);
+    public bool CanInteractAlternate(ItemBehaviourController controller);
+    public void InteractAlternate(ItemBehaviourController controller, PlayerController playerController);
+    public void InteractPause(ItemBehaviourController controller);
+    public void OnModuleProcessComplete(ItemBehaviourController controller);
 }

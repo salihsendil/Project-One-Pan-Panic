@@ -41,24 +41,26 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
 
         var kitchenItem = itemSocket.GetItem();
 
+        if (!kitchenItem.TryGetBehaviourController(out ItemBehaviourController controller)) { return; }
+
         foreach (var module in alternateModules)
         {
             if (module == null) { continue; }
 
             if (module.IsProcessing())
             {
-                kitchenItem.OnItemProcessComplete -= HandleProcessComplete;
+                controller.OnItemBehaviourProcessComplete -= HandleProcessComplete;
                 currentPlayer = playerController;
-                module.InteractPause(kitchenItem);
+                module.InteractPause(controller);
                 HandleProcessState(false);
                 break;
             }
 
-            else if (module.CanInteractAlternate(kitchenItem))
+            else if (module.CanInteractAlternate(controller))
             {
 
-                kitchenItem.OnItemProcessComplete += HandleProcessComplete;
-                module.InteractAlternate(kitchenItem, playerController);
+                controller.OnItemBehaviourProcessComplete += HandleProcessComplete;
+                module.InteractAlternate(controller, playerController);
                 currentPlayer = playerController;
                 HandleProcessState(true);
                 break;
@@ -73,9 +75,9 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
         currentPlayer.SetBusyState(isProcessing);
     }
 
-    private void HandleProcessComplete(KitchenItem kitchenItem)
+    private void HandleProcessComplete(ItemBehaviourController controller)
     {
-        kitchenItem.OnItemProcessComplete -= HandleProcessComplete;
+        controller.OnItemBehaviourProcessComplete -= HandleProcessComplete;
         HandleProcessState(false);
     }
 }

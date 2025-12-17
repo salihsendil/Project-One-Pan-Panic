@@ -8,6 +8,7 @@ public class KitchenItemSO : ScriptableObject
     public string itemName;
     public GameObject prefab;
     public Sprite icon;
+    public ItemStage initialStage;
 
     public List<ProcessRule> processRules = new();
 }

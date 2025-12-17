@@ -7,38 +7,38 @@ public class CuttingModule : MonoBehaviour, IInteractableAlternateModule
 
     private ProcessType processType = ProcessType.Cut;
 
-    public bool CanInteractAlternate(KitchenItem kitchenItem)
+    public bool CanInteractAlternate(ItemBehaviourController controller)
     {
-        if (kitchenItem.CanProcess(processType)) { return true; }
+        if (controller.CanProcess(processType)) { return true; }
         return false;
     }
 
-    public void InteractAlternate(KitchenItem kitchenItem, PlayerController playerController)
+    public void InteractAlternate(ItemBehaviourController controller, PlayerController playerController)
     {
-        if (kitchenItem.WorkStage == WorkStage.Paused)
+        if (controller.WorkStage == WorkStage.Paused)
         {
-            kitchenItem.HandleResumeProcess(processType);
+            controller.HandleResumeProcess(processType);
         }
 
         else
         {
-            kitchenItem.HandleProcessStart(processType);
+            controller.HandleProcessStart(processType);
         }
 
-        kitchenItem.OnItemProcessComplete += OnModuleProcessComplete;
+        controller.OnItemBehaviourProcessComplete += OnModuleProcessComplete;
         isProcessing = true;
     }
 
-    public void InteractPause(KitchenItem kitchenItem)
+    public void InteractPause(ItemBehaviourController controller)
     {
-        kitchenItem.OnItemProcessComplete -= OnModuleProcessComplete;
-        kitchenItem.HandlePauseProcess(processType);
+        controller.OnItemBehaviourProcessComplete -= OnModuleProcessComplete;
+        controller.HandlePauseProcess(processType);
         isProcessing = false;
     }
 
-    public void OnModuleProcessComplete(KitchenItem kitchenItem)
+    public void OnModuleProcessComplete(ItemBehaviourController controller)
     {
-        kitchenItem.OnItemProcessComplete -= OnModuleProcessComplete;
+        controller.OnItemBehaviourProcessComplete -= OnModuleProcessComplete;
         isProcessing = false;
     }
 }

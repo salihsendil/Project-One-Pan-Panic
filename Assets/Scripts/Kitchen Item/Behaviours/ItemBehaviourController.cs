@@ -2,17 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitchenItem : MonoBehaviour
+[RequireComponent(typeof(IngredientItem))]
+public class ItemBehaviourController : MonoBehaviour
 {
     //References
-    private MeshFilter meshFilter;
-
-    //Data
-    [SerializeField] private KitchenItemSO kitchenItemSO;
+    private IngredientItem ingredientItem;
 
     //Stages
-    [SerializeField] private ItemStage itemStage = ItemStage.Raw;
-    [SerializeField] private WorkStage workStage = WorkStage.Idle;
+    private WorkStage workStage = WorkStage.Idle;
 
     //Data-Lookup
     private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
@@ -22,18 +19,20 @@ public class KitchenItem : MonoBehaviour
     public WorkStage WorkStage => workStage;
 
     //Events
-    public event Action<KitchenItem> OnItemProcessComplete;
+    public event Action<ItemBehaviourController> OnItemBehaviourProcessComplete;
 
     private void Awake()
     {
-        TryGetComponent(out meshFilter);
+        TryGetComponent(out ingredientItem);
+
         InitializeProcessRules();
         InitializeBehaviours();
     }
     private void InitializeProcessRules()
     {
-        if (kitchenItemSO.processRules.Count <= 0) { return; }
-        foreach (var rule in kitchenItemSO.processRules)
+        var data = ingredientItem.KitchenItemSO;
+        if (data.processRules.Count <= 0) { return; }
+        foreach (var rule in data.processRules)
         {
             ruleMap.TryAdd((rule.currentProcessType, rule.fromStage), rule);
         }
@@ -48,22 +47,14 @@ public class KitchenItem : MonoBehaviour
         }
     }
 
-    public void UpdateMesh(Mesh newMesh)
-    {
-        if (meshFilter != null)
-        {
-            meshFilter.mesh = newMesh;
-        }
-    }
-
     public bool CanProcess(ProcessType type)
     {
-        return ruleMap.ContainsKey((type, itemStage)) && behavioursDict.ContainsKey(type);
+        return ruleMap.ContainsKey((type, ingredientItem.ItemStage)) && behavioursDict.ContainsKey(type);
     }
 
     public void HandleProcessStart(ProcessType processType)
     {
-        if (!ruleMap.TryGetValue((processType, itemStage), out ProcessRule rule)) { return; }
+        if (!ruleMap.TryGetValue((processType, ingredientItem.ItemStage), out ProcessRule rule)) { return; }
 
         if (!behavioursDict.TryGetValue(processType, out IItemBehaviour behaviour)) { return; }
 
@@ -71,20 +62,20 @@ public class KitchenItem : MonoBehaviour
 
         behaviour.OnProcessComplete += HandleProcessComplete;
 
-        behaviour.StartProcess(this, rule);
+        behaviour.StartProcess(rule);
     }
 
     private void HandleProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
     {
         behaviour.OnProcessComplete -= HandleProcessComplete;
 
-        itemStage = rule.toStage;
+        ingredientItem.SetItemStage(rule.toStage);
 
         workStage = WorkStage.Idle;
 
-        UpdateMesh(rule.outputMesh);
+        ingredientItem.UpdateMesh(rule.outputMesh);
 
-        OnItemProcessComplete?.Invoke(this);
+        OnItemBehaviourProcessComplete?.Invoke(this);
     }
 
     public void HandlePauseProcess(ProcessType processType)

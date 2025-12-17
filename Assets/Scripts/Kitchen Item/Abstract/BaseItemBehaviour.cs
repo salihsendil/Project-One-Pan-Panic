@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(ItemBehaviourController))]
 public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
 {
     private bool isPaused;
@@ -13,13 +14,14 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
 
     public abstract ProcessType GetProcessType();
 
-    public void StartProcess(KitchenItem kitchenItem, ProcessRule rule)
+    public void StartProcess(ProcessRule rule)
     {
         processRule = rule;
         processTimer.SetTimer(processRule.processTime);
         coroutine = TickProcess();
         StartCoroutine(coroutine);
     }
+
     public IEnumerator TickProcess()
     {
         while (!processTimer.IsFinished())

@@ -22,13 +22,17 @@ public class CookingCounter : BaseCounter
         {
             if (!itemSocket.HasItem()) { return; }
 
-            else if (!cookingModule.IsProcessing())
+            if (!cookingModule.IsProcessing())
             {
                 base.Interact(player);
                 return;
             }
 
-            else if (cookingModule.TryInteractPause(itemSocket.GetItem()))
+            BaseKitchenItem kitchenItem = itemSocket.GetItem();
+
+            if (!kitchenItem.TryGetBehaviourController(out ItemBehaviourController controller)) { return; }
+
+            else if (cookingModule.TryInteractPause(controller))
             {
                 base.Interact(player);
             }
@@ -36,12 +40,16 @@ public class CookingCounter : BaseCounter
 
         else //player.HasItem()
         {
+            BaseKitchenItem kitchenItem = player.GetItem();
+
             if (!itemSocket.HasItem())
             {
-                if (cookingModule.CanInteractableAuto(player.GetItem()))
+                if (!kitchenItem.TryGetBehaviourController(out ItemBehaviourController controller)) { return; }
+
+                if (cookingModule.CanInteractableAuto(controller))
                 {
                     base.Interact(player);
-                    cookingModule.InteractAuto(itemSocket.GetItem());
+                    cookingModule.InteractAuto(controller);
                     return;
                 }
             }

@@ -21,7 +21,7 @@ public class IngredientItem : BaseKitchenItem
 
     private void OnEnable()
     {
-        itemStage = kitchenItemSO.initialStage;
+        itemStage = kitchenItemSO.InitialStage;
     }
 
     public override bool TryGetBehaviourController(out ItemBehaviourController controller)

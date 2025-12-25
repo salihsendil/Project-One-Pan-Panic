@@ -13,6 +13,8 @@ public class ItemSocket : MonoBehaviour, IItemCarrier
         currentItem = obj;
         currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         currentItem.transform.SetParent(holdPoint);
+        currentItem.transform.localPosition = Vector3.zero;
+        currentItem.transform.localRotation = Quaternion.identity;
     }
 
     public BaseKitchenItem RemoveItem()

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b332c529972a3ca45975b66f2dfb525e, type: 3}
+  m_Name: DevSceneOrderConfigs
+  m_EditorClassIdentifier: 
+  RecipeList:
+  - {fileID: 11400000, guid: 3de60279eaa56ae4f938f09b2c9d37f4, type: 2}
+  - {fileID: 11400000, guid: 25b65750ef14b66488026a3f797deb20, type: 2}
+  MaxActiveOrderCount: 3
+  OrderSpawnDelay: 5
+  Description: Dev Scene Order Configs.

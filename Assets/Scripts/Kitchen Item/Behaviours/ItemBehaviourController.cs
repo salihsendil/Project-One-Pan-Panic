@@ -31,10 +31,10 @@ public class ItemBehaviourController : MonoBehaviour
     private void InitializeProcessRules()
     {
         var data = ingredientItem.KitchenItemSO;
-        if (data.processRules.Count <= 0) { return; }
-        foreach (var rule in data.processRules)
+        if (data.ProcessRules.Count <= 0) { return; }
+        foreach (var rule in data.ProcessRules)
         {
-            ruleMap.TryAdd((rule.currentProcessType, rule.fromStage), rule);
+            ruleMap.TryAdd((rule.ProcessType, rule.FromStage), rule);
         }
     }
 
@@ -69,11 +69,11 @@ public class ItemBehaviourController : MonoBehaviour
     {
         behaviour.OnProcessComplete -= HandleProcessComplete;
 
-        ingredientItem.SetItemStage(rule.toStage);
+        ingredientItem.SetItemStage(rule.ToStage);
 
         workStage = WorkStage.Idle;
 
-        ingredientItem.UpdateMesh(rule.outputMesh);
+        ingredientItem.UpdateMesh(rule.OutputMesh);
 
         OnItemBehaviourProcessComplete?.Invoke(this);
     }

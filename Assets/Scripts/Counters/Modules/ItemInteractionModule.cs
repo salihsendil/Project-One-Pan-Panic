@@ -27,8 +27,22 @@ public class ItemInteractionModule : MonoBehaviour, IInteractableModule
         {
             if (!player.HasItem()) { player.SetItem(itemSocket.RemoveItem()); return true; }
 
-            else { Debug.Log("Player has plate!"); return true; }
+            else
+            {
+                if (item.TryInteractWith(player.GetItem()))
+                {
+                    player.RemoveItem();
+                    return true;
+                }
+
+                else if (player.GetItem().TryInteractWith(item))
+                {
+                    itemSocket.RemoveItem();
+                    return true;
+                }
+            }
         }
+
         return false;
     }
 }

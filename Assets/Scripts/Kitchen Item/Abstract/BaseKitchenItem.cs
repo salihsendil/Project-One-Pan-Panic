@@ -23,4 +23,8 @@ public abstract class BaseKitchenItem : MonoBehaviour
         return false;
     }
 
+    public virtual bool TryInteractWith(BaseKitchenItem kitchenItem)
+    {
+        return false;
+    }
 }

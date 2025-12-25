@@ -17,7 +17,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     public void StartProcess(ProcessRule rule)
     {
         processRule = rule;
-        processTimer.SetTimer(processRule.processTime);
+        processTimer.SetTimer(processRule.ProcessTime);
         coroutine = TickProcess();
         StartCoroutine(coroutine);
     }

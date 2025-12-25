@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(IngredientDispenserModule))]
 public class IngredientDispenserCounter : BaseCounter
 {
-    [SerializeField] private KitchenItemSO itemSO;
-
     protected override void Awake()
     {
         base.Awake();

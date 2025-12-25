@@ -54,10 +54,18 @@ public class CookingCounter : BaseCounter
                 }
             }
 
-            Debug.Log("Player plate state");
-            //if(tryinteract)
-            //pauseprocess
-            //interact
+            else if (kitchenItem is ContainerItem containerItem)
+            {
+                if (containerItem.TryInteractWith(itemSocket.GetItem()))
+                {
+                    if (!itemSocket.GetItem().TryGetBehaviourController(out ItemBehaviourController controller)) { return; }
+
+                    if (cookingModule.TryInteractPause(controller))
+                    {
+                        base.Interact(player);
+                    }
+                }
+            }
         }
     }
 }

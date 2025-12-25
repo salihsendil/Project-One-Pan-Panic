@@ -5,21 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New KitchenItemSO", menuName = "Scriptable Objects/New KitchenItemSO")]
 public class KitchenItemSO : ScriptableObject
 {
-    public string itemName;
-    public GameObject prefab;
-    public Sprite icon;
-    public ItemStage initialStage;
-
-    public List<ProcessRule> processRules = new();
+    public IngredientID IngredientID;
+    public BaseKitchenItem Prefab;
+    public Sprite Icon;
+    public ItemStage InitialStage;
+    public List<ProcessRule> ProcessRules = new();
 }
 
 [Serializable]
 public class ProcessRule
 {
-    public ProcessType currentProcessType;
-    public ItemStage fromStage;
-    public ItemStage toStage;
-    public float processTime;
-    public Mesh outputMesh;
+    public ProcessType ProcessType;
+    public ItemStage FromStage;
+    public ItemStage ToStage;
+    public float ProcessTime;
+    public Mesh OutputMesh;
 }
 

@@ -10,11 +10,6 @@ public class PlayerCarryingController : MonoBehaviour
         TryGetComponent(out itemSocket);
     }
 
-    private void OnEnable() //debug
-    {
-        SetItem(GetItem());
-    }
-
     public bool HasItem() => itemSocket.HasItem();
 
     public BaseKitchenItem GetItem() => itemSocket.GetItem();

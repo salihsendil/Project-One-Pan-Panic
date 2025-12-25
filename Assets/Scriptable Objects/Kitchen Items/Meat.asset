@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68e29709679d544bbddd79ed1060e4c, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  itemName: Meat
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
-  processRules:
-  - currentProcessType: 2
-    fromStage: 0
-    toStage: 2
-    processTime: 5
-    outputMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  - currentProcessType: 3
-    fromStage: 2
-    toStage: 3
-    processTime: 5
-    outputMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  IngredientID: 2
+  Prefab: {fileID: 3292004790950630509, guid: e17ba255b21998f4eb75e05f33d4ae21, type: 3}
+  Icon: {fileID: 0}
+  InitialStage: 0
+  ProcessRules:
+  - ProcessType: 2
+    FromStage: 0
+    ToStage: 2
+    ProcessTime: 3
+    OutputMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  - ProcessType: 3
+    FromStage: 2
+    ToStage: 3
+    ProcessTime: 5
+    OutputMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

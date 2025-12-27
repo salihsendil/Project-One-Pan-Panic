@@ -4,9 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(IngredientDispenserModule))]
 public class IngredientDispenserCounter : BaseCounter
 {
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         TryGetComponent(out ItemInteractionModule itemInteractionModule);
         TryGetComponent(out IngredientDispenserModule ingredientDispenserModule);
         counterModules[0] = itemInteractionModule;

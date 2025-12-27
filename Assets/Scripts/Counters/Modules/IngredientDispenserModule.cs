@@ -7,11 +7,11 @@ public class IngredientDispenserModule : MonoBehaviour, IInteractableModule
     [Inject] private KitchenItemPoolManager poolManager;
 
     //Item Data
-    [SerializeField] private KitchenItemSO kitchenItemSO;
+    [SerializeField] private IngredientItemSO ingredientItemSO;
 
     public bool TryInteract(PlayerCarryingController player)
     {
-        BaseKitchenItem item = poolManager.GetItemFromPool(kitchenItemSO);
+        BaseKitchenItem item = poolManager.GetItemFromPool(ingredientItemSO);
 
         if (item == null) { return false; }
 

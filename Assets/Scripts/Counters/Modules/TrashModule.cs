@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using Zenject;
 
 public class TrashModule : MonoBehaviour, IInteractableModule
 {
+    [Inject] private KitchenItemPoolManager poolManager;
     public bool TryInteract(PlayerCarryingController player)
     {
-        Debug.Log("throwing trashes in here");
+        KitchenItemRestorer.RestoreAndReturn(player.RemoveItem(), poolManager);
         return true;
     }
 }

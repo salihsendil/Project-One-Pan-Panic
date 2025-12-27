@@ -5,13 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(CuttingCounterAnimationsController))]
 public class CuttingCounter : BaseCounter, IInteractableAlternate
 {
+    private ItemSocket itemSocket;
     private PlayerController currentPlayer;
     private CuttingCounterAnimationsController animationsController;
     private IInteractableAlternateModule[] alternateModules = new IInteractableAlternateModule[2];
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        TryGetComponent(out itemSocket);
 
         TryGetComponent(out animationsController);
 

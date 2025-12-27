@@ -30,7 +30,7 @@ public class ItemBehaviourController : MonoBehaviour
     }
     private void InitializeProcessRules()
     {
-        var data = ingredientItem.KitchenItemSO;
+        var data = ingredientItem.GetKitchenItemSO() as IngredientItemSO;
         if (data.ProcessRules.Count <= 0) { return; }
         foreach (var rule in data.ProcessRules)
         {

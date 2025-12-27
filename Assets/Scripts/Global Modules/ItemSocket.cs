@@ -8,12 +8,17 @@ public class ItemSocket : MonoBehaviour, IItemCarrier
     public bool HasItem() => currentItem != null;
     public BaseKitchenItem GetItem() { return currentItem; }
 
-    public void SetItem(BaseKitchenItem obj)
+    public void SetItem(BaseKitchenItem kitchenItem)
     {
-        currentItem = obj;
+        SetItemToOffset(kitchenItem, Vector3.zero);
+    }
+
+    public void SetItemToOffset(BaseKitchenItem kitchenItem, Vector3 offset)
+    {
+        currentItem = kitchenItem;
         currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         currentItem.transform.SetParent(holdPoint);
-        currentItem.transform.localPosition = Vector3.zero;
+        currentItem.transform.localPosition += offset;
         currentItem.transform.localRotation = Quaternion.identity;
     }
 

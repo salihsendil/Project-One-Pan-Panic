@@ -7,10 +7,11 @@ public class RecipeSO : ScriptableObject
 {
     public string RecipeName;
     public string RecipeID;
-    public List<IngredientEntry> Ingredients = new();
+    public Mesh Mesh;
     public int SuccessScore;
     public int PenaltyScore;
     public float PreperationTime;
+    public List<IngredientEntry> Ingredients = new();
 }
 
 [Serializable]

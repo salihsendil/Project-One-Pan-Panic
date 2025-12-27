@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -8,22 +7,31 @@ public class ContainerItem : BaseKitchenItem
     //References
     [Inject] private OrderSystem orderSystem;
     [Inject] private RecipeMatchEvaluator recipeMatch;
+    [Inject] private KitchenItemPoolManager poolManager;
 
-    //Ingredient List
-    [SerializeField] private List<IngredientEntry> ingredientsOnPlate = new();
+    //Data
+    [SerializeField] private ContainerItemSO containerItemSO;
 
     //HoldPoint
     [SerializeField] private Transform holdPoint;
+
+    //Ingredient List
+    [SerializeField] private List<IngredientItem> spawnedItems = new();
+    [SerializeField] private List<IngredientEntry> ingredientEntries = new();
 
     //State
     private ContainerState containerState = ContainerState.Empty;
 
     //Recipe
     private string currentRecipeID;
-    public string CurrentRecipeID  => currentRecipeID;
+    public string CurrentRecipeID => currentRecipeID;
 
 
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
+
+    public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
+    public List<IngredientItem> SpawnedItems => spawnedItems;
+    public List<IngredientEntry> IngredientEntries => ingredientEntries;
 
     public override bool TryInteractWith(BaseKitchenItem kitchenItem)
     {
@@ -36,11 +44,12 @@ public class ContainerItem : BaseKitchenItem
 
     public bool TryAddIngredient(IngredientItem ingredient)
     {
-        IngredientEntry newEntry = new IngredientEntry(ingredient.KitchenItemSO.IngredientID, ingredient.ItemStage);
+        IngredientEntry newEntry = new IngredientEntry(((IngredientItemSO)ingredient.GetKitchenItemSO()).IngredientID, ingredient.ItemStage);
 
         if (!orderSystem.IsIngredientAllowedOnPlate(newEntry)) { return false; }
 
-        ingredientsOnPlate.Add(newEntry);
+        spawnedItems.Add(ingredient);
+        ingredientEntries.Add(newEntry);
 
         SetIngredientTransform(ingredient);
 
@@ -51,13 +60,14 @@ public class ContainerItem : BaseKitchenItem
 
     private void CheckRecipeMatch()
     {
-        if (!recipeMatch.TryRecipeMatch(ingredientsOnPlate, out currentRecipeID))
+        if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipeID))
         {
-            containerState = ContainerState.InProgress;
+            containerState = ContainerState.Invalid;
             //UpdateMesh(); - will be update
             return;
         }
 
+        KitchenItemRestorer.ClearContainerContents(spawnedItems, poolManager);
         containerState = ContainerState.ReadyToServe;
     }
 
@@ -67,17 +77,13 @@ public class ContainerItem : BaseKitchenItem
         ingredient.transform.SetParent(holdPoint);
     }
 
-    private void ClearPlate()
+    public override void RestoreItem()
     {
-        ingredientsOnPlate.Clear();
+        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        UpdateMesh(containerItemSO.InitialMesh);
+        currentRecipeID = null;
+        containerState = ContainerState.Empty;
+        spawnedItems.Clear();
+        ingredientEntries.Clear();
     }
-
-
-
-    private List<int> testList = new List<int>();
-    private Stack<int> testStack = new Stack<int>();
-    private Queue<int> testQueue = new Queue<int>();
-
-
-
 }

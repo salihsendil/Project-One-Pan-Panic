@@ -5,6 +5,7 @@ public class DeliveryModule : MonoBehaviour, IInteractableModule
 {
     //References
     [Inject] private OrderSystem orderSystem;
+    [Inject] private KitchenItemPoolManager poolManager;
 
     public bool TryInteract(PlayerCarryingController player)
     {
@@ -16,7 +17,7 @@ public class DeliveryModule : MonoBehaviour, IInteractableModule
         {
             if (orderSystem.RecipeHasOrdered(containerItem.CurrentRecipeID))
             {
-                Debug.Log("plate is serving");
+                KitchenItemRestorer.FullRestoreContainer(containerItem, poolManager);
                 return true;
             }
         }

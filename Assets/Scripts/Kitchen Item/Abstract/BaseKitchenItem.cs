@@ -9,6 +9,9 @@ public abstract class BaseKitchenItem : MonoBehaviour
         TryGetComponent(out meshFilter);
     }
 
+    public abstract KitchenItemSO GetKitchenItemSO();
+    public abstract void RestoreItem();
+
     public void UpdateMesh(Mesh newMesh)
     {
         if (meshFilter != null)

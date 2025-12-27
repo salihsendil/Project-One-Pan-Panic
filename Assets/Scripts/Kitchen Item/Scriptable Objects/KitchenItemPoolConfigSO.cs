@@ -14,4 +14,5 @@ public struct PoolItemEntry
 {
     public KitchenItemSO KitchenItemSO;
     public int InitializeSize;
+    public bool HasHardLimit;
 }

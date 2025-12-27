@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca681847344ee04d95d258d6aeb195d, type: 3}
-  m_Name: DevScenePoolConfig
+  m_Script: {fileID: 11500000, guid: a86f536d492f8154382402a68d18e2d8, type: 3}
+  m_Name: Plate
   m_EditorClassIdentifier: 
-  KitchenItemEntries:
-  - KitchenItemSO: {fileID: 11400000, guid: bf8d57210c213324484f56e4816e9c34, type: 2}
-    InitializeSize: 8
-    HasHardLimit: 1
+  KitchenItemName: white-plate
+  Prefab: {fileID: 424908270209778929, guid: 206b208327e80614d86dd54daa34d421, type: 3}
+  InitialStage: 0

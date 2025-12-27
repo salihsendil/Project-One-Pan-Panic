@@ -2,6 +2,6 @@
 public enum ContainerState
 {
     Empty,
-    InProgress,
+    Invalid,
     ReadyToServe
 }

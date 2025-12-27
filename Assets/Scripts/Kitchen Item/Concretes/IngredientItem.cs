@@ -10,18 +10,15 @@ public class IngredientItem : BaseKitchenItem
     public ItemStage ItemStage => itemStage;
 
     //Data
-    [SerializeField] private KitchenItemSO kitchenItemSO;
-    public KitchenItemSO KitchenItemSO => kitchenItemSO;
+    [SerializeField] private IngredientItemSO ingredientItemSO;
 
+
+    public override KitchenItemSO GetKitchenItemSO() => ingredientItemSO;
 
     private void Awake()
     {
         TryGetComponent(out behaviourController);
-    }
-
-    private void OnEnable()
-    {
-        itemStage = kitchenItemSO.InitialStage;
+        itemStage = ingredientItemSO.InitialStage;
     }
 
     public override bool TryGetBehaviourController(out ItemBehaviourController controller)
@@ -37,4 +34,13 @@ public class IngredientItem : BaseKitchenItem
     {
         itemStage = newStage;
     }
+
+    public override void RestoreItem()
+    {
+        transform.SetParent(null);
+        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        SetItemStage(ingredientItemSO.InitialStage);
+        UpdateMesh(ingredientItemSO.InitialMesh);
+    }
+
 }

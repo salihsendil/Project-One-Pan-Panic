@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using Zenject;
 
-
 public class RecipeMatchEvaluator
 {
     [Inject] private OrderSystem orderSystem;
 
     //List For Copy Plate Ingredient
     private List<IngredientEntry> plateTemp = new();
-
 
     public bool TryRecipeMatch(List<IngredientEntry> entries, out string recipeID)
     {

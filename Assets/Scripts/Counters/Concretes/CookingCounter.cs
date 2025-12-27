@@ -4,11 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(CookingModule))]
 public class CookingCounter : BaseCounter
 {
+    private ItemSocket itemSocket;
     private CookingModule cookingModule;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        TryGetComponent(out itemSocket);
 
         TryGetComponent(out ItemInteractionModule itemInteractionModule);
         counterModules[0] = itemInteractionModule;

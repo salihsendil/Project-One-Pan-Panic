@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e68e29709679d544bbddd79ed1060e4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 212b1904562bbcb49b54d9c2d67f57cc, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
+  KitchenItemName: meat
+  Prefab: {fileID: 0}
   IngredientID: 2
-  Prefab: {fileID: 3292004790950630509, guid: e17ba255b21998f4eb75e05f33d4ae21, type: 3}
   Icon: {fileID: 0}
   InitialStage: 0
   ProcessRules:
@@ -22,8 +23,8 @@ MonoBehaviour:
     ToStage: 2
     ProcessTime: 3
     OutputMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-  - ProcessType: 3
+  - ProcessType: 2
     FromStage: 2
     ToStage: 3
-    ProcessTime: 5
+    ProcessTime: 3
     OutputMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

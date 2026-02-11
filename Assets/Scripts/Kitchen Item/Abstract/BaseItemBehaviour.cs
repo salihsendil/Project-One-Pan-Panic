@@ -8,7 +8,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     private bool isPaused;
     private IEnumerator coroutine;
     private ProcessRule processRule;
-    private ProcessTimer processTimer = new();
+    private Timer processTimer = new();
 
     public event Action<IItemBehaviour, ProcessRule> OnProcessComplete;
 

@@ -23,8 +23,8 @@ public class ContainerItem : BaseKitchenItem
     private ContainerState containerState = ContainerState.Empty;
 
     //Recipe
-    private string currentRecipeID;
-    public string CurrentRecipeID => currentRecipeID;
+    private RecipeSO currentRecipe;
+    public RecipeSO CurrentRecipe => currentRecipe;
 
 
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
@@ -32,6 +32,7 @@ public class ContainerItem : BaseKitchenItem
     public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
     public List<IngredientItem> SpawnedItems => spawnedItems;
     public List<IngredientEntry> IngredientEntries => ingredientEntries;
+
 
     public override bool TryInteractWith(BaseKitchenItem kitchenItem)
     {
@@ -60,7 +61,7 @@ public class ContainerItem : BaseKitchenItem
 
     private void CheckRecipeMatch()
     {
-        if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipeID))
+        if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipe))
         {
             containerState = ContainerState.Invalid;
             //UpdateMesh(); - will be update
@@ -81,7 +82,7 @@ public class ContainerItem : BaseKitchenItem
     {
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         UpdateMesh(containerItemSO.InitialMesh);
-        currentRecipeID = null;
+        currentRecipe = null;
         containerState = ContainerState.Empty;
         spawnedItems.Clear();
         ingredientEntries.Clear();

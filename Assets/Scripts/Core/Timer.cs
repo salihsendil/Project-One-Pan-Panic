@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Timer
 {
     public float Duration;
@@ -14,9 +12,9 @@ public class Timer
         Remaining = duration;
     }
 
-    public void TickTimer()
+    public void TickTimer(float deltaTime)
     {
-        Remaining -= Time.deltaTime;
+        Remaining -= deltaTime;
     }
 
     public void ResetTimer()

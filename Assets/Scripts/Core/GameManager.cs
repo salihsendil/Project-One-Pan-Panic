@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckAndUpdateTimer()
     {
-        timer.TickTimer();
+        timer.TickTimer(Time.deltaTime);
         if ((int)timer.Remaining != currentTime)
         {
             currentTime = (int)timer.Remaining;

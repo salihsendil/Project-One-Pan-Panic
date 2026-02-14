@@ -1,16 +1,59 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class OrderCardView : MonoBehaviour
+public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //Data
+    private Order currentOrder;
+
+    //UI
+    [SerializeField] private Image orderIcon;
+    [SerializeField] private TMP_Text orderName;
+    [SerializeField] private List<Image> recipeIngredientsIcons = new();
+    [SerializeField] private ProgressBarDisplay progressBar;
+
+
+    public GameObject GetGameObject() => gameObject;
+
+    public UniversalPoolEntryType GetPoolType() => UniversalPoolEntryType.OrderCardView;
+
+    public void OnSpawn()
     {
-        
+        foreach (var icon in recipeIngredientsIcons)
+        {
+            icon.gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDespawn()
     {
-        
+        currentOrder = null;
     }
+
+    private void Update()
+    {
+        if (currentOrder != null)
+        {
+            progressBar.UpdateTimer(currentOrder.RemainingTime);
+        }
+    }
+
+    public void Configure(Order order)
+    {
+        currentOrder = order;
+        RecipeSO recipe = order.Recipe;
+        orderIcon.sprite = recipe.RecipeIcon;
+        orderName.text = recipe.RecipeName;
+
+        for (int i = 0; i < recipe.Ingredients.Count; i++)
+        {
+            recipeIngredientsIcons[i].gameObject.SetActive(true);
+            recipeIngredientsIcons[i].sprite = recipe.Ingredients[i].IngredientItemData.Icon;
+        }
+
+        progressBar.SetProgress(recipe.PreperationTime);
+    }
+
 }

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Plate
   m_EditorClassIdentifier: 
   KitchenItemName: white-plate
+  Type: 20
   Prefab: {fileID: 424908270209778929, guid: 206b208327e80614d86dd54daa34d421, type: 3}
+  InitialMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   InitialStage: 0

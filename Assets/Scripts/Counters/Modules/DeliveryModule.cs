@@ -5,7 +5,7 @@ public class DeliveryModule : MonoBehaviour, IInteractableModule
 {
     //References
     [Inject] private OrderSystem orderSystem;
-    [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private UniversalPoolManager poolManager;
     [Inject] private SignalBus signalBus;
 
     public bool TryInteract(PlayerCarryingController player)
@@ -16,14 +16,14 @@ public class DeliveryModule : MonoBehaviour, IInteractableModule
 
         if (containerItem.IsPlateReadyToServe())
         {
-            if (orderSystem.RecipeHasOrdered(containerItem.CurrentRecipe.RecipeID))
+            if (orderSystem.TryCompleteOrder(containerItem.CurrentRecipe, out Order order))
             {
-                signalBus.Fire(new OrderDeliveredSignal(containerItem.CurrentRecipe.SuccessScore));
-                KitchenItemRestorer.FullRestoreContainer(containerItem, poolManager);
+                signalBus.Fire(new OrderDeliveredSignal(order));
+                PoolItemCleaner.RestoreAndReturn(player.RemoveItem(), poolManager);
                 return true;
             }
+            Debug.LogError("It's not ordered!");
         }
-        Debug.LogError("It's not ordered!");
         return false;
     }
 }

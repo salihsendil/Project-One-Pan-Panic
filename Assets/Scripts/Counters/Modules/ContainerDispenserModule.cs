@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,8 @@ using Zenject;
 public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
 {
     //Zenject
-    [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private UniversalPoolManager poolManager;
+    [Inject] private SignalBus signalBus;
 
     //References
     private ItemSocket itemSocket;
@@ -17,27 +19,36 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
     //Stack
     private Stack<ContainerItem> containerStack = new();
 
-    //Container Count
-    [SerializeField] private int maxCounterSize;
-
     //Transform
     private Vector3 positionOffset = new Vector3(0f, 0.05f, 0f);
 
+    //Respawn Delay
+    [SerializeField] private int respawnDelay = 1500;
+
     private void Awake()
     {
-        TryGetComponent(out itemSocket);
+        if (itemSocket == null) { TryGetComponent(out itemSocket); }
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        for (int i = 0; i < maxCounterSize; i++)
-        {
-            BaseKitchenItem item = poolManager.GetItemFromPool(containerItemSO);
-            if (item == null) { break; }
+        signalBus.Subscribe<ContainerItemDespawned>(PrepareReplacement);
+    }
 
-            itemSocket.SetItemToOffset(item, positionOffset * i);
-            containerStack.Push(item as ContainerItem);
-        }
+    private void OnDisable()
+    {
+        signalBus.Unsubscribe<ContainerItemDespawned>(PrepareReplacement);
+    }
+
+    private async void PrepareReplacement()
+    {
+        await Task.Delay(respawnDelay);
+
+        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.Type);
+        if (item == null) { return; }
+
+        itemSocket.SetItemToOffset(item, positionOffset * containerStack.Count);
+        containerStack.Push(item);
     }
 
     public bool TryInteract(PlayerCarryingController player)

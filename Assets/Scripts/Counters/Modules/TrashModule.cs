@@ -3,10 +3,10 @@ using Zenject;
 
 public class TrashModule : MonoBehaviour, IInteractableModule
 {
-    [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private UniversalPoolManager poolManager;
     public bool TryInteract(PlayerCarryingController player)
     {
-        KitchenItemRestorer.RestoreAndReturn(player.RemoveItem(), poolManager);
+        PoolItemCleaner.RestoreAndReturn(player.RemoveItem(), poolManager);
         return true;
     }
 }

@@ -7,7 +7,8 @@ public class ContainerItem : BaseKitchenItem
     //References
     [Inject] private OrderSystem orderSystem;
     [Inject] private RecipeMatchEvaluator recipeMatch;
-    [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private UniversalPoolManager poolManager;
+    [Inject] private SignalBus signalBus;
 
     //Data
     [SerializeField] private ContainerItemSO containerItemSO;
@@ -26,13 +27,30 @@ public class ContainerItem : BaseKitchenItem
     private RecipeSO currentRecipe;
     public RecipeSO CurrentRecipe => currentRecipe;
 
+    //Pool Type
+    public override UniversalPoolEntryType GetPoolType() => containerItemSO.Type;
 
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
 
     public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
     public List<IngredientItem> SpawnedItems => spawnedItems;
-    public List<IngredientEntry> IngredientEntries => ingredientEntries;
 
+
+    public override void OnSpawn()
+    {
+        containerState = ContainerState.Empty;
+        UpdateMesh(containerItemSO.InitialMesh);
+        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+    }
+
+    public override void OnDespawn()
+    {
+        currentRecipe = null;
+        PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
+        spawnedItems.Clear();
+        ingredientEntries.Clear();
+        signalBus.Fire(new ContainerItemDespawned(GetPoolType()));
+    }
 
     public override bool TryInteractWith(BaseKitchenItem kitchenItem)
     {
@@ -45,7 +63,7 @@ public class ContainerItem : BaseKitchenItem
 
     public bool TryAddIngredient(IngredientItem ingredient)
     {
-        IngredientEntry newEntry = new IngredientEntry(((IngredientItemSO)ingredient.GetKitchenItemSO()).IngredientID, ingredient.ItemStage);
+        IngredientEntry newEntry = new IngredientEntry((IngredientItemSO)ingredient.GetKitchenItemSO(), ingredient.ItemStage);
 
         if (!orderSystem.IsIngredientAllowedOnPlate(newEntry)) { return false; }
 
@@ -64,11 +82,12 @@ public class ContainerItem : BaseKitchenItem
         if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipe))
         {
             containerState = ContainerState.Invalid;
-            //UpdateMesh(); - will be update
             return;
         }
 
-        KitchenItemRestorer.ClearContainerContents(spawnedItems, poolManager);
+        PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
+        spawnedItems.Clear();
+        //UpdateMesh(); - will be update
         containerState = ContainerState.ReadyToServe;
     }
 
@@ -76,15 +95,5 @@ public class ContainerItem : BaseKitchenItem
     {
         ingredient.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         ingredient.transform.SetParent(holdPoint);
-    }
-
-    public override void RestoreItem()
-    {
-        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        UpdateMesh(containerItemSO.InitialMesh);
-        currentRecipe = null;
-        containerState = ContainerState.Empty;
-        spawnedItems.Clear();
-        ingredientEntries.Clear();
     }
 }

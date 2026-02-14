@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New RecipeSO", menuName = "Scriptable Objects/New RecipeSO")]
 public class RecipeSO : ScriptableObject
 {
+    public Sprite RecipeIcon;
     public string RecipeName;
     public string RecipeID;
     public Mesh Mesh;
@@ -17,12 +19,12 @@ public class RecipeSO : ScriptableObject
 [Serializable]
 public struct IngredientEntry
 {
-    public IngredientID IngredientID;
+    public IngredientItemSO IngredientItemData;
     public ItemStage RequiredStage;
 
-    public IngredientEntry(IngredientID ingredientID, ItemStage itemStage)
+    public IngredientEntry(IngredientItemSO ýngredientItemData, ItemStage requiredStage)
     {
-        IngredientID = ingredientID;
-        RequiredStage = itemStage;
+        IngredientItemData = ýngredientItemData;
+        RequiredStage = requiredStage;
     }
 }

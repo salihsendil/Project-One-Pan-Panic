@@ -16,8 +16,8 @@ public class ItemSocket : MonoBehaviour, IItemCarrier
     public void SetItemToOffset(BaseKitchenItem kitchenItem, Vector3 offset)
     {
         currentItem = kitchenItem;
-        currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         currentItem.transform.SetParent(holdPoint);
+        currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         currentItem.transform.localPosition += offset;
         currentItem.transform.localRotation = Quaternion.identity;
     }

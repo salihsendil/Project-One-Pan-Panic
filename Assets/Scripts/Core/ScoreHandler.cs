@@ -10,11 +10,14 @@ public class ScoreHandler : IInitializable, IDisposable
     public void Initialize()
     {
         signalBus.Subscribe<OrderDeliveredSignal>(AddScore);
+        signalBus.Subscribe<OrderExpiredSignal>(RemoveScore);
+        SetScore(200);
     }
 
     public void Dispose()
     {
         signalBus.Unsubscribe<OrderDeliveredSignal>(AddScore);
+        signalBus.Unsubscribe<OrderExpiredSignal>(RemoveScore);
     }
 
     public void SetScore(int score)
@@ -29,13 +32,13 @@ public class ScoreHandler : IInitializable, IDisposable
 
     private void AddScore(OrderDeliveredSignal signal)
     {
-        currentScore += signal.SuccessScore;
+        currentScore += signal.Order.Recipe.SuccessScore;
         signalBus.Fire(new ScoreChangedSignal(currentScore));
     }
 
-    private void RemoveScore(int amount)
+    private void RemoveScore(OrderExpiredSignal signal)
     {
-        currentScore -= amount;
+        currentScore += signal.Order.Recipe.PenaltyScore;
         if (currentScore <= 0)
         {
             currentScore = 0;

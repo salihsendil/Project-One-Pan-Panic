@@ -10,8 +10,6 @@ public class ProjectInstaller : MonoInstaller
 
     private void SignalInstallers()
     {
-        SignalBusInstaller.Install(Container);
-    
-        
+        SignalBusInstaller.Install(Container);        
     }
 }

@@ -26,7 +26,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     {
         while (!processTimer.IsFinished())
         {
-            if (!isPaused) { processTimer.TickTimer(); }
+            if (!isPaused) { processTimer.TickTimer(Time.deltaTime); }
             yield return null;
         }
 

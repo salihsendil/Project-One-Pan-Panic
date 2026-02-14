@@ -5,6 +5,7 @@ using Zenject;
 public class ScoreDisplay : MonoBehaviour
 {
     [Inject] private SignalBus signalBus;
+    [Inject] private ScoreHandler scoreHandler;
 
     [SerializeField] private TMP_Text scoreText;
 
@@ -25,7 +26,7 @@ public class ScoreDisplay : MonoBehaviour
 
     private void Start()
     {
-        scoreText.text = "0";
+        scoreText.text = scoreHandler.GetScore().ToString();
     }
 
     public void UpdateScoreText(ScoreChangedSignal signal)

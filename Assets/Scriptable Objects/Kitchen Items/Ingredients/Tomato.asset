@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   KitchenItemName: tomato
+  Type: 5
   Prefab: {fileID: 0}
+  InitialMesh: {fileID: 0}
   IngredientID: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   InitialStage: 0
   ProcessRules:
   - ProcessType: 1

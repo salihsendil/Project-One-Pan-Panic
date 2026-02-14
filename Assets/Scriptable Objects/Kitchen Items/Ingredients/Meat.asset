@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   KitchenItemName: meat
+  Type: 8
   Prefab: {fileID: 0}
+  InitialMesh: {fileID: 0}
   IngredientID: 2
   Icon: {fileID: 0}
   InitialStage: 0

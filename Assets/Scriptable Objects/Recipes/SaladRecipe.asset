@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1de2d0c6ea0f48b183df183f770da, type: 3}
   m_Name: SaladRecipe
   m_EditorClassIdentifier: 
+  RecipeIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   RecipeName: Salad
   RecipeID: recipeSalad
-  Ingredients:
-  - IngredientID: 1
-    RequiredStage: 1
-  - IngredientID: 0
-    RequiredStage: 1
+  Mesh: {fileID: 0}
   SuccessScore: 50
   PenaltyScore: -20
-  PreperationTime: 35
+  PreperationTime: 10
+  Ingredients:
+  - IngredientItemData: {fileID: 11400000, guid: 16193c3989e003f4fb441846338fffe7, type: 2}
+    RequiredStage: 1
+  - IngredientItemData: {fileID: 11400000, guid: ca83e7dd17121cf4ea1915fb09f59dbc, type: 2}
+    RequiredStage: 1

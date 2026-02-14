@@ -4,14 +4,14 @@ using Zenject;
 public class IngredientDispenserModule : MonoBehaviour, IInteractableModule
 {
     //References
-    [Inject] private KitchenItemPoolManager poolManager;
+    [Inject] private UniversalPoolManager poolManager;
 
     //Item Data
     [SerializeField] private IngredientItemSO ingredientItemSO;
 
     public bool TryInteract(PlayerCarryingController player)
     {
-        BaseKitchenItem item = poolManager.GetItemFromPool(ingredientItemSO);
+        IngredientItem item = poolManager.Spawn<IngredientItem>(ingredientItemSO.Type);
 
         if (item == null) { return false; }
 

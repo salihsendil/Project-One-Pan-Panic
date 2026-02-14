@@ -1,9 +1,9 @@
 ﻿public struct OrderDeliveredSignal
 {
-    public int SuccessScore;
+    public Order Order;
 
-    public OrderDeliveredSignal(int successScore)
+    public OrderDeliveredSignal(Order order)
     {
-        SuccessScore = successScore;
+        Order = order;
     }
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   Mesh: {fileID: 0}
   SuccessScore: 50
   PenaltyScore: -20
-  PreperationTime: 10
+  PreparationTime: 20
   Ingredients:
   - IngredientItemData: {fileID: 11400000, guid: 16193c3989e003f4fb441846338fffe7, type: 2}
     RequiredStage: 1

@@ -11,10 +11,8 @@ public class OrderPanelController : MonoBehaviour
     //References
     [SerializeField] private GameObject orderPanel;
 
-
     //Data
     private Dictionary<int, OrderCardView> cards = new();
-
 
     private void OnEnable()
     {
@@ -41,18 +39,19 @@ public class OrderPanelController : MonoBehaviour
 
     private void OnOrderDelivered(OrderDeliveredSignal signal)
     {
-        if (cards.TryGetValue(signal.Order.ID, out OrderCardView cardView))
-        {
-            cards.Remove(signal.Order.ID);
-            PoolItemCleaner.RestoreAndReturn(cardView, poolManager);
-        }
+        FinalizeOrder(signal.Order);
     }
 
     private void OnOrderExpired(OrderExpiredSignal signal)
     {
-        if (cards.TryGetValue(signal.Order.ID, out OrderCardView cardView))
+        FinalizeOrder(signal.Order);
+    }
+
+    private void FinalizeOrder(Order order)
+    {
+        if (cards.TryGetValue(order.ID, out OrderCardView cardView))
         {
-            cards.Remove(signal.Order.ID);
+            cards.Remove(order.ID);
             PoolItemCleaner.RestoreAndReturn(cardView, poolManager);
         }
     }

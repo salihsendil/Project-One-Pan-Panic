@@ -1,9 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class InputHandler : MonoBehaviour
 {
+    //Zenject
+    [Inject] private SignalBus signalBus;
+
     private PlayerInput playerInput;
     private Vector2 inputVector;
     private Vector3 movementVector;
@@ -20,6 +24,18 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        signalBus.Subscribe<GameStartedSignal>(UnlockInput);
+        signalBus.Subscribe<GameFinishedSignal>(LockInput);
+    }
+
+    private void OnDisable()
+    {
+        signalBus.Unsubscribe<GameStartedSignal>(UnlockInput);
+        signalBus.Unsubscribe<GameFinishedSignal>(LockInput);
+    }
+
+    private void UnlockInput()
+    {
         playerInput.Enable();
         playerInput.Movement.Move.started += Move;
         playerInput.Movement.Move.performed += Move;
@@ -28,8 +44,11 @@ public class InputHandler : MonoBehaviour
         playerInput.Interactions.InteractionAlternate.performed += InteractionAlternate;
     }
 
-    private void OnDisable()
+    private void LockInput()
     {
+        inputVector = Vector2.zero;
+        movementVector = Vector3.zero;
+
         playerInput.Movement.Move.started -= Move;
         playerInput.Movement.Move.performed -= Move;
         playerInput.Movement.Move.canceled -= Move;

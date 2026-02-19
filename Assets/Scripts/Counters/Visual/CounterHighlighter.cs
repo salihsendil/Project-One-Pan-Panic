@@ -5,7 +5,7 @@ public class CounterHighlighter : MonoBehaviour
     private Renderer _renderer;
     private Material _material;
     [SerializeField] private Color originalEmission = Color.clear;
-    [SerializeField] public Color highlightColor = new Color(0.1f, 0.1f, 0.1f, 0.4f);
+    [SerializeField] private Color highlightColor = new Color(0.1f, 0.1f, 0.1f, 0.4f);
 
     private void Awake()
     {

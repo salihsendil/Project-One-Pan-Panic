@@ -8,7 +8,7 @@ public class Order
     {
         ID = id;
         Recipe = recipe;
-        RemainingTime = recipe.PreperationTime;
+        RemainingTime = recipe.PreparationTime;
     }
 
 

@@ -3,7 +3,7 @@ using Zenject;
 
 public class RecipeMatchEvaluator
 {
-    [Inject] private OrderSystem orderSystem;
+    [Inject] private OrderConfigSO orderConfig;
 
     //List For Copy Plate Ingredient
     private List<IngredientEntry> plateTemp = new();
@@ -11,7 +11,7 @@ public class RecipeMatchEvaluator
     public bool TryRecipeMatch(List<IngredientEntry> entries, out RecipeSO recipeSO)
     {
         recipeSO = null;
-        var recipes = orderSystem.OrderConfig.RecipeList;
+        var recipes = orderConfig.RecipeList;
 
         foreach (var recipe in recipes)
         {

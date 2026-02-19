@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(UIButtonHandler))]
 public class PanelAction : BaseUIAction
 {
     [SerializeField] private GameObject panel;

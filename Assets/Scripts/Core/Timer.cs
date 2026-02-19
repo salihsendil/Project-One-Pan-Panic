@@ -5,19 +5,19 @@ public class Timer
 
     public bool IsFinished() => Remaining <= 0f;
 
-    public void SetTimer(float duration)
+    public void Set(float duration)
     {
-        ResetTimer();
+        Reset();
         Duration = duration;
         Remaining = duration;
     }
 
-    public void TickTimer(float deltaTime)
+    public void Tick(float deltaTime)
     {
         Remaining -= deltaTime;
     }
 
-    public void ResetTimer()
+    public void Reset()
     {
         Duration = Remaining = 0f;
     }

@@ -7,6 +7,7 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
 {
     //Data
     private Order currentOrder;
+    private bool isCardVisible;
 
     //UI
     [SerializeField] private Image orderIcon;
@@ -18,6 +19,16 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
     public GameObject GetGameObject() => gameObject;
 
     public UniversalPoolEntryType GetPoolType() => UniversalPoolEntryType.OrderCardView;
+
+    private void OnEnable()
+    {
+        isCardVisible = true;
+    }
+
+    private void OnDisable()
+    {
+        isCardVisible = false;
+    }
 
     public void OnSpawn()
     {
@@ -34,7 +45,7 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
 
     private void Update()
     {
-        if (currentOrder != null)
+        if (isCardVisible && currentOrder != null)
         {
             progressBar.UpdateTimer(currentOrder.RemainingTime);
         }
@@ -53,7 +64,7 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
             recipeIngredientsIcons[i].sprite = recipe.Ingredients[i].IngredientItemData.Icon;
         }
 
-        progressBar.SetProgress(recipe.PreperationTime);
+        progressBar.SetProgress(recipe.PreparationTime);
     }
 
 }

@@ -17,7 +17,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     public void StartProcess(ProcessRule rule)
     {
         processRule = rule;
-        processTimer.SetTimer(processRule.ProcessTime);
+        processTimer.Set(processRule.ProcessTime);
         coroutine = TickProcess();
         StartCoroutine(coroutine);
     }
@@ -26,7 +26,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     {
         while (!processTimer.IsFinished())
         {
-            if (!isPaused) { processTimer.TickTimer(Time.deltaTime); }
+            if (!isPaused) { processTimer.Tick(Time.deltaTime); }
             yield return null;
         }
 
@@ -37,7 +37,7 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     {
         StopCoroutine(coroutine);
         coroutine = null;
-        processTimer.ResetTimer();
+        processTimer.Reset();
         OnProcessComplete?.Invoke(this, processRule);
     }
 

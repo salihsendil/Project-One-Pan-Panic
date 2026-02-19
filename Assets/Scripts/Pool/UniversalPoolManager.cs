@@ -6,9 +6,7 @@ public class UniversalPoolManager : MonoBehaviour
 {
     //Zenject
     [Inject] private IInstantiator instantiator;
-
-    //Config
-    [SerializeField] private UniversalPoolConfigSO poolConfig;
+    [Inject] private UniversalPoolConfigSO poolConfig;
 
     //Pool
     private Dictionary<UniversalPoolEntryType, UniversalPoolEntry> poolEntries = new();

@@ -3,7 +3,7 @@ using Zenject;
 
 public class IngredientDispenserModule : MonoBehaviour, IInteractableModule
 {
-    //References
+    //Zenject
     [Inject] private UniversalPoolManager poolManager;
 
     //Item Data

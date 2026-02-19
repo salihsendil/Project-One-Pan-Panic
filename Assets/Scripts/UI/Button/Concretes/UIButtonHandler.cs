@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIButtonHandler : MonoBehaviour
 {
     [SerializeField] private Button button;
-    private BaseUIAction[] uiActions = new BaseUIAction[10];
+    private BaseUIAction[] uiActions;
 
     private void Awake()
     {

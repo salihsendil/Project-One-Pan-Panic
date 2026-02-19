@@ -12,7 +12,7 @@ public class RecipeSO : ScriptableObject
     public Mesh Mesh;
     public int SuccessScore;
     public int PenaltyScore;
-    public float PreperationTime;
+    public float PreparationTime;
     public List<IngredientEntry> Ingredients = new();
 }
 

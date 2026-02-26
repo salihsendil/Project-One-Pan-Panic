@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ItemInteractionModule))]
@@ -5,7 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(CuttingCounterAnimationsController))]
 public class CuttingCounter : BaseCounter, IInteractableAlternate
 {
-    private ItemSocket itemSocket;
+    //need bug-fix
+    private ItemSocket itemSocket;//--
     private PlayerController currentPlayer;
     private CuttingCounterAnimationsController animationsController;
     private IInteractableAlternateModule[] alternateModules = new IInteractableAlternateModule[2];
@@ -16,8 +18,9 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
 
         TryGetComponent(out animationsController);
 
-        TryGetComponent(out ItemInteractionModule itemInteractionModule);
-        counterModules[0] = itemInteractionModule;
+        //need bug-fix
+        TryGetComponent(out ItemInteractionModule itemInteractionModule);//--
+        counterModules[0] = itemInteractionModule;//--
 
         TryGetComponent(out CuttingModule cuttingModule);
         alternateModules[0] = cuttingModule;
@@ -69,7 +72,6 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
             }
         }
     }
-
     private void HandleProcessState(bool isProcessing)
     {
         animationsController.UpdateAnimationState(isProcessing);
@@ -80,5 +82,18 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
     {
         controller.OnItemBehaviourProcessComplete -= HandleProcessComplete;
         HandleProcessState(false);
+    }
+
+    public override bool TryGetItemIcon()
+    {
+        if (!itemSocket.HasItem()) { return false; }
+
+        if (!itemSocket.GetItem().TryGetComponent(out IInfoProvider provider))
+        {
+            return false;
+        }
+        provider.GetDataInfo();
+
+        return true;
     }
 }

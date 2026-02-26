@@ -15,7 +15,6 @@ public class GameSceneInstaller : MonoInstaller
         SignalBindings();
     }
 
-
     private void InterfaceBindings()
     {
         Container.BindInterfacesAndSelfTo<ScoreHandler>().AsSingle();
@@ -33,6 +32,7 @@ public class GameSceneInstaller : MonoInstaller
         Container.DeclareSignal<OrderGeneratedSignal>();
         Container.DeclareSignal<OrderExpiredSignal>();
         Container.DeclareSignal<ContainerItemDespawned>();
+        Container.DeclareSignal<DisplayItemContextSignal>();
+        Container.DeclareSignal<ClearDisplayItemsSignal>();
     }
-
 }

@@ -1,18 +1,22 @@
 using UnityEngine;
 
-public abstract class BaseKitchenItem : MonoBehaviour, IPoolable
+public abstract class BaseKitchenItem : MonoBehaviour, IPoolable, IInfoProvider
 {
     private MeshFilter meshFilter;
 
     public abstract KitchenItemSO GetKitchenItemSO();
 
     public abstract UniversalPoolEntryType GetPoolType();
+
     public abstract void OnSpawn();
 
     public abstract void OnDespawn();
 
+    public abstract void GetDataInfo();
+
     public GameObject GetGameObject() => gameObject;
-    private void Start()
+
+    protected void Start()
     {
         if (meshFilter == null) { TryGetComponent(out meshFilter); }
     }

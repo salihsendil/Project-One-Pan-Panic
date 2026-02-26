@@ -9,14 +9,13 @@ public class OrderSystem : MonoBehaviour
     [Inject] private SignalBus signalBus;
     [Inject] private OrderConfigSO orderConfig;
 
-    //Debug
+    //Game State Check
     [SerializeField] private bool isGamePlaying = false;
 
     //Order List
     private int orderCounter = 0;
     private List<Order> activeOrders = new();
     private List<RecipeSO> recipes => orderConfig.RecipeList;
-
 
     //Allowed Ingredients
     private HashSet<IngredientEntry> allowedIngredientSet = new HashSet<IngredientEntry>();
@@ -86,11 +85,11 @@ public class OrderSystem : MonoBehaviour
 
     IEnumerator TrySpawnOrderPeriodically()
     {
-        while (true) //debug
+        while (true)
         {
             if (!isGamePlaying) { yield return new WaitUntil(() => isGamePlaying); }
 
-            if (orderConfig.MaxActiveOrderCount <= activeOrders.Count) { continue; }
+            if (orderConfig.MaxActiveOrderCount <= activeOrders.Count) { yield return null; }
 
             Order order = GetRandomOrder();
             activeOrders.Add(order);

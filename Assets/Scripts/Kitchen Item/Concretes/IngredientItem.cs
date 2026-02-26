@@ -1,7 +1,11 @@
 using UnityEngine;
+using Zenject;
 
 public class IngredientItem : BaseKitchenItem
 {
+    //Zenject
+    [Inject] private SignalBus signalBus;
+
     //References
     private ItemBehaviourController behaviourController;
 
@@ -19,7 +23,6 @@ public class IngredientItem : BaseKitchenItem
     private void Awake()
     {
         if (behaviourController == null) { TryGetComponent(out behaviourController); }
-        SetItemStage(ingredientItemSO.InitialStage);
     }
 
     public override bool TryGetBehaviourController(out ItemBehaviourController controller)
@@ -45,6 +48,10 @@ public class IngredientItem : BaseKitchenItem
 
     public override void OnDespawn()
     {
+    }
 
+    public override void GetDataInfo()
+    {
+        signalBus.Fire(new DisplayItemContextSignal(ingredientItemSO.Icon));
     }
 }

@@ -6,12 +6,14 @@ public class PlayerInteractor : MonoBehaviour
 {
     //Zenject
     [Inject] private InputHandler inputHandler;
+    [Inject] private SignalBus signalBus;
 
     //Ray Variables
     [SerializeField] private float rayRadius = 0.25f;
     [SerializeField] private float maxRayDistance = 1f;
     [SerializeField] private Vector3 rayOffset = new(0f, 0.75f, 0f);
 
+    private BaseCounter currentCounter;
     private CounterHighlighter currentHighlighter;
 
     //Events
@@ -34,16 +36,15 @@ public class PlayerInteractor : MonoBehaviour
     void Update()
     {
         UpdateHighlight();
+        UpdateItemInfoContext();
+
     }
 
     private void UpdateHighlight()
     {
-        Vector3 rayOrigin = transform.position + rayOffset;
-        Vector3 rayDir = transform.forward * maxRayDistance;
-        Ray ray = new(rayOrigin, rayDir);
-        if (Physics.SphereCast(ray, rayRadius, out RaycastHit hit, maxRayDistance))
+        if (TryGetInteractable(out GameObject go))
         {
-            if (hit.collider.gameObject.TryGetComponent(out CounterHighlighter newHighlighter))
+            if (go.TryGetComponent(out CounterHighlighter newHighlighter))
             {
                 if (currentHighlighter == newHighlighter) { return; }
 
@@ -55,25 +56,69 @@ public class PlayerInteractor : MonoBehaviour
             }
         }
 
-        if (currentHighlighter != null)
+        else if (currentHighlighter != null)
         {
             currentHighlighter.HighlightObject(false);
             currentHighlighter = null;
         }
     }
 
-    private Ray InteractionRay()
+    private void UpdateItemInfoContext()
     {
+
+        if (TryGetInteractable(out GameObject go))
+        {
+            if (go.TryGetComponent(out BaseCounter counter))
+            {
+                counter.TryGetItemIcon();
+            }
+        }
+
+        else
+        {
+            signalBus.Fire(new ClearDisplayItemsSignal());
+        }
+
+        //if (TryGetInteractable(out GameObject go))
+        //{
+        //    if (go.TryGetComponent(out BaseCounter counter))
+        //    {
+        //        if (currentCounter == counter) { return; }
+
+        //        currentCounter = counter;
+        //        currentCounter.TryGetItemIcon();
+        //        return;
+        //    }
+        //}
+
+        //if (currentCounter != null)
+        //{
+        //    currentCounter = null;
+        //    signalBus.Fire(new ClearDisplayItemsSignal());
+        //}
+    }
+
+    private bool TryGetInteractable(out GameObject go)
+    {
+        go = null;
+
         Vector3 rayOrigin = transform.position + rayOffset;
         Vector3 rayDir = transform.forward * maxRayDistance;
-        return new(rayOrigin, rayDir);
+        Ray ray = new(rayOrigin, rayDir);
+
+        if (Physics.SphereCast(ray, rayRadius, out RaycastHit hit, maxRayDistance))
+        {
+            go = hit.collider.gameObject;
+            return true;
+        }
+        return false;
     }
 
     private void HandleInteraction()
     {
-        if (Physics.SphereCast(InteractionRay(), rayRadius, out RaycastHit hit, maxRayDistance))
+        if (TryGetInteractable(out GameObject go))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IInteractable<PlayerCarryingController> interactable))
+            if (go.TryGetComponent(out IInteractable<PlayerCarryingController> interactable))
             {
                 OnCounterInteractionRequest?.Invoke(interactable);
             }
@@ -82,22 +127,12 @@ public class PlayerInteractor : MonoBehaviour
 
     private void HandleInteractionAlternate()
     {
-        if (Physics.SphereCast(InteractionRay(), rayRadius, out RaycastHit hit, maxRayDistance))
+        if (TryGetInteractable(out GameObject go))
         {
-            if (hit.collider.gameObject.TryGetComponent(out IInteractableAlternate interactableAlternate))
+            if (go.TryGetComponent(out IInteractableAlternate interactableAlternate))
             {
                 OnCounterInteractionAlternateRequest?.Invoke(interactableAlternate);
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        //Vector3 rayOrigin = transform.position + rayOffset;
-        //Vector3 rayDir = transform.forward * maxDistance;
-        //Debug.DrawRay(rayOrigin, rayDir, Color.red);
-        //Gizmos.DrawWireSphere(rayOrigin, rayRadius);
-        //Gizmos.DrawWireSphere(rayDir + rayOrigin, rayRadius);
-    }
-
 }

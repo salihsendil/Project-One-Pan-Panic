@@ -4,14 +4,16 @@ using Zenject;
 public class ScoreHandler : IInitializable, IDisposable
 {
     [Inject] private SignalBus signalBus;
+    [Inject] private LevelConfigSO levelConfig;
 
     private int currentScore;
 
     public void Initialize()
     {
+        SetScore(levelConfig.StartScore);
+
         signalBus.Subscribe<OrderDeliveredSignal>(AddScore);
         signalBus.Subscribe<OrderExpiredSignal>(RemoveScore);
-        SetScore(200);
     }
 
     public void Dispose()

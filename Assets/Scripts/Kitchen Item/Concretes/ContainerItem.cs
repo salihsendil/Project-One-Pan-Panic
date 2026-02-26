@@ -33,6 +33,7 @@ public class ContainerItem : BaseKitchenItem
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
 
     public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
+
     public List<IngredientItem> SpawnedItems => spawnedItems;
 
 
@@ -63,11 +64,16 @@ public class ContainerItem : BaseKitchenItem
 
     public bool TryAddIngredient(IngredientItem ingredient)
     {
-        IngredientEntry newEntry = new IngredientEntry((IngredientItemSO)ingredient.GetKitchenItemSO(), ingredient.ItemStage);
+        IngredientItemSO ingredientData = (IngredientItemSO)ingredient.GetKitchenItemSO();
+
+        Debug.Log($"TryAddIngredient called for {ingredientData.name} (stage: {ingredient.ItemStage})", this);
+
+        IngredientEntry newEntry = new IngredientEntry(ingredientData, ingredient.ItemStage);
 
         if (!orderSystem.IsIngredientAllowedOnPlate(newEntry)) { return false; }
 
         spawnedItems.Add(ingredient);
+
         ingredientEntries.Add(newEntry);
 
         SetIngredientTransform(ingredient);
@@ -95,5 +101,19 @@ public class ContainerItem : BaseKitchenItem
     {
         ingredient.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         ingredient.transform.SetParent(holdPoint);
+    }
+
+    public override void GetDataInfo()
+    {
+        if (containerState == ContainerState.Empty) { return; }
+
+        List<Sprite> icons = new();
+
+        foreach (var item in ingredientEntries)
+        {
+            icons.Add(item.IngredientItemData.Icon);
+        }
+
+        signalBus.Fire(new DisplayItemContextSignal(icons));
     }
 }

@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
     {
         timer?.Tick(deltaTime);
         int remainingInt = (int)timer.Remaining;
-        Debug.Log(timer.Remaining);
 
         if (countdownTime != remainingInt)
         {

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215e51fcc71dc6048963d1b83ee7b800, type: 3}
+  m_Name: Cloth Catalog
+  m_EditorClassIdentifier: 
+  Cloths:
+  - BodyPart: 0
+    PartCloths: {fileID: 11400000, guid: eb6596f75c44cd24fb21571c0af3cb1a, type: 2}
+  - BodyPart: 1
+    PartCloths: {fileID: 11400000, guid: f027ee362f7d8a649ba4aaa8de21720c, type: 2}
+  - BodyPart: 2
+    PartCloths: {fileID: 11400000, guid: f340efdfd7fdf6e45a5a7dd64b091ef5, type: 2}
+  - BodyPart: 3
+    PartCloths: {fileID: 11400000, guid: 0f7acbce9d9af084fb4364b14f644cb1, type: 2}
+  - BodyPart: 4
+    PartCloths: {fileID: 11400000, guid: cfb1a469725c2054b820a4cae1f9f08e, type: 2}
+  - BodyPart: 5
+    PartCloths: {fileID: 11400000, guid: 49d83e426ec290945a629b61f245e1d4, type: 2}
+  - BodyPart: 6
+    PartCloths: {fileID: 11400000, guid: be935c144ab20bd4eaccb7b67f8c5c16, type: 2}
+  - BodyPart: 7
+    PartCloths: {fileID: 11400000, guid: c499368cae47196459d3e2187c5b4587, type: 2}
+  - BodyPart: 8
+    PartCloths: {fileID: 11400000, guid: 0e0960630730f064d9e93224ffa9e398, type: 2}

@@ -1,0 +1,8 @@
+{
+  "Entries": [
+    {
+      "SaveDataType": 0,
+      "JsonData": "[\r\n  {\r\n    \"Key\": 0,\r\n    \"EquippedItem\": \"accessories_02\",\r\n    \"OwnedItems\": [\r\n      \"accessories_02\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 2,\r\n    \"EquippedItem\": \"glasses_03\",\r\n    \"OwnedItems\": [\r\n      \"glasses_03\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 4,\r\n    \"EquippedItem\": \"heads_05\",\r\n    \"OwnedItems\": [\r\n      \"heads_05\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 7,\r\n    \"EquippedItem\": \"pants_02\",\r\n    \"OwnedItems\": [\r\n      \"pants_02\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 8,\r\n    \"EquippedItem\": \"shoes_04\",\r\n    \"OwnedItems\": [\r\n      \"shoes_04\"\r\n    ]\r\n  }\r\n]"
+    }
+  ]
+}

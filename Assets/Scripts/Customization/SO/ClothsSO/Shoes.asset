@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c866fc813d21303488a2dd8a7519c880, type: 3}
+  m_Name: Shoes
+  m_EditorClassIdentifier: 
+  Cloths:
+  - BodyPart: 8
+    Id: shoes_0
+    Mesh: {fileID: -278085929633702562, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+    Cost: 0
+  - BodyPart: 8
+    Id: shoes_01
+    Mesh: {fileID: 2525575882034029105, guid: 1ce007de4fc6e4645b0ea41258fde30a, type: 3}
+    Cost: 25
+  - BodyPart: 8
+    Id: shoes_02
+    Mesh: {fileID: -1419061772662269867, guid: 20384ecd8466c804eb14b502b62acc3b, type: 3}
+    Cost: 100
+  - BodyPart: 8
+    Id: shoes_03
+    Mesh: {fileID: -5648626978545720014, guid: bfab5a5ca14002a469bd5912e025f274, type: 3}
+    Cost: 175
+  - BodyPart: 8
+    Id: shoes_04
+    Mesh: {fileID: 2990419855401034948, guid: 0fc9184e885899c408b2467848981766, type: 3}
+    Cost: 300

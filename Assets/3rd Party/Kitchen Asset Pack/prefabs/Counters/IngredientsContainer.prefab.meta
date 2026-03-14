@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9a5b1c8d71d9a164481f48dbe336c036
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/IngredientsContainer.prefab
+  uploadId: 754165

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aee9ca5a1f9093d4ebd013758a4d5b2a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/materials/Ingredients.mat
+  uploadId: 754165

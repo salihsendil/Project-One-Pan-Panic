@@ -14,14 +14,14 @@ public class CustomizationManager : MonoBehaviour
     [SerializeField] private BodyPartCatalogSO dataCatalog;
 
     //Data Mapping
-    private Dictionary<BodyPartType, List<ClothData>> catalog = new();
+    private Dictionary<BodyPartType, List<CustomizationData>> catalog = new();
     private Dictionary<BodyPartType, int> partIndices = new();
 
     //Worker Mapping
-    private Dictionary<BodyPartType, BodyPartFitter> bodyParts = new();
+    private Dictionary<BodyPartType, IBodyPartFitter> bodyParts = new();
 
     //Navigation
-    private BodyPartType currentBodyPart = BodyPartType.Accessories;
+    private BodyPartType currentBodyPart = BodyPartType.Body;
     private int previewIndex = 0;
 
     //Events
@@ -52,7 +52,7 @@ public class CustomizationManager : MonoBehaviour
 
     private void InitializeBodyParts()
     {
-        var parts = GetComponentsInChildren<BodyPartFitter>();
+        var parts = GetComponentsInChildren<IBodyPartFitter>();
 
         foreach (var part in parts)
         {
@@ -69,7 +69,7 @@ public class CustomizationManager : MonoBehaviour
         int nextIndex = GetWrappedIndex((int)currentBodyPart, step, catalog.Count);
         currentBodyPart = (BodyPartType)nextIndex;
         previewIndex = partIndices[currentBodyPart];
-
+        Debug.Log("anlik durum: " + currentBodyPart);
         OnChangeBodyPartChanged?.Invoke(currentBodyPart);
         OnChangeCloth(0);
     }
@@ -87,13 +87,12 @@ public class CustomizationManager : MonoBehaviour
         OnClothChanged?.Invoke(buttonState, cost);
     }
 
-    private void ApplyCloth(ClothData cloth)
+    private void ApplyCloth(CustomizationData data)
     {
-        Mesh newMesh = cloth.Mesh;
-        bodyParts[currentBodyPart].UpdateMesh(newMesh);
+        bodyParts[currentBodyPart].Apply(data);
     }
 
-    private void HandleButtonState(ClothData cloth, out BuyButtonState buttonState, out int? cost)
+    private void HandleButtonState(CustomizationData cloth, out BuyButtonState buttonState, out int? cost)
     {
         cost = null;
 
@@ -138,7 +137,7 @@ public class CustomizationManager : MonoBehaviour
         }
     }
 
-    private void EquipCloth(BodyPartType partType, ClothData cloth)
+    private void EquipCloth(BodyPartType partType, CustomizationData cloth)
     {
         ApplyCloth(cloth);
         wardrobe.Equip(partType, cloth.Id);

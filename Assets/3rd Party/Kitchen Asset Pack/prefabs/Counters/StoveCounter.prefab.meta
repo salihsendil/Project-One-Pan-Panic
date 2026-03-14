@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f0e6b8ee3dc2b6d4995308dbb09e89ea
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/StoveCounter.prefab
+  uploadId: 754165

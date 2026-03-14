@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 52ae8b7884652974b87e08d239927595
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/Cabbage.prefab
+  uploadId: 754165

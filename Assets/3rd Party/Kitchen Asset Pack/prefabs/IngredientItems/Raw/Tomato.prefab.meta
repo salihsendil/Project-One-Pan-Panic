@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dd2b743fa6230bb41add50b9aa4667eb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/Tomato.prefab
+  uploadId: 754165

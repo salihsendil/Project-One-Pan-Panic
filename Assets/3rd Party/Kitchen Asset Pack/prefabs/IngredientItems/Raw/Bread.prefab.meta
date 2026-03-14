@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 857d75e2f5c77b44eb9755c70f974f04
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/Bread.prefab
+  uploadId: 754165

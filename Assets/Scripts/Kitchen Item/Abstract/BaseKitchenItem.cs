@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class BaseKitchenItem : MonoBehaviour, IPoolable, IInfoProvider
 {
-    private MeshFilter meshFilter;
+    [SerializeField] private MeshFilter meshFilter;
 
     public abstract KitchenItemSO GetKitchenItemSO();
 
@@ -18,7 +18,7 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPoolable, IInfoProvider
 
     protected void Start()
     {
-        if (meshFilter == null) { TryGetComponent(out meshFilter); }
+        if (meshFilter == null) { meshFilter = GetComponentInChildren<MeshFilter>(); }
     }
 
     public void UpdateMesh(Mesh newMesh)

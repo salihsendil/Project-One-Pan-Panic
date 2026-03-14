@@ -12,6 +12,6 @@ public class BodyPartCatalogSO : ScriptableObject
 public struct CatalogData
 {
     public BodyPartType BodyPart;
-    public BodyPartClothSO PartCloths;
+    public BodyPartCustomizationSO PartCloths;
 }
 

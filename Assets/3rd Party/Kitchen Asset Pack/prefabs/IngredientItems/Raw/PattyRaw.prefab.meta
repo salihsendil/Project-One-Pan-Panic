@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ae5931a27a9ee5d4698e2da707d7d112
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/PattyRaw.prefab
+  uploadId: 754165

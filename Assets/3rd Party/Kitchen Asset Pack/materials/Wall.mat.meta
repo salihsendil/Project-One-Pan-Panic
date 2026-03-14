@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 554bb37adb56ed34aa2f1d732e02384d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/materials/Wall.mat
+  uploadId: 754165

@@ -10,6 +10,8 @@ public class SceneService : MonoBehaviour
 
     public void QuitGame()
     {
+        Debug.Log("quitting...");
+
         Application.Quit();
     }
 }

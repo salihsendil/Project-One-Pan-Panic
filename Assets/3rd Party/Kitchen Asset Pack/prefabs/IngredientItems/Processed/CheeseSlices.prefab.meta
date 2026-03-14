@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fb9531c7cc66e8546a33b96e01ec3c78
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/CheeseSlices.prefab
+  uploadId: 754165

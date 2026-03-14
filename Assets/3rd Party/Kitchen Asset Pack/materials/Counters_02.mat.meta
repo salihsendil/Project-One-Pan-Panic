@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 196174c64cacb314085496ce085424d3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/materials/Counters_02.mat
+  uploadId: 754165

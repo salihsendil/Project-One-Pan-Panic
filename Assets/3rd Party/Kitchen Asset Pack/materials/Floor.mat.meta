@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 06b72d79aa3313042a79fec92a65768a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/materials/Floor.mat
+  uploadId: 754165

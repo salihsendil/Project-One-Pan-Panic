@@ -13,7 +13,6 @@ public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
     public event Action<IItemBehaviour, ProcessRule> OnProcessComplete;
 
     public abstract ProcessType GetProcessType();
-
     public void StartProcess(ProcessRule rule)
     {
         processRule = rule;

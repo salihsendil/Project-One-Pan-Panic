@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 78e03aebf59065c408fa618166ca6282
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/DeliveryCounter.prefab
+  uploadId: 754165

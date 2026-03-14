@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215e51fcc71dc6048963d1b83ee7b800, type: 3}
+  m_Name: Customization Catalog
+  m_EditorClassIdentifier: 
+  Cloths:
+  - BodyPart: 0
+    PartCloths: {fileID: 11400000, guid: 7479b876146f05f40bb8f79d67a4bea6, type: 2}
+  - BodyPart: 1
+    PartCloths: {fileID: 11400000, guid: 3594444df7985b24da3a08f087dcfb18, type: 2}
+  - BodyPart: 2
+    PartCloths: {fileID: 11400000, guid: a4e0daa6fa341174fa7e47d2ceba5e8e, type: 2}

@@ -68,7 +68,6 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
                 currentPlayer = playerController;
                 HandleProcessState(true);
                 break;
-
             }
         }
     }

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3696dbc1150f2c64fb10d57d9a471269
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/Plate.prefab
+  uploadId: 754165

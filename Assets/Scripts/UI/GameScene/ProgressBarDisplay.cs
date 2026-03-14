@@ -13,7 +13,6 @@ public class ProgressBarDisplay : MonoBehaviour
     public void SetProgress(float duration)
     {
          slider.value = slider.maxValue = duration;
-
     }
 
     public void UpdateTimer(float remaining)

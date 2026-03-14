@@ -2,34 +2,38 @@ using UnityEngine;
 
 public class CounterHighlighter : MonoBehaviour
 {
-    private Renderer _renderer;
-    private Material _material;
+    private Material[] materials = new Material[3];
     [SerializeField] private Color originalEmission = Color.clear;
     [SerializeField] private Color highlightColor = new Color(0.1f, 0.1f, 0.1f, 0.4f);
 
     private void Awake()
     {
-        TryGetComponent(out _renderer);
-        _material = _renderer.material;
+        var renderers = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            materials[i] = renderers[i].material;
+        }
     }
 
     public void HighlightObject(bool isOn)
     {
-        if (_material == null || !_material.HasProperty("_EmissionColor"))
+        foreach (var material in materials)
         {
-            return;
-        }
+            if (material == null || !material.HasProperty("_EmissionColor"))
+            {
+                return;
+            }
 
-        if (isOn)
-        {
-            _material.EnableKeyword("_EMISSION");
-            _material.SetColor("_EmissionColor", highlightColor);
-        }
+            if (isOn)
+            {
+                material.EnableKeyword("_EMISSION");
+                material.SetColor("_EmissionColor", highlightColor);
+            }
 
-        if (!isOn)
-        {
-            _material.SetColor("_EmissionColor", originalEmission);
+            if (!isOn)
+            {
+                material.SetColor("_EmissionColor", originalEmission);
+            }
         }
-
     }
 }

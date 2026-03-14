@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 879d1959eb3b71b45b4332023d4b63ef
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/TrashCounter.prefab
+  uploadId: 754165

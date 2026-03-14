@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7910615ad5b4f4d438099ad6291f2c2c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/FryPan.prefab
+  uploadId: 754165

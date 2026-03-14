@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a5461b92de11645942a33bdfcdd701, type: 3}
+  m_Name: BodyColors
+  m_EditorClassIdentifier: 
+  Cloths:
+  - BodyPart: 0
+    Id: body_color_01
+    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    BodyColorMaterial: {fileID: 2100000, guid: 4ab96d2727fd9d24aa0fb27162ecebe4, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 150
+  - BodyPart: 0
+    Id: body_color_02
+    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    BodyColorMaterial: {fileID: 2100000, guid: e9a52ac0bed4a0d4ab5e851eb0d44cae, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 123
+  - BodyPart: 0
+    Id: body_color_03
+    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    BodyColorMaterial: {fileID: 2100000, guid: a64e0e56ce1532a4b82adb0fa29a1911, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 342

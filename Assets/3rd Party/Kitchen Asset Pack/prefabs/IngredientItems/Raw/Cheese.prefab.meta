@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f2375262b8a9c364cba55f5294e0964a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: kitchen asset pack
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 319174
+  packageName: Kitchen Game Assets
+  packageVersion: 1.2
+  assetPath: Assets/Kitchen Asset Pack/prefabs/Cheese.prefab
+  uploadId: 754165

@@ -9,6 +9,7 @@ public class LoadSceneAction : BaseUIAction
 
     public override void Execute()
     {
+        Time.timeScale = 1;
         sceneService.LoadScene(sceneToLoad);
     }
 }

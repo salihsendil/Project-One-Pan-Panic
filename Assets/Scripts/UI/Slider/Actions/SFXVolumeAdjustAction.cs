@@ -1,20 +1,26 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(UISliderHandler))]
-public class MusicVolumeAdjustAction : BaseUIAction<float>
+public class SFXVolumeAdjustAction : BaseUIAction<float>
 {
     [Inject] private GameSettingsService settingsService;
     private UISliderHandler sliderHandler;
 
     public override void Execute(float param)
     {
-        settingsService.UpdateMusicVolume(param);
+        settingsService.UpdateSfxVolume(param);
     }
 
     private void Start()
     {
         sliderHandler = GetComponent<UISliderHandler>();
-        sliderHandler.SetSliderValue(settingsService.MusicVolume);
+        if (sliderHandler == null)
+        {
+            Debug.Log("boþ" +
+                "");
+        }
+        sliderHandler.SetSliderValue(settingsService.SfxVolume);
     }
 }

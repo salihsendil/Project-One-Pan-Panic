@@ -15,6 +15,8 @@ public class SaveSystem : IInitializable
     {
         iSaveables.Add(saveable);
 
+        if (saveFile == null) { return; }
+
         foreach (var saveEntry in saveFile.Entries)
         {
             if (saveable.GetSaveDataType == saveEntry.SaveDataType)

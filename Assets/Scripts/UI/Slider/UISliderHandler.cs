@@ -17,6 +17,11 @@ public class UISliderHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHan
         uiActionsFloat = GetComponents<BaseUIAction<float>>();
     }
 
+    public void SetSliderValue(float value)
+    {
+        slider.value = value;
+    }
+
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         foreach (var actionFloat in uiActionsFloat)

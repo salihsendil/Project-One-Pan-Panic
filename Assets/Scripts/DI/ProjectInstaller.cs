@@ -6,8 +6,8 @@ public class ProjectInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<SaveSystem>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<WardrobeManager>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<GameDataService>().AsSingle().NonLazy();
-        Container.Bind<CurrencyManager>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<GameSettingsService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<CurrencyManager>().AsSingle().NonLazy();
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
 
 

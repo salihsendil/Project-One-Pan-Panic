@@ -29,7 +29,7 @@ public class CustomizationUIController : MonoBehaviour
 
     private void Start()
     {
-        CurrencyUpdate(currencyManager.CurrentMoney);
+        CurrencyUpdate(currencyManager.CurrentCurrency);
     }
 
     private void TargetBodyPartChanged(BodyPartType type)

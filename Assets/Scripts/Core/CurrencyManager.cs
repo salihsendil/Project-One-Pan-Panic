@@ -1,32 +1,67 @@
+using Newtonsoft.Json;
 using System;
+using Zenject;
 
-public class CurrencyManager
+[Serializable]
+public struct CurrencyData
 {
-    private int currentMoney = 2000;
+    public int Currency;
+}
+
+public class CurrencyManager : ISaveable, IInitializable, IDisposable
+{
+    [Inject] private SaveSystem saveSystem;
+
+    private int currentCurrency = 2000;
 
     public event Action<int> OnCurrencyChanged;
 
-    public int CurrentMoney => currentMoney;
+    public int CurrentCurrency => currentCurrency;
+
+    public SaveDataType GetSaveDataType => SaveDataType.Currency;
+
+    public void Initialize()
+    {
+        saveSystem.Register(this);
+    }
+
+    public void Dispose()
+    {
+        saveSystem.Unregister(this);
+    }
 
     public bool HasEnough(int amount)
     {
-        return currentMoney >= amount;
+        return currentCurrency >= amount;
     }
 
     public void Add(int amount)
     {
-        currentMoney += amount;
-        OnCurrencyChanged?.Invoke(currentMoney);
+        currentCurrency += amount;
+        OnCurrencyChanged?.Invoke(currentCurrency);
     }
 
     public bool TrySpend(int amount)
     {
         if (HasEnough(amount))
         {
-            currentMoney -= amount;
-            OnCurrencyChanged?.Invoke(currentMoney);
+            currentCurrency -= amount;
+            OnCurrencyChanged?.Invoke(currentCurrency);
             return true;
         }
         return false;
+    }
+
+    public string GetSaveData()
+    {
+        CurrencyData currencyData = new CurrencyData();
+        currencyData.Currency = currentCurrency;
+        return JsonConvert.SerializeObject(currencyData, Formatting.Indented);
+    }
+
+    public void LoadData(string json)
+    {
+        CurrencyData currencyData = JsonConvert.DeserializeObject<CurrencyData>(json);
+        currentCurrency = currencyData.Currency;
     }
 }

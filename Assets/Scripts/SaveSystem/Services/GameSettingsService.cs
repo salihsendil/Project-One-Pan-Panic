@@ -1,9 +1,15 @@
 using Newtonsoft.Json;
 using System;
-using UnityEngine;
 using Zenject;
 
-public class GameDataService : IInitializable, IDisposable, ISaveable
+[Serializable]
+public struct GameSettingsData
+{
+    public float MusicVolume;
+    public float SfxVolume;
+}
+
+public class GameSettingsService : IInitializable, IDisposable, ISaveable
 {
     [Inject] private SaveSystem saveSystem;
 
@@ -38,7 +44,7 @@ public class GameDataService : IInitializable, IDisposable, ISaveable
 
     public string GetSaveData()
     {
-        GameData settingsData = new();
+        GameSettingsData settingsData = new();
         settingsData.MusicVolume = musicVolume;
         settingsData.SfxVolume = sfxVolume;
         return JsonConvert.SerializeObject(settingsData, Formatting.Indented);
@@ -46,7 +52,7 @@ public class GameDataService : IInitializable, IDisposable, ISaveable
 
     public void LoadData(string json)
     {
-        GameData settingsData = JsonConvert.DeserializeObject<GameData>(json);
+        GameSettingsData settingsData = JsonConvert.DeserializeObject<GameSettingsData>(json);
         musicVolume = settingsData.MusicVolume;
         sfxVolume = settingsData.SfxVolume;
     }

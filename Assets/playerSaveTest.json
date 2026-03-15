@@ -2,7 +2,11 @@
   "Entries": [
     {
       "SaveDataType": 0,
-      "JsonData": "[\r\n  {\r\n    \"Key\": 0,\r\n    \"EquippedItem\": \"body_color_03\",\r\n    \"OwnedItems\": [\r\n      \"body_color_03\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 1,\r\n    \"EquippedItem\": \"face_02\",\r\n    \"OwnedItems\": [\r\n      \"face_02\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 2,\r\n    \"EquippedItem\": \"hat_03\",\r\n    \"OwnedItems\": [\r\n      \"hat_03\"\r\n    ]\r\n  }\r\n]"
+      "JsonData": "[\r\n  {\r\n    \"Key\": 0,\r\n    \"EquippedItem\": \"body_color_02\",\r\n    \"OwnedItems\": [\r\n      \"body_color_02\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 2,\r\n    \"EquippedItem\": \"hat_03\",\r\n    \"OwnedItems\": [\r\n      \"hat_03\"\r\n    ]\r\n  }\r\n]"
+    },
+    {
+      "SaveDataType": 2,
+      "JsonData": "{\r\n  \"MusicVolume\": 0.757694364,\r\n  \"SfxVolume\": 0.527130544,\r\n  \"Currency\": 0\r\n}"
     }
   ]
 }

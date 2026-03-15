@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class UISliderHandler : MonoBehaviour
+public class UISliderHandler : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] private Slider slider;
     private BaseUIAction[] uiActions;
@@ -16,17 +17,17 @@ public class UISliderHandler : MonoBehaviour
         uiActionsFloat = GetComponents<BaseUIAction<float>>();
     }
 
-    private void OnEnable()
+    public virtual void OnPointerUp(PointerEventData eventData)
     {
-        slider.onValueChanged.AddListener(OnValueChanged);
+        foreach (var actionFloat in uiActionsFloat)
+        {
+            if (actionFloat == null) { continue; }
+
+            actionFloat.Execute(slider.value);
+        }
     }
 
-    private void OnDisable()
-    {
-        slider.onValueChanged.RemoveListener(OnValueChanged);
-    }
-
-    private void OnValueChanged(float value)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         foreach (var action in uiActions)
         {
@@ -34,13 +35,5 @@ public class UISliderHandler : MonoBehaviour
 
             action.Execute();
         }
-
-        foreach (var actionFloat in uiActionsFloat)
-        {
-            if (actionFloat == null) { continue; }
-
-            actionFloat.Execute(value);
-        }
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿public interface IBodyPartFitter
 {
     public BodyPartType BodyPart { get; }
-    public void Apply(CustomizationData Data);
+    public void Apply(CustomizationData data);
 }

@@ -1,6 +1,6 @@
 public interface ISaveable
 {
-    public SaveDataType GetSaveDataType();
+    public SaveDataType GetSaveDataType { get; }
     public string GetSaveData();
     public void LoadData(string json);
 }

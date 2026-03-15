@@ -8,7 +8,7 @@ public class BodyMaterialFitter : MonoBehaviour, IBodyPartFitter
     private const int FACE_INDEX = 1;
 
     [SerializeField] private BodyPartType bodyPart;
-    private SkinnedMeshRenderer skinnedMesh;
+    [SerializeField] private SkinnedMeshRenderer skinnedMesh;
 
     public BodyPartType BodyPart => bodyPart;
 
@@ -19,7 +19,6 @@ public class BodyMaterialFitter : MonoBehaviour, IBodyPartFitter
 
     public void Apply(CustomizationData data)
     {
-        Debug.Log("çağrılan benim: " + bodyPart);
         var mats = skinnedMesh.materials;
 
         if (data.BodyColorMaterial != null)

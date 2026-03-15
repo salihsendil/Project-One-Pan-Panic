@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 public class WardrobeManager : ISaveable, IInitializable, IDisposable
@@ -11,6 +10,19 @@ public class WardrobeManager : ISaveable, IInitializable, IDisposable
     private Dictionary<BodyPartType, HashSet<string>> ownedCloths = new();
     private Dictionary<BodyPartType, string> equippedCloths = new();
 
+    public SaveDataType GetSaveDataType => SaveDataType.Wardrobe;
+
+    public Dictionary<BodyPartType, string> EquippedCloths { get => equippedCloths; }
+
+    public void Initialize()
+    {
+        saveSystem.Register(this);
+    }
+
+    public void Dispose()
+    {
+        saveSystem.Unregister(this);
+    }
 
     public bool HasCloth(BodyPartType bodyPart, string id)
     {
@@ -39,11 +51,6 @@ public class WardrobeManager : ISaveable, IInitializable, IDisposable
     public void Equip(BodyPartType partType, string newID)
     {
         equippedCloths[partType] = newID;
-    }
-
-    public void Test()
-    {
-        Debug.Log(ownedCloths.Count);
     }
 
     public string GetSaveData()
@@ -77,23 +84,8 @@ public class WardrobeManager : ISaveable, IInitializable, IDisposable
 
             foreach (var cloth in data.OwnedItems)
             {
-                ownedCloths[data.Key].Add(cloth); 
+                ownedCloths[data.Key].Add(cloth);
             }
         }
-    }
-
-    public void Dispose()
-    {
-        saveSystem.Unregister(this);
-    }
-
-    public void Initialize()
-    {
-        saveSystem.Register(this);
-    }
-
-    public SaveDataType GetSaveDataType()
-    {
-        return SaveDataType.Wardrobe;
     }
 }

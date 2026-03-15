@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-public enum SaveDataType { Wardrobe, Currency}
+public enum SaveDataType { Wardrobe, Currency, Settings}
 
 [Serializable]
 public class WardrobeSaveData

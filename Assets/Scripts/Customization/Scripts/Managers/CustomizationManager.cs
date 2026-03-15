@@ -32,6 +32,7 @@ public class CustomizationManager : MonoBehaviour
     {
         InitializeData();
         InitializeBodyParts();
+        InitializeCharacter();
 
         var cloth = catalog[currentBodyPart][partIndices[currentBodyPart]];
         HandleButtonState(cloth, out BuyButtonState buttonState, out int? cost);
@@ -53,10 +54,23 @@ public class CustomizationManager : MonoBehaviour
     private void InitializeBodyParts()
     {
         var parts = GetComponentsInChildren<IBodyPartFitter>();
-
         foreach (var part in parts)
         {
             bodyParts[part.BodyPart] = part;
+        }
+    }
+
+    private void InitializeCharacter()
+    {
+        var equippedCloths = wardrobe.EquippedCloths;
+        foreach (var key in equippedCloths.Keys)
+        {
+            if (catalog.TryGetValue(key, out var clothList))
+            {
+                CustomizationData data = clothList.Find(x => x.Id == equippedCloths[key]);
+                EquipCloth(key, data);
+            }
+
         }
     }
 
@@ -69,7 +83,6 @@ public class CustomizationManager : MonoBehaviour
         int nextIndex = GetWrappedIndex((int)currentBodyPart, step, catalog.Count);
         currentBodyPart = (BodyPartType)nextIndex;
         previewIndex = partIndices[currentBodyPart];
-        Debug.Log("anlik durum: " + currentBodyPart);
         OnChangeBodyPartChanged?.Invoke(currentBodyPart);
         OnChangeCloth(0);
     }
@@ -89,6 +102,7 @@ public class CustomizationManager : MonoBehaviour
 
     private void ApplyCloth(CustomizationData data)
     {
+        Debug.Log(bodyParts[currentBodyPart].BodyPart);
         bodyParts[currentBodyPart].Apply(data);
     }
 
@@ -123,6 +137,7 @@ public class CustomizationManager : MonoBehaviour
             {
                 wardrobe.Unlock(currentBodyPart, cloth.Id);
                 EquipCloth(currentBodyPart, cloth);
+                wardrobe.Equip(currentBodyPart, cloth.Id);
                 OnClothChanged?.Invoke(BuyButtonState.Equipped, null);
             }
         }
@@ -132,6 +147,7 @@ public class CustomizationManager : MonoBehaviour
             if (!wardrobe.IsEquipped(currentBodyPart, cloth.Id))
             {
                 EquipCloth(currentBodyPart, cloth);
+                wardrobe.Equip(currentBodyPart, cloth.Id);
                 OnClothChanged?.Invoke(BuyButtonState.Equipped, null);
             }
         }
@@ -139,10 +155,11 @@ public class CustomizationManager : MonoBehaviour
 
     private void EquipCloth(BodyPartType partType, CustomizationData cloth)
     {
+        currentBodyPart = partType;
         ApplyCloth(cloth);
-        wardrobe.Equip(partType, cloth.Id);
         partIndices[partType] = previewIndex;
     }
+
 
     private void Update()
     {
@@ -156,6 +173,7 @@ public class CustomizationManager : MonoBehaviour
             saveSystem.LoadData();
         }
     }
+
 
     #region Helper
     private int GetWrappedIndex(int index, int step, int count)

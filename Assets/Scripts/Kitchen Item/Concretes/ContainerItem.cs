@@ -102,18 +102,4 @@ public class ContainerItem : BaseKitchenItem
         ingredient.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         ingredient.transform.SetParent(holdPoint);
     }
-
-    public override void GetDataInfo()
-    {
-        if (containerState == ContainerState.Empty) { return; }
-
-        List<Sprite> icons = new();
-
-        foreach (var item in ingredientEntries)
-        {
-            icons.Add(item.IngredientItemData.Icon);
-        }
-
-        signalBus.Fire(new DisplayItemContextSignal(icons));
-    }
 }

@@ -12,18 +12,4 @@ public class IngredientDispenserCounter : BaseCounter
         counterModules[0] = itemInteractionModule;
         counterModules[1] = ingredientDispenserModule;
     }
-
-    public override bool TryGetItemIcon()
-    {
-        return true;
-        if (!itemSocket.HasItem()) { return false; }
-
-        if (!itemSocket.GetItem().TryGetComponent(out IInfoProvider provider))
-        {
-            return false;
-        }
-        provider.GetDataInfo();
-
-        return true;
-    }
 }

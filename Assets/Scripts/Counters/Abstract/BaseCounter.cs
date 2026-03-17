@@ -17,7 +17,4 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable<PlayerCarryingC
             }
         }
     }
-
-    public abstract bool TryGetItemIcon();
-
 }

@@ -12,17 +12,4 @@ public class HoldingCounter : BaseCounter
         TryGetComponent(out ItemInteractionModule itemInteractionModule);
         counterModules[0] = itemInteractionModule;
     }
-
-    public override bool TryGetItemIcon()
-    {
-        if (!itemSocket.HasItem()) { return false; }
-
-        if (!itemSocket.GetItem().TryGetComponent(out IInfoProvider provider))
-        {
-            return false;
-        }
-        provider.GetDataInfo();
-
-        return true;
-    }
 }

@@ -36,7 +36,6 @@ public class PlayerInteractor : MonoBehaviour
     void Update()
     {
         UpdateHighlight();
-        UpdateItemInfoContext();
 
     }
 
@@ -61,41 +60,6 @@ public class PlayerInteractor : MonoBehaviour
             currentHighlighter.HighlightObject(false);
             currentHighlighter = null;
         }
-    }
-
-    private void UpdateItemInfoContext()
-    {
-
-        if (TryGetInteractable(out GameObject go))
-        {
-            if (go.TryGetComponent(out BaseCounter counter))
-            {
-                counter.TryGetItemIcon();
-            }
-        }
-
-        else
-        {
-            signalBus.Fire(new ClearDisplayItemsSignal());
-        }
-
-        //if (TryGetInteractable(out GameObject go))
-        //{
-        //    if (go.TryGetComponent(out BaseCounter counter))
-        //    {
-        //        if (currentCounter == counter) { return; }
-
-        //        currentCounter = counter;
-        //        currentCounter.TryGetItemIcon();
-        //        return;
-        //    }
-        //}
-
-        //if (currentCounter != null)
-        //{
-        //    currentCounter = null;
-        //    signalBus.Fire(new ClearDisplayItemsSignal());
-        //}
     }
 
     private bool TryGetInteractable(out GameObject go)

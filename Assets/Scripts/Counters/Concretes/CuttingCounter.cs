@@ -82,17 +82,4 @@ public class CuttingCounter : BaseCounter, IInteractableAlternate
         controller.OnItemBehaviourProcessComplete -= HandleProcessComplete;
         HandleProcessState(false);
     }
-
-    public override bool TryGetItemIcon()
-    {
-        if (!itemSocket.HasItem()) { return false; }
-
-        if (!itemSocket.GetItem().TryGetComponent(out IInfoProvider provider))
-        {
-            return false;
-        }
-        provider.GetDataInfo();
-
-        return true;
-    }
 }

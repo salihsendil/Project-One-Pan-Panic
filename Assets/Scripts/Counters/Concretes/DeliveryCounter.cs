@@ -8,5 +8,4 @@ public class DeliveryCounter : BaseCounter
         TryGetComponent(out DeliveryModule deliveryModule);
         counterModules[0] = deliveryModule;
     }
-    public override bool TryGetItemIcon() { return false; }
 }

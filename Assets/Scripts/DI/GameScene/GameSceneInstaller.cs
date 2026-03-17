@@ -31,7 +31,5 @@ public class GameSceneInstaller : MonoInstaller
         Container.DeclareSignal<OrderGeneratedSignal>();
         Container.DeclareSignal<OrderExpiredSignal>();
         Container.DeclareSignal<ContainerItemDespawned>();
-        Container.DeclareSignal<DisplayItemContextSignal>();
-        Container.DeclareSignal<ClearDisplayItemsSignal>();
     }
 }

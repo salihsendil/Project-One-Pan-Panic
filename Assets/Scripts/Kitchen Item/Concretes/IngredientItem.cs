@@ -49,9 +49,4 @@ public class IngredientItem : BaseKitchenItem
     public override void OnDespawn()
     {
     }
-
-    public override void GetDataInfo()
-    {
-        signalBus.Fire(new DisplayItemContextSignal(ingredientItemSO.Icon));
-    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseKitchenItem : MonoBehaviour, IPoolable, IInfoProvider
+public abstract class BaseKitchenItem : MonoBehaviour, IPoolable
 {
     [SerializeField] private MeshFilter meshFilter;
 
@@ -11,8 +11,6 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPoolable, IInfoProvider
     public abstract void OnSpawn();
 
     public abstract void OnDespawn();
-
-    public abstract void GetDataInfo();
 
     public GameObject GetGameObject() => gameObject;
 

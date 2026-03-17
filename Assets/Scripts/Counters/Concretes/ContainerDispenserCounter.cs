@@ -8,5 +8,4 @@ public class ContainerDispenserCounter : BaseCounter
         TryGetComponent(out ContainerDispenserModule containerDispenserModule);
         counterModules[0] = containerDispenserModule;
     }
-    public override bool TryGetItemIcon() { return false; }
 }

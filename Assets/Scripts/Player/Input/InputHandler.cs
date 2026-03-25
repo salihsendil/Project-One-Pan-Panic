@@ -14,8 +14,9 @@ public class InputHandler : MonoBehaviour
 
     public Vector3 MovementVector { get => movementVector; }
 
-    public event Action OnInteractionButtonPressed;
-    public event Action OnInteractionAlternateButtonPressed;
+    public event Action OnInteractionStarted;
+    public event Action OnInteractionPerformed;
+    public event Action OnInteractionCanceled;
 
     private void Awake()
     {
@@ -37,11 +38,12 @@ public class InputHandler : MonoBehaviour
     private void UnlockInput()
     {
         playerInput.Enable();
-        playerInput.Movement.Move.started += Move;
-        playerInput.Movement.Move.performed += Move;
-        playerInput.Movement.Move.canceled += Move;
-        playerInput.Interactions.Interaction.performed += Interaction;
-        playerInput.Interactions.InteractionAlternate.performed += InteractionAlternate;
+        playerInput.Player.Movement.started += Move;
+        playerInput.Player.Movement.performed += Move;
+        playerInput.Player.Movement.canceled += Move;
+        playerInput.Player.Interaction.started += Interaction;
+        playerInput.Player.Interaction.performed += Interaction;
+        playerInput.Player.Interaction.canceled += Interaction;
     }
 
     private void LockInput()
@@ -49,11 +51,12 @@ public class InputHandler : MonoBehaviour
         inputVector = Vector2.zero;
         movementVector = Vector3.zero;
 
-        playerInput.Movement.Move.started -= Move;
-        playerInput.Movement.Move.performed -= Move;
-        playerInput.Movement.Move.canceled -= Move;
-        playerInput.Interactions.Interaction.performed -= Interaction;
-        playerInput.Interactions.InteractionAlternate.performed -= InteractionAlternate;
+        playerInput.Player.Movement.started -= Move;
+        playerInput.Player.Movement.performed -= Move;
+        playerInput.Player.Movement.canceled -= Move;
+        playerInput.Player.Interaction.started -= Interaction;
+        playerInput.Player.Interaction.performed -= Interaction;
+        playerInput.Player.Interaction.canceled -= Interaction;
         playerInput.Disable();
     }
 
@@ -63,14 +66,23 @@ public class InputHandler : MonoBehaviour
         movementVector = ConvertMovementVector(inputVector);
     }
 
-    private void Interaction(InputAction.CallbackContext callbackContext)
+    private void Interaction(InputAction.CallbackContext callback)
     {
-        OnInteractionButtonPressed?.Invoke();
-    }
+        if (callback.started)
+        {
+            OnInteractionStarted?.Invoke();
+        }
 
-    private void InteractionAlternate(InputAction.CallbackContext callbackContext)
-    {
-        OnInteractionAlternateButtonPressed?.Invoke();
+        else if (callback.performed)
+        {
+            OnInteractionPerformed?.Invoke();
+        }
+
+        else
+        {
+            OnInteractionCanceled?.Invoke();
+        }
+
     }
 
     private Vector3 ConvertMovementVector(Vector2 input)

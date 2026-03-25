@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IPoolable
 {
-    public GameObject GetGameObject();
-    public UniversalPoolEntryType GetPoolType();
+    public GameObject GetGameObject { get; }
+    public UniversalPoolEntryType GetPoolType { get; }
     public void OnSpawn();
     public void OnDespawn();
 }

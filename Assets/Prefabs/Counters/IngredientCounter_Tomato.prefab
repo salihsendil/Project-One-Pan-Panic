@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8651776828172604945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8651776828172604945
 Transform:
@@ -41,12 +41,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5704781690910749060}
   - component: {fileID: 3541310027441228061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5704781690910749060
 Transform:
@@ -133,12 +133,12 @@ GameObject:
   - component: {fileID: 7041123325987082407}
   - component: {fileID: 5968202143477779533}
   - component: {fileID: 6636987945394936339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientCounter_Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5707485237263648402
 Transform:
@@ -255,12 +255,12 @@ GameObject:
   - component: {fileID: 8228961671320743009}
   - component: {fileID: 751237409871534137}
   - component: {fileID: 5048785777696136429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8228961671320743009
 Transform:
@@ -342,12 +342,12 @@ GameObject:
   - component: {fileID: 5382647293646735990}
   - component: {fileID: 6097297561211037611}
   - component: {fileID: 7763857392157339538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5382647293646735990
 Transform:

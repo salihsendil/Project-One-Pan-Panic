@@ -47,7 +47,9 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
         ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.Type);
         if (item == null) { return; }
 
-        itemSocket.SetItemToOffset(item, positionOffset * containerStack.Count);
+        if (!item.TryGetComponent(out IPickable pickable)) return;
+
+        itemSocket.SetItemToOffset(pickable, positionOffset * containerStack.Count);
         containerStack.Push(item);
     }
 
@@ -55,9 +57,11 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
     {
         if (containerStack == null || containerStack.Count <= 0) { return false; }
 
-        if (player.HasItem())
+        if (player.HasItem)
         {
-            if (!itemSocket.GetItem().TryInteractWith(player.GetItem())) { return false; }
+            if (!itemSocket.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem item)) { return false; }
+            if (!player.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem playerItem)) { return false; }
+            if (!item.TryInteractWith(playerItem)) { return false; }
 
             player.RemoveItem();
             return true;
@@ -67,12 +71,14 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
         {
             if (!containerStack.TryPop(out ContainerItem containerItem)) { return false; }
 
-            player.SetItem(containerItem);
+            if (!containerItem.TryGetComponent(out IPickable pickable)) return false;
+
+            player.SetItem(pickable);
             itemSocket.RemoveItem();
 
             if (containerStack.TryPeek(out ContainerItem container))
             {
-                itemSocket.SetItemToOffset(container, positionOffset * (containerStack.Count - 1));
+                itemSocket.SetItemToOffset(pickable, positionOffset * (containerStack.Count - 1));
             }
 
             return true;

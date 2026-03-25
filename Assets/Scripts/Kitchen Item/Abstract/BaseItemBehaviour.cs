@@ -1,47 +1,34 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(ItemBehaviourController))]
 public abstract class BaseItemBehaviour : MonoBehaviour, IItemBehaviour
 {
-    private bool isPaused;
-    private IEnumerator coroutine;
-    private ProcessRule processRule;
-    private Timer processTimer = new();
+    private ProgressTracker progressTracker;
 
-    public event Action<IItemBehaviour, ProcessRule> OnProcessComplete;
-
+    public event Action OnProcessComplete;
+    
     public abstract ProcessType GetProcessType();
+
     public void StartProcess(ProcessRule rule)
     {
-        processRule = rule;
-        processTimer.Set(processRule.ProcessTime);
-        coroutine = TickProcess();
-        StartCoroutine(coroutine);
+        progressTracker.SetTarget(rule.ProcessTime);
     }
 
-    public IEnumerator TickProcess()
+    public void TickProcess(float delta)
     {
-        while (!processTimer.IsFinished())
-        {
-            if (!isPaused) { processTimer.Tick(Time.deltaTime); }
-            yield return null;
-        }
+        Debug.Log("tick " + delta);
 
-        FinishProcess();
+        progressTracker.Tick(delta);
+
+        if (progressTracker.IsFinished)
+        {
+            FinishProcess();
+        }
     }
 
     public void FinishProcess()
     {
-        StopCoroutine(coroutine);
-        coroutine = null;
-        processTimer.Reset();
-        OnProcessComplete?.Invoke(this, processRule);
-    }
-
-    public void SetProcessPause(bool pause)
-    {
-        isPaused = pause;
+        OnProcessComplete?.Invoke();
     }
 }

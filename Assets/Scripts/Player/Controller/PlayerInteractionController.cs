@@ -1,43 +1,95 @@
 using UnityEngine;
+using Zenject;
 
+[RequireComponent(typeof(PlayerCarryingController))]
 public class PlayerInteractionController : MonoBehaviour
 {
-    private PlayerController playerController;
-    private PlayerInteractor playerInteractor;
-    private PlayerCarryingController playerCarryingController;
+    //Zenject
+    [Inject] private InputHandler inputHandler;
+
+    //Ray Variables
+    [SerializeField] private float rayRadius = 0.25f;
+    [SerializeField] private float maxRayDistance = 1f;
+
+    //Raycast Settings
+    [SerializeField] private LayerMask layerMask;
+    private readonly RaycastHit[] raycastHits = new RaycastHit[1];
+
+    //Interactable
+    private IInteractable currentInteractable;
+
+    //References
+    private IInteractor interactor;
 
     private void Awake()
     {
-        TryGetComponent(out playerController);
-        TryGetComponent(out playerInteractor);
-        TryGetComponent(out playerCarryingController);
-
-        if (playerController == null) { Debug.LogWarning("Please add PlayerController.cs component"); }
-        if (playerInteractor == null) { Debug.LogWarning("Please add PlayerInteractor.cs component"); }
-        if (playerCarryingController == null) { Debug.LogWarning("Please add PlayerCarryingController.cs component"); }
-
+        interactor = GetComponent<IInteractor>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        playerInteractor.OnCounterInteractionRequest += InteractionRequestRouter;
-        playerInteractor.OnCounterInteractionAlternateRequest += InteractionAlternateRequestRouter;
+        inputHandler.OnInteractionStarted += TestInteractionStarted;
+        inputHandler.OnInteractionPerformed += TestInteractionPerformed;
+        inputHandler.OnInteractionCanceled += TestInteractionCanceled;
     }
 
     private void OnDisable()
     {
-        playerInteractor.OnCounterInteractionRequest -= InteractionRequestRouter;
-        playerInteractor.OnCounterInteractionAlternateRequest -= InteractionAlternateRequestRouter;
+        inputHandler.OnInteractionStarted -= TestInteractionStarted;
+        inputHandler.OnInteractionPerformed -= TestInteractionPerformed;
+        inputHandler.OnInteractionCanceled -= TestInteractionCanceled;
     }
 
-    private void InteractionRequestRouter(IInteractable<PlayerCarryingController> interactable)
+    private void Update()
     {
-        interactable.Interact(playerCarryingController);
+        //optimization required
+        if (TryGetInteractable(out currentInteractable)) { }
     }
 
-    private void InteractionAlternateRequestRouter(IInteractableAlternate interactableAlternate)
+    private bool TryGetInteractable(out IInteractable interactable)
     {
-        interactableAlternate.InteractAlternate(playerCarryingController, playerController);
+        interactable = null;
+
+        Vector3 rayOrigin = transform.position;
+        Vector3 rayDir = transform.forward.normalized;
+        Ray ray = new(rayOrigin, rayDir);
+
+        int hitCount = Physics.SphereCastNonAlloc(ray, rayRadius, raycastHits, maxRayDistance, layerMask, QueryTriggerInteraction.Ignore);
+
+        if (hitCount > 0)
+        {
+            RaycastHit hit = raycastHits[0];
+
+            if (hit.collider.TryGetComponent(out interactable))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
+    private void TestInteractionStarted()
+    {
+        currentInteractable?.InteractionStarted(interactor);
+    }
+
+    private void TestInteractionPerformed()
+    {
+        currentInteractable?.InteractionPerformed(interactor);
+    }
+
+    private void TestInteractionCanceled()
+    {
+        currentInteractable?.InteractionCanceled(interactor);
+        currentInteractable = null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Vector3 rayOrigin = transform.position;
+        Vector3 rayDir = transform.forward * maxRayDistance;
+        Ray ray = new(rayOrigin, rayDir);
+        Gizmos.DrawRay(ray);
+    }
 }

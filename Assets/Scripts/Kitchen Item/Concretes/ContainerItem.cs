@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class ContainerItem : BaseKitchenItem
+public class ContainerItem : BaseKitchenItem, IPoolable
 {
     //References
     [Inject] private OrderSystem orderSystem;
@@ -28,8 +28,6 @@ public class ContainerItem : BaseKitchenItem
     public RecipeSO CurrentRecipe => currentRecipe;
 
     //Pool Type
-    public override UniversalPoolEntryType GetPoolType() => containerItemSO.Type;
-
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
 
     public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
@@ -37,21 +35,26 @@ public class ContainerItem : BaseKitchenItem
     public List<IngredientItem> SpawnedItems => spawnedItems;
 
 
-    public override void OnSpawn()
+    #region Object Pooling
+    public UniversalPoolEntryType GetPoolType => containerItemSO.Type;
+
+    public  void OnSpawn()
     {
         containerState = ContainerState.Empty;
         UpdateMesh(containerItemSO.InitialMesh);
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
-    public override void OnDespawn()
+    public  void OnDespawn()
     {
         currentRecipe = null;
         PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
         spawnedItems.Clear();
         ingredientEntries.Clear();
-        signalBus.Fire(new ContainerItemDespawned(GetPoolType()));
+        signalBus.Fire(new ContainerItemDespawned(GetPoolType));
     }
+
+    #endregion
 
     public override bool TryInteractWith(BaseKitchenItem kitchenItem)
     {
@@ -102,4 +105,5 @@ public class ContainerItem : BaseKitchenItem
         ingredient.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
         ingredient.transform.SetParent(holdPoint);
     }
+
 }

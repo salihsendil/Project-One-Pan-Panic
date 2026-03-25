@@ -4,12 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(IngredientDispenserModule))]
 public class IngredientDispenserCounter : BaseCounter
 {
-    private ItemSocket itemSocket;
-    private void Awake()
+    public override void InteractionStarted(IInteractor interactor)
     {
-        TryGetComponent(out ItemInteractionModule itemInteractionModule);
-        TryGetComponent(out IngredientDispenserModule ingredientDispenserModule);
-        counterModules[0] = itemInteractionModule;
-        counterModules[1] = ingredientDispenserModule;
+        foreach (var module in instantModules)
+        {
+            if (module == null) { return; }
+
+            if (module.TryInteractionInstant(interactor))
+            {
+                break;
+            }
+        }
     }
 }

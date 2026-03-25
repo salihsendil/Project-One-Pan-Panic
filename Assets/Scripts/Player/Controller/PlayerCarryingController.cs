@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ItemSocket))]
-public class PlayerCarryingController : MonoBehaviour
+public class PlayerCarryingController : MonoBehaviour, IInteractor
 {
     private ItemSocket itemSocket;
 
@@ -10,11 +10,11 @@ public class PlayerCarryingController : MonoBehaviour
         TryGetComponent(out itemSocket);
     }
 
-    public bool HasItem() => itemSocket.HasItem();
+    public bool HasItem => itemSocket.HasItem;
 
-    public BaseKitchenItem GetItem() => itemSocket.GetItem();
+    public IPickable GetItem => itemSocket.GetItem;
 
-    public void SetItem(BaseKitchenItem obj) => itemSocket.SetItem(obj);
+    public void SetItem(IPickable obj) => itemSocket.SetItem(obj);
 
-    public BaseKitchenItem RemoveItem() => itemSocket.RemoveItem();
+    public IPickable RemoveItem() => itemSocket.RemoveItem();
 }

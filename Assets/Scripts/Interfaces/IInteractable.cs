@@ -1,5 +1,7 @@
 
-public interface IInteractable<T>
+public interface IInteractable
 {
-    public void Interact(T data);
+    public void InteractionStarted(IInteractor interactor);
+    public void InteractionPerformed(IInteractor interactor);
+    public void InteractionCanceled(IInteractor interactor);
 }

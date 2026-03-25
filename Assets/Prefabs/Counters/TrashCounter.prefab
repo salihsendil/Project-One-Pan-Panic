@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 1503416950213538483}
   - component: {fileID: 6577514909760067056}
   - component: {fileID: 7537848920311887085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrashCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1846710355148992913
 Transform:
@@ -106,12 +106,12 @@ GameObject:
   - component: {fileID: 8432961844192379727}
   - component: {fileID: 5257284215214450344}
   - component: {fileID: 8781194384005037387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrashCounter.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8432961844192379727
 Transform:

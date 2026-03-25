@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class IngredientDispenserModule : MonoBehaviour, IInteractableModule
+public class IngredientDispenserModule : MonoBehaviour, IInstantModule
 {
     //Zenject
     [Inject] private UniversalPoolManager poolManager;
@@ -9,13 +9,17 @@ public class IngredientDispenserModule : MonoBehaviour, IInteractableModule
     //Item Data
     [SerializeField] private IngredientItemSO ingredientItemSO;
 
-    public bool TryInteract(PlayerCarryingController player)
+    public bool TryInteractionInstant(IInteractor interactor)
     {
+        if (interactor.HasItem) return false;
+
         IngredientItem item = poolManager.Spawn<IngredientItem>(ingredientItemSO.Type);
 
         if (item == null) { return false; }
 
-        player.SetItem(item);
+        if (!item.TryGetComponent(out IPickable pickable)) return false;
+
+        interactor.SetItem(pickable);
 
         return true;
     }

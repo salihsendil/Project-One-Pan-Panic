@@ -7,7 +7,7 @@ public class MeshCombinerTool : EditorWindow
 {
     [Header("Combine Items")]
     [Tooltip("Add items want to combine mesh.")]
-    [SerializeField] private List<GameObject> gameObjects = new List<GameObject>();
+    [SerializeField] private List<UnityEngine.GameObject> gameObjects = new List<UnityEngine.GameObject>();
     [SerializeField] private List<MeshFilter> meshFilters = new List<MeshFilter>();
     [SerializeField] private Vector2 scrollPos;
     [SerializeField] private bool isIncludeInactive;
@@ -32,7 +32,7 @@ public class MeshCombinerTool : EditorWindow
         for (int i = 0; i < gameObjects.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
-            gameObjects[i] = (GameObject)EditorGUILayout.ObjectField(gameObjects[i], typeof(GameObject), true);
+            gameObjects[i] = (UnityEngine.GameObject)EditorGUILayout.ObjectField(gameObjects[i], typeof(UnityEngine.GameObject), true);
             if (GUILayout.Button("Sil", GUILayout.Width(40)))
             {
                 gameObjects.RemoveAt(i);
@@ -110,8 +110,8 @@ public class MeshCombinerTool : EditorWindow
         combinedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32; // Büyük mesh'ler için
         combinedMesh.CombineMeshes(combine.ToArray());
 
-        
-        GameObject combinedObject = new GameObject("Combined Mesh");
+
+        UnityEngine.GameObject combinedObject = new UnityEngine.GameObject("Combined Mesh");
         MeshFilter mfCombined = combinedObject.AddComponent<MeshFilter>();
         MeshRenderer mrCombined = combinedObject.AddComponent<MeshRenderer>();
 

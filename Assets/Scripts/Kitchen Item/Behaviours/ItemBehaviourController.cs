@@ -8,26 +8,28 @@ public class ItemBehaviourController : MonoBehaviour
     //References
     private IngredientItem ingredientItem;
 
-    //Stages
-    private WorkStage workStage = WorkStage.Idle;
-
     //Data-Lookup
-    private Dictionary<ProcessType, IItemBehaviour> behavioursDict = new();
     private Dictionary<(ProcessType, ItemStage), ProcessRule> ruleMap = new();
 
-    //Getter
-    public WorkStage WorkStage => workStage;
+    //Process
+    private ProgressTracker progressTracker = new();
+    private ProcessRule currentProcess;
+
+    public ProgressTracker ProgressTracker { get => progressTracker; }
 
     //Events
-    public event Action<ItemBehaviourController> OnItemBehaviourProcessComplete;
+
+    public event Action OnProcessComplete;
 
     private void Awake()
     {
-        TryGetComponent(out ingredientItem);
+        ingredientItem = GetComponent<IngredientItem>();
 
         InitializeProcessRules();
-        InitializeBehaviours();
     }
+
+    #region Initialize Data Lookup
+
     private void InitializeProcessRules()
     {
         var data = ingredientItem.GetKitchenItemSO() as IngredientItemSO;
@@ -38,76 +40,46 @@ public class ItemBehaviourController : MonoBehaviour
         }
     }
 
-    private void InitializeBehaviours()
+    #endregion
+
+    public bool CanProcess(ProcessType processType)
     {
-        var list = GetComponents<IItemBehaviour>();
-        foreach (var item in list)
+        if (ruleMap.TryGetValue((processType, ingredientItem.ItemStage), out currentProcess))
         {
-            behavioursDict.TryAdd(item.GetProcessType(), item);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void HandleStartBehaviour()
+    {
+        if (!progressTracker.IsFinished) return;
+
+        if (currentProcess == null) return;
+
+        progressTracker.SetTarget(currentProcess.ProcessTime);
+    }
+
+    public void HandleTickBehaviour(float deltaTime)
+    {
+        progressTracker.Tick(deltaTime);
+
+        Debug.Log("progress ratio " + progressTracker.ProgressRatio);
+
+        if (progressTracker.IsFinished)
+        {
+            HandleFinishBehaviour();
         }
     }
 
-    public bool CanProcess(ProcessType type)
+    public void HandleFinishBehaviour()
     {
-        return ruleMap.ContainsKey((type, ingredientItem.ItemStage)) && behavioursDict.ContainsKey(type);
+        OnProcessComplete?.Invoke();
+        progressTracker.Reset();
+        ingredientItem.SetItemStage(currentProcess.ToStage);
+        ingredientItem.UpdateMesh(currentProcess.OutputMesh);
+
     }
 
-    public void HandleProcessStart(ProcessType processType)
-    {
-        if (!ruleMap.TryGetValue((processType, ingredientItem.ItemStage), out ProcessRule rule)) { return; }
-
-        if (!behavioursDict.TryGetValue(processType, out IItemBehaviour behaviour)) { return; }
-
-        workStage = WorkStage.Processing;
-
-        behaviour.OnProcessComplete += HandleProcessComplete;
-
-        behaviour.StartProcess(rule);
-    }
-
-    private void HandleProcessComplete(IItemBehaviour behaviour, ProcessRule rule)
-    {
-        behaviour.OnProcessComplete -= HandleProcessComplete;
-
-        ingredientItem.SetItemStage(rule.ToStage);
-
-        workStage = WorkStage.Idle;
-
-        ingredientItem.UpdateMesh(rule.OutputMesh);
-
-        OnItemBehaviourProcessComplete?.Invoke(this);
-    }
-
-    public void HandlePauseProcess(ProcessType processType)
-    {
-        if (!TryGetBehaviour(processType, out IItemBehaviour behaviour)) { return; }
-
-        behaviour.OnProcessComplete -= HandleProcessComplete;
-
-        behaviour.SetProcessPause(true);
-
-        workStage = WorkStage.Paused;
-    }
-
-    public void HandleResumeProcess(ProcessType processType)
-    {
-        if (!TryGetBehaviour(processType, out IItemBehaviour behaviour)) { return; }
-
-        behaviour.OnProcessComplete += HandleProcessComplete;
-
-        behaviour.SetProcessPause(false);
-
-        workStage = WorkStage.Processing;
-    }
-
-    private bool TryGetBehaviour(ProcessType processType, out IItemBehaviour behaviour)
-    {
-        behaviour = null;
-
-        if (!CanProcess(processType)) { return false; }
-
-        if (!behavioursDict.TryGetValue(processType, out behaviour)) { return false; }
-
-        return true;
-    }
 }

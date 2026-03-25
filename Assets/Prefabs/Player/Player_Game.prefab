@@ -70,16 +70,13 @@ PrefabInstance:
       addedObject: {fileID: 6872810657441283326}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9019701488925638707}
-    - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7911075864572784990}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1540595403411306972}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4740268910362248211}
+      addedObject: {fileID: 6110529397392012348}
   m_SourcePrefab: {fileID: 100100000, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
 --- !u!4 &5279158653088390970 stripped
 Transform:
@@ -167,21 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b8cdd3753de7541b2e01e6e0e97289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9019701488925638707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6746491010090134044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e0468ae3471804fb477cad972ceb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayRadius: 0.25
-  maxRayDistance: 1
-  rayOffset: {x: 0, y: 0.75, z: 0}
 --- !u!114 &7911075864572784990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd80585e13364f4b82ab95394390ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4740268910362248211
+--- !u!114 &6110529397392012348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,6 +199,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6746491010090134044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b516ccee4a99614e94df2d1bbcc3850, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f281a4e36daff64989c9bc07e85cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayRadius: 0.25
+  maxRayDistance: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64

@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 
 public interface IItemBehaviour
 {
-    public event Action<IItemBehaviour, ProcessRule> OnProcessComplete;
+    public event Action OnProcessComplete;
     public ProcessType GetProcessType();
     public void StartProcess(ProcessRule rule);
-    public IEnumerator TickProcess();
+    public void TickProcess(float delta);
     public void FinishProcess();
-    public void SetProcessPause(bool pause);
 }

@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8297810330708832067}
   - component: {fileID: 1351592636228628209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8297810330708832067
 Transform:
@@ -96,12 +96,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3252618660783647555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3252618660783647555
 Transform:
@@ -133,12 +133,12 @@ GameObject:
   - component: {fileID: 7921686491376052674}
   - component: {fileID: 7622895720282886263}
   - component: {fileID: 1830988269544223799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientCounter_Lettuce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4637678648932361002
 Transform:
@@ -255,12 +255,12 @@ GameObject:
   - component: {fileID: 2843670371236633871}
   - component: {fileID: 3801298816068442128}
   - component: {fileID: 162827253478058852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2843670371236633871
 Transform:
@@ -342,12 +342,12 @@ GameObject:
   - component: {fileID: 5878098104922543004}
   - component: {fileID: 6519993730805179534}
   - component: {fileID: 4479158368450223207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsContainer.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5878098104922543004
 Transform:

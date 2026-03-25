@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3310818608001827729}
   - component: {fileID: 3291469335889716022}
   - component: {fileID: 3755848360262342262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DeliveryCounter.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3310818608001827729
 Transform:
@@ -99,12 +99,12 @@ GameObject:
   - component: {fileID: 3283685618602531184}
   - component: {fileID: 3071111062903073883}
   - component: {fileID: 2331393642495319048}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DeliveryCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3763726217464119454
 Transform:
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8021866608194949495}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1

@@ -1,20 +1,43 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CounterHighlighter))]
-public abstract class BaseCounter : MonoBehaviour, IInteractable<PlayerCarryingController>
+public abstract class BaseCounter : MonoBehaviour, IInteractable
 {
-    protected IInteractableModule[] counterModules = new IInteractableModule[2];
+    protected IInstantModule[] instantModules = new IInstantModule[3];
+    protected IHoldModule[] holdModules = new IHoldModule[2];
 
-    public virtual void Interact(PlayerCarryingController player)
+    protected virtual void Awake()
     {
-        foreach (var module in counterModules)
-        {
-            if (module == null) { continue; }
+        instantModules = GetComponents<IInstantModule>();
+        holdModules = GetComponents<IHoldModule>();
+    }
 
-            if (module.TryInteract(player))
-            {
-                break;
-            }
+    public virtual void InteractionStarted(IInteractor interactor)
+    {
+        foreach (var module in instantModules)
+        {
+            module?.TryInteractionInstant(interactor);
+        }
+
+        foreach (var module in holdModules)
+        {
+            module?.OnInteractionStarted();
+        }
+    }
+
+    public virtual void InteractionPerformed(IInteractor interactor)
+    {
+        foreach (var module in holdModules)
+        {
+            module?.OnInteractionPerformed();
+        }
+    }
+
+    public virtual void InteractionCanceled(IInteractor interactor)
+    {
+        foreach (var module in holdModules)
+        {
+            module?.OnInteractionCanceled();
         }
     }
 }

@@ -1,48 +1,45 @@
 using UnityEngine;
 
-public class ItemInteractionModule : MonoBehaviour, IInteractableModule
+[RequireComponent(typeof(ItemSocket))]
+public class ItemInteractionModule : MonoBehaviour, IInstantModule
 {
     private ItemSocket itemSocket;
 
-    private void Start()
+    private void Awake()
     {
-        TryGetComponent(out itemSocket);
+        itemSocket = GetComponent<ItemSocket>();
     }
 
-    public bool TryInteract(PlayerCarryingController player)
+    public bool TryInteractionInstant(IInteractor interactor)
     {
-        var item = itemSocket.GetItem();
-        bool hasItem = item != null;
-        bool playerHasItem = player.HasItem();
 
-        if (!hasItem)
+        if (interactor.HasItem && !interactor.GetItem.IsPickable)
         {
-            if (!playerHasItem) { return false; }
-
-            itemSocket.SetItem(player.RemoveItem());
-            return true;
+            return false;
         }
 
-        else if (hasItem)
+        if (itemSocket.HasItem && !itemSocket.GetItem.IsPickable)
         {
-            if (!player.HasItem()) { player.SetItem(itemSocket.RemoveItem()); return true; }
+            return false;
+        }
 
-            else
+        else if (!interactor.HasItem)
+        {
+            if (itemSocket.HasItem)
             {
-                if (item.TryInteractWith(player.GetItem()))
-                {
-                    player.RemoveItem();
-                    return true;
-                }
-
-                else if (player.GetItem().TryInteractWith(item))
-                {
-                    itemSocket.RemoveItem();
-                    return true;
-                }
+                interactor.SetItem(itemSocket.RemoveItem());
+                return true;
             }
         }
 
+        else if (!itemSocket.HasItem)
+        {
+            if (interactor.HasItem)
+            {
+                itemSocket.SetItem(interactor.RemoveItem());
+                return true;
+            }
+        }
         return false;
     }
 }

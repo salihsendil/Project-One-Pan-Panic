@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3574297166047847790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8313192147794075854}
   - component: {fileID: 3744456609234324640}
   - component: {fileID: 8518885844068967635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatesCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3519352431328659862}
   - component: {fileID: 9136074754700802042}
   - component: {fileID: 1226220081149173541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatesCounter.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 1091862540272616452}
   - component: {fileID: 1508519082919282103}
   - component: {fileID: 4450815713022032791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatesCounter.PlateHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

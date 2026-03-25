@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2816542781608890634
 Transform:
@@ -97,12 +97,12 @@ GameObject:
   - component: {fileID: 2790736683909000442}
   - component: {fileID: 5955033155452740958}
   - component: {fileID: 7180826918400292731}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CuttingCounter.CuttingBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2790736683909000442
 Transform:
@@ -183,12 +183,12 @@ GameObject:
   - component: {fileID: 7398358326200414907}
   - component: {fileID: 9125453792033087810}
   - component: {fileID: 1119520941032964733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CuttingCounter.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7398358326200414907
 Transform:
@@ -275,12 +275,12 @@ GameObject:
   - component: {fileID: 2924461331859110136}
   - component: {fileID: 287397763060826926}
   - component: {fileID: 7494911231739926227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CuttingCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &14278235211243807
 Transform:
@@ -429,12 +429,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7427782051595380051}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7427782051595380051
 Transform:

@@ -3,7 +3,7 @@ public class Timer
     public float Duration;
     public float Remaining;
 
-    public bool IsFinished() => Remaining <= 0f;
+    public bool IsFinished => Remaining <= 0;
 
     public void Set(float duration)
     {

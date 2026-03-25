@@ -16,19 +16,10 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
     [SerializeField] private ProgressBarDisplay progressBar;
 
 
-    public GameObject GetGameObject() => gameObject;
+    #region Object Pooling
 
-    public UniversalPoolEntryType GetPoolType() => UniversalPoolEntryType.OrderCardView;
-
-    private void OnEnable()
-    {
-        isCardVisible = true;
-    }
-
-    private void OnDisable()
-    {
-        isCardVisible = false;
-    }
+    public GameObject GetGameObject => gameObject;
+    public UniversalPoolEntryType GetPoolType => UniversalPoolEntryType.OrderCardView;
 
     public void OnSpawn()
     {
@@ -41,6 +32,18 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
     public void OnDespawn()
     {
         currentOrder = null;
+    }
+
+    #endregion
+
+    private void OnEnable()
+    {
+        isCardVisible = true;
+    }
+
+    private void OnDisable()
+    {
+        isCardVisible = false;
     }
 
     private void Update()

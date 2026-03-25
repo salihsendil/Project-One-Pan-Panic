@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             signalBus.Fire(new CountdownTickSignal(remainingInt));
         }
 
-        if (timer.IsFinished())
+        if (timer.IsFinished)
         {
             timer.Reset();
             timer.Set(gameTime);
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             signalBus.Fire(new LevelTimerTickSignal(remainingInt));
         }
 
-        if (timer.IsFinished())
+        if (timer.IsFinished)
         {
             timer.Reset();
             gameplayPhase = GameplayPhase.Finish;

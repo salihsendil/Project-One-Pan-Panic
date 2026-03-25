@@ -1,25 +1,25 @@
 using UnityEngine;
 using Zenject;
 
-public class DeliveryModule : MonoBehaviour, IInteractableModule
+public class DeliveryModule : MonoBehaviour, IInstantModule
 {
     //References
     [Inject] private OrderSystem orderSystem;
     [Inject] private UniversalPoolManager poolManager;
     [Inject] private SignalBus signalBus;
 
-    public bool TryInteract(PlayerCarryingController player)
+    public bool TryInteractionInstant(IInteractor interactor)
     {
-        if (!player.HasItem()) { return false; }
+        if (!interactor.HasItem) { return false; }
 
-        if (player.GetItem() is not ContainerItem containerItem) { return false; }
+        if (interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) { return false; }
 
         if (containerItem.IsPlateReadyToServe())
         {
             if (orderSystem.TryCompleteOrder(containerItem.CurrentRecipe, out Order order))
             {
                 signalBus.Fire(new OrderDeliveredSignal(order));
-                PoolItemCleaner.RestoreAndReturn(player.RemoveItem(), poolManager);
+                PoolItemCleaner.RestoreAndReturn(containerItem, poolManager);
                 return true;
             }
             Debug.LogError("It's not ordered!");

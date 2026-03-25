@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 6446521250497566823}
   - component: {fileID: 1643693261554002064}
   - component: {fileID: 7105761484779665784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HolderCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8885302263306583109
 Transform:
@@ -122,12 +122,12 @@ GameObject:
   - component: {fileID: 5502304253429765658}
   - component: {fileID: 2082714535929567771}
   - component: {fileID: 6812785447538462729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClearCounter.Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5502304253429765658
 Transform:
@@ -206,12 +206,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8664722582442867473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8664722582442867473
 Transform:

@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public abstract class BaseKitchenItem : MonoBehaviour, IPoolable
+public abstract class BaseKitchenItem : MonoBehaviour, IPickable
 {
     [SerializeField] private MeshFilter meshFilter;
+    private bool canPickable = true;
+
+    public Transform Transform => transform;
+
+    public GameObject GetGameObject => gameObject;
+
+    public virtual bool IsPickable { get => canPickable; set => canPickable = value; }
 
     public abstract KitchenItemSO GetKitchenItemSO();
-
-    public abstract UniversalPoolEntryType GetPoolType();
-
-    public abstract void OnSpawn();
-
-    public abstract void OnDespawn();
-
-    public GameObject GetGameObject() => gameObject;
 
     protected void Start()
     {
@@ -25,12 +24,6 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPoolable
         {
             meshFilter.mesh = newMesh;
         }
-    }
-
-    public virtual bool TryGetBehaviourController(out ItemBehaviourController controller)
-    {
-        controller = null;
-        return false;
     }
 
     public virtual bool TryInteractWith(BaseKitchenItem kitchenItem)

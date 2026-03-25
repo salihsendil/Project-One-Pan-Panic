@@ -1,28 +1,40 @@
 using UnityEngine;
 
-public class ItemSocket : MonoBehaviour, IItemCarrier
+public class ItemSocket : MonoBehaviour
 {
     [SerializeField] private Transform holdPoint;
-    [SerializeField] private BaseKitchenItem currentItem;
+    [SerializeField] private GameObject currentItemTest;
+    [SerializeField] private IPickable currentItem;
 
-    public bool HasItem() => currentItem != null;
-    public BaseKitchenItem GetItem() { return currentItem; }
+    public bool HasItem => currentItem != null;
+    public IPickable GetItem => currentItem;
 
-    public void SetItem(BaseKitchenItem kitchenItem)
+    private void Start()
+    {
+        if (currentItemTest != null)
+        {
+            if (currentItemTest.TryGetComponent(out IPickable pickable))
+            {
+                SetItem(pickable);
+            }
+        }
+    }
+
+    public void SetItem(IPickable kitchenItem)
     {
         SetItemToOffset(kitchenItem, Vector3.zero);
     }
 
-    public void SetItemToOffset(BaseKitchenItem kitchenItem, Vector3 offset)
+    public void SetItemToOffset(IPickable kitchenItem, Vector3 offset)
     {
         currentItem = kitchenItem;
-        currentItem.transform.SetParent(holdPoint);
-        currentItem.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
-        currentItem.transform.localPosition += offset;
-        currentItem.transform.localRotation = Quaternion.identity;
+        currentItem.Transform.SetParent(holdPoint);
+        currentItem.Transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
+        currentItem.Transform.localPosition += offset;
+        currentItem.Transform.localRotation = Quaternion.identity;
     }
 
-    public BaseKitchenItem RemoveItem()
+    public IPickable RemoveItem()
     {
         var tempItem = currentItem;
         currentItem = null;

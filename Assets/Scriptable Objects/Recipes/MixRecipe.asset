@@ -25,4 +25,4 @@ MonoBehaviour:
   - IngredientItemData: {fileID: 11400000, guid: 84537cbe8e52a9648a2e9e1945fc3c10, type: 2}
     RequiredStage: 2
   - IngredientItemData: {fileID: 11400000, guid: 16193c3989e003f4fb441846338fffe7, type: 2}
-    RequiredStage: 2
+    RequiredStage: 1

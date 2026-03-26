@@ -32,8 +32,8 @@ public class ItemBehaviourController : MonoBehaviour
 
     private void InitializeProcessRules()
     {
-        var data = ingredientItem.GetKitchenItemSO() as IngredientItemSO;
-        if (data.ProcessRules.Count <= 0) { return; }
+        var data = ingredientItem.GetItemData();
+        if ( data.ProcessRules.Count <= 0) { return; }
         foreach (var rule in data.ProcessRules)
         {
             ruleMap.TryAdd((rule.ProcessType, rule.FromStage), rule);
@@ -65,7 +65,7 @@ public class ItemBehaviourController : MonoBehaviour
     {
         progressTracker.Tick(deltaTime);
 
-        Debug.Log("progress ratio " + progressTracker.ProgressRatio);
+        //Debug.Log("progress ratio " + progressTracker.ProgressRatio);
 
         if (progressTracker.IsFinished)
         {

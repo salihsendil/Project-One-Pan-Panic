@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86f536d492f8154382402a68d18e2d8, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
-  KitchenItemName: white-plate_empty_01
-  Type: 20
-  Prefab: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
+  KitchenItemName: white-plate-empty-01
+  PoolType: 20
+  Prefab: {fileID: 7876499546485564982, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
   InitialMesh: {fileID: 3736213754101489272, guid: f920fa8dc37a67541b6732134ea60f71, type: 3}
   InitialStage: 0

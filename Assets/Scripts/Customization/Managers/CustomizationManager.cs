@@ -160,21 +160,6 @@ public class CustomizationManager : MonoBehaviour
         partIndices[partType] = previewIndex;
     }
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            saveSystem.SaveData();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            saveSystem.LoadData();
-        }
-    }
-
-
     #region Helper
     private int GetWrappedIndex(int index, int step, int count)
     {

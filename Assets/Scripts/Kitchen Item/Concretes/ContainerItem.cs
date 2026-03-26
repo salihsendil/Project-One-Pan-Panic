@@ -30,13 +30,11 @@ public class ContainerItem : BaseKitchenItem, IPoolable
     //Pool Type
     public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
 
-    public override KitchenItemSO GetKitchenItemSO() => containerItemSO;
-
-    public List<IngredientItem> SpawnedItems => spawnedItems;
+    public ContainerItemSO GetKitchenItemSO() => containerItemSO;
 
 
     #region Object Pooling
-    public UniversalPoolEntryType GetPoolType => containerItemSO.Type;
+    public UniversalPoolEntryType GetPoolType => containerItemSO.PoolType;
 
     public  void OnSpawn()
     {
@@ -67,7 +65,7 @@ public class ContainerItem : BaseKitchenItem, IPoolable
 
     public bool TryAddIngredient(IngredientItem ingredient)
     {
-        IngredientItemSO ingredientData = (IngredientItemSO)ingredient.GetKitchenItemSO();
+        IngredientItemSO ingredientData = ingredient.GetItemData();
 
         Debug.Log($"TryAddIngredient called for {ingredientData.name} (stage: {ingredient.ItemStage})", this);
 

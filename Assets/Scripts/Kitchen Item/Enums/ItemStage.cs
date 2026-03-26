@@ -2,8 +2,8 @@
 public enum ItemStage
 {
     Raw,
-    Cut,
+    Chopped,
     Cooked,
-    Burned,
-    Ready
+    Burnt,
+    Instant
 }

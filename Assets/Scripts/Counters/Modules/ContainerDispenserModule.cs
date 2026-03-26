@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(ItemSocket))]
-public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
+public class ContainerDispenserModule : MonoBehaviour/*, IInteractableModule*/
 {
     //Zenject
     [Inject] private UniversalPoolManager poolManager;
@@ -44,7 +44,7 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
     {
         await Task.Delay(respawnDelay);
 
-        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.Type);
+        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.PoolType);
         if (item == null) { return; }
 
         if (!item.TryGetComponent(out IPickable pickable)) return;
@@ -53,17 +53,17 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
         containerStack.Push(item);
     }
 
-    public bool TryInteract(PlayerCarryingController player)
+    public bool TryInteract(IInteractor interactor)
     {
         if (containerStack == null || containerStack.Count <= 0) { return false; }
 
-        if (player.HasItem)
+        if (interactor.HasItem)
         {
             if (!itemSocket.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem item)) { return false; }
-            if (!player.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem playerItem)) { return false; }
+            if (!interactor.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem playerItem)) { return false; }
             if (!item.TryInteractWith(playerItem)) { return false; }
 
-            player.RemoveItem();
+            interactor.RemoveItem();
             return true;
         }
 
@@ -73,7 +73,7 @@ public class ContainerDispenserModule : MonoBehaviour, IInteractableModule
 
             if (!containerItem.TryGetComponent(out IPickable pickable)) return false;
 
-            player.SetItem(pickable);
+            interactor.SetItem(pickable);
             itemSocket.RemoveItem();
 
             if (containerStack.TryPeek(out ContainerItem container))

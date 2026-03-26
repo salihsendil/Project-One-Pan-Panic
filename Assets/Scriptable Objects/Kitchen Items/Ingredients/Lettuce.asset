@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212b1904562bbcb49b54d9c2d67f57cc, type: 3}
   m_Name: Lettuce
   m_EditorClassIdentifier: 
-  KitchenItemName: lettuce_raw_01
-  Type: 6
-  Prefab: {fileID: 0}
+  Name: lettuce-raw-01
   InitialMesh: {fileID: -1258277815187534484, guid: 6bd3c48b7856cb440b1f6ccbc925c560, type: 3}
-  IngredientID: 1
-  Icon: {fileID: 21300000, guid: 67ef830dbf6a0fe4d939cc2bd79677e7, type: 3}
   InitialStage: 0
+  Icon: {fileID: 21300000, guid: 67ef830dbf6a0fe4d939cc2bd79677e7, type: 3}
+  Prefab: {fileID: 7301802289305275674, guid: 1d6ab98013f008647afb89524555b39e, type: 3}
+  PoolType: 6
   ProcessRules:
   - ProcessType: 1
     FromStage: 0

@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class CookingModule : MonoBehaviour, IInstantModule
 {
-    private ProcessType processType = ProcessType.Cut;
-    private float processSpeed = 1f;
 
-    private ProcessType[] processTypes = { ProcessType.Cook, ProcessType.Burn };
+    private ProcessType[] processTypes = { ProcessType.Cook };
+    private float processSpeed = 1f;
 
     public bool TryInteractionInstant(IInteractor interactor)
     {

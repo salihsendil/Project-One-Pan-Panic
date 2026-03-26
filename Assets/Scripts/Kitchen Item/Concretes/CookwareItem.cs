@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class CookwareItem : MonoBehaviour
+public class CookwareItem : BaseKitchenItem, IContainer, ICookware
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool AddIngredient(IngredientItem ingredient)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CanAddIngredient(IngredientItem ingredient)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public void Tick(float delta)
+    {
+        throw new System.NotImplementedException();
     }
 }

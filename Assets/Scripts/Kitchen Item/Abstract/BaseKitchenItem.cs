@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class BaseKitchenItem : MonoBehaviour, IPickable
 {
-    [SerializeField] private MeshFilter meshFilter;
+    private MeshFilter meshFilter;
     private bool canPickable = true;
 
     public Transform Transform => transform;
@@ -10,8 +10,6 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPickable
     public GameObject GetGameObject => gameObject;
 
     public virtual bool IsPickable { get => canPickable; set => canPickable = value; }
-
-    public abstract KitchenItemSO GetKitchenItemSO();
 
     protected void Start()
     {

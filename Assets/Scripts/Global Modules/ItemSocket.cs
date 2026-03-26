@@ -1,24 +1,12 @@
 using UnityEngine;
 
-public class ItemSocket : MonoBehaviour
+public class ItemSocket : MonoBehaviour, IInteractor
 {
     [SerializeField] private Transform holdPoint;
-    [SerializeField] private GameObject currentItemTest;
     [SerializeField] private IPickable currentItem;
 
     public bool HasItem => currentItem != null;
     public IPickable GetItem => currentItem;
-
-    private void Start()
-    {
-        if (currentItemTest != null)
-        {
-            if (currentItemTest.TryGetComponent(out IPickable pickable))
-            {
-                SetItem(pickable);
-            }
-        }
-    }
 
     public void SetItem(IPickable kitchenItem)
     {

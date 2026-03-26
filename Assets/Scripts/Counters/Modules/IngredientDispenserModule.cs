@@ -13,13 +13,11 @@ public class IngredientDispenserModule : MonoBehaviour, IInstantModule
     {
         if (interactor.HasItem) return false;
 
-        IngredientItem item = poolManager.Spawn<IngredientItem>(ingredientItemSO.Type);
+        IngredientItem item = poolManager.Spawn<IngredientItem>(ingredientItemSO.PoolType);
 
         if (item == null) { return false; }
 
-        if (!item.TryGetComponent(out IPickable pickable)) return false;
-
-        interactor.SetItem(pickable);
+        interactor.SetItem(item);
 
         return true;
     }

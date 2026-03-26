@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 8651776828172604945}
-  currentItem: {fileID: 0}
+  currentItemTest: {fileID: 0}
 --- !u!1 &7056116285432202313
 GameObject:
   m_ObjectHideFlags: 0

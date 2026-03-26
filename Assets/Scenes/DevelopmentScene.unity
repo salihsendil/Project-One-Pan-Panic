@@ -697,9 +697,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -755,9 +755,9 @@ MonoBehaviour:
   m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
+  m_isRichText: 0
+  m_EmojiFallbackSupport: 0
+  m_parseCtrlCharacters: 0
   m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
+  m_useMaxVisibleDescender: 0
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
@@ -4821,11 +4821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 947907878}
---- !u!1 &960596993 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7876499546485564982, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-  m_PrefabInstance: {fileID: 1041079872}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &966391962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5190,30 +5185,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plate
       objectReference: {fileID: 0}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: containerState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: ingredientEntries.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: ingredientEntries.Array.data[0].RequiredStage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: ingredientEntries.Array.data[1].RequiredStage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: ingredientEntries.Array.data[0].IngredientItemData
-      value: 
-      objectReference: {fileID: 11400000, guid: 16193c3989e003f4fb441846338fffe7, type: 2}
-    - target: {fileID: 9178280411022145836, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
-      propertyPath: ingredientEntries.Array.data[1].IngredientItemData
-      value: 
-      objectReference: {fileID: 11400000, guid: ca83e7dd17121cf4ea1915fb09f59dbc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5271,10 +5242,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingCounter
       objectReference: {fileID: 0}
-    - target: {fileID: 7494911231739926227, guid: 49eb2ce575479dc41b4e3709af8891e1, type: 3}
-      propertyPath: currentItemTest
-      value: 
-      objectReference: {fileID: 960596993}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6683,6 +6650,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6004112781504693675, guid: e50a4444a4d8d834eba8461d2c1d72eb, type: 3}
   m_PrefabInstance: {fileID: 1511179810}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1520972168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1356904857024455834, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_Name
+      value: Tomato
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1458175
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09694344
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.0277154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433138412958510167, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
 --- !u!4 &1527923784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8885302263306583109, guid: 4415da56d1c8eb749b67428d8d3e6ee8, type: 3}
@@ -9449,3 +9473,4 @@ SceneRoots:
   - {fileID: 1224606494}
   - {fileID: 349816898}
   - {fileID: 1041079872}
+  - {fileID: 1520972168}

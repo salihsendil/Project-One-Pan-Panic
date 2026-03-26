@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New IngredientItemSO", menuName = "Scriptable Objects/New IngredientItemSO")]
-public class IngredientItemSO : KitchenItemSO
+public class IngredientItemSO : ScriptableObject
 {
-    public IngredientID IngredientID;
-    public Sprite Icon;
+    [Header("Name")]
+    public string Name;
+    
+    [Header("Initial State")]
+    public Mesh InitialMesh;
     public ItemStage InitialStage;
+
+
+    [Header("Visual")]
+    public Sprite Icon;
+    public GameObject Prefab;
+
+
+    [Header("Pool")]
+    public UniversalPoolEntryType PoolType;
+
+    [Header("Process Rules")]
     public List<ProcessRule> ProcessRules = new();
 }
 

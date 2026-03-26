@@ -14,6 +14,11 @@ public class ProgressTracker
         CurrentValue = 0f;
     }
 
+    public void Add(float amount)
+    {
+        TargetValue += amount;
+    }
+
     public void Tick(float deltaTime)
     {
         if (IsFinished) return;

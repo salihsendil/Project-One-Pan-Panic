@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(PlayerCarryingController))]
+[RequireComponent(typeof(ItemSocket))]
 public class PlayerInteractionController : MonoBehaviour
 {
     //Zenject
@@ -24,26 +24,42 @@ public class PlayerInteractionController : MonoBehaviour
     private void Awake()
     {
         interactor = GetComponent<IInteractor>();
+        Debug.Log(interactor.GetType().Name);
     }
 
     private void Start()
     {
-        inputHandler.OnInteractionStarted += TestInteractionStarted;
-        inputHandler.OnInteractionPerformed += TestInteractionPerformed;
-        inputHandler.OnInteractionCanceled += TestInteractionCanceled;
+        inputHandler.OnInteractionStarted += InteractionStarted;
+        inputHandler.OnInteractionPerformed += InteractionPerformed;
+        inputHandler.OnInteractionCanceled += InteractionCanceled;
     }
 
     private void OnDisable()
     {
-        inputHandler.OnInteractionStarted -= TestInteractionStarted;
-        inputHandler.OnInteractionPerformed -= TestInteractionPerformed;
-        inputHandler.OnInteractionCanceled -= TestInteractionCanceled;
+        inputHandler.OnInteractionStarted -= InteractionStarted;
+        inputHandler.OnInteractionPerformed -= InteractionPerformed;
+        inputHandler.OnInteractionCanceled -= InteractionCanceled;
     }
 
     private void Update()
     {
-        //optimization required
-        if (TryGetInteractable(out currentInteractable)) { }
+        if (TryGetInteractable(out IInteractable interactable))
+        {
+            if (currentInteractable != interactable)
+            {
+                currentInteractable?.InteractionCanceled(interactor);
+                currentInteractable = interactable;
+            }
+        }
+
+        else
+        {
+            if (currentInteractable != null)
+            {
+                currentInteractable.InteractionCanceled(interactor);
+                currentInteractable = null;
+            }
+        }
     }
 
     private bool TryGetInteractable(out IInteractable interactable)
@@ -68,18 +84,19 @@ public class PlayerInteractionController : MonoBehaviour
         return false;
     }
 
-    private void TestInteractionStarted()
+    private void InteractionStarted()
     {
         currentInteractable?.InteractionStarted(interactor);
     }
 
-    private void TestInteractionPerformed()
+    private void InteractionPerformed()
     {
         currentInteractable?.InteractionPerformed(interactor);
     }
 
-    private void TestInteractionCanceled()
+    private void InteractionCanceled()
     {
+        Debug.Log("cancel");
         currentInteractable?.InteractionCanceled(interactor);
         currentInteractable = null;
     }

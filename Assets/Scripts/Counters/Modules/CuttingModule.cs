@@ -1,12 +1,13 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 [RequireComponent(typeof(ItemSocket))]
+[RequireComponent(typeof(CuttingCounterAnimationsController))]
 public class CuttingModule : MonoBehaviour, IHoldModule
 {
     //References
     private ItemSocket itemSocket;
-    private ItemBehaviourController behaviourController;
+    private ItemBehaviourController behaviourController; 
+    private CuttingCounterAnimationsController animationsController;
 
     //Process
     private ProcessType processType = ProcessType.Cut;
@@ -17,6 +18,7 @@ public class CuttingModule : MonoBehaviour, IHoldModule
     private void Awake()
     {
         itemSocket = GetComponent<ItemSocket>();
+        animationsController = GetComponent<CuttingCounterAnimationsController>();
     }
 
     public void OnInteractionStarted()
@@ -35,6 +37,8 @@ public class CuttingModule : MonoBehaviour, IHoldModule
 
         isProcessing = true;
 
+        animationsController.UpdateAnimationState(isProcessing);
+
         behaviourController.HandleStartBehaviour();
 
         behaviourController.OnProcessComplete += ProcessFinished;
@@ -43,9 +47,8 @@ public class CuttingModule : MonoBehaviour, IHoldModule
     public void OnInteractionCanceled()
     {
         isProcessing = false;
-        canProcess = false;
 
-        if (itemSocket.HasItem) { itemSocket.GetItem.IsPickable = true; }
+        animationsController.UpdateAnimationState(isProcessing);
 
         if (behaviourController != null)
         {
@@ -58,6 +61,7 @@ public class CuttingModule : MonoBehaviour, IHoldModule
     {
         isProcessing = false;
         canProcess = false;
+        animationsController.UpdateAnimationState(isProcessing);
 
         if (itemSocket.HasItem) { itemSocket.GetItem.IsPickable = true; }
 

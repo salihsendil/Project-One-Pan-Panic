@@ -17,15 +17,19 @@ MonoBehaviour:
     Prefab: {fileID: 1228597164330082447, guid: 013ff6a5e6e54e54ea9329c50c438981, type: 3}
     InitializeSize: 5
     HasHardLimit: 1
-  - Type: 5
-    Prefab: {fileID: 1356904857024455834, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
-    InitializeSize: 5
-    HasHardLimit: 1
-  - Type: 6
-    Prefab: {fileID: 7301802289305275674, guid: 1d6ab98013f008647afb89524555b39e, type: 3}
-    InitializeSize: 5
-    HasHardLimit: 1
   - Type: 20
     Prefab: {fileID: 7876499546485564982, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
     InitializeSize: 5
     HasHardLimit: 1
+  - Type: 5
+    Prefab: {fileID: 1356904857024455834, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+    InitializeSize: 5
+    HasHardLimit: 0
+  - Type: 6
+    Prefab: {fileID: 7301802289305275674, guid: 1d6ab98013f008647afb89524555b39e, type: 3}
+    InitializeSize: 5
+    HasHardLimit: 0
+  - Type: 8
+    Prefab: {fileID: 7377488157220404945, guid: a06e9086d86d65c4eb7d34df77efd0ce, type: 3}
+    InitializeSize: 5
+    HasHardLimit: 0

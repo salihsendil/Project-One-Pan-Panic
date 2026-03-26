@@ -10,7 +10,7 @@ public class IngredientItem : BaseKitchenItem, IPoolable
 
 
     public ItemStage ItemStage => itemStage;
-    public override KitchenItemSO GetKitchenItemSO() => ingredientItemSO;
+    public IngredientItemSO GetItemData() => ingredientItemSO;
 
     public void SetItemStage(ItemStage newStage)
     {
@@ -18,7 +18,7 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     }
 
     #region Object Pooling
-    public UniversalPoolEntryType GetPoolType => ingredientItemSO.Type;
+    public UniversalPoolEntryType GetPoolType => ingredientItemSO.PoolType;
 
     public void OnSpawn()
     {

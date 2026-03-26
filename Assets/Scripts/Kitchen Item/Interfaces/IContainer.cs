@@ -1,5 +1,5 @@
 public interface IContainer
 {
-    public bool CanAddIngredient();
-    public bool AddIngredient(BaseKitchenItem kitchenItem);
+    public bool CanAddIngredient(IngredientItem ingredient);
+    public bool AddIngredient(IngredientItem ingredient);
 }

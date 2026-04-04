@@ -20,11 +20,12 @@ public class PlayerInteractionController : MonoBehaviour
 
     //References
     private IInteractor interactor;
+    private ItemSocket itemSocket;
 
     private void Awake()
     {
         interactor = GetComponent<IInteractor>();
-        Debug.Log(interactor.GetType().Name);
+        itemSocket = GetComponent<ItemSocket>();
     }
 
     private void Start()
@@ -47,7 +48,7 @@ public class PlayerInteractionController : MonoBehaviour
         {
             if (currentInteractable != interactable)
             {
-                currentInteractable?.InteractionCanceled(interactor);
+                InteractionCanceled();
                 currentInteractable = interactable;
             }
         }
@@ -56,8 +57,7 @@ public class PlayerInteractionController : MonoBehaviour
         {
             if (currentInteractable != null)
             {
-                currentInteractable.InteractionCanceled(interactor);
-                currentInteractable = null;
+                InteractionCanceled();
             }
         }
     }
@@ -96,17 +96,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void InteractionCanceled()
     {
-        Debug.Log("cancel");
         currentInteractable?.InteractionCanceled(interactor);
         currentInteractable = null;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Vector3 rayOrigin = transform.position;
-        Vector3 rayDir = transform.forward * maxRayDistance;
-        Ray ray = new(rayOrigin, rayDir);
-        Gizmos.DrawRay(ray);
     }
 }

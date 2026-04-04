@@ -12,11 +12,11 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
     {
         if (!interactor.HasItem) { return false; }
 
-        if (interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) { return false; }
+        if (!interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) { return false; }
 
-        if (containerItem.IsPlateReadyToServe())
+        if (containerItem.TryGetRecipe(out RecipeSO recipe))
         {
-            if (orderSystem.TryCompleteOrder(containerItem.CurrentRecipe, out Order order))
+            if (orderSystem.TryCompleteOrder(recipe, out Order order))
             {
                 signalBus.Fire(new OrderDeliveredSignal(order));
                 PoolItemCleaner.RestoreAndReturn(containerItem, poolManager);

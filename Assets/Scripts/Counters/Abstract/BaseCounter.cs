@@ -5,11 +5,13 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
 {
     protected IInstantModule[] instantModules = new IInstantModule[3];
     protected IHoldModule[] holdModules = new IHoldModule[2];
+    protected IAutoModule[] autoModules = new IAutoModule[2];
 
     protected virtual void Awake()
     {
         instantModules = GetComponents<IInstantModule>();
         holdModules = GetComponents<IHoldModule>();
+        autoModules = GetComponents<IAutoModule>();
     }
 
     public virtual void InteractionStarted(IInteractor interactor)
@@ -22,6 +24,11 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
         foreach (var module in holdModules)
         {
             module?.OnInteractionStarted();
+        }
+
+        foreach (var module in autoModules)
+        {
+            module?.StartProcess(interactor.GetItem);
         }
     }
 

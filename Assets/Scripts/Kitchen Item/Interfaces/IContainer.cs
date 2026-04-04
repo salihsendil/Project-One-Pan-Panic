@@ -1,5 +1,7 @@
 public interface IContainer
 {
-    public bool CanAddIngredient(IngredientItem ingredient);
-    public bool AddIngredient(IngredientItem ingredient);
+    public IInteractor GetInteractor { get; }
+
+    public bool CanInteractWith(IPickable pickable);
+    public void InteractWith(IPickable pickable);
 }

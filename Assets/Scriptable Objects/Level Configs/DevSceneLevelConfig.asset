@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DevSceneLevelConfig
   m_EditorClassIdentifier: 
   CountdownTime: 0
-  LevelTime: 150
+  LevelTime: 1500
   StartScore: 500

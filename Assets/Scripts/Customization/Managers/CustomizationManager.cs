@@ -102,7 +102,6 @@ public class CustomizationManager : MonoBehaviour
 
     private void ApplyCloth(CustomizationData data)
     {
-        Debug.Log(bodyParts[currentBodyPart].BodyPart);
         bodyParts[currentBodyPart].Apply(data);
     }
 

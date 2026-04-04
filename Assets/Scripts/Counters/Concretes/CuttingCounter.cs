@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ItemSocket))]
+[RequireComponent(typeof(ItemInteractionModule))]
 [RequireComponent(typeof(CuttingModule))]
 public class CuttingCounter : BaseCounter
 {

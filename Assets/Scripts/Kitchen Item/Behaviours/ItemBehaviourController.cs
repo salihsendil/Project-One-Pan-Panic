@@ -18,7 +18,6 @@ public class ItemBehaviourController : MonoBehaviour
     public ProgressTracker ProgressTracker { get => progressTracker; }
 
     //Events
-
     public event Action OnProcessComplete;
 
     private void Awake()
@@ -32,7 +31,7 @@ public class ItemBehaviourController : MonoBehaviour
 
     private void InitializeProcessRules()
     {
-        var data = ingredientItem.GetItemData();
+        var data = ingredientItem.GetItemData;
         if ( data.ProcessRules.Count <= 0) { return; }
         foreach (var rule in data.ProcessRules)
         {
@@ -54,6 +53,7 @@ public class ItemBehaviourController : MonoBehaviour
 
     public void HandleStartBehaviour()
     {
+        Debug.Log("behaviour start");
         if (!progressTracker.IsFinished) return;
 
         if (currentProcess == null) return;
@@ -65,7 +65,7 @@ public class ItemBehaviourController : MonoBehaviour
     {
         progressTracker.Tick(deltaTime);
 
-        //Debug.Log("progress ratio " + progressTracker.ProgressRatio);
+        Debug.Log("progress ratio " + progressTracker.ProgressRatio);
 
         if (progressTracker.IsFinished)
         {
@@ -73,13 +73,15 @@ public class ItemBehaviourController : MonoBehaviour
         }
     }
 
-    public void HandleFinishBehaviour()
+    private void HandleFinishBehaviour()
     {
-        OnProcessComplete?.Invoke();
+        Debug.Log("behaviour finish");
         progressTracker.Reset();
         ingredientItem.SetItemStage(currentProcess.ToStage);
         ingredientItem.UpdateMesh(currentProcess.OutputMesh);
-
+        currentProcess = null;
+        ingredientItem.HandleItemUIState();
+        OnProcessComplete?.Invoke();
     }
 
 }

@@ -41,7 +41,6 @@ public class UniversalPoolManager : MonoBehaviour
 
     public GameObject Spawn(UniversalPoolEntryType type)
     {
-
         if (!pool.TryGetValue(type, out var stack))
         {
             stack = new Stack<GameObject>();

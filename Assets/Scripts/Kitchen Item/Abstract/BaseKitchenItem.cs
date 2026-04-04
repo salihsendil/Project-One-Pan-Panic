@@ -1,19 +1,26 @@
 using UnityEngine;
 
+[RequireComponent(typeof(IconBillboardHandler))]
 public abstract class BaseKitchenItem : MonoBehaviour, IPickable
 {
-    private MeshFilter meshFilter;
-    private bool canPickable = true;
+    //References
+    protected MeshFilter meshFilter;
+    protected IconBillboardHandler billboardHandler;
+
+    //Transfer
+    private bool isPickable = true;
 
     public Transform Transform => transform;
 
     public GameObject GetGameObject => gameObject;
 
-    public virtual bool IsPickable { get => canPickable; set => canPickable = value; }
+    public virtual bool IsPickable { get => isPickable; set => isPickable = value; }
+    public IconBillboardHandler BillboardHandler { get => billboardHandler; }
 
-    protected void Start()
+    protected virtual void Start()
     {
-        if (meshFilter == null) { meshFilter = GetComponentInChildren<MeshFilter>(); }
+        if (meshFilter == null) meshFilter = GetComponentInChildren<MeshFilter>();
+        billboardHandler = GetComponent<IconBillboardHandler>();
     }
 
     public void UpdateMesh(Mesh newMesh)

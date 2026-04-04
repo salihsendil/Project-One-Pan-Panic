@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(ItemSocket))]
-public class ContainerDispenserModule : MonoBehaviour/*, IInteractableModule*/
+public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 {
     //Zenject
     [Inject] private UniversalPoolManager poolManager;
@@ -27,7 +27,7 @@ public class ContainerDispenserModule : MonoBehaviour/*, IInteractableModule*/
 
     private void Awake()
     {
-        if (itemSocket == null) { TryGetComponent(out itemSocket); }
+        itemSocket = GetComponent<ItemSocket>();
     }
 
     private void OnEnable()
@@ -45,7 +45,7 @@ public class ContainerDispenserModule : MonoBehaviour/*, IInteractableModule*/
         await Task.Delay(respawnDelay);
 
         ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.PoolType);
-        if (item == null) { return; }
+        if (item == null) return;
 
         if (!item.TryGetComponent(out IPickable pickable)) return;
 
@@ -83,5 +83,10 @@ public class ContainerDispenserModule : MonoBehaviour/*, IInteractableModule*/
 
             return true;
         }
+    }
+
+    public bool TryInteractionInstant(IInteractor interactor)
+    {
+        throw new System.NotImplementedException();
     }
 }

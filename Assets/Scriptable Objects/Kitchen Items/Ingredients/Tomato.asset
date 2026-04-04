@@ -19,8 +19,8 @@ MonoBehaviour:
   Prefab: {fileID: 1356904857024455834, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
   PoolType: 5
   ProcessRules:
-  - ProcessType: 1
+  - ProcessType: 5
     FromStage: 0
     ToStage: 1
-    ProcessTime: 3
+    ProcessTime: 1
     OutputMesh: {fileID: -3864207983360289550, guid: 105f9ccd0cd5eab43a236419b69ce1f4, type: 3}

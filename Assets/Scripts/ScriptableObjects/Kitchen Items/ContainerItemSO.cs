@@ -12,6 +12,4 @@ public class ContainerItemSO : ScriptableObject
     [Header("Visual")]
     public GameObject Prefab;
     public Mesh InitialMesh;
-
-    public ContainerState InitialStage;
 }

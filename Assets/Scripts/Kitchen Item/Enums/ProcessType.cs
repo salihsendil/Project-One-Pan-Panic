@@ -1,7 +1,9 @@
 
 public enum ProcessType
 {
-    None,
-    Cut,
-    Cook
+    None = 0,
+    Cut = 5,
+    PanCooked = 10,
+    Boilled,
+    Fried
 }

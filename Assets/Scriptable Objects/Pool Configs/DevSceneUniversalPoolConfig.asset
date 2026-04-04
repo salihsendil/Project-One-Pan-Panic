@@ -33,3 +33,11 @@ MonoBehaviour:
     Prefab: {fileID: 7377488157220404945, guid: a06e9086d86d65c4eb7d34df77efd0ce, type: 3}
     InitializeSize: 5
     HasHardLimit: 0
+  - Type: 9
+    Prefab: {fileID: 2831678058498387438, guid: 04b5aa8f7381d094ca81888fe6df6826, type: 3}
+    InitializeSize: 5
+    HasHardLimit: 0
+  - Type: 7
+    Prefab: {fileID: 1375815837900121627, guid: 6fc3fa6bac432d742a0e44cc020af843, type: 3}
+    InitializeSize: 5
+    HasHardLimit: 0

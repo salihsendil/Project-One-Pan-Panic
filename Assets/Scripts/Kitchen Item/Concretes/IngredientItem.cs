@@ -8,13 +8,26 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     //Data
     [SerializeField] private IngredientItemSO ingredientItemSO;
 
-
     public ItemStage ItemStage => itemStage;
-    public IngredientItemSO GetItemData() => ingredientItemSO;
+    public IngredientItemSO GetItemData => ingredientItemSO;
+
+    private void Awake()
+    {
+        billboardHandler = GetComponent<IconBillboardHandler>();
+    }
 
     public void SetItemStage(ItemStage newStage)
     {
         itemStage = newStage;
+    }
+
+    public void HandleItemUIState()
+    {
+        if (itemStage != ItemStage.Raw)
+        {
+            billboardHandler.SetCanvasVisibility(true);
+            billboardHandler.SetImage(ingredientItemSO.Icon);
+        }
     }
 
     #region Object Pooling
@@ -24,10 +37,14 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     {
         SetItemStage(ingredientItemSO.InitialStage);
         UpdateMesh(ingredientItemSO.InitialMesh);
+        HandleItemUIState();
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
-    public void OnDespawn() { }
+    public void OnDespawn()
+    {
+        billboardHandler.AllClear();
+    }
 
     #endregion
 }

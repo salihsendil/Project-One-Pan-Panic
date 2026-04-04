@@ -2,48 +2,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class ContainerItem : BaseKitchenItem, IPoolable
+[RequireComponent(typeof(ItemSocket))]
+public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
 {
-    //References
     [Inject] private OrderSystem orderSystem;
     [Inject] private RecipeMatchEvaluator recipeMatch;
     [Inject] private UniversalPoolManager poolManager;
     [Inject] private SignalBus signalBus;
 
-    //Data
     [SerializeField] private ContainerItemSO containerItemSO;
+    [SerializeField] private IInteractor currentInteractor;
 
-    //HoldPoint
-    [SerializeField] private Transform holdPoint;
-
-    //Ingredient List
     [SerializeField] private List<IngredientItem> spawnedItems = new();
     [SerializeField] private List<IngredientEntry> ingredientEntries = new();
 
-    //State
-    private ContainerState containerState = ContainerState.Empty;
-
-    //Recipe
     private RecipeSO currentRecipe;
-    public RecipeSO CurrentRecipe => currentRecipe;
 
-    //Pool Type
-    public bool IsPlateReadyToServe() { return containerState == ContainerState.ReadyToServe; }
+    public IInteractor GetInteractor => currentInteractor;
+    public UniversalPoolEntryType GetPoolType => UniversalPoolEntryType.Plate;
 
-    public ContainerItemSO GetKitchenItemSO() => containerItemSO;
-
-
-    #region Object Pooling
-    public UniversalPoolEntryType GetPoolType => containerItemSO.PoolType;
-
-    public  void OnSpawn()
+    private void Awake()
     {
-        containerState = ContainerState.Empty;
+        currentInteractor = GetComponent<IInteractor>();
+    }
+
+    #region ObjectPooling
+
+    public void OnSpawn()
+    {
         UpdateMesh(containerItemSO.InitialMesh);
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
-    public  void OnDespawn()
+    public void OnDespawn()
     {
         currentRecipe = null;
         PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
@@ -54,54 +45,44 @@ public class ContainerItem : BaseKitchenItem, IPoolable
 
     #endregion
 
-    public override bool TryInteractWith(BaseKitchenItem kitchenItem)
+    public bool TryGetRecipe(out RecipeSO recipe)
     {
-        if (kitchenItem is IngredientItem ingredientItem)
-        {
-            return TryAddIngredient(ingredientItem);
-        }
-        return false;
+        recipe = currentRecipe;
+        return recipe != null;
     }
 
-    public bool TryAddIngredient(IngredientItem ingredient)
+    public bool CanInteractWith(IPickable pickable)
     {
-        IngredientItemSO ingredientData = ingredient.GetItemData();
+        if (!pickable.IsPickable) return false;
+        if (!pickable.GetGameObject.TryGetComponent(out IngredientItem ingredient)) return false;
 
-        Debug.Log($"TryAddIngredient called for {ingredientData.name} (stage: {ingredient.ItemStage})", this);
-
-        IngredientEntry newEntry = new IngredientEntry(ingredientData, ingredient.ItemStage);
-
-        if (!orderSystem.IsIngredientAllowedOnPlate(newEntry)) { return false; }
-
-        spawnedItems.Add(ingredient);
-
-        ingredientEntries.Add(newEntry);
-
-        SetIngredientTransform(ingredient);
-
-        CheckRecipeMatch();
+        IngredientEntry entry = new IngredientEntry(ingredient.GetItemData, ingredient.ItemStage);
+        if (!orderSystem.IsIngredientAllowedOnPlate(entry)) return false;
 
         return true;
     }
 
+    public void InteractWith(IPickable pickable)
+    {
+        if (!pickable.IsPickable) return;
+        if (!pickable.GetGameObject.TryGetComponent(out IngredientItem ingredient)) return;
+
+        IngredientEntry entry = new IngredientEntry(ingredient.GetItemData, ingredient.ItemStage);
+
+        currentInteractor.SetItem(pickable);
+        spawnedItems.Add(ingredient);
+        ingredientEntries.Add(entry);
+        ingredient.BillboardHandler.SetCanvasVisibility(false);
+        billboardHandler.SetCanvasVisibility(true);
+        billboardHandler.SetImage(ingredient.GetItemData.Icon);
+        CheckRecipeMatch();
+    }
+
     private void CheckRecipeMatch()
     {
-        if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipe))
-        {
-            containerState = ContainerState.Invalid;
-            return;
-        }
+        if (!recipeMatch.TryRecipeMatch(ingredientEntries, out currentRecipe)) return;
 
         PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
         spawnedItems.Clear();
-        //UpdateMesh(); - will be update
-        containerState = ContainerState.ReadyToServe;
     }
-
-    private void SetIngredientTransform(IngredientItem ingredient)
-    {
-        ingredient.transform.SetPositionAndRotation(holdPoint.position, holdPoint.transform.rotation);
-        ingredient.transform.SetParent(holdPoint);
-    }
-
 }

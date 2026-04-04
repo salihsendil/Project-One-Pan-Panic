@@ -1,3 +1,4 @@
+// ItemInteractionModule.cs
 using UnityEngine;
 
 [RequireComponent(typeof(ItemSocket))]
@@ -12,34 +13,42 @@ public class ItemInteractionModule : MonoBehaviour, IInstantModule
 
     public bool TryInteractionInstant(IInteractor interactor)
     {
-
-        if (interactor.HasItem && !interactor.GetItem.IsPickable)
+        if (!itemSocket.HasItem)
         {
-            return false;
+            if (!interactor.HasItem) return false;
+            if (!interactor.GetItem.IsPickable) return false;
+
+            itemSocket.SetItem(interactor.RemoveItem());
+            return true;
         }
 
-        if (itemSocket.HasItem && !itemSocket.GetItem.IsPickable)
+        if (itemSocket.HasItem)
         {
-            return false;
-        }
-
-        else if (!interactor.HasItem)
-        {
-            if (itemSocket.HasItem)
+            if (!interactor.HasItem)
             {
+                if (!itemSocket.GetItem.IsPickable) return false;
+
                 interactor.SetItem(itemSocket.RemoveItem());
                 return true;
             }
-        }
 
-        else if (!itemSocket.HasItem)
-        {
-            if (interactor.HasItem)
+            itemSocket.GetItem.GetGameObject.TryGetComponent(out IContainer socketContainer);
+
+            if (socketContainer != null && socketContainer.CanInteractWith(interactor.GetItem))
             {
-                itemSocket.SetItem(interactor.RemoveItem());
+                socketContainer.InteractWith(interactor.RemoveItem());
+                return true;
+            }
+
+            interactor.GetItem.GetGameObject.TryGetComponent(out IContainer interactorContainer);
+
+            if (interactorContainer != null && interactorContainer.CanInteractWith(itemSocket.GetItem))
+            {
+                interactorContainer.InteractWith(itemSocket.RemoveItem());
                 return true;
             }
         }
+
         return false;
     }
 }

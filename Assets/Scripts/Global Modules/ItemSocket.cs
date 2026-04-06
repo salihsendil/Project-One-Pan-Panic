@@ -10,7 +10,7 @@ public class ItemSocket : MonoBehaviour, IInteractor
     public bool HasItem => currentItem != null;
     public IPickable GetItem => currentItem;
 
-    private void Start()
+    private void Start() //debugDelete
     {
         TestMethod();
     }
@@ -31,14 +31,14 @@ public class ItemSocket : MonoBehaviour, IInteractor
 
     public IPickable RemoveItem()
     {
-        currentItemGO = null;
+        currentItemGO = null; //debugDelete
         var tempItem = currentItem;
         currentItem.Transform.parent = null;
         currentItem = null;
         return tempItem;
     }
 
-    public void TestMethod()
+    public void TestMethod() //debugDelete
     {
         if (currentItemTest != null)
         {
@@ -49,7 +49,7 @@ public class ItemSocket : MonoBehaviour, IInteractor
         }
     }
 
-    private void Update()
+    private void Update() //debugDelete
     {
         if (Input.GetKey(KeyCode.G))
         {

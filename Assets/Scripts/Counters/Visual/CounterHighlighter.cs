@@ -3,8 +3,8 @@ using UnityEngine;
 public class CounterHighlighter : MonoBehaviour
 {
     private Material[] materials = new Material[3];
-    [SerializeField] private Color originalEmission = Color.clear;
-    [SerializeField] private Color highlightColor = new Color(0.1f, 0.1f, 0.1f, 0.4f);
+    private Color originalEmission = Color.clear;
+    private Color highlightColor = new Color(0.2f, 0.2f, 0.2f, 0.4f);
 
     private void Awake()
     {

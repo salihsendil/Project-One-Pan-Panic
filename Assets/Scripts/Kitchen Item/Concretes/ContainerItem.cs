@@ -36,10 +36,12 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
 
     public void OnDespawn()
     {
+        Debug.Log("despawn " + gameObject.name);
         currentRecipe = null;
         PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
         spawnedItems.Clear();
         ingredientEntries.Clear();
+        billboardHandler.AllClear();
         signalBus.Fire(new ContainerItemDespawned(GetPoolType));
     }
 

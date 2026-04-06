@@ -33,14 +33,14 @@ public class ItemInteractionModule : MonoBehaviour, IInstantModule
             }
 
             itemSocket.GetItem.GetGameObject.TryGetComponent(out IContainer socketContainer);
+            interactor.GetItem.GetGameObject.TryGetComponent(out IContainer interactorContainer);
 
             if (socketContainer != null && socketContainer.CanInteractWith(interactor.GetItem))
             {
                 socketContainer.InteractWith(interactor.RemoveItem());
+                interactor.SetItem(itemSocket.RemoveItem());
                 return true;
             }
-
-            interactor.GetItem.GetGameObject.TryGetComponent(out IContainer interactorContainer);
 
             if (interactorContainer != null && interactorContainer.CanInteractWith(itemSocket.GetItem))
             {

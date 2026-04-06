@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CounterHighlighter))]
 public abstract class BaseCounter : MonoBehaviour, IInteractable
 {
+    protected CounterHighlighter counterHighlighter;
     protected IInstantModule[] instantModules = new IInstantModule[3];
     protected IHoldModule[] holdModules = new IHoldModule[2];
     protected IAutoModule[] autoModules = new IAutoModule[2];
@@ -12,6 +13,10 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
         instantModules = GetComponents<IInstantModule>();
         holdModules = GetComponents<IHoldModule>();
         autoModules = GetComponents<IAutoModule>();
+    }
+    private void OnEnable()
+    {
+        counterHighlighter = GetComponent<CounterHighlighter>();
     }
 
     public virtual void InteractionStarted(IInteractor interactor)
@@ -46,5 +51,10 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
         {
             module?.OnInteractionCanceled();
         }
+    }
+
+    public void HighlightInteractable(bool canInteractable)
+    {
+        counterHighlighter.HighlightObject(canInteractable);
     }
 }

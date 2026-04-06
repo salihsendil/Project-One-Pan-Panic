@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalEmission: {r: 0, g: 0, b: 0, a: 0}
-  highlightColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.4}
+  highlightColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.4}
 --- !u!114 &1643693261554002064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 8664722582442867473}
-  currentItem: {fileID: 0}
+  currentItemTest: {fileID: 0}
+  currentItemGO: {fileID: 0}
 --- !u!1 &5496347459735299668
 GameObject:
   m_ObjectHideFlags: 0

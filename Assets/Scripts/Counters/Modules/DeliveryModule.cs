@@ -19,6 +19,7 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
             if (orderSystem.TryCompleteOrder(recipe, out Order order))
             {
                 signalBus.Fire(new OrderDeliveredSignal(order));
+                interactor.RemoveItem();
                 PoolItemCleaner.RestoreAndReturn(containerItem, poolManager);
                 return true;
             }

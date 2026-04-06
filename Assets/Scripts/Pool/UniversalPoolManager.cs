@@ -29,7 +29,6 @@ public class UniversalPoolManager : MonoBehaviour
                 pool[entry.Type] = stack;
             }
 
-
             for (int i = 0; i < entry.InitializeSize; i++)
             {
                 GameObject go = instantiator.InstantiatePrefab(entry.Prefab, transform);
@@ -56,7 +55,7 @@ public class UniversalPoolManager : MonoBehaviour
                 go = instantiator.InstantiatePrefab(entry.Prefab, transform);
             }
         }
-        go.SetActive(true);
+        go?.SetActive(true);
         return go;
     }
 

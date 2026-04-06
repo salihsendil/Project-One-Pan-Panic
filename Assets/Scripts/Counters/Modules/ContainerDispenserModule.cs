@@ -40,53 +40,38 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
         signalBus.Unsubscribe<ContainerItemDespawned>(PrepareReplacement);
     }
 
+    private void Start()
+    {
+        while (TryPlaceContainer()) { }
+    }
+
     private async void PrepareReplacement()
     {
         await Task.Delay(respawnDelay);
 
-        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.PoolType);
-        if (item == null) return;
+        TryPlaceContainer();
+    }
 
-        if (!item.TryGetComponent(out IPickable pickable)) return;
+    private bool TryPlaceContainer()
+    {
+        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.PoolType);
+        if (item == null) return false;
+
+        if (!item.TryGetComponent(out IPickable pickable)) return false;
 
         itemSocket.SetItemToOffset(pickable, positionOffset * containerStack.Count);
         containerStack.Push(item);
+        return true;
     }
 
-    public bool TryInteract(IInteractor interactor)
+    public bool TryInteractionInstant(IInteractor _)
     {
-        if (containerStack == null || containerStack.Count <= 0) { return false; }
+        if (containerStack == null || containerStack.Count <= 0) return false;
+        containerStack.Pop();
 
-        if (interactor.HasItem)
-        {
-            if (!itemSocket.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem item)) { return false; }
-            if (!interactor.GetItem.GetGameObject.TryGetComponent(out BaseKitchenItem playerItem)) { return false; }
-            if (!item.TryInteractWith(playerItem)) { return false; }
+        if (!containerStack.TryPeek(out ContainerItem item)) return false;
 
-            interactor.RemoveItem();
-            return true;
-        }
-
-        else //!player.HasItem()
-        {
-            if (!containerStack.TryPop(out ContainerItem containerItem)) { return false; }
-
-            if (!containerItem.TryGetComponent(out IPickable pickable)) return false;
-
-            interactor.SetItem(pickable);
-            itemSocket.RemoveItem();
-
-            if (containerStack.TryPeek(out ContainerItem container))
-            {
-                itemSocket.SetItemToOffset(pickable, positionOffset * (containerStack.Count - 1));
-            }
-
-            return true;
-        }
-    }
-
-    public bool TryInteractionInstant(IInteractor interactor)
-    {
-        throw new System.NotImplementedException();
+        itemSocket.SetItemToOffset(item, positionOffset * (containerStack.Count - 1));
+        return true;
     }
 }

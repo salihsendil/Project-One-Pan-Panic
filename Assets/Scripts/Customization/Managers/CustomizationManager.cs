@@ -158,7 +158,6 @@ public class CustomizationManager : MonoBehaviour
         ApplyCloth(cloth);
         partIndices[partType] = previewIndex;
     }
-
     #region Helper
     private int GetWrappedIndex(int index, int step, int count)
     {

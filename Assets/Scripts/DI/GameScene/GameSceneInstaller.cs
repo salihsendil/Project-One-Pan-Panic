@@ -9,6 +9,7 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<OrderSystem>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<RecipeMatchEvaluator>().AsSingle().NonLazy();
         Container.Bind<UniversalPoolManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<LevelStatsService>().FromComponentInHierarchy().AsSingle().NonLazy();
 
         InterfaceBindings();
         SignalBindings();

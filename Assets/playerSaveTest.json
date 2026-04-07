@@ -2,15 +2,19 @@
   "Entries": [
     {
       "SaveDataType": 0,
-      "JsonData": "[\r\n  {\r\n    \"Key\": 0,\r\n    \"EquippedItem\": \"body_color_03\",\r\n    \"OwnedItems\": [\r\n      \"body_color_03\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 1,\r\n    \"EquippedItem\": \"face_02\",\r\n    \"OwnedItems\": [\r\n      \"face_02\"\r\n    ]\r\n  },\r\n  {\r\n    \"Key\": 2,\r\n    \"EquippedItem\": \"hat_03\",\r\n    \"OwnedItems\": [\r\n      \"hat_03\"\r\n    ]\r\n  }\r\n]"
+      "JsonData": "[]"
     },
     {
-      "SaveDataType": 2,
-      "JsonData": "{\r\n  \"MusicVolume\": 0.5277412,\r\n  \"SfxVolume\": 1.0\r\n}"
+      "SaveDataType": 40,
+      "JsonData": "{\r\n  \"MusicVolume\": 0.5,\r\n  \"SfxVolume\": 0.5\r\n}"
     },
     {
-      "SaveDataType": 1,
-      "JsonData": "{\r\n  \"Currency\": 845\r\n}"
+      "SaveDataType": 10,
+      "JsonData": "{\r\n  \"Currency\": 2000\r\n}"
+    },
+    {
+      "SaveDataType": 20,
+      "JsonData": "0"
     }
   ]
 }

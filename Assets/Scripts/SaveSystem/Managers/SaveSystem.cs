@@ -35,7 +35,6 @@ public class SaveSystem : IInitializable
     //But for now, since we’re keeping all the data in a single JSON file, the system is logging everything.
     public void SaveData()
     {
-
         SaveFile saveFile = new();
 
         foreach (var saveable in iSaveables)
@@ -62,19 +61,20 @@ public class SaveSystem : IInitializable
         string json = File.ReadAllText(filePath);
 
         saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
-        //foreach (var saveable in iSaveables)
-        //{
-        //    string jsonData = data.Entries.Find(x => x.SaveDataType == saveable.GetSaveDataType).JsonData;
-
-        //    if (jsonData == null) { continue; }
-
-        //    saveable.LoadData(jsonData);
-        //}
     }
 
     public void Initialize()
     {
         LoadData();
     }
+
+    #region RefactorSaveSystem
+
+    public void SaveFile()
+    {
+
+    }
+
+    #endregion
 }
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CountdownTime: 0
   LevelTime: 5
-  StartScore: 500
+  StartScore: 120

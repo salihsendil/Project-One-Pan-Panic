@@ -7,19 +7,21 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
     [Inject] SaveSystem saveSystem;
     [Inject] private SignalBus signalBus;
     [Inject] private LevelConfigSO levelConfig;
+    [Inject] private LevelStatsService statsService;
 
     private int highScore;
     private int currentScore;
 
     public int HighScore => highScore;
-    public SaveDataType GetSaveDataType => SaveDataType.Highscore;
+    public SaveDataType GetSaveDataType => SaveDataType.Stats;
 
 
     public void Initialize()
     {
         SetScore(levelConfig.StartScore);
+        LoadData();
+        statsService.UpdateStats(StatsType.Score, currentScore);
 
-        saveSystem.Register(this);
         signalBus.Subscribe<OrderDeliveredSignal>(AddScore);
         signalBus.Subscribe<OrderExpiredSignal>(RemoveScore);
         signalBus.Subscribe<GameFinishedSignal>(CheckNewHighScore);
@@ -27,7 +29,6 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
 
     public void Dispose()
     {
-        saveSystem.Unregister(this);
         signalBus.Unsubscribe<OrderDeliveredSignal>(AddScore);
         signalBus.Unsubscribe<OrderExpiredSignal>(RemoveScore);
         signalBus.Unsubscribe<GameFinishedSignal>(CheckNewHighScore);
@@ -61,18 +62,26 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
 
     private void CheckNewHighScore()
     {
-        if (currentScore > highScore)
-            highScore = currentScore;
-        UnityEngine.Debug.Log(highScore);
+        if (currentScore <= highScore) return;
+        highScore = currentScore;
+        SaveData();
     }
 
-    public string GetSaveData()
+    #region SaveLoadData
+
+    public void SaveData()
     {
-        return JsonConvert.SerializeObject(highScore, Formatting.Indented);
+        StatsDataSave newData = new();
+        newData.HighScore = highScore;
+        saveSystem.UpdateData(GetSaveDataType, newData);
+        saveSystem.SaveData(GetSaveDataType);
     }
 
-    public void LoadData(string json)
+    public void LoadData()
     {
-        highScore = int.Parse(json);
+        StatsDataSave data = saveSystem.GetData<StatsDataSave>(GetSaveDataType);
+        highScore = data.HighScore;
     }
+
+    #endregion
 }

@@ -1,59 +1,54 @@
-using Newtonsoft.Json;
-using System;
 using Zenject;
 
-[Serializable]
-public struct GameSettingsData
+public class GameSettingsService : ISaveable, IInitializable
 {
-    public float MusicVolume;
-    public float SfxVolume;
-}
-
-public class GameSettingsService : IInitializable, IDisposable, ISaveable
-{
+    //Zenject
     [Inject] private SaveSystem saveSystem;
 
+    //Volume Variables
     private float musicVolume = 0.5f;
     private float sfxVolume = 0.5f;
 
+    //Properties
     public SaveDataType GetSaveDataType => SaveDataType.Settings;
+    public float MusicVolume  => musicVolume; 
+    public float SfxVolume  => sfxVolume; 
 
-    public float MusicVolume { get => musicVolume; }
-    public float SfxVolume { get => sfxVolume; }
 
     public void Initialize()
     {
-        saveSystem.Register(this);
-    }
-
-    public void Dispose()
-    {
-        //saveSystem.SaveData();
-        saveSystem.Unregister(this);
+        LoadData();
     }
 
     public void UpdateMusicVolume(float newValue)
     {
         musicVolume = newValue;
+        SaveData();
     }
 
     public void UpdateSfxVolume(float newValue)
     {
         sfxVolume = newValue;
+        SaveData();
     }
 
-    public string GetSaveData()
+    #region SaveLoadData
+
+    public void SaveData()
     {
-        GameSettingsData settingsData = new();
-        settingsData.MusicVolume = musicVolume;
-        settingsData.SfxVolume = sfxVolume;
-        return JsonConvert.SerializeObject(settingsData, Formatting.Indented);
+        SettingsDataSave newData = new();
+        newData.MusicVolume = musicVolume;
+        newData.SfxVolume = sfxVolume;
+        saveSystem.UpdateData(GetSaveDataType, newData);
+        saveSystem.SaveData(GetSaveDataType);
     }
 
-    public void LoadData(string json)
+    public void LoadData()
     {
-        GameSettingsData settingsData = JsonConvert.DeserializeObject<GameSettingsData>(json);
-        musicVolume = settingsData.MusicVolume;
-        sfxVolume = settingsData.SfxVolume;
+        SettingsDataSave data = saveSystem.GetData<SettingsDataSave>(GetSaveDataType);
+        musicVolume = data.MusicVolume;
+        sfxVolume = data.SfxVolume;
     }
+
+    #endregion
 }

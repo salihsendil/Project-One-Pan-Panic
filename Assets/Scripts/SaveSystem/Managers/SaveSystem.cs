@@ -2,79 +2,109 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Newtonsoft.Json;
 using Zenject;
 
 public class SaveSystem : IInitializable
 {
-    private HashSet<ISaveable> iSaveables = new();
+    //File Path
+#if UNITY_EDITOR
+    private string savePath = Application.dataPath;
+#else
+    private string savePath = Application.persistentDataPath;
+#endif
 
-    private SaveFile saveFile;
+    //Mapping
+    public Dictionary<SaveDataType, object> dataMapping = new();
 
-    public void Register(ISaveable saveable)
-    {
-        iSaveables.Add(saveable);
+    //Data Models
+    private SettingsDataSave settingsData = new();
+    private PlayerDataSave playerData = new();
+    private StatsDataSave statsData = new();
 
-        if (saveFile == null) { return; }
-
-        foreach (var saveEntry in saveFile.Entries)
-        {
-            if (saveable.GetSaveDataType == saveEntry.SaveDataType)
-            {
-                saveable.LoadData(saveEntry.JsonData);
-            }
-        }
-    }
-
-    public void Unregister(ISaveable saveable)
-    {
-        iSaveables.Remove(saveable);
-    }
-
-    //In the future, when we split the log files, we will need to store the data across multiple files.
-    //But for now, since we’re keeping all the data in a single JSON file, the system is logging everything.
-    public void SaveData()
-    {
-        SaveFile saveFile = new();
-
-        foreach (var saveable in iSaveables)
-        {
-            SaveFileEntry entry = new();
-            entry.SaveDataType = saveable.GetSaveDataType;
-            entry.JsonData = saveable.GetSaveData();
-            saveFile.Entries.Add(entry);
-        }
-
-        string json = JsonConvert.SerializeObject(saveFile, Formatting.Indented);
-        Debug.Log("final correct json: " + json);
-        string filePath = Path.Combine(Application.dataPath, "playerSaveTest" + ".json");
-        File.WriteAllText(filePath, json);
-        AssetDatabase.Refresh();
-    }
-
-    public void LoadData()
-    {
-        string filePath = Path.Combine(Application.dataPath, "playerSaveTest" + ".json");
-
-        if (!File.Exists(filePath)) return;
-
-        string json = File.ReadAllText(filePath);
-
-        saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
-    }
+    #region Initialize
 
     public void Initialize()
     {
+        InitializeDataMapping();
         LoadData();
     }
 
-    #region RefactorSaveSystem
-
-    public void SaveFile()
+    private void InitializeDataMapping()
     {
+        dataMapping[SaveDataType.Settings] = settingsData;
+        dataMapping[SaveDataType.PlayerData] = playerData;
+        dataMapping[SaveDataType.Stats] = statsData;
+    }
 
+    #endregion
+
+    #region Update
+
+    public T GetData<T>(SaveDataType type) where T : class
+    {
+        if (dataMapping.TryGetValue(type, out object value))
+        {
+            return value as T;
+        }
+        return null;
+    }
+
+    public void UpdateData<T>(SaveDataType type, T newData) where T : class
+    {
+        if (dataMapping.ContainsKey(type))
+        {
+            dataMapping[type] = newData;
+            return;
+        }
+
+        dataMapping.Add(type, newData);
+    }
+
+    #endregion
+
+    #region Save
+
+    public void SaveData(SaveDataType type)
+    {
+        string filePath = Path.Combine(savePath, type.ToString() + ".json");
+        string json = JsonUtility.ToJson(dataMapping[type], true);
+        File.WriteAllText(filePath, json);
+
+#if UNITY_EDITOR
+        AssetDatabase.Refresh();
+#endif
+    }
+
+    public void AllSaveData()
+    {
+        foreach (var type in dataMapping.Keys)
+        {
+            SaveData(type);
+        }
+    }
+
+    #endregion
+
+    #region Load
+
+    private void LoadData()
+    {
+        foreach (var type in dataMapping.Keys)
+        {
+            string filePath = Path.Combine(savePath, type.ToString() + ".json");
+
+            if (!File.Exists(filePath)) continue;
+
+            string json = File.ReadAllText(filePath);
+            object obj =  dataMapping[type];
+            JsonUtility.FromJsonOverwrite(json, obj);
+        }
+
+        foreach (var data in dataMapping.Keys)
+        {
+            Debug.Log(dataMapping[data]);
+        }
     }
 
     #endregion
 }
-

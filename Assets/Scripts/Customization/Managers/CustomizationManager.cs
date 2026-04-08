@@ -164,4 +164,13 @@ public class CustomizationManager : MonoBehaviour
         return (((index + step) % count) + count) % count;
     }
     #endregion
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.T))
+    //    {
+    //        saveSystem.SaveData();
+    //    }
+    //}
+
 }

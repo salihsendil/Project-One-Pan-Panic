@@ -1,27 +1,24 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Zenject;
 
-public class WardrobeManager : ISaveable, IInitializable, IDisposable
+public class WardrobeManager : ISaveable, IInitializable
 {
+    //Zenject
     [Inject] private SaveSystem saveSystem;
 
+    //Data
     private Dictionary<BodyPartType, HashSet<string>> ownedCloths = new();
     private Dictionary<BodyPartType, string> equippedCloths = new();
 
-    public SaveDataType GetSaveDataType => SaveDataType.Wardrobe;
-
+    //Properties
+    public SaveDataType GetSaveDataType => SaveDataType.PlayerData;
     public Dictionary<BodyPartType, string> EquippedCloths { get => equippedCloths; }
+
 
     public void Initialize()
     {
-        saveSystem.Register(this);
-    }
-
-    public void Dispose()
-    {
-        saveSystem.Unregister(this);
+        LoadData();
     }
 
     public bool HasCloth(BodyPartType bodyPart, string id)
@@ -46,46 +43,63 @@ public class WardrobeManager : ISaveable, IInitializable, IDisposable
 
         clothes.Add(id);
         ownedCloths[bodyPart] = clothes;
+
+        SaveData();
     }
 
     public void Equip(BodyPartType partType, string newID)
     {
         equippedCloths[partType] = newID;
+
+        SaveData();
     }
 
-    public string GetSaveData()
+    #region SaveLoadData
+
+    public void SaveData()
     {
-        List<WardrobeSaveData> clothes = new();
+        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
+
+        List<OutfitData> newOutfitList = new();
 
         foreach (var owned in ownedCloths)
         {
-            WardrobeSaveData saveData = new();
-            saveData.Key = owned.Key;
-            saveData.EquippedItem = equippedCloths[owned.Key];
+            OutfitData outfitData = new();
+            outfitData.Key = owned.Key;
+            if (!equippedCloths.ContainsKey(owned.Key))
+                equippedCloths.Add(owned.Key, ""); //fix required!
+            outfitData.EquippedItem = equippedCloths[owned.Key];
 
-            foreach (var cloths in ownedCloths[saveData.Key])
-            {
-                saveData.OwnedItems.Add(cloths);
-            }
-            clothes.Add(saveData);
+            foreach (var cloths in ownedCloths[owned.Key])
+                outfitData.OwnedItems.Add(cloths);
+
+            newOutfitList.Add(outfitData);
         }
 
-        return JsonConvert.SerializeObject(clothes, Formatting.Indented);
+        data.Outfits = newOutfitList;
+        saveSystem.UpdateData(GetSaveDataType, data);
+        saveSystem.SaveData(GetSaveDataType);
     }
 
-    public void LoadData(string json)
+    public void LoadData()
     {
-        List<WardrobeSaveData> dataList = JsonConvert.DeserializeObject<List<WardrobeSaveData>>(json);
+        PlayerDataSave save = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
 
-        foreach (var data in dataList)
+        if (save == null) return;
+
+        foreach (var data in save.Outfits)
         {
-            ownedCloths.Add(data.Key, new HashSet<string>());
-            equippedCloths[data.Key] = data.EquippedItem;
+            HashSet<string> ownedItems = new();
 
-            foreach (var cloth in data.OwnedItems)
+            foreach (var outfit in data.OwnedItems)
             {
-                ownedCloths[data.Key].Add(cloth);
+                ownedItems.Add(outfit);
             }
+
+            ownedCloths.Add(data.Key, ownedItems);
+            equippedCloths.Add(data.Key, data.EquippedItem);
         }
     }
+
+    #endregion
 }

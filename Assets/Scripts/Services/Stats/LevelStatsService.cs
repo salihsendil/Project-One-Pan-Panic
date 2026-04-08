@@ -19,7 +19,6 @@ public class LevelStatsService : MonoBehaviour
         signalBus.Subscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Subscribe<OrderExpiredSignal>(OrderExpired);
         #endregion
-
     }
 
     private void OnDisable()
@@ -28,8 +27,6 @@ public class LevelStatsService : MonoBehaviour
         signalBus.Unsubscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Unsubscribe<OrderExpiredSignal>(OrderExpired);
         #endregion
-
-
     }
 
     #region OrderStats

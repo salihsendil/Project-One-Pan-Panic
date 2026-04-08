@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System;
 using Zenject;
 
@@ -8,26 +7,25 @@ public struct CurrencyData
     public int Currency;
 }
 
-public class CurrencyManager : ISaveable, IInitializable, IDisposable
+public class CurrencyManager : ISaveable, IInitializable
 {
+    //Zenject
     [Inject] private SaveSystem saveSystem;
 
+    //Currency
     private int currentCurrency = 2000;
 
+    //Event
     public event Action<int> OnCurrencyChanged;
 
+    //Properties
     public int CurrentCurrency => currentCurrency;
+    public SaveDataType GetSaveDataType => SaveDataType.PlayerData;
 
-    public SaveDataType GetSaveDataType => SaveDataType.Currency;
 
     public void Initialize()
     {
-        saveSystem.Register(this);
-    }
-
-    public void Dispose()
-    {
-        saveSystem.Unregister(this);
+        LoadData();
     }
 
     public bool HasEnough(int amount)
@@ -38,6 +36,7 @@ public class CurrencyManager : ISaveable, IInitializable, IDisposable
     public void Add(int amount)
     {
         currentCurrency += amount;
+        SaveData();
         OnCurrencyChanged?.Invoke(currentCurrency);
     }
 
@@ -46,22 +45,31 @@ public class CurrencyManager : ISaveable, IInitializable, IDisposable
         if (HasEnough(amount))
         {
             currentCurrency -= amount;
+            SaveData();
             OnCurrencyChanged?.Invoke(currentCurrency);
             return true;
         }
         return false;
     }
 
-    public string GetSaveData()
+    #region SaveLoadData
+
+    public void SaveData()
     {
-        CurrencyData currencyData = new CurrencyData();
-        currencyData.Currency = currentCurrency;
-        return JsonConvert.SerializeObject(currencyData, Formatting.Indented);
+        PlayerDataSave newData = new();
+        newData.Currency = currentCurrency;
+
+        saveSystem.UpdateData(GetSaveDataType, newData);
+        saveSystem.SaveData(GetSaveDataType);
     }
 
-    public void LoadData(string json)
+    public void LoadData()
     {
-        CurrencyData currencyData = JsonConvert.DeserializeObject<CurrencyData>(json);
-        currentCurrency = currencyData.Currency;
+        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
+
+        if (data == null) return;
+        currentCurrency = data.Currency;
     }
+
+    #endregion
 }

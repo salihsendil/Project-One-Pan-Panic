@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum StatsType { Score, CompleteOrder, FailOrder }
+public enum StatsType { Score, CompleteOrder, FailOrder, EarnedGold }
 
 public class LevelStatsService : MonoBehaviour
 {
@@ -12,35 +12,38 @@ public class LevelStatsService : MonoBehaviour
     //Data
     public Dictionary<StatsType, int> statsDictionary = new Dictionary<StatsType, int>();
 
+    #region SignalSubscription
 
     private void OnEnable()
     {
-        #region OrderSignals
         signalBus.Subscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Subscribe<OrderExpiredSignal>(OrderExpired);
-        #endregion
+        signalBus.Subscribe<ScoreChangedSignal>(ScoreChanged);
+
     }
 
     private void OnDisable()
     {
-        #region OrderSignals
         signalBus.Unsubscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Unsubscribe<OrderExpiredSignal>(OrderExpired);
-        #endregion
+        signalBus.Unsubscribe<ScoreChangedSignal>(ScoreChanged);
     }
+
+    #endregion
 
     #region OrderStats
 
-    public void OrderDelivered(OrderDeliveredSignal signal)
+    private void OrderDelivered(OrderDeliveredSignal signal)
     {
         UpdateStats(StatsType.CompleteOrder, 1);
-        UpdateStats(StatsType.Score, signal.Order.Recipe.SuccessScore);
-
     }
-    public void OrderExpired(OrderExpiredSignal signal)
+    private void OrderExpired(OrderExpiredSignal signal)
     {
         UpdateStats(StatsType.FailOrder, 1);
-        UpdateStats(StatsType.Score, signal.Order.Recipe.SuccessScore);
+    }
+    private void ScoreChanged(ScoreChangedSignal signal)
+    {
+        UpdateStats(StatsType.Score, signal.NewScore);
     }
 
     #endregion

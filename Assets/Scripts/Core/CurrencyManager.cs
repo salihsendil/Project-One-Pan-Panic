@@ -1,19 +1,13 @@
 using System;
 using Zenject;
 
-[Serializable]
-public struct CurrencyData
-{
-    public int Currency;
-}
-
 public class CurrencyManager : ISaveable, IInitializable
 {
     //Zenject
     [Inject] private SaveSystem saveSystem;
 
     //Currency
-    private int currentCurrency = 2000;
+    private int currentCurrency;
 
     //Event
     public event Action<int> OnCurrencyChanged;
@@ -28,7 +22,7 @@ public class CurrencyManager : ISaveable, IInitializable
         LoadData();
     }
 
-    public bool HasEnough(int amount)
+    private bool HasEnough(int amount)
     {
         return currentCurrency >= amount;
     }
@@ -56,10 +50,10 @@ public class CurrencyManager : ISaveable, IInitializable
 
     public void SaveData()
     {
-        PlayerDataSave newData = new();
-        newData.Currency = currentCurrency;
+        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(SaveDataType.PlayerData);
+        data.Currency = currentCurrency;
 
-        saveSystem.UpdateData(GetSaveDataType, newData);
+        saveSystem.UpdateData(GetSaveDataType, data);
         saveSystem.SaveData(GetSaveDataType);
     }
 

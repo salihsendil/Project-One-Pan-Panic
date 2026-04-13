@@ -10,7 +10,6 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<CurrencyManager>().AsSingle().NonLazy();
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
 
-
         SignalInstallers();
     }
 

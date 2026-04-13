@@ -26,7 +26,7 @@ public class ScoreDisplay : MonoBehaviour
 
     private void Start()
     {
-        scoreText.text = scoreHandler.GetScore().ToString();
+        scoreText.text = scoreHandler.CurrentScore.ToString();
     }
 
     public void UpdateScoreText(ScoreChangedSignal signal)

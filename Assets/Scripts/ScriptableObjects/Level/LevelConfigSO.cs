@@ -11,4 +11,8 @@ public class LevelConfigSO : ScriptableObject
 
     [Header("Score")]
     public int StartScore = 0;
+    public float ScoreMultiplierStepAmount = 0.04f;
+
+    [Header("Currency")]
+    public float ScoreCurrencyMultiplier = 0.08f;
 }

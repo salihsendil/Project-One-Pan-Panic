@@ -23,7 +23,7 @@ public class GameCompletePanelDisplay : MonoBehaviour
     {
         panel = GetComponent<CanvasGroup>();
         panel.alpha = 0;
-        panel.interactable = false;
+        panel.blocksRaycasts = false;
     }
 
     private void OnEnable()
@@ -41,17 +41,16 @@ public class GameCompletePanelDisplay : MonoBehaviour
         await Task.Delay(2000);
         SetStatsText();
         panel.alpha = 1;
-        panel.interactable = true;
+        panel.blocksRaycasts = true;
     }
 
     private void SetStatsText()
     {
         scoreText.text = "Score: " + statsService.GetStat(StatsType.Score).ToString();
-        Debug.Log("panel: " + scoreHandler.HighScore.ToString());
         highscoreText.text = "High Score: " + scoreHandler.HighScore.ToString();
         failOrderText.text = "Failed Order: " + statsService.GetStat(StatsType.FailOrder).ToString();
         completeOrderText.text = "Completed Order: " + statsService.GetStat(StatsType.CompleteOrder).ToString();
-        //earnedGoldText
+        earnedGoldText.text = "Earned Gold: " + statsService.GetStat(StatsType.EarnedGold).ToString();
     }
 
 }

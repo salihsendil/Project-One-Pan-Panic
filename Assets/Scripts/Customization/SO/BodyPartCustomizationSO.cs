@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Body Part Customization SO", menuName = "Scriptable Objects/Customization/New Body Part Customization SO")]
 public class BodyPartCustomizationSO : ScriptableObject
 {
-    public List<CustomizationData> Cloths = new List<CustomizationData>();
-
+    public List<CustomizationData> ClothsList = new List<CustomizationData>();
 }
 
 [Serializable]

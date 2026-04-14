@@ -2315,8 +2315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07457e4e806dd1468ab4cb59a7f71b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuGroup: {fileID: 1091847571}
-  customizeGroup: {fileID: 1172680871}
+  mainMenuCanvas: {fileID: 1091847571}
+  customizationUI: {fileID: 1172680870}
 --- !u!1 &499326708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,8 +4358,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -4446,13 +4446,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.061746404, y: -0.32898474, z: 0.021562807, w: 0.9420677}
-  m_LocalPosition: {x: -1.884, y: 1.388, z: -2.423}
+  m_LocalRotation: {x: 0.08143655, y: -0.3284618, z: 0.028438913, w: 0.9405701}
+  m_LocalPosition: {x: -2.12, y: 1.32, z: -2.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 7.5, y: -38.5, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.897, y: -38.5, z: 0}
 --- !u!1 &975996637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4832,7 +4832,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091847569}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5010,6 +5010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c7f9c7d5dcc7647a186a2cc37c7415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1172680871}
   customizationManager: {fileID: 170579983}
   buyButtonDisplay: {fileID: 844331374}
   currencyDisplay: {fileID: 1902493891}
@@ -5022,7 +5023,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172680868}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -7915,7 +7916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5496564
+      value: -3.999
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7923,7 +7924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.922249
+      value: 0.218
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalRotation.w

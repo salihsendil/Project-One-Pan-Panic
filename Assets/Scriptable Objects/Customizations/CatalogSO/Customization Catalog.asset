@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215e51fcc71dc6048963d1b83ee7b800, type: 3}
   m_Name: Customization Catalog
   m_EditorClassIdentifier: 
-  Cloths:
+  Catalog:
   - BodyPart: 0
     PartCloths: {fileID: 11400000, guid: 7479b876146f05f40bb8f79d67a4bea6, type: 2}
   - BodyPart: 1

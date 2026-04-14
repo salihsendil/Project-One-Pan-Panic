@@ -40,7 +40,7 @@ public class SaveSystem : IInitializable
 
     #region Update
 
-    public T GetData<T>(SaveDataType type) where T : class
+    public T TryGetData<T>(SaveDataType type) where T : class
     {
         if (dataMapping.TryGetValue(type, out object value))
         {
@@ -98,11 +98,6 @@ public class SaveSystem : IInitializable
             string json = File.ReadAllText(filePath);
             object obj =  dataMapping[type];
             JsonUtility.FromJsonOverwrite(json, obj);
-        }
-
-        foreach (var data in dataMapping.Keys)
-        {
-            Debug.Log(dataMapping[data]);
         }
     }
 

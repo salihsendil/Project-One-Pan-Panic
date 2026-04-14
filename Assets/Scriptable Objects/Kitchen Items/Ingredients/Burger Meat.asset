@@ -22,10 +22,10 @@ MonoBehaviour:
   - ProcessType: 10
     FromStage: 0
     ToStage: 2
-    ProcessTime: 10
+    ProcessTime: 5
     OutputMesh: {fileID: 3689311507718238679, guid: d242f63e832a1b54a8e9211c5b82df76, type: 3}
   - ProcessType: 10
     FromStage: 2
     ToStage: 3
-    ProcessTime: 5
+    ProcessTime: 10
     OutputMesh: {fileID: 2609348891185806902, guid: 57f46fb5808ee344bbf2bf26d0340e72, type: 3}

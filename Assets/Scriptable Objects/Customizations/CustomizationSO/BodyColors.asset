@@ -12,22 +12,226 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a5461b92de11645942a33bdfcdd701, type: 3}
   m_Name: BodyColors
   m_EditorClassIdentifier: 
-  Cloths:
+  ClothsList:
+  - BodyPart: 0
+    Id: default
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: ca35d437b63c7ad43b38aae7a892cb59, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 0
   - BodyPart: 0
     Id: body_color_01
-    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    Mesh: {fileID: 0}
     BodyColorMaterial: {fileID: 2100000, guid: 4ab96d2727fd9d24aa0fb27162ecebe4, type: 2}
     FaceMaterial: {fileID: 0}
-    Cost: 150
+    Cost: 105
   - BodyPart: 0
     Id: body_color_02
-    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
-    BodyColorMaterial: {fileID: 2100000, guid: e9a52ac0bed4a0d4ab5e851eb0d44cae, type: 2}
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: dd747bfe35549bd40adf543e8dc5bf34, type: 2}
     FaceMaterial: {fileID: 0}
-    Cost: 123
+    Cost: 137
   - BodyPart: 0
     Id: body_color_03
-    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 963bb908ca563dc4481592bffab4118e, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 131
+  - BodyPart: 0
+    Id: body_color_04
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 20d50c47c1be99c4f929b2eb262ca870, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 141
+  - BodyPart: 0
+    Id: body_color_05
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: e9a52ac0bed4a0d4ab5e851eb0d44cae, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 124
+  - BodyPart: 0
+    Id: body_color_06
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 30df60519ea9dc748a9274e9735fb811, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 138
+  - BodyPart: 0
+    Id: body_color_07
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 822c1ed671e27f147942eab73b51059c, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 76
+  - BodyPart: 0
+    Id: body_color_08
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: fd0589f6e47f47e4caa2276e07e21ca1, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 80
+  - BodyPart: 0
+    Id: body_color_09
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 5cc6864d6e70a6c4187f4d1cc68e6774, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 105
+  - BodyPart: 0
+    Id: body_color_10
+    Mesh: {fileID: 0}
     BodyColorMaterial: {fileID: 2100000, guid: a64e0e56ce1532a4b82adb0fa29a1911, type: 2}
     FaceMaterial: {fileID: 0}
-    Cost: 342
+    Cost: 175
+  - BodyPart: 0
+    Id: body_color_11
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: a139f0d25a40f794691eb459f3a41308, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 116
+  - BodyPart: 0
+    Id: body_color_12
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 9957ebb756fa8554f8b6b32ad0e81526, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 0
+    Id: body_color_13
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: c3d438ea033b79e4396ccc80e8529e42, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 62
+  - BodyPart: 0
+    Id: body_color_14
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 9213715ec0c977342ae0400d0d4eac54, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 94
+  - BodyPart: 0
+    Id: body_color_15
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 283251a745a8f7244863bcb1c97e02de, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 0
+    Id: body_color_16
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: c795e7546da9bcb4f8216d8819b4fb96, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 125
+  - BodyPart: 0
+    Id: body_color_17
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: bb6de756dc698d94a8447f2122674668, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 156
+  - BodyPart: 0
+    Id: body_color_18
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 7c11cffe8593dc3478b618f388c55ddc, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 99
+  - BodyPart: 0
+    Id: body_color_19
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: d1fef1d8e31bd3447ae0dd845cfb8ba7, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 78
+  - BodyPart: 0
+    Id: body_color_20
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 6c38e9006f7761e499a6f41850d9c956, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 80
+  - BodyPart: 0
+    Id: body_color_21
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 8a9f62f28e14ce947b92717671f3a310, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 99
+  - BodyPart: 0
+    Id: body_color_22
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: c8e546b210448884cb547844d7b74890, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 162
+  - BodyPart: 0
+    Id: body_color_23
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: b6244bc7b57bf13468651f72d8b2b352, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 68
+  - BodyPart: 0
+    Id: body_color_24
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: e3e696f667f272d44a6c540ab139b231, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 149
+  - BodyPart: 0
+    Id: body_color_25
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 859a79739a0c78541a556e638cee9193, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 163
+  - BodyPart: 0
+    Id: body_color_26
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 8dff402d4144b6c499dd4414de69a55f, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 172
+  - BodyPart: 0
+    Id: body_color_27
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: d61d3dfbea583f64ba1c6c6e2d011e90, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 142
+  - BodyPart: 0
+    Id: body_color_28
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: fb269c9da0489bb44aefeaf0c664a247, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 97
+  - BodyPart: 0
+    Id: body_color_29
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: e76e4488955447d4487b7fb243a077b7, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 154
+  - BodyPart: 0
+    Id: body_color_30
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: c4c0783b1679586408a1e00fcc359798, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 143
+  - BodyPart: 0
+    Id: body_color_31
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 09c68f4e070e9ee4e830f24d481782eb, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 62
+  - BodyPart: 0
+    Id: body_color_32
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 86233cda5f45e034b8d782a0dd1287fa, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 177
+  - BodyPart: 0
+    Id: body_color_33
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 09523f5a0711f10468cbf57544572e4d, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 144
+  - BodyPart: 0
+    Id: body_color_34
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 2cee18d7460ff2c4b9d7952374f76046, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 124
+  - BodyPart: 0
+    Id: body_color_35
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 86b2616ed4d79734ca59b98fc78e3408, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 79
+  - BodyPart: 0
+    Id: body_color_36
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 2100000, guid: 14eb5e69b0c55144c8cd04d413120d73, type: 2}
+    FaceMaterial: {fileID: 0}
+    Cost: 158

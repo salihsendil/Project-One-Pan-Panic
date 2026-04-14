@@ -8,6 +8,6 @@ public class ChangeBodyPartAction : BaseUIAction
 
     public override void Execute()
     {
-        customizationManager.OnChangeBodyPart(stepSize);
+        customizationManager.ChangeBodyPart(stepSize);
     }
 }

@@ -6,8 +6,8 @@ public enum SaveDataType { Settings = 0, PlayerData = 10, Stats = 20 }
 [Serializable]
 public class SettingsDataSave
 {
-    public float MusicVolume;
-    public float SfxVolume;
+    public float MusicVolume = 0.5f;
+    public float SfxVolume = 0.5f;
 }
 
 [Serializable]
@@ -23,12 +23,17 @@ public class OutfitData
     public BodyPartType Key;
     public string EquippedItem;
     public List<string> OwnedItems = new();
+
+    public OutfitData(BodyPartType key)
+    {
+        Key = key;
+    }
 }
 
 [Serializable]
 public class StatsDataSave
 {
-    public int HighScore;
+    public int HighScore = 0;
 }
 
 

@@ -45,7 +45,7 @@ public class GameSettingsService : ISaveable, IInitializable
 
     public void LoadData()
     {
-        SettingsDataSave data = saveSystem.GetData<SettingsDataSave>(GetSaveDataType);
+        SettingsDataSave data = saveSystem.TryGetData<SettingsDataSave>(GetSaveDataType);
         musicVolume = data.MusicVolume;
         sfxVolume = data.SfxVolume;
     }

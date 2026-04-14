@@ -8,6 +8,6 @@ public class ChangeClothAction : BaseUIAction
 
     public override void Execute()
     {
-        customizationManager.OnChangeCloth(stepSize);
+        customizationManager.ChangeCloth(stepSize);
     }
 }

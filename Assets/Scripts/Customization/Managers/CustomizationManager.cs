@@ -5,172 +5,155 @@ using Zenject;
 
 public class CustomizationManager : MonoBehaviour
 {
+    //Data Model
+    public struct BodyPartBinding
+    {
+        public int EquippedIndex;
+        public IBodyPartFitter BodyPartFitter;
+
+        public BodyPartBinding(int equippedIndex, IBodyPartFitter bodyPartFitter)
+        {
+            EquippedIndex = equippedIndex;
+            BodyPartFitter = bodyPartFitter;
+        }
+
+        public void UpdateIndex(int equippedIndex)
+        {
+            EquippedIndex = equippedIndex;
+        }
+    }
+
     //Zenject
     [Inject] private WardrobeManager wardrobe;
     [Inject] private CurrencyManager currencyManager;
-    [Inject] private SaveSystem saveSystem;
 
     //Data
-    [SerializeField] private BodyPartCatalogSO dataCatalog;
+    [SerializeField] private BodyPartCatalogSO catalogSO;
 
     //Data Mapping
     private Dictionary<BodyPartType, List<CustomizationData>> catalog = new();
-    private Dictionary<BodyPartType, int> partIndices = new();
-
-    //Worker Mapping
-    private Dictionary<BodyPartType, IBodyPartFitter> bodyParts = new();
+    private Dictionary<BodyPartType, BodyPartBinding> bodyParts = new();
 
     //Navigation
-    private BodyPartType currentBodyPart = BodyPartType.Body;
-    private int previewIndex = 0;
+    private BodyPartType currentPart = BodyPartType.Body;
+    private int previewIndex;
 
     //Events
-    public event Action<BodyPartType> OnChangeBodyPartChanged;
-    public event Action<BuyButtonState, int?> OnClothChanged;
+    public event Action<BodyPartType> OnBodyPartChanged;
+    public event Action<string> OnClothChanged;
 
     private void Start()
     {
-        InitializeData();
-        InitializeBodyParts();
+        InitializeCatalog();
         InitializeCharacter();
-
-        var cloth = catalog[currentBodyPart][partIndices[currentBodyPart]];
-        HandleButtonState(cloth, out BuyButtonState buttonState, out int? cost);
-
-        OnClothChanged?.Invoke(buttonState, cost);
+        ChangeBodyPart(0);
     }
 
-    #region Initialize
-
-    private void InitializeData()
+    private void InitializeCatalog()
     {
-        foreach (var item in dataCatalog.Cloths)
+        foreach (var entry in catalogSO.Catalog)
         {
-            partIndices[item.BodyPart] = 0; //till save-load system, after that its gonna update
-            catalog[item.BodyPart] = item.PartCloths.Cloths;
+            catalog[entry.BodyPart] = entry.PartCloths.ClothsList;
         }
     }
-
-    private void InitializeBodyParts()
-    {
-        var parts = GetComponentsInChildren<IBodyPartFitter>();
-        foreach (var part in parts)
-        {
-            bodyParts[part.BodyPart] = part;
-        }
-    }
-
     private void InitializeCharacter()
     {
-        var equippedCloths = wardrobe.EquippedCloths;
-        foreach (var key in equippedCloths.Keys)
-        {
-            if (catalog.TryGetValue(key, out var clothList))
-            {
-                CustomizationData data = clothList.Find(x => x.Id == equippedCloths[key]);
-                EquipCloth(key, data);
-            }
+        var parts = GetComponentsInChildren<IBodyPartFitter>();
 
+        foreach (var part in parts)
+        {
+            bodyParts[part.BodyPart] = new BodyPartBinding(0, part);
+
+            string clothId = wardrobe.GetEquippedClothId(part.BodyPart);
+
+            int newIndex = catalog[part.BodyPart].FindIndex(x => x.Id == clothId);
+            if (newIndex == -1) continue;
+
+            bodyParts[part.BodyPart].UpdateIndex(newIndex);
+            EquipCloth(part.BodyPart, catalog[part.BodyPart][newIndex]);
         }
     }
 
-    #endregion
 
-    public void OnChangeBodyPart(int step)
+    public void ChangeBodyPart(int stepSize)
     {
-        ApplyCloth(catalog[currentBodyPart][partIndices[currentBodyPart]]);
+        RevertChanges(currentPart);
 
-        int nextIndex = GetWrappedIndex((int)currentBodyPart, step, catalog.Count);
-        currentBodyPart = (BodyPartType)nextIndex;
-        previewIndex = partIndices[currentBodyPart];
-        OnChangeBodyPartChanged?.Invoke(currentBodyPart);
-        OnChangeCloth(0);
+        currentPart = (BodyPartType)GetWrappedIndex((int)currentPart, stepSize, catalog.Count);
+        previewIndex = bodyParts[currentPart].EquippedIndex;
+
+        ChangeCloth(0);
+        OnBodyPartChanged?.Invoke(currentPart);
     }
 
-    public void OnChangeCloth(int step)
+    public void ChangeCloth(int stepSize)
     {
-        int count = catalog[currentBodyPart].Count;
-        previewIndex = GetWrappedIndex(previewIndex, step, count);
-        var cloth = catalog[currentBodyPart][previewIndex];
+        int catalogSize = catalog[currentPart].Count;
 
-        ApplyCloth(cloth);
+        previewIndex = GetWrappedIndex(previewIndex, stepSize, catalogSize);
+        CustomizationData data = catalog[currentPart][previewIndex];
 
-        HandleButtonState(cloth, out BuyButtonState buttonState, out int? cost);
-
-        OnClothChanged?.Invoke(buttonState, cost);
+        EquipCloth(currentPart, data);
+        HandleButtonState(data);
     }
 
-    private void ApplyCloth(CustomizationData data)
+    private void HandleButtonState(CustomizationData data)
     {
-        bodyParts[currentBodyPart].Apply(data);
-    }
+        string buttonText;
 
-    private void HandleButtonState(CustomizationData cloth, out BuyButtonState buttonState, out int? cost)
-    {
-        cost = null;
+        if (wardrobe.IsEquipped(currentPart, data.Id))
+            buttonText = BuyButtonState.Equipped.ToString();
 
-        if (!wardrobe.HasCloth(currentBodyPart, cloth.Id))
-        {
-            buttonState = BuyButtonState.Buy;
-            cost = cloth.Cost;
-        }
+        else if (wardrobe.HasCloth(currentPart, data.Id))
+            buttonText = BuyButtonState.Equip.ToString();
 
         else
-        {
-            if (!wardrobe.IsEquipped(currentBodyPart, cloth.Id))
-            {
-                buttonState = BuyButtonState.Equip;
-                return;
-            }
-            buttonState = BuyButtonState.Equipped;
-        }
+            buttonText = data.Cost.ToString();
+
+        OnClothChanged?.Invoke(buttonText);
     }
 
     public void HandleBuyButton()
     {
-        var cloth = catalog[currentBodyPart][previewIndex];
+        int index = bodyParts[currentPart].EquippedIndex;
+        CustomizationData data = catalog[currentPart][index];
 
-        if (!wardrobe.HasCloth(currentBodyPart, cloth.Id))
+        if (!wardrobe.HasCloth(currentPart, data.Id))
         {
-            if (currencyManager.TrySpend(cloth.Cost))
-            {
-                wardrobe.Unlock(currentBodyPart, cloth.Id);
-                EquipCloth(currentBodyPart, cloth);
-                wardrobe.Equip(currentBodyPart, cloth.Id);
-                OnClothChanged?.Invoke(BuyButtonState.Equipped, null);
-            }
+            if (!currencyManager.TrySpend(data.Cost)) return;
+            wardrobe.Unlock(currentPart, data.Id);
         }
-
-        else
-        {
-            if (!wardrobe.IsEquipped(currentBodyPart, cloth.Id))
-            {
-                EquipCloth(currentBodyPart, cloth);
-                wardrobe.Equip(currentBodyPart, cloth.Id);
-                OnClothChanged?.Invoke(BuyButtonState.Equipped, null);
-            }
-        }
+        wardrobe.Equip(currentPart, data.Id);
+        bodyParts[currentPart].UpdateIndex(previewIndex);
+        EquipCloth(currentPart, data);
+        HandleButtonState(data);
     }
 
-    private void EquipCloth(BodyPartType partType, CustomizationData cloth)
+    private void EquipCloth(BodyPartType partType, CustomizationData data)
     {
-        currentBodyPart = partType;
-        ApplyCloth(cloth);
-        partIndices[partType] = previewIndex;
+        bodyParts[partType].BodyPartFitter.Apply(data);
     }
+
     #region Helper
     private int GetWrappedIndex(int index, int step, int count)
     {
         return (((index + step) % count) + count) % count;
     }
+
+    private void RevertChanges(BodyPartType partType)
+    {
+        int index = bodyParts[partType].EquippedIndex;
+        CustomizationData data = catalog[partType][index];
+
+        EquipCloth(partType, data);
+    }
+
+    public void RevertAllChanges()
+    {
+        foreach (var part in bodyParts.Keys)
+        {
+            RevertChanges(part);
+        }
+    }
     #endregion
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        saveSystem.SaveData();
-    //    }
-    //}
-
 }

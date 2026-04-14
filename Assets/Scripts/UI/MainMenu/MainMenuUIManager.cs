@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MainMenuUIManager : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup mainMenuGroup;
-    [SerializeField] private CanvasGroup customizeGroup;
+    [SerializeField] private CanvasGroup mainMenuCanvas;
+    [SerializeField] private CustomizationUIController customizationUI;
 
     private void OnEnable()
     {
@@ -12,17 +12,17 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void GoToCustomize()
     {
-        customizeGroup.alpha = 1;
-        customizeGroup.interactable = true;
-        mainMenuGroup.alpha = 0;
-        mainMenuGroup.interactable = false;
+        customizationUI.SetVisibility(true);
+        mainMenuCanvas.alpha = 0;
+        mainMenuCanvas.interactable = false;
+        mainMenuCanvas.blocksRaycasts = false;
     }
 
     public void GoToMainMenu()
     {
-        customizeGroup.alpha = 0;
-        customizeGroup.interactable = false;
-        mainMenuGroup.alpha = 1;
-        mainMenuGroup.interactable = true;
+        customizationUI.SetVisibility(false);
+        mainMenuCanvas.alpha = 1;
+        mainMenuCanvas.interactable = true;
+        mainMenuCanvas.blocksRaycasts = true;
     }
 }

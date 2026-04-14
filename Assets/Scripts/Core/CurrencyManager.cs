@@ -50,7 +50,7 @@ public class CurrencyManager : ISaveable, IInitializable
 
     public void SaveData()
     {
-        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(SaveDataType.PlayerData);
+        PlayerDataSave data = saveSystem.TryGetData<PlayerDataSave>(SaveDataType.PlayerData);
         data.Currency = currentCurrency;
 
         saveSystem.UpdateData(GetSaveDataType, data);
@@ -59,7 +59,7 @@ public class CurrencyManager : ISaveable, IInitializable
 
     public void LoadData()
     {
-        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
+        PlayerDataSave data = saveSystem.TryGetData<PlayerDataSave>(GetSaveDataType);
 
         if (data == null) return;
         currentCurrency = data.Currency;

@@ -4,52 +4,80 @@ using Zenject;
 
 public class WardrobeManager : ISaveable, IInitializable
 {
+    private struct WardrobeCollection
+    {
+        public string EquippedClothId;
+        public HashSet<string> OwnedClothsId;
+
+        public static WardrobeCollection CreateEmpty()
+        {
+            string defaultId = "default";
+            return new WardrobeCollection
+            {
+                EquippedClothId = defaultId,
+                OwnedClothsId = new HashSet<string> { defaultId }
+            };
+        }
+
+        public WardrobeCollection(string equippedClothId, HashSet<string> ownedClothsId)
+        {
+            EquippedClothId = equippedClothId;
+            OwnedClothsId = ownedClothsId;
+        }
+    }
+
     //Zenject
     [Inject] private SaveSystem saveSystem;
 
-    //Data
-    private Dictionary<BodyPartType, HashSet<string>> ownedCloths = new();
-    private Dictionary<BodyPartType, string> equippedCloths = new();
+    private Dictionary<BodyPartType, WardrobeCollection> wardrobeCatalog = new();
 
     //Properties
     public SaveDataType GetSaveDataType => SaveDataType.PlayerData;
-    public Dictionary<BodyPartType, string> EquippedCloths { get => equippedCloths; }
-
 
     public void Initialize()
     {
         LoadData();
     }
 
-    public bool HasCloth(BodyPartType bodyPart, string id)
+    public string GetEquippedClothId(BodyPartType bodyPart)
     {
-        if (!ownedCloths.TryGetValue(bodyPart, out HashSet<string> cloths)) { return false; }
+        if (!wardrobeCatalog.ContainsKey(bodyPart)) return null;
 
-        return cloths.Contains(id);
+        return wardrobeCatalog[bodyPart].EquippedClothId;
     }
 
-    public bool IsEquipped(BodyPartType partType, string id)
+    public bool HasCloth(BodyPartType bodyPart, string id)
     {
-        return equippedCloths.TryGetValue(partType, out var equippedId) && equippedId == id;
+        if (!wardrobeCatalog.ContainsKey(bodyPart)) return false;
+
+        HashSet<string> ownedClothes = wardrobeCatalog[bodyPart].OwnedClothsId;
+
+        return ownedClothes.Contains(id);
+    }
+
+    public bool IsEquipped(BodyPartType bodyPart, string id)
+    {
+        if (!wardrobeCatalog.ContainsKey(bodyPart)) return false;
+
+        return wardrobeCatalog[bodyPart].EquippedClothId == id;
     }
 
     public void Unlock(BodyPartType bodyPart, string id)
     {
-        HashSet<string> clothes;
-        if (!ownedCloths.TryGetValue(bodyPart, out clothes))
-        {
-            clothes = new();
-        }
-
-        clothes.Add(id);
-        ownedCloths[bodyPart] = clothes;
+        if (!wardrobeCatalog.ContainsKey(bodyPart))
+            wardrobeCatalog[bodyPart] = WardrobeCollection.CreateEmpty();
+        wardrobeCatalog[bodyPart].OwnedClothsId.Add(id);
 
         SaveData();
     }
 
-    public void Equip(BodyPartType partType, string newID)
+    public void Equip(BodyPartType bodyPart, string newID)
     {
-        equippedCloths[partType] = newID;
+        if (!wardrobeCatalog.ContainsKey(bodyPart)) return;
+
+        WardrobeCollection collection = wardrobeCatalog[bodyPart];
+        collection.EquippedClothId = newID;
+        wardrobeCatalog[bodyPart] = collection;
 
         SaveData();
     }
@@ -58,46 +86,56 @@ public class WardrobeManager : ISaveable, IInitializable
 
     public void SaveData()
     {
-        PlayerDataSave data = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
+        PlayerDataSave data = saveSystem.TryGetData<PlayerDataSave>(GetSaveDataType);
+        if (data == null) data = new();
+        data.Outfits.Clear();
 
-        List<OutfitData> newOutfitList = new();
-
-        foreach (var owned in ownedCloths)
+        foreach (var collection in wardrobeCatalog.Keys)
         {
-            OutfitData outfitData = new();
-            outfitData.Key = owned.Key;
-            if (!equippedCloths.ContainsKey(owned.Key))
-                equippedCloths.Add(owned.Key, ""); //fix required!
-            outfitData.EquippedItem = equippedCloths[owned.Key];
+            OutfitData outfitData = data.Outfits.Find(x => x.Key == collection);
+            if (outfitData == null) outfitData = new(collection);
+            outfitData.OwnedItems.Clear();
 
-            foreach (var cloths in ownedCloths[owned.Key])
-                outfitData.OwnedItems.Add(cloths);
+            HashSet<string> ownedCloths = wardrobeCatalog[collection].OwnedClothsId;
+            foreach (var owned in ownedCloths)
+            {
+                outfitData.OwnedItems.Add(owned);
+            }
 
-            newOutfitList.Add(outfitData);
+            outfitData.EquippedItem = wardrobeCatalog[collection].EquippedClothId;
+            data.Outfits.Add(outfitData);
         }
-
-        data.Outfits = newOutfitList;
         saveSystem.UpdateData(GetSaveDataType, data);
         saveSystem.SaveData(GetSaveDataType);
     }
 
     public void LoadData()
     {
-        PlayerDataSave save = saveSystem.GetData<PlayerDataSave>(GetSaveDataType);
+        PlayerDataSave save = saveSystem.TryGetData<PlayerDataSave>(GetSaveDataType);
 
-        if (save == null) return;
-
-        foreach (var data in save.Outfits)
+        //if save null create default data and return
+        if (save == null)
         {
-            HashSet<string> ownedItems = new();
-
-            foreach (var outfit in data.OwnedItems)
+            var parts = Enum.GetValues(typeof(BodyPartType));
+            foreach (BodyPartType part in parts)
             {
-                ownedItems.Add(outfit);
+                WardrobeCollection newCollection = WardrobeCollection.CreateEmpty();
+                wardrobeCatalog[part] = newCollection;
             }
 
-            ownedCloths.Add(data.Key, ownedItems);
-            equippedCloths.Add(data.Key, data.EquippedItem);
+            return;
+        }
+
+        //if save found and valid initialize data mapping
+        foreach (var data in save.Outfits)
+        {
+            WardrobeCollection newCollection = WardrobeCollection.CreateEmpty();
+
+            foreach (var owned in data.OwnedItems)
+                newCollection.OwnedClothsId.Add(owned);
+
+            newCollection.EquippedClothId = data.EquippedItem;
+            wardrobeCatalog[data.Key] = newCollection;
         }
     }
 

@@ -83,7 +83,7 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
 
     public void LoadData()
     {
-        StatsDataSave data = saveSystem.GetData<StatsDataSave>(GetSaveDataType);
+        StatsDataSave data = saveSystem.TryGetData<StatsDataSave>(GetSaveDataType);
         highScore = data.HighScore;
     }
 

@@ -12,22 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a5461b92de11645942a33bdfcdd701, type: 3}
   m_Name: Hats
   m_EditorClassIdentifier: 
-  Cloths:
+  ClothsList:
+  - BodyPart: 2
+    Id: default
+    Mesh: {fileID: 0}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 0
   - BodyPart: 2
     Id: hat_01
     Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
     BodyColorMaterial: {fileID: 0}
     FaceMaterial: {fileID: 0}
-    Cost: 235
+    Cost: 261
   - BodyPart: 2
     Id: hat_02
-    Mesh: {fileID: -2087009209214787242, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
-    BodyColorMaterial: {fileID: 0}
-    FaceMaterial: {fileID: 0}
-    Cost: 123
-  - BodyPart: 2
-    Id: hat_03
     Mesh: {fileID: 1601736987376108287, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
     BodyColorMaterial: {fileID: 0}
     FaceMaterial: {fileID: 0}
-    Cost: 489
+    Cost: 124
+  - BodyPart: 2
+    Id: hat_03
+    Mesh: {fileID: -2087009209214787242, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 84

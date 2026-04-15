@@ -41,7 +41,7 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
         PoolItemCleaner.ClearContainerIngredients(spawnedItems, poolManager);
         spawnedItems.Clear();
         ingredientEntries.Clear();
-        billboardHandler.AllClear();
+        iconDisplay.AllClear();
         signalBus.Fire(new ContainerItemDespawned(GetPoolType));
     }
 
@@ -74,9 +74,9 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
         currentInteractor.SetItem(pickable);
         spawnedItems.Add(ingredient);
         ingredientEntries.Add(entry);
-        ingredient.BillboardHandler.SetCanvasVisibility(false);
-        billboardHandler.SetCanvasVisibility(true);
-        billboardHandler.SetImage(ingredient.GetItemData.Icon);
+        ingredient.IconDisplay.SetCanvasVisibility(false);
+        iconDisplay.SetCanvasVisibility(true);
+        iconDisplay.SetImage(ingredient.GetItemData.Icon);
         CheckRecipeMatch();
     }
 

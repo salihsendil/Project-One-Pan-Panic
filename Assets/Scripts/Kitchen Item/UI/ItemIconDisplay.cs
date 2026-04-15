@@ -2,22 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IconBillboardHandler : MonoBehaviour
+public class ItemIconDisplay : MonoBehaviour
 {
-    private Transform lookAt;
-    private bool isActive;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private List<Image> images = new List<Image>();
 
     private void Awake()
     {
-        lookAt = Camera.main.transform;
         AllClear();
     }
 
     public void SetCanvasVisibility(bool isVisible)
     {
-        isActive = isVisible;
         canvasGroup.alpha = isVisible ? 1 : 0;
     }
 
@@ -43,13 +39,5 @@ public class IconBillboardHandler : MonoBehaviour
         }
 
         SetCanvasVisibility(false);
-    }
-
-    private void Update()
-    {
-        if (isActive)
-        {
-            canvasGroup.transform.rotation = lookAt.rotation;
-        }
     }
 }

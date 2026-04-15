@@ -1,11 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(IconBillboardHandler))]
+[RequireComponent(typeof(ItemCanvasBillboardHandler))]
+[RequireComponent(typeof(ItemIconDisplay))]
 public abstract class BaseKitchenItem : MonoBehaviour, IPickable
 {
     //References
     protected MeshFilter meshFilter;
-    protected IconBillboardHandler billboardHandler;
+    protected ItemCanvasBillboardHandler billboardHandler;
+    protected ItemIconDisplay iconDisplay;
 
     //Transfer
     private bool isPickable = true;
@@ -15,12 +17,14 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPickable
     public GameObject GetGameObject => gameObject;
 
     public virtual bool IsPickable { get => isPickable; set => isPickable = value; }
-    public IconBillboardHandler BillboardHandler { get => billboardHandler; }
+    public ItemIconDisplay IconDisplay { get => iconDisplay; }
 
     protected virtual void Start()
     {
         if (meshFilter == null) meshFilter = GetComponentInChildren<MeshFilter>();
-        billboardHandler = GetComponent<IconBillboardHandler>();
+
+        billboardHandler = GetComponent<ItemCanvasBillboardHandler>();
+        iconDisplay = GetComponent<ItemIconDisplay>();
     }
 
     public void UpdateMesh(Mesh newMesh)
@@ -29,10 +33,5 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPickable
         {
             meshFilter.mesh = newMesh;
         }
-    }
-
-    public virtual bool TryInteractWith(BaseKitchenItem kitchenItem)
-    {
-        return false;
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class IngredientItem : BaseKitchenItem, IPoolable
 {
     //Stage
@@ -11,11 +12,6 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     public ItemStage ItemStage => itemStage;
     public IngredientItemSO GetItemData => ingredientItemSO;
 
-    private void Awake()
-    {
-        billboardHandler = GetComponent<IconBillboardHandler>();
-    }
-
     public void SetItemStage(ItemStage newStage)
     {
         itemStage = newStage;
@@ -25,8 +21,8 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     {
         if (itemStage != ItemStage.Raw)
         {
-            billboardHandler.SetCanvasVisibility(true);
-            billboardHandler.SetImage(ingredientItemSO.Icon);
+            iconDisplay.SetCanvasVisibility(true);
+            iconDisplay.SetImage(ingredientItemSO.Icon);
         }
     }
 
@@ -43,7 +39,7 @@ public class IngredientItem : BaseKitchenItem, IPoolable
 
     public void OnDespawn()
     {
-        billboardHandler.AllClear();
+        iconDisplay.AllClear();
     }
 
     #endregion

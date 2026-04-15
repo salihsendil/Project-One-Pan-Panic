@@ -34,6 +34,8 @@ public class CookingModule : MonoBehaviour, IAutoModule
         isProcessing = false;
         if (currentBehaviour == null) return;
 
+        currentBehaviour.HandlePauseProcess();
+
         currentBehaviour.OnProcessComplete -= CompleteProcess;
         currentBehaviour = null;
     }

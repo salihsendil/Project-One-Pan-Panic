@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecipeList:
   - {fileID: 11400000, guid: 3de60279eaa56ae4f938f09b2c9d37f4, type: 2}
+  - {fileID: 11400000, guid: 796fed778aab9a44493b4d0411dde57f, type: 2}
   MaxActiveOrderCount: 3
   OrderSpawnDelay: 10
   Description: Dev Scene Order Configs.

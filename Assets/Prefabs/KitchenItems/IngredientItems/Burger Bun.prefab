@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2782574896610090452}
   - component: {fileID: 8608299095027727990}
   - component: {fileID: 5948282813456876792}
+  - component: {fileID: 8528139007742770289}
   m_Layer: 0
   m_Name: Burger Bun
   m_TagString: Untagged
@@ -64,6 +65,19 @@ MonoBehaviour:
   canvasGroup: {fileID: 8080867287836079861}
   images:
   - {fileID: 7082391060808880473}
+--- !u!114 &8528139007742770289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831678058498387438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0982aadab52bf4f952c9ae2ecfacb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 8080867287836079861}
 --- !u!1 &4948921666983169269
 GameObject:
   m_ObjectHideFlags: 0

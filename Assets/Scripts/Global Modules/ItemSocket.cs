@@ -1,19 +1,13 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ItemSocket : MonoBehaviour, IInteractor
 {
     [SerializeField] private Transform holdPoint;
-    [SerializeField] private GameObject currentItemTest;
     [SerializeField] private IPickable currentItem;
-    [SerializeField] private GameObject currentItemGO; //debugDelete
 
     public bool HasItem => currentItem != null;
     public IPickable GetItem => currentItem;
-
-    private void Start() //debugDelete
-    {
-        TestMethod();
-    }
 
     public void SetItem(IPickable pickable)
     {
@@ -22,38 +16,27 @@ public class ItemSocket : MonoBehaviour, IInteractor
 
     public void SetItemToOffset(IPickable pickable, Vector3 offset)
     {
+        pickable.Transform.DOKill();
+
         currentItem = pickable;
-        currentItemGO = pickable.GetGameObject; //debugDelete
-        currentItem.Transform.SetParent(holdPoint);
-        currentItem.Transform.position = holdPoint.position;
-        currentItem.Transform.localPosition += offset;
+
+        currentItem.Transform.DOJump(holdPoint.position, 0.5f, 1, 0.2f)
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
+                currentItem.Transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f);
+                currentItem.Transform.SetParent(holdPoint);
+                currentItem.Transform.position = holdPoint.position;
+                currentItem.Transform.localPosition += offset;
+            });
     }
 
     public IPickable RemoveItem()
     {
-        currentItemGO = null; //debugDelete
+        currentItem.Transform.DOKill();
         var tempItem = currentItem;
         currentItem.Transform.parent = null;
         currentItem = null;
         return tempItem;
-    }
-
-    public void TestMethod() //debugDelete
-    {
-        if (currentItemTest != null)
-        {
-            if (currentItemTest.TryGetComponent(out IPickable pickable))
-            {
-                SetItem(pickable);
-            }
-        }
-    }
-
-    private void Update() //debugDelete
-    {
-        if (Input.GetKey(KeyCode.G))
-        {
-            TestMethod();
-        }
     }
 }

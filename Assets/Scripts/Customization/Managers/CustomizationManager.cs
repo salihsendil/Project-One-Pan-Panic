@@ -8,18 +8,22 @@ public class CustomizationManager : MonoBehaviour
     //Data Model
     public struct BodyPartBinding
     {
-        public int EquippedIndex;
+        private int equippedIndex;
+
+        //public int EquippedIndex;
         public IBodyPartFitter BodyPartFitter;
+
+        public int EquippedIndex{ get => equippedIndex; set => equippedIndex = value; }
 
         public BodyPartBinding(int equippedIndex, IBodyPartFitter bodyPartFitter)
         {
-            EquippedIndex = equippedIndex;
+            this.equippedIndex = equippedIndex;
             BodyPartFitter = bodyPartFitter;
         }
 
         public void UpdateIndex(int equippedIndex)
         {
-            EquippedIndex = equippedIndex;
+            this.equippedIndex = equippedIndex;
         }
     }
 
@@ -69,7 +73,10 @@ public class CustomizationManager : MonoBehaviour
             int newIndex = catalog[part.BodyPart].FindIndex(x => x.Id == clothId);
             if (newIndex == -1) continue;
 
-            bodyParts[part.BodyPart].UpdateIndex(newIndex);
+            BodyPartBinding partBinding = bodyParts[part.BodyPart];
+            partBinding.UpdateIndex(newIndex);
+            bodyParts[part.BodyPart] = partBinding;
+
             EquipCloth(part.BodyPart, catalog[part.BodyPart][newIndex]);
         }
     }
@@ -115,8 +122,7 @@ public class CustomizationManager : MonoBehaviour
 
     public void HandleBuyButton()
     {
-        int index = bodyParts[currentPart].EquippedIndex;
-        CustomizationData data = catalog[currentPart][index];
+        CustomizationData data = catalog[currentPart][previewIndex];
 
         if (!wardrobe.HasCloth(currentPart, data.Id))
         {
@@ -124,7 +130,11 @@ public class CustomizationManager : MonoBehaviour
             wardrobe.Unlock(currentPart, data.Id);
         }
         wardrobe.Equip(currentPart, data.Id);
-        bodyParts[currentPart].UpdateIndex(previewIndex);
+
+        BodyPartBinding partBinding = bodyParts[currentPart];
+        partBinding.UpdateIndex(previewIndex);
+        bodyParts[currentPart] = partBinding;
+
         EquipCloth(currentPart, data);
         HandleButtonState(data);
     }
@@ -156,4 +166,15 @@ public class CustomizationManager : MonoBehaviour
         }
     }
     #endregion
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            foreach (var part in bodyParts.Keys)
+            {
+                Debug.Log(part + " " + bodyParts[part].EquippedIndex);
+            }
+        }
+    }
 }

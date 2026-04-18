@@ -41,7 +41,10 @@ public class WardrobeManager : ISaveable, IInitializable
 
     public string GetEquippedClothId(BodyPartType bodyPart)
     {
+        UnityEngine.Debug.Log("1");
+
         if (!wardrobeCatalog.ContainsKey(bodyPart)) return null;
+        UnityEngine.Debug.Log("2");
 
         return wardrobeCatalog[bodyPart].EquippedClothId;
     }
@@ -114,15 +117,17 @@ public class WardrobeManager : ISaveable, IInitializable
         PlayerDataSave save = saveSystem.TryGetData<PlayerDataSave>(GetSaveDataType);
 
         //if save null create default data and return
-        if (save == null)
+        if (save.Outfits.Count <= 0)
         {
             var parts = Enum.GetValues(typeof(BodyPartType));
             foreach (BodyPartType part in parts)
             {
+                UnityEngine.Debug.Log("3");
                 WardrobeCollection newCollection = WardrobeCollection.CreateEmpty();
                 wardrobeCatalog[part] = newCollection;
             }
 
+            SaveData();
             return;
         }
 

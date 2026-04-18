@@ -17,6 +17,8 @@ public class IngredientDispenserModule : MonoBehaviour, IInstantModule
 
         if (item == null) { return false; }
 
+        item.transform.position = transform.position;
+
         interactor.SetItem(item);
 
         return true;

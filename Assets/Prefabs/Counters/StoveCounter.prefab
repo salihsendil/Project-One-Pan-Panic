@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 7007895847974905121}
   - component: {fileID: 2832618778697597622}
   - component: {fileID: 2664001310794226586}
+  - component: {fileID: 7012473146092536285}
   m_Layer: 6
   m_Name: StoveCounter
   m_TagString: Untagged
@@ -190,8 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 9172123356441081854}
-  currentItemTest: {fileID: 0}
-  currentItemGO: {fileID: 0}
 --- !u!114 &7007895847974905121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e5a2d1d7f1d8747b8ca0d46985b4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalEmission: {r: 0, g: 0, b: 0, a: 0}
-  highlightColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.4}
 --- !u!114 &2832618778697597622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +225,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f98810bf1420a4f49ac9954da9480625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7012473146092536285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170937407311508608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48360e7f8c3a29d4081ea48f0bc01f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1721914684127907463

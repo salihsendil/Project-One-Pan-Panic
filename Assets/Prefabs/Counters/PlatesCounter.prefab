@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 3574297166047847790}
-  currentItemTest: {fileID: 0}
-  currentItemGO: {fileID: 0}
 --- !u!114 &8313192147794075854
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,10 +41,7 @@ public class WardrobeManager : ISaveable, IInitializable
 
     public string GetEquippedClothId(BodyPartType bodyPart)
     {
-        UnityEngine.Debug.Log("1");
-
         if (!wardrobeCatalog.ContainsKey(bodyPart)) return null;
-        UnityEngine.Debug.Log("2");
 
         return wardrobeCatalog[bodyPart].EquippedClothId;
     }

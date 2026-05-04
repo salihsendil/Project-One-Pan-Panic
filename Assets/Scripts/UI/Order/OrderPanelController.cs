@@ -52,7 +52,7 @@ public class OrderPanelController : MonoBehaviour
         if (cards.TryGetValue(order.ID, out OrderCardView cardView))
         {
             cards.Remove(order.ID);
-            PoolItemCleaner.RestoreAndReturn(cardView, poolManager);
+            poolManager.Despawn(cardView);
         }
     }
 }

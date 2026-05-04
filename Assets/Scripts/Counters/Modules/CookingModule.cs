@@ -3,11 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(ItemSocket))]
 public class CookingModule : MonoBehaviour, IAutoModule
 {
-    private bool isProcessing;
-    private float processSpeed = 1f;
-    private ProcessType processType = ProcessType.PanCooked;
-    private ItemBehaviourController currentBehaviour;
+    //References
     private IInteractor interactor;
+
+    //Process
+    private ProcessType processType = ProcessType.PanCooked;
+    private float processSpeed = 1f;
+    private bool isProcessing;
+
+    //Current Item
+    private IItemProcess itemProcess;
 
     private void Awake()
     {
@@ -16,51 +21,50 @@ public class CookingModule : MonoBehaviour, IAutoModule
 
     public bool CanProcessable(IPickable pickable)
     {
-        if (!pickable.GetGameObject.TryGetComponent(out ItemBehaviourController controller)) return false;
-        if (!controller.CanProcess(processType)) return false;
+        if (!pickable.GetGameObject.TryGetComponent(out ItemProcessHandler processHandler)) return false;
+        if (!processHandler.TryGetProcess(processType, out itemProcess)) return false;
+
         return true;
     }
 
-    public void StartProcess(IPickable pickable)
+    public void StartProcess()
     {
-        if (!pickable.GetGameObject.TryGetComponent(out currentBehaviour)) return;
+        if (itemProcess == null) return;
+
+        itemProcess.StartProcess();
+        itemProcess.OnProcessFinished += CompleteProcess;
+
         isProcessing = true;
-        currentBehaviour.HandleStartBehaviour();
-        currentBehaviour.OnProcessComplete += CompleteProcess;
     }
 
-    public void StopProcess()
+    public void PauseProcess()
     {
         isProcessing = false;
-        if (currentBehaviour == null) return;
 
-        currentBehaviour.HandlePauseProcess();
+        if (itemProcess == null) return;
 
-        currentBehaviour.OnProcessComplete -= CompleteProcess;
-        currentBehaviour = null;
+        itemProcess.PauseProcess();
+        itemProcess.OnProcessFinished -= CompleteProcess;
+        itemProcess = null;
     }
 
-    public void CompleteProcess()
+    public void CompleteProcess(IItemProcess process)
     {
         isProcessing = false;
-        if (currentBehaviour == null) return;
 
-        currentBehaviour.OnProcessComplete -= CompleteProcess;
-        currentBehaviour = null;
+        itemProcess.OnProcessFinished -= CompleteProcess;
 
         if (CanProcessable(interactor.GetItem))
         {
-            StartProcess(interactor.GetItem);
+            StartProcess();
         }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        if (isProcessing && interactor.HasItem && currentBehaviour != null)
+        if (isProcessing && itemProcess != null)
         {
-            currentBehaviour.HandleTickBehaviour(Time.deltaTime * processSpeed);
+            itemProcess.TickProcess(Time.deltaTime * processSpeed);
         }
     }
-
-
 }

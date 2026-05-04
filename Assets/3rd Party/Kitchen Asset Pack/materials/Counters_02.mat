@@ -10,14 +10,14 @@ Material:
   m_Name: Counters_02
   m_Shader: {fileID: 4800000, guid: 0e9d5a909a1f7e84882a534d0d11e49f, type: 3}
   m_Parent: {fileID: 2100000, guid: 603c7ec8fb433c843b8cd368e21ad064, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 4
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _GLOSSYREFLECTIONS_OFF
   - _METALLICGLOSSMAP
   - _SPECGLOSSMAP
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}

@@ -1,6 +1,3 @@
-
-using System.Collections;
-
 public interface ICounterModule { }
 
 public interface IInstantModule : ICounterModule
@@ -17,7 +14,8 @@ public interface IHoldModule : ICounterModule
 
 public interface IAutoModule : ICounterModule
 {
-    public void StartProcess(IPickable pickable);
-    public void StopProcess();
-    public void CompleteProcess();
+    public bool CanProcessable(IPickable pickable);
+    public void StartProcess();
+    public void PauseProcess();
+    public void CompleteProcess(IItemProcess process);
 }

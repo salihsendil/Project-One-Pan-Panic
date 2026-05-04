@@ -10,21 +10,21 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
 
     public bool TryInteractionInstant(IInteractor interactor)
     {
-        if (!interactor.HasItem) { return false; }
+        if (!interactor.HasItem) return false;
 
-        if (!interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) { return false; }
+        if (!interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) return false;
+        if (containerItem.CurrentRecipe == null) return false;
 
-        if (containerItem.TryGetRecipe(out RecipeSO recipe))
+        if (orderSystem.TryCompleteOrder(containerItem.CurrentRecipe, out Order order))
         {
-            if (orderSystem.TryCompleteOrder(recipe, out Order order))
-            {
-                signalBus.Fire(new OrderDeliveredSignal(order));
-                interactor.RemoveItem();
-                PoolItemCleaner.RestoreAndReturn(containerItem, poolManager);
-                return true;
-            }
-            Debug.LogError("It's not ordered!");
+            signalBus.Fire(new OrderDeliveredSignal(order));
+            interactor.RemoveItem();
+            poolManager.Despawn(containerItem);
+            return true;
         }
+
+        Debug.LogError("It's not ordered!");
+
         return false;
     }
 }

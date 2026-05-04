@@ -21,7 +21,7 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
     public GameObject GetGameObject => gameObject;
     public UniversalPoolEntryType GetPoolType => UniversalPoolEntryType.OrderCardView;
 
-    public void OnSpawn()
+    public void Spawn()
     {
         foreach (var icon in recipeIngredientsIcons)
         {
@@ -29,7 +29,7 @@ public class OrderCardView : MonoBehaviour, IPoolable, IConfigurable<Order>
         }
     }
 
-    public void OnDespawn()
+    public void Despawn()
     {
         currentOrder = null;
     }

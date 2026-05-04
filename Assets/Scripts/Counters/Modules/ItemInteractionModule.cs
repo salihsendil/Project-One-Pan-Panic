@@ -1,4 +1,3 @@
-// ItemInteractionModule.cs
 using UnityEngine;
 
 [RequireComponent(typeof(ItemSocket))]
@@ -32,20 +31,24 @@ public class ItemInteractionModule : MonoBehaviour, IInstantModule
                 return true;
             }
 
-            itemSocket.GetItem.GetGameObject.TryGetComponent(out IContainer socketContainer);
-            interactor.GetItem.GetGameObject.TryGetComponent(out IContainer interactorContainer);
-
-            if (socketContainer != null && socketContainer.CanInteractWith(interactor.GetItem))
+            if (itemSocket.GetItem.GetGameObject.TryGetComponent(out IContainer socketItem))
             {
-                socketContainer.InteractWith(interactor.RemoveItem());
-                interactor.SetItem(itemSocket.RemoveItem());
-                return true;
+                if (socketItem.CanAddItem(interactor.GetItem, out IngredientItem ingredient))
+                {
+                    interactor.RemoveItem();
+                    socketItem.AddItem(ingredient);
+                    return true;
+                }
             }
 
-            if (interactorContainer != null && interactorContainer.CanInteractWith(itemSocket.GetItem))
+            if (interactor.GetItem.GetGameObject.TryGetComponent(out IContainer heldItem))
             {
-                interactorContainer.InteractWith(itemSocket.RemoveItem());
-                return true;
+                if (heldItem.CanAddItem(itemSocket.GetItem, out IngredientItem ingredient))
+                {
+                    itemSocket.RemoveItem();
+                    heldItem.AddItem(ingredient);
+                    return true;
+                }
             }
         }
 

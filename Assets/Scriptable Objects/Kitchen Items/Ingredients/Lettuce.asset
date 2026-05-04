@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: lettuce-raw-01
   InitialMesh: {fileID: -1258277815187534484, guid: 6bd3c48b7856cb440b1f6ccbc925c560, type: 3}
-  InitialStage: 0
+  InitialStage: 15
   Icon: {fileID: 21300000, guid: 67ef830dbf6a0fe4d939cc2bd79677e7, type: 3}
-  Prefab: {fileID: 7301802289305275674, guid: 1d6ab98013f008647afb89524555b39e, type: 3}
+  Prefab: {fileID: 1968098981985813129, guid: 43016f80a74d42f44a3ea611cfef4d17, type: 3}
   PoolType: 6
-  ProcessRules:
-  - ProcessType: 5
-    FromStage: 0
-    ToStage: 1
-    ProcessTime: 3
-    OutputMesh: {fileID: -993183278979693542, guid: 4fd291b59805e924496569f5ff61c0bf, type: 3}

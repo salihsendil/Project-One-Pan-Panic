@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8297810330708832067
 Transform:
@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600589339061153296}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.026195616, z: 0.47909266}
   m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2843670371236633871}
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &1351592636228628209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3252618660783647555
 Transform:
@@ -138,7 +138,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4637678648932361002
 Transform:
@@ -150,7 +150,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5878098104922543004}
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 3252618660783647555}
+  gameObject: {fileID: 0}
 --- !u!1 &8291985127123093682
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +258,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2843670371236633871
 Transform:
@@ -344,7 +345,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5878098104922543004
 Transform:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plate
   m_EditorClassIdentifier: 
   KitchenItemName: white-plate-empty-01
+  Capacity: 4
   PoolType: 20
-  Prefab: {fileID: 7876499546485564982, guid: 1937da9ab8e0b034dab2212808b86231, type: 3}
+  Prefab: {fileID: 4907760017414632395, guid: f4a5a32f1bec0fe44ad202ca6e64a53b, type: 3}
   InitialMesh: {fileID: 3736213754101489272, guid: f920fa8dc37a67541b6732134ea60f71, type: 3}
-  InitialStage: 0

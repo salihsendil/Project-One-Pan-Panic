@@ -1,4 +1,3 @@
-
 public class ComboRewardManager
 {
     private float scoreMultiplier;

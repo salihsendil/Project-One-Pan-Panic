@@ -1,11 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New ContainerItemSO", menuName = "Scriptable Objects/New ContainerItemSO")]
+[CreateAssetMenu(fileName = "New ContainerItemSO", menuName = "Scriptable Objects/Kitchen Items/New ContainerItemSO")]
 public class ContainerItemSO : ScriptableObject
 {
-    [Header("ID")]
+    [Header("Settings")]
     public string KitchenItemName;
-    
+    public int Capacity;
+
     [Header("Pool")]
     public UniversalPoolEntryType PoolType;
 

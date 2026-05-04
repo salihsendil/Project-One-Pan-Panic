@@ -17,15 +17,6 @@ public class OrderSystem : MonoBehaviour
     private List<Order> activeOrders = new();
     private List<RecipeSO> recipes => orderConfig.RecipeList;
 
-    //Allowed Ingredients
-    private HashSet<IngredientEntry> allowedIngredientSet = new HashSet<IngredientEntry>();
-
-
-    private void Awake()
-    {
-        InitializeAllowedIngredientSet();
-    }
-
     private void OnEnable()
     {
         signalBus.Subscribe<GameStartedSignal>(StartGenerateOrder);
@@ -47,27 +38,6 @@ public class OrderSystem : MonoBehaviour
     {
         TickOrderTimers();
     }
-
-    #region Allowed Ingredient Set
-
-    private void InitializeAllowedIngredientSet()
-    {
-        foreach (var recipe in recipes)
-        {
-            foreach (var entry in recipe.Ingredients)
-            {
-                allowedIngredientSet.Add(entry);
-            }
-        }
-    }
-
-    public bool IsIngredientAllowedOnPlate(IngredientEntry entry)
-    {
-        return allowedIngredientSet.Contains(entry);
-    }
-
-    #endregion
-
     private void StartGenerateOrder()
     {
         SetOrderSpawnAvailability(true);

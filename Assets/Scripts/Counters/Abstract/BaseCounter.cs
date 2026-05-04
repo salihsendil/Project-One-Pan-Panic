@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class BaseCounter : MonoBehaviour, IInteractable
 {
     protected CounterHighlighter counterHighlighter;
+
     protected IInstantModule[] instantModules = new IInstantModule[3];
     protected IHoldModule[] holdModules = new IHoldModule[2];
     protected IAutoModule[] autoModules = new IAutoModule[2];
@@ -33,7 +34,7 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
 
         foreach (var module in autoModules)
         {
-            module?.StartProcess(interactor.GetItem);
+            module?.StartProcess();
         }
     }
 

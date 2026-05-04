@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DevelopmentScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/KitchenItemRefactorScene.unity
+    guid: 5db2fba05e16d6c43aba76b94dced891
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ab75c0377b99d974d895cd9ac510846a, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: bf773eb060838274ba2cd28bfd386500, type: 2}

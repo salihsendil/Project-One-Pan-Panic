@@ -5,81 +5,70 @@ using UnityEngine;
 public class CuttingModule : MonoBehaviour, IHoldModule
 {
     //References
-    private ItemSocket itemSocket;
-    private ItemBehaviourController behaviourController; 
+    private IInteractor interactor;
     private CuttingCounterAnimationsController animationsController;
 
     //Process
     private ProcessType processType = ProcessType.Cut;
     private float processSpeed = 1f;
     private bool isProcessing;
-    private bool canProcess;
+
+    //Current Item
+    private IItemProcess itemProcess;
 
     private void Awake()
     {
-        itemSocket = GetComponent<ItemSocket>();
+        interactor = GetComponent<IInteractor>();
         animationsController = GetComponent<CuttingCounterAnimationsController>();
     }
 
     public void OnInteractionStarted()
     {
-        if (!itemSocket.HasItem) return;
-        if (!itemSocket.GetItem.GetGameObject.TryGetComponent(out behaviourController)) return;
-        if (!behaviourController.CanProcess(processType)) return;
-        canProcess = true;
+        if (!interactor.HasItem) return;
+        if (!interactor.GetItem.GetGameObject.TryGetComponent(out ItemProcessHandler processHandler)) return;
+        if (processHandler.TryGetProcess(processType, out itemProcess)) return;
     }
 
     public void OnInteractionPerformed()
     {
-        if (!canProcess || isProcessing) return;
+        if (itemProcess == null) return;
+        interactor.GetItem.IsPickable = false;
 
-        itemSocket.GetItem.IsPickable = false;
-
+        itemProcess.StartProcess();
+        itemProcess.OnProcessFinished += HandleProcessFinish;
+        
         isProcessing = true;
-
         animationsController.UpdateAnimationState(isProcessing);
-
-        behaviourController.HandleStartBehaviour();
-
-        behaviourController.OnProcessComplete += ProcessFinished;
     }
 
     public void OnInteractionCanceled()
     {
         isProcessing = false;
-
         animationsController.UpdateAnimationState(isProcessing);
 
-        if (behaviourController != null)
-        {
-            behaviourController.OnProcessComplete -= ProcessFinished;
-            behaviourController = null;
-        }
+        if (itemProcess == null) return;
+
+        itemProcess.PauseProcess();
+        itemProcess.OnProcessFinished -= HandleProcessFinish;
+        itemProcess = null;
     }
 
-    private void ProcessFinished()
+    private void HandleProcessFinish(IItemProcess _)
     {
         isProcessing = false;
-        canProcess = false;
         animationsController.UpdateAnimationState(isProcessing);
 
-        if (itemSocket.HasItem) { itemSocket.GetItem.IsPickable = true; }
+        itemProcess.OnProcessFinished -= HandleProcessFinish;
+        itemProcess = null;
 
-        if (behaviourController != null)
-        {
-            behaviourController.OnProcessComplete -= ProcessFinished;
-            behaviourController = null;
-        }
+        interactor.GetItem.IsPickable = true;
     }
 
     private void Update()
     {
-        if (isProcessing)
+        if (isProcessing && itemProcess != null)
         {
-            if (behaviourController != null && canProcess)
-            {
-                behaviourController.HandleTickBehaviour(processSpeed * Time.deltaTime);
-            }
+            itemProcess.TickProcess(Time.deltaTime * processSpeed);
         }
     }
 }

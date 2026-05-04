@@ -11,67 +11,88 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
     [Inject] private SignalBus signalBus;
 
     //References
-    private ItemSocket itemSocket;
+    private IInteractor itemSocket;
 
     //Data
-    [SerializeField] private ContainerItemSO containerItemSO;
+    [SerializeField] private ContainerItemSO containerData;
 
-    //Stack
+    //Module Variables
     private Stack<ContainerItem> containerStack = new();
-
-    //Transform
-    private Vector3 positionOffset = new Vector3(0f, 0.05f, 0f);
-
-    //Respawn Delay
-    [SerializeField] private int respawnDelay = 1500;
+    [SerializeField] private Vector3 offsetVector = new Vector3(0f, 0.05f, 0f);
 
     private void Awake()
     {
-        itemSocket = GetComponent<ItemSocket>();
+        itemSocket = GetComponent<IInteractor>();
     }
 
+    #region Signal Subscription
     private void OnEnable()
     {
-        signalBus.Subscribe<ContainerItemDespawned>(PrepareReplacement);
+        signalBus.Subscribe<ContainerItemDespawned>(ContainerItemDespawned);
     }
-
     private void OnDisable()
     {
-        signalBus.Unsubscribe<ContainerItemDespawned>(PrepareReplacement);
+        signalBus.Unsubscribe<ContainerItemDespawned>(ContainerItemDespawned);
     }
+    #endregion
 
     private void Start()
     {
-        while (TryPlaceContainer()) { }
+        while (TryPlaceContainerToStack()) { }
     }
 
-    private async void PrepareReplacement()
+    private async void ContainerItemDespawned()
     {
-        await Task.Delay(respawnDelay);
+        await Task.Delay(1500);
 
-        TryPlaceContainer();
+        TryPlaceContainerToStack();
     }
 
-    private bool TryPlaceContainer()
+    private bool TryPlaceContainerToStack()
     {
-        ContainerItem item = poolManager.Spawn<ContainerItem>(containerItemSO.PoolType);
-        if (item == null) return false;
+        ContainerItem container = poolManager.Spawn<ContainerItem>(containerData.PoolType);
 
-        if (!item.TryGetComponent(out IPickable pickable)) return false;
+        if (container == null) return false;
 
-        itemSocket.SetItemToOffset(pickable, positionOffset * containerStack.Count);
-        containerStack.Push(item);
+        container.transform.position = transform.position;
+        containerStack.Push(container);
+        itemSocket.SetItemToOffset(container, containerStack.Count * offsetVector);
         return true;
     }
 
-    public bool TryInteractionInstant(IInteractor _)
+    public bool TryInteractionInstant(IInteractor interactor)
     {
         if (containerStack == null || containerStack.Count <= 0) return false;
-        containerStack.Pop();
 
-        if (!containerStack.TryPeek(out ContainerItem item)) return false;
+        if (!interactor.HasItem)
+        {
+            interactor.SetItem(itemSocket.RemoveItem());
+            containerStack.Pop();
 
-        itemSocket.SetItemToOffset(item, positionOffset * (containerStack.Count - 1));
+            if (containerStack.TryPeek(out ContainerItem item))
+            {
+                itemSocket.SetItemToOffset(item, containerStack.Count * offsetVector); //fix required
+            }
+
+        }
+
+        else
+        {
+            if (interactor.GetItem.GetGameObject.TryGetComponent(out IContainer _)) return false;
+
+            if (!containerStack.Peek().CanAddItem(interactor.GetItem, out IngredientItem ingredient)) return false;
+
+            ContainerItem container = containerStack.Pop();
+            interactor.RemoveItem();
+            container.AddItem(ingredient);
+            interactor.SetItem(itemSocket.RemoveItem());
+
+            if (containerStack.TryPeek(out ContainerItem item))
+            {
+                itemSocket.SetItemToOffset(item, containerStack.Count * offsetVector); //fix required
+            }
+        }
+
         return true;
     }
 }

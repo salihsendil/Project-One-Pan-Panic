@@ -2,35 +2,35 @@ using UnityEngine;
 
 public class ProgressTracker
 {
-    public float TargetValue { get; private set; }
-    public float CurrentValue { get; private set; }
+    private float targetValue;
+    private float currentValue;
 
-    public bool IsFinished => CurrentValue >= TargetValue /*&& TargetValue > 0*/;
-    public float ProgressRatio => TargetValue > 0 ? Mathf.Clamp01(CurrentValue / TargetValue) : 0f;
+    public bool IsFinished => currentValue >= targetValue /*&& TargetValue > 0*/;
+    public float ProgressRatio => targetValue > 0 ? Mathf.Clamp01(currentValue / targetValue) : 0f;
 
     public void SetTarget(float target)
     {
-        TargetValue = target;
-        CurrentValue = 0f;
+        targetValue = target;
+        currentValue = 0f;
     }
 
     public void Add(float amount)
     {
-        TargetValue += amount;
+        targetValue += amount;
     }
 
     public void Tick(float deltaTime)
     {
         if (IsFinished) return;
 
-        CurrentValue += deltaTime;
+        currentValue += deltaTime;
 
-        if (CurrentValue > TargetValue)
-            CurrentValue = TargetValue;
+        if (currentValue > targetValue)
+            currentValue = targetValue;
     }
 
     public void Reset()
     {
-        TargetValue = CurrentValue = 0f;
+        targetValue = currentValue = 0f;
     }
 }

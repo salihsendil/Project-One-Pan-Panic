@@ -22,27 +22,23 @@ public class CookingCounter : BaseCounter
         {
             if (!interactor.HasItem) return;
 
-            if (!cookingModule.CanProcessable(interactor.GetItem)) return;
-            itemInteractionModule.TryInteractionInstant(interactor);
-            cookingModule.StartProcess(currentInteractor.GetItem);
+            if (cookingModule.CanProcessable(interactor.GetItem))
+            {
+                base.InteractionStarted(interactor);
+            }
+
             return;
         }
 
-        if (currentInteractor.HasItem)
+        else //currentInteractor.HasItem
         {
-            if (!interactor.HasItem)
+            if (interactor.HasItem && interactor.GetItem is IContainer container)
             {
-                cookingModule.StopProcess();
-                itemInteractionModule.TryInteractionInstant(interactor);
-
-                return;
+                if (!container.CanAddItem(currentInteractor.GetItem, out IngredientItem _)) return;
             }
 
-            if (!interactor.GetItem.GetGameObject.TryGetComponent(out IContainer container)) return;
-            if (!container.CanInteractWith(currentInteractor.GetItem)) return;
-
-            cookingModule.StopProcess();
-            container.InteractWith(currentInteractor.RemoveItem());
+            cookingModule.PauseProcess();
+            itemInteractionModule.TryInteractionInstant(interactor);
         }
     }
 }

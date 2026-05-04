@@ -25,14 +25,15 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        signalBus.Subscribe<GameStartedSignal>(UnlockInput);
-        signalBus.Subscribe<GameFinishedSignal>(LockInput);
+        //signalBus.Subscribe<GameStartedSignal>(UnlockInput);
+        //signalBus.Subscribe<GameFinishedSignal>(LockInput);
+        UnlockInput();
     }
 
     private void OnDisable()
     {
-        signalBus.Unsubscribe<GameStartedSignal>(UnlockInput);
-        signalBus.Unsubscribe<GameFinishedSignal>(LockInput);
+        //signalBus.Unsubscribe<GameStartedSignal>(UnlockInput);
+        //signalBus.Unsubscribe<GameFinishedSignal>(LockInput);
     }
 
     private void UnlockInput()

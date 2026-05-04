@@ -52,7 +52,7 @@ public class UniversalPoolManager : MonoBehaviour
 
             if (!entry.HasHardLimit)
             {
-                go = instantiator.InstantiatePrefab(entry.Prefab, transform);
+                go = instantiator.InstantiatePrefab(entry.Prefab);
             }
         }
         go?.SetActive(true);
@@ -64,7 +64,7 @@ public class UniversalPoolManager : MonoBehaviour
         GameObject go = Spawn(type);
 
         if (go == null || !go.TryGetComponent(out T component)) { return null; }
-        component.OnSpawn();
+        component.Spawn();
         return component;
     }
 
@@ -80,24 +80,24 @@ public class UniversalPoolManager : MonoBehaviour
         return component;
     }
 
-    public void Despawn(UniversalPoolEntryType type, GameObject go)
+    public void Despawn(IPoolable poolable)
     {
-        if (go == null) { return; }
+        if (poolable == null) { return; }
 
-        if (!pool.TryGetValue(type, out var stack))
+        if (!pool.TryGetValue(poolable.GetPoolType, out var stack))
         {
             stack = new Stack<GameObject>();
-            pool[type] = stack;
+            pool[poolable.GetPoolType] = stack;
         }
 
-        go.SetActive(false);
-        go.transform.SetParent(transform, false);
-        stack.Push(go);
-    }
+        poolable.Despawn();
 
-    public void Despawn<T>(UniversalPoolEntryType type, T component) where T : Component
-    {
-        Despawn(type, component.gameObject);
+        GameObject go = poolable.GetGameObject;
+        go.SetActive(false);
+        go.transform.SetParent(transform);
+        go.transform.position = Vector3.zero;
+
+        stack.Push(go);
     }
 
     public void ClearPool(UniversalPoolEntryType type)

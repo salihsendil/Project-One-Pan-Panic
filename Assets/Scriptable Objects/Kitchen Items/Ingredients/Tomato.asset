@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: tomato-raw-01
   InitialMesh: {fileID: -8294207154117743106, guid: 68ac6eb46cc61cd4f9873eb924f3d4bb, type: 3}
-  InitialStage: 0
+  InitialStage: 15
   Icon: {fileID: 21300000, guid: 2e5ef34d1e8e9d74bb5ea80dc9ac55ff, type: 3}
-  Prefab: {fileID: 1356904857024455834, guid: b63864aa353e38c48afaeee9385446c8, type: 3}
+  Prefab: {fileID: 3984393664540235066, guid: 37c1434b038f58f4c813be1e65bb76a7, type: 3}
   PoolType: 5
-  ProcessRules:
-  - ProcessType: 5
-    FromStage: 0
-    ToStage: 1
-    ProcessTime: 1
-    OutputMesh: {fileID: -3864207983360289550, guid: 105f9ccd0cd5eab43a236419b69ce1f4, type: 3}

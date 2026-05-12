@@ -6,16 +6,16 @@ public class ItemSocket : MonoBehaviour, IInteractor
     private IPickable currentItem;
     [SerializeField] private Transform holdPoint;
 
-    [SerializeField] private GameObject gameObject; //test delete
+    [SerializeField] private GameObject testGameObject; //test delete
 
     public bool HasItem => currentItem != null;
     public IPickable GetItem => currentItem;
 
     private void Awake()//test delete
     {
-        if (gameObject != null)
+        if (testGameObject != null)
         {
-            if (gameObject.TryGetComponent(out IPickable pickable))
+            if (testGameObject.TryGetComponent(out IPickable pickable))
             {
                 SetItem(pickable);
             }

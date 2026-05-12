@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b332c529972a3ca45975b66f2dfb525e, type: 3}
   m_Name: DevSceneOrderConfigs
   m_EditorClassIdentifier: 
-  RecipeList:
-  - {fileID: 11400000, guid: 3de60279eaa56ae4f938f09b2c9d37f4, type: 2}
+  RecipeEntries:
+  - Recipe: {fileID: 11400000, guid: 5be6473e601aa3d4693842cb7ad3be3e, type: 2}
+    StartWeight: 0
+    EndWeight: 0
   MaxActiveOrderCount: 3
-  OrderSpawnDelay: 10
+  StartOrderSpawnDelay: 2
+  OrderSpawnDelay: 8
   Description: Dev Scene Order Configs.

@@ -28,11 +28,11 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
     #region Signal Subscription
     private void OnEnable()
     {
-        signalBus.Subscribe<ContainerItemDespawned>(ContainerItemDespawned);
+        signalBus.Subscribe<ContainerItemDespawnSignal>(ContainerItemDespawned);
     }
     private void OnDisable()
     {
-        signalBus.Unsubscribe<ContainerItemDespawned>(ContainerItemDespawned);
+        signalBus.Unsubscribe<ContainerItemDespawnSignal>(ContainerItemDespawned);
     }
     #endregion
 

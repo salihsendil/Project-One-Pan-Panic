@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 5415396957892007406}
-  gameObject: {fileID: 0}
+  testGameObject: {fileID: 0}
 --- !u!114 &3070489804941854016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f281a4e36daff64989c9bc07e85cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayRadius: 0.25
-  maxRayDistance: 1
+  rayRadius: 0.1
+  maxRayDistance: 0.5
   layerMask:
     serializedVersion: 2
     m_Bits: 64

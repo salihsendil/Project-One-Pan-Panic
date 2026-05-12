@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tomato_Cut_Data
   m_EditorClassIdentifier: 
   ProcessType: 5
-  ProcessTime: 2
+  ProcessTime: 1
   FromStage: 15
   ToStage: 16
   OutputMesh: {fileID: -3864207983360289550, guid: 105f9ccd0cd5eab43a236419b69ce1f4, type: 3}

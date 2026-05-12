@@ -1,9 +1,9 @@
-public struct OrderExpiredSignal
+﻿public struct OrderExpiredSignal
 {
-    public Order Order;
+    public int Penalty;
 
-    public OrderExpiredSignal(Order order)
+    public OrderExpiredSignal(int penalty)
     {
-        Order = order;
+        Penalty = penalty;
     }
 }

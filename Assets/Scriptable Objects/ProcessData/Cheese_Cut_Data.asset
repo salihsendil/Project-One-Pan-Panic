@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheese_Cut_Data
   m_EditorClassIdentifier: 
   ProcessType: 5
-  ProcessTime: 2
+  ProcessTime: 1.4
   FromStage: 15
   ToStage: 16
   OutputMesh: {fileID: -33791506624762615, guid: dc394fba0c51d0d4396d6ee072dd19e2, type: 3}

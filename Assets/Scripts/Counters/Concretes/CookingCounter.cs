@@ -4,13 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(CookingModule))]
 public class CookingCounter : BaseCounter
 {
-    private IInteractor currentInteractor;
+    private IInteractor itemSocket;
     private ItemInteractionModule itemInteractionModule;
     private CookingModule cookingModule;
 
     protected override void Awake()
     {
-        currentInteractor = GetComponent<ItemSocket>();
+        itemSocket = GetComponent<ItemSocket>();
         itemInteractionModule = GetComponent<ItemInteractionModule>();
         cookingModule = GetComponent<CookingModule>();
         base.Awake();
@@ -18,7 +18,7 @@ public class CookingCounter : BaseCounter
 
     public override void InteractionStarted(IInteractor interactor)
     {
-        if (!currentInteractor.HasItem)
+        if (!itemSocket.HasItem)
         {
             if (!interactor.HasItem) return;
 
@@ -32,13 +32,19 @@ public class CookingCounter : BaseCounter
 
         else //currentInteractor.HasItem
         {
-            if (interactor.HasItem && interactor.GetItem is IContainer container)
+            if (!interactor.HasItem)
             {
-                if (!container.CanAddItem(currentInteractor.GetItem, out IngredientItem _)) return;
+                cookingModule.PauseProcess();
+                itemInteractionModule.TryInteractionInstant(interactor);
             }
 
-            cookingModule.PauseProcess();
-            itemInteractionModule.TryInteractionInstant(interactor);
+            if (interactor.HasItem && interactor.GetItem is IContainer container)
+            {
+                if (!container.CanAddItem(itemSocket.GetItem, out IngredientItem _)) return;
+
+                cookingModule.PauseProcess();
+                itemInteractionModule.TryInteractionInstant(interactor);
+            }
         }
     }
 }

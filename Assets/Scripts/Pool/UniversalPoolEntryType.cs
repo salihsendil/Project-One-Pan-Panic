@@ -7,5 +7,5 @@ public enum UniversalPoolEntryType
     BurgerMeat,
     BurgerBun,
     Plate = 20,
-    OrderCardView=30
+    OrderCard=30
 }

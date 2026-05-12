@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65045dd950d3944dbfd484e9d640821, type: 3}
   m_Name: DevSceneLevelConfig
   m_EditorClassIdentifier: 
-  CountdownTime: 1
-  LevelTime: 500
+  CountdownTime: 0
+  LevelTime: 300
   StartScore: 0
   ScoreMultiplierStepAmount: 0.04
   ScoreCurrencyMultiplier: 0.08

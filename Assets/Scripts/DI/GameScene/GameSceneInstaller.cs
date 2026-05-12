@@ -6,7 +6,7 @@ public class GameSceneInstaller : MonoInstaller
     {
         Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<InputHandler>().FromComponentInHierarchy().AsSingle().NonLazy();
-        Container.Bind<OrderSystem>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<OrderManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<RecipeMatchEvaluator>().AsSingle().NonLazy();
         Container.Bind<UniversalPoolManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<LevelStatsService>().FromComponentInHierarchy().AsSingle().NonLazy();
@@ -22,15 +22,21 @@ public class GameSceneInstaller : MonoInstaller
 
     private void SignalBindings()
     {
-        Container.DeclareSignal<CountdownTickSignal>();
-        Container.DeclareSignal<GameStartedSignal>();
-        Container.DeclareSignal<GameFinishedSignal>();
-        Container.DeclareSignal<TogglePauseRequestSignal>();
         Container.DeclareSignal<LevelTimerTickSignal>();
-        Container.DeclareSignal<OrderDeliveredSignal>();
+        Container.DeclareSignal<CountdownTickSignal>();
+        
         Container.DeclareSignal<ScoreChangedSignal>();
+        
+        Container.DeclareSignal<ContainerItemDespawnSignal>();
+        
+        //Game State Signals
+        Container.DeclareSignal<GameStartedSignal>();
+        Container.DeclareSignal<TogglePauseRequestSignal>();
+        Container.DeclareSignal<GameFinishedSignal>();
+
+        //Order Signals
         Container.DeclareSignal<OrderGeneratedSignal>();
         Container.DeclareSignal<OrderExpiredSignal>();
-        Container.DeclareSignal<ContainerItemDespawned>();
+        Container.DeclareSignal<OrderDeliveredSignal>();
     }
 }

@@ -52,11 +52,7 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
     private void RemoveScore(OrderExpiredSignal signal)
     {
         comboManager.ResetScoreMultiplier();
-        currentScore += signal.Order.Recipe.PenaltyScore;
-
-        if (currentScore <= 0)
-            currentScore = 0;
-
+        currentScore += signal.Penalty;
         signalBus.Fire(new ScoreChangedSignal(currentScore));
     }
 

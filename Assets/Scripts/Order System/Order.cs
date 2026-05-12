@@ -1,24 +1,31 @@
+using System;
+
+[Serializable]
 public class Order
 {
-    public int ID { get; }
-    public RecipeSO Recipe { get; }
-    public float RemainingTime { get; private set; }
+    public int OrderID;
+    public RecipeSO Recipe;
+    public float Time;
 
-    public Order(int id, RecipeSO recipe)
+    public event Action OnOrderSetAgain;
+
+    public Order(int orderID, RecipeSO recipe)
     {
-        ID = id;
+        OrderID = orderID;
         Recipe = recipe;
-        RemainingTime = recipe.PreparationTime;
+        Time = recipe.PreparationTime;
     }
 
+    public bool IsExpired => Time <= 0f;
 
-    public bool IsExpired()
+    public void Tick(float deltaTime)
     {
-        return RemainingTime <= 0;
+        Time -= deltaTime;
     }
 
-    public void TickTime(float deltaTime)
+    public void SetOrderAgain()
     {
-        RemainingTime -= deltaTime;
+        Time = Recipe.PreparationTime;
+        OnOrderSetAgain?.Invoke();
     }
 }

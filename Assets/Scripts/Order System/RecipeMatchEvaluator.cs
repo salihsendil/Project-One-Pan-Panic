@@ -8,13 +8,13 @@ public class RecipeMatchEvaluator
     public bool TryRecipeMatch(HashSet<IngredientEntry> entries, out RecipeSO recipeSO)
     {
         recipeSO = null;
-        var recipeList = orderConfig.RecipeList;
-        foreach (var recipe in recipeList)
+        var recipeEntries = orderConfig.RecipeEntries;
+        foreach (var entry in recipeEntries)
         {
-            bool isExactlyEqual = recipe.Ingredients.Count == entries.Count && entries.SetEquals(recipe.Ingredients);
+            bool isExactlyEqual = entry.Recipe.Ingredients.Count == entries.Count && entries.SetEquals(entry.Recipe.Ingredients);
             if (isExactlyEqual)
             {
-                recipeSO = recipe;
+                recipeSO = entry.Recipe;
                 return true;
             }
         }

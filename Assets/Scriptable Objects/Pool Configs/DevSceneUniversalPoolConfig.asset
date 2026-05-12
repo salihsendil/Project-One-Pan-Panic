@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolEntries:
   - Type: 30
-    Prefab: {fileID: 1228597164330082447, guid: 013ff6a5e6e54e54ea9329c50c438981, type: 3}
-    InitializeSize: 5
-    HasHardLimit: 1
+    Prefab: {fileID: 5346871778767101828, guid: de509a3312624b4488952153046b9f12, type: 3}
+    InitializeSize: 3
+    HasHardLimit: 0
   - Type: 20
     Prefab: {fileID: 4907760017414632395, guid: f4a5a32f1bec0fe44ad202ca6e64a53b, type: 3}
-    InitializeSize: 2
+    InitializeSize: 3
     HasHardLimit: 1
   - Type: 5
     Prefab: {fileID: 3984393664540235066, guid: 37c1434b038f58f4c813be1e65bb76a7, type: 3}

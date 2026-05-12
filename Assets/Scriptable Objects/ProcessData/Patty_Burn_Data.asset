@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Patty_Burn_Data
   m_EditorClassIdentifier: 
   ProcessType: 10
-  ProcessTime: 10
+  ProcessTime: 6
   FromStage: 17
   ToStage: 18
   OutputMesh: {fileID: 2609348891185806902, guid: 57f46fb5808ee344bbf2bf26d0340e72, type: 3}

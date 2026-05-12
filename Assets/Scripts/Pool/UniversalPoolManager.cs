@@ -94,7 +94,7 @@ public class UniversalPoolManager : MonoBehaviour
 
         GameObject go = poolable.GetGameObject;
         go.SetActive(false);
-        go.transform.SetParent(transform);
+        go.transform.SetParent(transform, false);
         go.transform.position = Vector3.zero;
 
         stack.Push(go);

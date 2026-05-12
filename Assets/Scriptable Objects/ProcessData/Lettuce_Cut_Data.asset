@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lettuce_Cut_Data
   m_EditorClassIdentifier: 
   ProcessType: 5
-  ProcessTime: 1
+  ProcessTime: 0.9
   FromStage: 15
   ToStage: 16
   OutputMesh: {fileID: -993183278979693542, guid: 4fd291b59805e924496569f5ff61c0bf, type: 3}

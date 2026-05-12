@@ -4,9 +4,8 @@ using Zenject;
 public class DeliveryModule : MonoBehaviour, IInstantModule
 {
     //References
-    [Inject] private OrderSystem orderSystem;
+    [Inject] private OrderManager orderManager;
     [Inject] private UniversalPoolManager poolManager;
-    [Inject] private SignalBus signalBus;
 
     public bool TryInteractionInstant(IInteractor interactor)
     {
@@ -15,9 +14,8 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
         if (!interactor.GetItem.GetGameObject.TryGetComponent(out ContainerItem containerItem)) return false;
         if (containerItem.CurrentRecipe == null) return false;
 
-        if (orderSystem.TryCompleteOrder(containerItem.CurrentRecipe, out Order order))
+        if (orderManager.TryCompleteOrder(containerItem.CurrentRecipe))
         {
-            signalBus.Fire(new OrderDeliveredSignal(order));
             interactor.RemoveItem();
             poolManager.Despawn(containerItem);
             return true;

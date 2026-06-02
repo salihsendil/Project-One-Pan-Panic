@@ -35,11 +35,15 @@ public class LevelStatsService : MonoBehaviour
 
     private void OrderDelivered(OrderDeliveredSignal signal)
     {
-        UpdateStats(StatsType.CompleteOrder, 1);
+        int statValue = GetStat(StatsType.CompleteOrder);
+        statValue++;
+        UpdateStats(StatsType.CompleteOrder, statValue);
     }
     private void OrderExpired(OrderExpiredSignal signal)
     {
-        UpdateStats(StatsType.FailOrder, 1);
+        int statValue = GetStat(StatsType.FailOrder);
+        statValue++;
+        UpdateStats(StatsType.FailOrder, statValue);
     }
     private void ScoreChanged(ScoreChangedSignal signal)
     {
@@ -48,13 +52,13 @@ public class LevelStatsService : MonoBehaviour
 
     #endregion
 
-    public void UpdateStats(StatsType statsType, int amount)
+    public void UpdateStats(StatsType statsType, int newValue)
     {
-        Debug.Log(statsType);
-        if (!statsDictionary.TryGetValue(statsType, out int value))
-            statsDictionary.Add(statsType, value);
+        if (!statsDictionary.ContainsKey(statsType))
+        {
+            statsDictionary.Add(statsType, newValue);
+        }
 
-        int newValue = value + amount;
         statsDictionary[statsType] = newValue;
     }
 

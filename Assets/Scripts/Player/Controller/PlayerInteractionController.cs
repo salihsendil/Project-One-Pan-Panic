@@ -8,8 +8,8 @@ public class PlayerInteractionController : MonoBehaviour
     [Inject] private InputHandler inputHandler;
 
     //Ray Variables
-    [SerializeField] private float rayRadius = 0.25f;
-    [SerializeField] private float maxRayDistance = 1f;
+    [SerializeField] private float rayRadius = 0.15f;
+    [SerializeField] private float maxRayDistance = 0.5f;
 
     //Raycast Settings
     [SerializeField] private LayerMask layerMask;

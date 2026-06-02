@@ -29,7 +29,7 @@ public class OrderManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(TrySpawnOrderPeriodically());
+        //StartCoroutine(TrySpawnOrderPeriodically());
     }
 
     private void Update()

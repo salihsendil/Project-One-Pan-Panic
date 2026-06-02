@@ -16,7 +16,22 @@ MonoBehaviour:
   - Recipe: {fileID: 11400000, guid: 5be6473e601aa3d4693842cb7ad3be3e, type: 2}
     StartWeight: 0
     EndWeight: 0
+  - Recipe: {fileID: 11400000, guid: 741179a95906a494c8f5207eefa8d3d9, type: 2}
+    StartWeight: 0
+    EndWeight: 0
+  - Recipe: {fileID: 11400000, guid: 7c658d9c65627834b91c359682b580a1, type: 2}
+    StartWeight: 0
+    EndWeight: 0
+  - Recipe: {fileID: 11400000, guid: 272043c113e21b849b8ced7e37b0ec85, type: 2}
+    StartWeight: 0
+    EndWeight: 0
+  - Recipe: {fileID: 11400000, guid: 39446a12cb3fce741b728e660001a337, type: 2}
+    StartWeight: 0
+    EndWeight: 0
+  - Recipe: {fileID: 11400000, guid: 5ff62248ed500b247ba740d5f98815a4, type: 2}
+    StartWeight: 0
+    EndWeight: 0
   MaxActiveOrderCount: 3
-  StartOrderSpawnDelay: 2
-  OrderSpawnDelay: 8
+  StartOrderSpawnDelay: 3
+  OrderSpawnDelay: 20
   Description: Dev Scene Order Configs.

@@ -38,7 +38,7 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 
     private void Start()
     {
-        while (TryPlaceContainerToStack()) { }
+        //while (TryPlaceContainerToStack()) { }
     }
 
     private async void ContainerItemDespawned()

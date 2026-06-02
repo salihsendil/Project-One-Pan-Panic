@@ -1,29 +1,25 @@
 {
-    "Currency": 4474,
+    "Currency": 25,
     "Outfits": [
         {
             "Key": 0,
-            "EquippedItem": "body_color_21",
+            "EquippedItem": "default",
             "OwnedItems": [
-                "default",
-                "body_color_20",
-                "body_color_21"
+                "default"
             ]
         },
         {
             "Key": 1,
-            "EquippedItem": "face_01",
+            "EquippedItem": "default",
             "OwnedItems": [
-                "default",
-                "face_01"
+                "default"
             ]
         },
         {
             "Key": 2,
-            "EquippedItem": "hat_01",
+            "EquippedItem": "default",
             "OwnedItems": [
-                "default",
-                "hat_01"
+                "default"
             ]
         }
     ]

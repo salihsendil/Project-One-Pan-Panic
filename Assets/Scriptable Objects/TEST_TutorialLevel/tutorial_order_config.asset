@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b332c529972a3ca45975b66f2dfb525e, type: 3}
+  m_Name: tutorial_order_config
+  m_EditorClassIdentifier: 
+  RecipeEntries:
+  - Recipe: {fileID: 11400000, guid: 272043c113e21b849b8ced7e37b0ec85, type: 2}
+    StartWeight: 0
+    EndWeight: 0
+  MaxActiveOrderCount: 2
+  StartOrderSpawnDelay: 5
+  OrderSpawnDelay: 30
+  Description: 

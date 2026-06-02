@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -148,7 +148,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4541654729354282176}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0fbfd522fdfc6d640883a5d6bf7f1e1a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f35e488dab84d74b8254db0b2323ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotationSpeed: 20
+  speed: 4
+  rotationSpeed: 12
 --- !u!114 &5991077615201222168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f281a4e36daff64989c9bc07e85cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayRadius: 0.1
+  rayRadius: 0.15
   maxRayDistance: 0.5
   layerMask:
     serializedVersion: 2

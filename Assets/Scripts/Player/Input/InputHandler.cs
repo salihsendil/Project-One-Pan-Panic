@@ -63,8 +63,17 @@ public class InputHandler : MonoBehaviour
 
     private void Move(InputAction.CallbackContext callback)
     {
-        inputVector = callback.ReadValue<Vector2>();
-        movementVector = ConvertMovementVector(inputVector);
+        SetMovementInput(callback.ReadValue<Vector2>());
+    }
+
+    public void SetMovementInput(Vector2 vector)
+    {
+        movementVector = ConvertMovementVector(vector);
+    }
+
+    private Vector3 ConvertMovementVector(Vector2 input)
+    {
+        return new Vector3(input.x, 0f, input.y);
     }
 
     private void Interaction(InputAction.CallbackContext callback)
@@ -84,10 +93,5 @@ public class InputHandler : MonoBehaviour
             OnInteractionCanceled?.Invoke();
         }
 
-    }
-
-    private Vector3 ConvertMovementVector(Vector2 input)
-    {
-        return new Vector3(input.x, 0f, input.y);
     }
 }

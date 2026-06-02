@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 movementVector => inputHandler.MovementVector;
 
 
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 4f;
     
     //Rotation Variables
-    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float rotationSpeed = 12f;
 
     //Busy State
     private bool isBusy;

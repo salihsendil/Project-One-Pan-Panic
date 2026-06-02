@@ -166,15 +166,4 @@ public class CustomizationManager : MonoBehaviour
         }
     }
     #endregion
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            foreach (var part in bodyParts.Keys)
-            {
-                Debug.Log(part + " " + bodyParts[part].EquippedIndex);
-            }
-        }
-    }
 }

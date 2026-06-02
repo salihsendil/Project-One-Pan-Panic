@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class MainMenuUIManager : MonoBehaviour
@@ -12,17 +13,33 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void GoToCustomize()
     {
-        customizationUI.SetVisibility(true);
-        mainMenuCanvas.alpha = 0;
+        mainMenuCanvas.transform.DOKill();
+
         mainMenuCanvas.interactable = false;
         mainMenuCanvas.blocksRaycasts = false;
+
+        mainMenuCanvas.transform.DOScale(Vector3.zero, 0.2f)
+            .SetEase(Ease.InQuad)
+            .SetUpdate(true);
+
+        customizationUI.SetVisibility(true);
     }
 
     public void GoToMainMenu()
     {
+        mainMenuCanvas.transform.DOKill();
+
+        mainMenuCanvas.transform.localScale = Vector3.zero;
+
+        mainMenuCanvas.transform.DOScale(Vector3.one, 0.4f)
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                mainMenuCanvas.interactable = true;
+                mainMenuCanvas.blocksRaycasts = true;
+            });
+
         customizationUI.SetVisibility(false);
-        mainMenuCanvas.alpha = 1;
-        mainMenuCanvas.interactable = true;
-        mainMenuCanvas.blocksRaycasts = true;
     }
 }

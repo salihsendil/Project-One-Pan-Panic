@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1de2d0c6ea0f48b183df183f770da, type: 3}
   m_Name: Sandvich
   m_EditorClassIdentifier: 
-  RecipeName: Sandvich
   RecipeID: r_sandvich
   RecipeIcon: {fileID: 21300000, guid: f041c5fe83f870d4587ab6775abf9aaf, type: 3}
   Mesh: {fileID: 4300000, guid: 17537a2bb208fce4cae04663a108257e, type: 2}
   SuccessScore: 46
   PenaltyScore: -14
-  PreparationTime: 38
+  PreparationTime: 48
   Ingredients:
   - IngredientItemData: {fileID: 11400000, guid: e3551d5e79f2b6245be7739533ed2f73, type: 2}
     RequiredStage: 5

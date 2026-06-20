@@ -1,18 +1,19 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class GameManager : MonoBehaviour
 {
+    //Zenject
+    [Inject] private InputHandler inputHandler;
     [Inject] private SignalBus signalBus;
     [Inject] private LevelConfigSO levelConfig;
 
     //Game State
-    private GameplayPhase gameplayPhase = GameplayPhase.Countdown;
-
-    //Timer
-    private Timer timer = new();
+    private GameplayPhase gameplayPhase;
 
     //Time Data
+    private Timer timer = new();
     private int countdownTime;
     private int gameTime;
 
@@ -25,14 +26,6 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
-    private void Start()
-    {
-        SetCountdown();
-
-        gameTime = levelConfig.LevelTime;
-        signalBus.Fire(new LevelTimerTickSignal(gameTime));
-    }
-
     private void OnEnable()
     {
         signalBus.Subscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
@@ -43,6 +36,16 @@ public class GameManager : MonoBehaviour
         signalBus.Unsubscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
     }
 
+    private void Start()
+    {
+        countdownTime = levelConfig.CountdownTime + 1;
+
+        gameTime = levelConfig.LevelTime;
+        signalBus.Fire(new LevelTimerTickSignal(gameTime));
+
+        SetGameplayPhase(levelConfig.StartPhase);
+    }
+
     private void Update()
     {
         float deltaTime = Time.deltaTime;
@@ -50,63 +53,68 @@ public class GameManager : MonoBehaviour
         switch (gameplayPhase)
         {
             case GameplayPhase.Countdown:
-                ProcessCountdownTimer(deltaTime);
+                ProcessTimer(deltaTime,
+                    ref countdownTime,
+                    remaining => signalBus.Fire(new CountdownTickSignal(remaining)),
+                    GameplayPhase.Play);
                 break;
+
             case GameplayPhase.Play:
-                ProcessGameTimer(deltaTime);
+                ProcessTimer(deltaTime,
+                    ref gameTime,
+                    remaining => signalBus.Fire(new LevelTimerTickSignal(remaining)),
+                    GameplayPhase.Finish);
                 break;
-            case GameplayPhase.Pause:
-                break;
-            case GameplayPhase.Finish:
-                break;
+
             default:
                 break;
         }
     }
 
-    private void SetCountdown()
-    {
-        countdownTime = levelConfig.CountdownTime;
-        countdownTime++;
-        timer.Set(countdownTime);
-    }
-
-    private void ProcessCountdownTimer(float deltaTime)
+    private void ProcessTimer(float deltaTime, ref int lastReportedTime, Action<int> onTick, GameplayPhase nextPhase)
     {
         timer?.Tick(deltaTime);
-        int remainingInt = (int)timer.Remaining;
+        int remainingTime = (int)timer.Remaining;
 
-        if (countdownTime != remainingInt)
+        if (lastReportedTime != remainingTime)
         {
-            countdownTime = remainingInt;
-            signalBus.Fire(new CountdownTickSignal(remainingInt));
+            lastReportedTime = remainingTime;
+            onTick?.Invoke(remainingTime);
         }
 
         if (timer.IsFinished)
         {
-            timer.Reset();
-            timer.Set(gameTime);
-            gameplayPhase = GameplayPhase.Play;
-            signalBus.Fire(new GameStartedSignal());
+            SetGameplayPhase(nextPhase);
         }
     }
 
-    private void ProcessGameTimer(float deltaTime)
+    private void SetGameplayPhase(GameplayPhase nextPhase)
     {
-        timer?.Tick(deltaTime);
-        int remainingInt = (int)timer.Remaining;
+        gameplayPhase = nextPhase;
 
-        if (gameTime != remainingInt)
+        switch (gameplayPhase)
         {
-            gameTime = remainingInt;
-            signalBus.Fire(new LevelTimerTickSignal(remainingInt));
-        }
+            case GameplayPhase.Tutorial:
+                inputHandler.SetInput(true);
+                break;
 
-        if (timer.IsFinished)
-        {
-            timer.Reset();
-            gameplayPhase = GameplayPhase.Finish;
-            signalBus.Fire(new GameFinishedSignal());
+            case GameplayPhase.Countdown:
+                timer.Reset();
+                timer.Set(countdownTime);
+                break;
+
+            case GameplayPhase.Play:
+                timer.Reset();
+                timer.Set(gameTime);
+                signalBus.Fire(new GameStartedSignal());
+                break;
+
+            case GameplayPhase.Finish:
+                signalBus.Fire(new GameFinishedSignal());
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -117,11 +125,13 @@ public class GameManager : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0;
-            gameplayPhase = GameplayPhase.Pause;
+            SetGameplayPhase(GameplayPhase.Pause);
             return;
         }
 
         Time.timeScale = 1;
-        gameplayPhase = GameplayPhase.Play;
+        SetGameplayPhase(GameplayPhase.Play);
     }
+
+    public void SetPlayPhase() => SetGameplayPhase(GameplayPhase.Play);
 }

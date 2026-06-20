@@ -19,13 +19,12 @@ public class OrderCardsUIController : MonoBehaviour
     {
         signalBus.Unsubscribe<OrderGeneratedSignal>(OnOrderGenerated);
         signalBus.Unsubscribe<OrderDeliveredSignal>(OnOrderDelivered);
-
     }
 
     public void OnOrderGenerated(OrderGeneratedSignal signal)
     {
         OrderUICard card = poolManager.SpawnWithConfig<OrderUICard, Order>
-                           (UniversalPoolEntryType.OrderCard, signal.Order);
+                           (ItemType.OrderCard, signal.Order);
         card.transform.SetParent(transform, false);
         cards[signal.Order.OrderID] = card;
     }

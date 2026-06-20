@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f636b822ab536084c85d03c8be750fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactorType: 7
   holdPoint: {fileID: 193348117449325762}
   testGameObject: {fileID: 0}
 --- !u!1 &2735472109284018871

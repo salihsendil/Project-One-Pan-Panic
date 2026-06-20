@@ -38,7 +38,7 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 
     private void Start()
     {
-        //while (TryPlaceContainerToStack()) { }
+        while (TryPlaceContainerToStack()) { }
     }
 
     private async void ContainerItemDespawned()
@@ -50,7 +50,7 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 
     private bool TryPlaceContainerToStack()
     {
-        ContainerItem container = poolManager.Spawn<ContainerItem>(containerData.PoolType);
+        ContainerItem container = poolManager.Spawn<ContainerItem>( containerData.ItemType);
 
         if (container == null) return false;
 
@@ -66,14 +66,16 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 
         if (!interactor.HasItem)
         {
-            interactor.SetItem(itemSocket.RemoveItem());
+            IPickable item = itemSocket.RemoveItem();
+            interactor.SetItem(item);
             containerStack.Pop();
 
-            if (containerStack.TryPeek(out ContainerItem item))
+            if (containerStack.TryPeek(out ContainerItem container))
             {
-                itemSocket.SetItemToOffset(item, containerStack.Count * offsetVector); //fix required
+                itemSocket.SetItemToOffset(container, containerStack.Count * offsetVector); //fix required
             }
 
+            signalBus.Fire(new ItemTransferredSignal(GameplayEvent.ItemPickedUp, item.GetItemType(), itemSocket, interactor));
         }
 
         else
@@ -82,8 +84,9 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
 
             if (!containerStack.Peek().CanAddItem(interactor.GetItem, out IngredientItem ingredient)) return false;
 
-            ContainerItem container = containerStack.Pop();
             interactor.RemoveItem();
+            ContainerItem container = containerStack.Pop();
+
             container.AddItem(ingredient);
             interactor.SetItem(itemSocket.RemoveItem());
 
@@ -91,6 +94,8 @@ public class ContainerDispenserModule : MonoBehaviour, IInstantModule
             {
                 itemSocket.SetItemToOffset(item, containerStack.Count * offsetVector); //fix required
             }
+
+            signalBus.Fire(new ItemTransferredSignal(GameplayEvent.ItemPickedUp, container.GetItemType(), itemSocket, interactor));
         }
 
         return true;

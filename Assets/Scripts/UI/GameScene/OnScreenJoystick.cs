@@ -19,7 +19,7 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private Vector2 padDefaultScreenPos;
 
     [Header("Nub Settings")]
-    [SerializeField] private float nubRange = 180f;
+    [SerializeField] private float nubRange = 170f;
 
     private void Start()
     {

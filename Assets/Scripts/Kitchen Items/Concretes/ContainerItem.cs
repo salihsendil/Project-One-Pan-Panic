@@ -11,11 +11,10 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
     [Inject] private RecipeMatchEvaluator recipeMatcher;
     [Inject] private SignalBus signalBus;
 
-
     [SerializeField] private ContainerItemSO containerData;
     [SerializeField] private Transform holdPoint;
     [SerializeField] private ContainerIconDisplay iconDisplay;
-    private RecipeSO currentRecipe;
+    [SerializeField] private RecipeSO currentRecipe;
 
     private int currentSize = 0;
 
@@ -24,16 +23,17 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
 
     public RecipeSO CurrentRecipe => currentRecipe;
 
+    public override ItemType GetItemType() => containerData.ItemType;
+
     protected override void Awake()
     {
         base.Awake();
-
         iconDisplay = GetComponent<ContainerIconDisplay>();
         iconDisplay.Hide();
     }
 
     #region IPoolable
-    public UniversalPoolEntryType GetPoolType => containerData.PoolType;
+    public ItemType GetPoolType => containerData.ItemType;
 
     public void Spawn()
     {
@@ -66,6 +66,8 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
             pickable.Transform.position = holdPoint.position;
             pickable.Transform.localPosition = Vector3.zero;
         });
+
+        signalBus.Fire(new IngredientAddedToContainerSignal(GameplayEvent.IngredientAddedToContainer, pickable.GetItemType()));
     }
 
     public bool CanAddItem(IPickable pickable, out IngredientItem ingredient)

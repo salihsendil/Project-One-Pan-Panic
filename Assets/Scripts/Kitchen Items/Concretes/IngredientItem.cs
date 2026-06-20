@@ -9,7 +9,8 @@ public class IngredientItem : BaseKitchenItem, IPoolable
 
     public ItemStage ItemStage => itemStage;
     public IngredientItemSO IngredientData => ingredientData;
-    public UniversalPoolEntryType GetPoolType => ingredientData.PoolType;
+    public ItemType GetPoolType => ingredientData.ItemType;
+    public override ItemType GetItemType() => ingredientData.ItemType;
 
 
     protected override void Awake()
@@ -20,6 +21,8 @@ public class IngredientItem : BaseKitchenItem, IPoolable
         iconDisplay.SetIcon(ingredientData.Icon);
         iconDisplay.Hide();
     }
+
+    #region IPoolable
 
     public void Spawn()
     {
@@ -33,6 +36,8 @@ public class IngredientItem : BaseKitchenItem, IPoolable
         iconDisplay.Hide();
         UpdateMesh(ingredientData.InitialMesh);
     }
+
+    #endregion
 
     public void ItemProcessed(Mesh newMesh, ItemStage newStage)
     {

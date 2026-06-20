@@ -17,5 +17,5 @@ public class IngredientItemSO : ScriptableObject
 
 
     [Header("Pool")]
-    public UniversalPoolEntryType PoolType;
+    public ItemType ItemType;
 }

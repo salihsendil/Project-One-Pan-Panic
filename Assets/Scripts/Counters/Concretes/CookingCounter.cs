@@ -13,10 +13,11 @@ public class CookingCounter : BaseCounter
         itemSocket = GetComponent<ItemSocket>();
         itemInteractionModule = GetComponent<ItemInteractionModule>();
         cookingModule = GetComponent<CookingModule>();
+
         base.Awake();
     }
 
-    public override void InteractionStarted(IInteractor interactor)
+    public override void InteractInstant(IInteractor interactor)
     {
         if (!itemSocket.HasItem)
         {
@@ -24,7 +25,7 @@ public class CookingCounter : BaseCounter
 
             if (cookingModule.CanProcessable(interactor.GetItem))
             {
-                base.InteractionStarted(interactor);
+                base.InteractInstant(interactor);
             }
 
             return;

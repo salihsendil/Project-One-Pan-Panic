@@ -1,8 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(IngredientItem))]
 public class ItemProcessHandler : MonoBehaviour
 {
+    //Zenject
+    [Inject] private SignalBus signalBus;
+
     private IngredientItem ingredient;
     private IItemProcess[] processes = new IItemProcess[3];
 
@@ -49,6 +53,11 @@ public class ItemProcessHandler : MonoBehaviour
     private void HandleProcessFinish(IItemProcess process)
     {
         ProcessRuleSO processRule = process.ProcessRule;
+
         ingredient.ItemProcessed(processRule.OutputMesh, processRule.ToStage);
+
+        signalBus.Fire(new ItemProcessedSignal(GameplayEvent.IngredientProcessed,
+                                                ingredient.IngredientData.ItemType,
+                                                processRule.ProcessType));
     }
 }

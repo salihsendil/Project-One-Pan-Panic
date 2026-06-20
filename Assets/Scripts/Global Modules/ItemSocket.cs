@@ -1,15 +1,25 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 public class ItemSocket : MonoBehaviour, IInteractor
 {
+    //Type
+    [SerializeField] private InteractorType interactorType;
+
+    //Item
     private IPickable currentItem;
+
+    //Positioning
     [SerializeField] private Transform holdPoint;
 
+    //Test
     [SerializeField] private GameObject testGameObject; //test delete
+
 
     public bool HasItem => currentItem != null;
     public IPickable GetItem => currentItem;
+    public InteractorType InteractorType => interactorType;
 
     private void Awake()//test delete
     {
@@ -41,6 +51,7 @@ public class ItemSocket : MonoBehaviour, IInteractor
                 itemTransform.SetParent(holdPoint);
                 itemTransform.localPosition = offset;
             });
+
     }
 
     public IPickable RemoveItem()

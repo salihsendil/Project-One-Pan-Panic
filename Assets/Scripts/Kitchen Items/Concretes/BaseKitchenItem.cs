@@ -9,12 +9,17 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPickable
 
 
     #region IPickable
+    
     public Transform Transform => transform;
 
     public GameObject GetGameObject => gameObject;
 
+    public abstract ItemType GetItemType();
+
     public bool IsPickable { get => isPickable; set => isPickable = value; }
+
     #endregion
+
 
     protected virtual void Awake()
     {
@@ -25,6 +30,7 @@ public abstract class BaseKitchenItem : MonoBehaviour, IPickable
     protected void UpdateMesh(Mesh newMesh)
     {
         if (meshFilter == null) return;
-        meshFilter.sharedMesh = newMesh;
+            meshFilter.sharedMesh = newMesh;
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(IngredientDispenserModule))]
 public class IngredientDispenserCounter : BaseCounter
 {
-    public override void InteractionStarted(IInteractor interactor)
+    public override void InteractInstant(IInteractor interactor)
     {
         foreach (var module in instantModules)
         {

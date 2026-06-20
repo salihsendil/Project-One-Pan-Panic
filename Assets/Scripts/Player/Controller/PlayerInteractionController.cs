@@ -20,26 +20,28 @@ public class PlayerInteractionController : MonoBehaviour
 
     //References
     private IInteractor interactor;
-    private ItemSocket itemSocket;
 
     private void Awake()
     {
         interactor = GetComponent<IInteractor>();
-        itemSocket = GetComponent<ItemSocket>();
     }
 
     private void Start()
     {
         inputHandler.OnInteractionStarted += InteractionStarted;
-        inputHandler.OnInteractionPerformed += InteractionPerformed;
         inputHandler.OnInteractionCanceled += InteractionCanceled;
+
+        inputHandler.OnInteractionAlternateStarted += InteractionAlternateStarted;
+        inputHandler.OnInteractionAlternateCanceled += InteractionAlternateCanceled;
     }
 
     private void OnDisable()
     {
         inputHandler.OnInteractionStarted -= InteractionStarted;
-        inputHandler.OnInteractionPerformed -= InteractionPerformed;
         inputHandler.OnInteractionCanceled -= InteractionCanceled;
+
+        inputHandler.OnInteractionAlternateStarted -= InteractionAlternateStarted;
+        inputHandler.OnInteractionAlternateCanceled -= InteractionAlternateCanceled;
     }
 
     private void Update()
@@ -90,17 +92,23 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void InteractionStarted()
     {
-        currentInteractable?.InteractionStarted(interactor);
-    }
-
-    private void InteractionPerformed()
-    {
-        currentInteractable?.InteractionPerformed(interactor);
+        currentInteractable?.InteractInstant(interactor);
     }
 
     private void InteractionCanceled()
     {
-        currentInteractable?.InteractionCanceled(interactor);
         currentInteractable = null;
     }
+
+    private void InteractionAlternateStarted()
+    {
+        currentInteractable?.InteractHoldStarted(interactor);
+    }
+
+    private void InteractionAlternateCanceled()
+    {
+        currentInteractable?.InteractHoldCanceled(interactor);
+        currentInteractable = null;
+    }
+
 }

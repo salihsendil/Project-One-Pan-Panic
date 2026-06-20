@@ -11,7 +11,7 @@ public class UniversalPoolConfigSO : ScriptableObject
 [Serializable]
 public struct UniversalPoolEntry
 {
-    public UniversalPoolEntryType Type;
+    public ItemType Type;
     public GameObject Prefab;
     public int InitializeSize;
     public bool HasHardLimit;

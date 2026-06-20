@@ -9,8 +9,8 @@ public class UniversalPoolManager : MonoBehaviour
     [Inject] private UniversalPoolConfigSO poolConfig;
 
     //Pool
-    private Dictionary<UniversalPoolEntryType, UniversalPoolEntry> poolEntries = new();
-    private Dictionary<UniversalPoolEntryType, Stack<GameObject>> pool = new();
+    private Dictionary<ItemType, UniversalPoolEntry> poolEntries = new();
+    private Dictionary<ItemType, Stack<GameObject>> pool = new();
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class UniversalPoolManager : MonoBehaviour
         }
     }
 
-    public GameObject Spawn(UniversalPoolEntryType type)
+    public GameObject Spawn(ItemType type)
     {
         if (!pool.TryGetValue(type, out var stack))
         {
@@ -59,7 +59,7 @@ public class UniversalPoolManager : MonoBehaviour
         return go;
     }
 
-    public T Spawn<T>(UniversalPoolEntryType type) where T : Component, IPoolable
+    public T Spawn<T>(ItemType type) where T : Component, IPoolable
     {
         GameObject go = Spawn(type);
 
@@ -68,7 +68,7 @@ public class UniversalPoolManager : MonoBehaviour
         return component;
     }
 
-    public T SpawnWithConfig<T, TParam>(UniversalPoolEntryType type, TParam config)
+    public T SpawnWithConfig<T, TParam>(ItemType type, TParam config)
                                          where T : Component, IPoolable, IConfigurable<TParam>
     {
         T component = Spawn<T>(type);
@@ -100,7 +100,7 @@ public class UniversalPoolManager : MonoBehaviour
         stack.Push(go);
     }
 
-    public void ClearPool(UniversalPoolEntryType type)
+    public void ClearPool(ItemType type)
     {
         if (!pool.TryGetValue(type, out var stack)) { return; }
 

@@ -8,7 +8,7 @@ public class ContainerItemSO : ScriptableObject
     public int Capacity;
 
     [Header("Pool")]
-    public UniversalPoolEntryType PoolType;
+    public ItemType ItemType;
 
     [Header("Visual")]
     public GameObject Prefab;

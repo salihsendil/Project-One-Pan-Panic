@@ -7,17 +7,16 @@ public class ProjectInstaller : MonoInstaller
     {
         Application.targetFrameRate = 60;
 
+        //Interface Bindings
         Container.BindInterfacesAndSelfTo<SaveSystem>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<WardrobeManager>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<GameSettingsService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<CurrencyManager>().AsSingle().NonLazy();
+
+        //Instantiate Object Bindings
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
 
-        SignalInstallers();
-    }
-
-    private void SignalInstallers()
-    {
-        SignalBusInstaller.Install(Container);        
+        //Signal Bindings
+        SignalBusInstaller.Install(Container);
     }
 }

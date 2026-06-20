@@ -2,7 +2,7 @@
 public interface IInteractable
 {
     public void HighlightInteractable(bool canInteractable);
-    public void InteractionStarted(IInteractor interactor);
-    public void InteractionPerformed(IInteractor interactor);
-    public void InteractionCanceled(IInteractor interactor);
+    public void InteractInstant(IInteractor interactor);
+    public void InteractHoldStarted(IInteractor interactor);
+    public void InteractHoldCanceled(IInteractor interactor);
 }

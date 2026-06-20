@@ -20,17 +20,17 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
         counterHighlighter = GetComponent<CounterHighlighter>();
     }
 
-    public virtual void InteractionStarted(IInteractor interactor)
+    public virtual void InteractInstant(IInteractor interactor)
     {
         foreach (var module in instantModules)
         {
             module?.TryInteractionInstant(interactor);
         }
 
-        foreach (var module in holdModules)
-        {
-            module?.OnInteractionStarted();
-        }
+        //foreach (var module in holdModules)
+        //{
+        //    module?.OnInteractionStarted();
+        //}
 
         foreach (var module in autoModules)
         {
@@ -38,15 +38,20 @@ public abstract class BaseCounter : MonoBehaviour, IInteractable
         }
     }
 
-    public virtual void InteractionPerformed(IInteractor interactor)
+    public virtual void InteractHoldStarted(IInteractor interactor)
     {
+        foreach (var module in holdModules)
+        {
+            module?.OnInteractionStarted();
+        }
+
         foreach (var module in holdModules)
         {
             module?.OnInteractionPerformed();
         }
     }
 
-    public virtual void InteractionCanceled(IInteractor interactor)
+    public virtual void InteractHoldCanceled(IInteractor interactor)
     {
         foreach (var module in holdModules)
         {

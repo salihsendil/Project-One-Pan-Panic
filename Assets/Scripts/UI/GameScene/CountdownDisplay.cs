@@ -28,12 +28,12 @@ public class CountdownDisplay : MonoBehaviour
         countdownText.text = signal.Remaining <= 0 ? "GO!" : signal.Remaining.ToString();
     }
 
-    public void OnGameStarted()
+    public void Hide()
     {
         gameObject.SetActive(false);
     }
 
-    public void OnGameFinished()
+    public void Show()
     {
         gameObject.SetActive(true);
         countdownText.text = "Time's Up!";

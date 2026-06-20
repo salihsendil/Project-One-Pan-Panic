@@ -21,7 +21,16 @@
                     "id": "bb854082-0ffd-4781-b383-de254d88f7e4",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold(duration=0.3)",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction_Alternate",
+                    "type": "Button",
+                    "id": "ca23709c-ceb1-47ca-9d93-f2e7f4aab9f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)",
                     "initialStateCheck": false
                 }
             ],
@@ -155,6 +164,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76f7ea8e-fcaf-4533-99a6-06d2c4ddaf1e",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction_Alternate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b54af0c3-dff8-4a27-b1c5-3433a92d4845",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction_Alternate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

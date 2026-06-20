@@ -9,7 +9,8 @@ public class OrderManager : MonoBehaviour
 
     [SerializeField] private int orderCounter;
     [SerializeField] private List<Order> activeOrders = new();
-    [SerializeField] public bool isPlaying;
+    [SerializeField] private bool isPlaying;
+    [SerializeField] private Coroutine orderCoroutine;
 
     private void OnEnable()
     {
@@ -24,25 +25,28 @@ public class OrderManager : MonoBehaviour
     }
 
     private void SetGameState(bool value) => isPlaying = value;
-    private void StartGame() => SetGameState(true);
-    private void StopGame() => SetGameState(false);
-
-    private void Start()
-    {
-        //StartCoroutine(TrySpawnOrderPeriodically());
-    }
 
     private void Update()
     {
         TickOrdersTimes();
     }
 
+    private void StartGame()
+    {
+        SetGameState(true);
+        orderCoroutine = StartCoroutine(TrySpawnOrderPeriodically());
+    }
+
+    private void StopGame()
+    {
+        SetGameState(false);
+        StopCoroutine(orderCoroutine);
+    }
+
     private IEnumerator TrySpawnOrderPeriodically()
     {
-        while (true)
+        while (isPlaying)
         {
-            if (!isPlaying) { yield return new WaitUntil(() => isPlaying); }
-
             yield return new WaitForSeconds(orderConfig.StartOrderSpawnDelay);
 
             if (activeOrders.Count >= orderConfig.MaxActiveOrderCount)
@@ -60,6 +64,7 @@ public class OrderManager : MonoBehaviour
     private void TickOrdersTimes()
     {
         if (!isPlaying) return;
+        //if (activeOrders.Count <= 0) return;
 
         for (int i = activeOrders.Count - 1; i >= 0; i--)
         {
@@ -97,6 +102,13 @@ public class OrderManager : MonoBehaviour
         return orderConfig.RecipeEntries[random].Recipe;
     }
 
+    public void GenerateOrder(RecipeSO recipeSO)
+    {
+        Order order = new(orderCounter, recipeSO);
+        activeOrders.Add(order);
+        signalBus.Fire(new OrderGeneratedSignal(order));
+    }
+
     public bool TryCompleteOrder(RecipeSO recipe)
     {
         foreach (var order in activeOrders)
@@ -104,7 +116,7 @@ public class OrderManager : MonoBehaviour
             if (order.Recipe == recipe)
             {
                 activeOrders.Remove(order);
-                signalBus.Fire(new OrderDeliveredSignal(order));
+                signalBus.Fire(new OrderDeliveredSignal(GameplayEvent.OrderDelivered, order));
                 return true;
             }
         }

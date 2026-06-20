@@ -1,0 +1,300 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5457f771fe276c47b2fbe52e19552af, type: 3}
+  m_Name: TutorialStepSO
+  m_EditorClassIdentifier: 
+  Steps:
+  - Dialogue: "\u015Eef! Nerede kald\u0131n? \u0130lk m\xFC\u015Fterimiz a\xE7l\u0131ktan
+      men\xFCy\xFC ezberlemek \xFCzere."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Merak etme, bug\xFCn yan\u0131nda olaca\u011F\u0131m. En az\u0131ndan
+      i\u015Fler kontrolden \xE7\u0131kana kadar."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "M\xFC\u015Fterilerin sipari\u015Flerini sa\u011F \xFCstten g\xF6rebilirsin."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Bak, ilk sipari\u015F geldi bile. Bir salata haz\u0131rlayaca\u011F\u0131z. "
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 5
+    TargetRecipe: {fileID: 11400000, guid: fc2eccab0e5752a47abfc3b3b1f75869, type: 2}
+  - Dialogue: "Sipari\u015Fin alt\u0131ndaki sab\u0131r \xE7ubu\u011Fu t\xFCkenirse
+      ceza puan\u0131 al\u0131rs\u0131n ve s\xFCre yeniden ba\u015Flar."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Hadi ba\u015Flayal\u0131m \u015Eef. \xD6nce bir domates al."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 5
+    TargetInteractor: 5
+    RequiredItemType: 5
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 5
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "G\xFCzel se\xE7im \u015Eef, \u015Fimdi domatesi do\u011Frama tezgah\u0131na
+      yerle\u015Ftir."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 5
+    TargetInteractor: 8
+    RequiredItemType: 5
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 7
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Harika! \u015Eimdi bas\u0131l\u0131 tutarak do\u011Frayal\u0131m. "
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 6
+    TargetInteractor: 0
+    RequiredItemType: 5
+    ProcessType: 5
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 7
+    GuidanceIcon: {fileID: 21300000, guid: 089df444c57e22d409fc2db84c168b5e, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "M\xFCkemmel. Salatan\u0131n ikinci malzemesi olan marulu al."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 5
+    TargetInteractor: 5
+    RequiredItemType: 6
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 6
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "\u015Eimdi marulu do\u011Frama tezgah\u0131na yerle\u015Ftir."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 5
+    TargetInteractor: 8
+    RequiredItemType: 6
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 8
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "G\xFCzel! Marulu da do\u011Frayal\u0131m."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 6
+    TargetInteractor: 0
+    RequiredItemType: 6
+    ProcessType: 5
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 8
+    GuidanceIcon: {fileID: 21300000, guid: 089df444c57e22d409fc2db84c168b5e, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "\u0130\u015Fte bu! Gerekli t\xFCm malzemeler haz\u0131r."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "\u015Eimdi bir tabak alal\u0131m \u015Eef."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 5
+    TargetInteractor: 5
+    RequiredItemType: 20
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 9
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "\xD6nce haz\u0131rlad\u0131\u011F\u0131n domatesi taba\u011Fa ekle."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 7
+    TargetInteractor: 0
+    RequiredItemType: 5
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 7
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "\u015Eimdi marulu da ekle. Salata haz\u0131r g\xF6r\xFCn\xFCyor."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 7
+    TargetInteractor: 0
+    RequiredItemType: 6
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 8
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "M\xFC\u015Fteri bizi bekliyor \u015Eef. Sipari\u015Fi hemen teslim
+      edelim."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 6
+    GameplayEvent: 8
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 11400000, guid: fc2eccab0e5752a47abfc3b3b1f75869, type: 2}
+    WorldTarget: 10
+    GuidanceIcon: {fileID: 21300000, guid: fd73d55b1a47d6a489d40b0e45664c87, type: 3}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Muhte\u015Fem! \u0130lk sipari\u015F ba\u015Far\u0131yla teslim edildi."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Teslim etti\u011Fin sipari\u015Fler sana skor kazand\u0131r\u0131r."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Vardiya sonunda toplad\u0131\u011F\u0131n skor alt\u0131na d\xF6n\xFC\u015F\xFCr.
+      Ne kadar \xE7ok sipari\u015F tamamlarsan o kadar \xE7ok alt\u0131n kazan\u0131rs\u0131n."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Fena de\u011Fil \u015Eef. \u0130lk vardiya i\xE7in bekledi\u011Fimden
+      daha az kaos ya\u015Fand\u0131."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Ama fazla rahatlama. Yak\u0131nda daha fazla m\xFC\u015Fteri ve daha
+      fazla sipari\u015F gelecek."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Ben sipari\u015Flerle ilgileniyorum. Sen de mutfa\u011F\u0131 ayakta
+      tutmaya \xE7al\u0131\u015F."
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}
+  - Dialogue: "Haz\u0131rsan \u015Eef, vardiya ger\xE7ekten \u015Fimdi ba\u015Fl\u0131yor!"
+    Mascot: {fileID: 21300000, guid: 188a192d796eba8438c65d686d2057cf, type: 3}
+    CompletionCondition: 5
+    GameplayEvent: 0
+    TargetInteractor: 0
+    RequiredItemType: 0
+    ProcessType: 0
+    RequiredRecipe: {fileID: 0}
+    WorldTarget: 0
+    GuidanceIcon: {fileID: 0}
+    TutorialStepAction: 0
+    TargetRecipe: {fileID: 0}

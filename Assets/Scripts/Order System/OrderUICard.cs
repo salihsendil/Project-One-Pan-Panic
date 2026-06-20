@@ -27,7 +27,7 @@ public class OrderUICard : MonoBehaviour, IPoolable, IConfigurable<Order>
 
     public GameObject GetGameObject => gameObject;
 
-    public UniversalPoolEntryType GetPoolType => UniversalPoolEntryType.OrderCard;
+    public ItemType GetPoolType => ItemType.OrderCard;
 
     public void Spawn()
     {

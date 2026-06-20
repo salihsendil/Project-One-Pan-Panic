@@ -1,9 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(ItemSocket))]
 public class ItemInteractionModule : MonoBehaviour, IInstantModule
 {
+    //Zenject
+    [Inject] private SignalBus signalBus;
+
+    //References
     private ItemSocket itemSocket;
+
 
     private void Awake()
     {
@@ -17,7 +23,11 @@ public class ItemInteractionModule : MonoBehaviour, IInstantModule
             if (!interactor.HasItem) return false;
             if (!interactor.GetItem.IsPickable) return false;
 
-            itemSocket.SetItem(interactor.RemoveItem());
+            IPickable item = interactor.RemoveItem();
+            itemSocket.SetItem(item);
+
+            signalBus.Fire(new ItemTransferredSignal(GameplayEvent.ItemPickedUp, item.GetItemType(), interactor, itemSocket));
+
             return true;
         }
 
@@ -27,7 +37,11 @@ public class ItemInteractionModule : MonoBehaviour, IInstantModule
             {
                 if (!itemSocket.GetItem.IsPickable) return false;
 
-                interactor.SetItem(itemSocket.RemoveItem());
+                IPickable item = itemSocket.RemoveItem();
+                interactor.SetItem(item);
+
+                signalBus.Fire(new ItemTransferredSignal(GameplayEvent.ItemPickedUp, item.GetItemType(), itemSocket, interactor));
+
                 return true;
             }
 

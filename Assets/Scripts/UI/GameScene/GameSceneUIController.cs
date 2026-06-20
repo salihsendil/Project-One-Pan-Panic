@@ -23,11 +23,11 @@ public class GameSceneUIController : MonoBehaviour
 
     private void OnGameStarted()
     {
-        countdownDisplay.OnGameStarted();
+        countdownDisplay.Hide();
     }
 
     private void OnGameFinished()
     {
-        countdownDisplay.OnGameFinished();
+        countdownDisplay.Show();
     }
 }

@@ -5,6 +5,7 @@ public class Game_Scene_SignalInstaller : MonoInstaller
     public override void InstallBindings()
     {
         //Gameplay Phase Signals
+        Container.DeclareSignal<CountdownStartedSignal>();
         Container.DeclareSignal<GameStartedSignal>();
         Container.DeclareSignal<TogglePauseRequestSignal>();
         Container.DeclareSignal<GameFinishedSignal>();

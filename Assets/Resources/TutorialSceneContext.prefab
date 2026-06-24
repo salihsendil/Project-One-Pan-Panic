@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22b22ea34fa667469f05dedd097987f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectivePointerPrefab: {fileID: 1868099393801635890, guid: 432a4965d59cd07408e91693071b9c9c, type: 3}

@@ -29,11 +29,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         signalBus.Subscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
+        signalBus.Subscribe<SceneFullyLoadedSignal>(SceneLoaded);
     }
 
     private void OnDisable()
     {
         signalBus.Unsubscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
+        signalBus.Unsubscribe<SceneFullyLoadedSignal>(SceneLoaded);
     }
 
     private void Start()
@@ -42,8 +44,6 @@ public class GameManager : MonoBehaviour
 
         gameTime = levelConfig.LevelTime;
         signalBus.Fire(new LevelTimerTickSignal(gameTime));
-
-        SetGameplayPhase(levelConfig.StartPhase);
     }
 
     private void Update()
@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void SceneLoaded()
+    {
+        SetGameplayPhase(levelConfig.StartPhase);
     }
 
     private void ProcessTimer(float deltaTime, ref int lastReportedTime, Action<int> onTick, GameplayPhase nextPhase)
@@ -101,6 +106,7 @@ public class GameManager : MonoBehaviour
             case GameplayPhase.Countdown:
                 timer.Reset();
                 timer.Set(countdownTime);
+                signalBus.Fire(new CountdownStartedSignal());
                 break;
 
             case GameplayPhase.Play:

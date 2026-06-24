@@ -2427,7 +2427,6 @@ GameObject:
   - component: {fileID: 3415781837067618943}
   - component: {fileID: 5673200084437024098}
   - component: {fileID: 3007301846983414818}
-  - component: {fileID: 2735421560962284571}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
@@ -2553,19 +2552,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2735421560962284571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3848873136839135607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6e435b7a3459a46b811f72fc217ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownText: {fileID: 3007301846983414818}
 --- !u!1 &3878708984545714542
 GameObject:
   m_ObjectHideFlags: 0
@@ -4309,9 +4295,9 @@ GameObject:
   - component: {fileID: 4049568701502658421}
   - component: {fileID: 8242516779821968977}
   - component: {fileID: 273451104069083623}
-  - component: {fileID: 8725741226858100926}
+  - component: {fileID: 1018251846727397008}
   m_Layer: 5
-  m_Name: UI
+  m_Name: Game_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4406,7 +4392,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8725741226858100926
+--- !u!114 &1018251846727397008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4415,10 +4401,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6815387092675165850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8500a39595505c4dada506886ea3e39, type: 3}
+  m_Script: {fileID: 11500000, guid: fc6e435b7a3459a46b811f72fc217ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownDisplay: {fileID: 2735421560962284571}
+  countdownText: {fileID: 3007301846983414818}
 --- !u!1 &7442712730373990704
 GameObject:
   m_ObjectHideFlags: 0

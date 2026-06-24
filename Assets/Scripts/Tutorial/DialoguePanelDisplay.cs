@@ -8,8 +8,7 @@ using DG.Tweening;
 public class DialoguePanelDisplay : MonoBehaviour, IPointerClickHandler
 {
     [Inject] private SignalBus signalBus;
-
-    [SerializeField] private TutorialStepManager tutorialStepManager;
+    [Inject] private TutorialStepManager tutorialStepManager;
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TMP_Text dialogueText;

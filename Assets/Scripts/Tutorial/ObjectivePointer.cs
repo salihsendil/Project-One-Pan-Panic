@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ObjectivePointer : MonoBehaviour
 {
     [Header("Positioning")]
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 offset = new(0, 0.5f, 0.5f);
 
     [Header("Visual")]
     [SerializeField] private Image iconImage;

@@ -8,12 +8,12 @@ public class TutorialStepManager : MonoBehaviour
     [Inject] private SignalBus signalBus;
     [Inject] private OrderManager orderManager;
     [Inject] private GameManager gameManager;
+    [Inject] private ObjectivePointer pointer;
 
     [SerializeField] private TutorialStepSO tutorialStepData;
     [SerializeField] private int currentStepIndex = 0;
 
-    [SerializeField] private ObjectivePointer pointer;
-    [SerializeField] private List<TutorialTarget> pointerTargets;
+    private HashSet<TutorialTarget> pointerTargets = new();
 
     private void Awake()
     {
@@ -22,6 +22,9 @@ public class TutorialStepManager : MonoBehaviour
 
     private void OnEnable()
     {
+        TutorialTarget.OnSpawned += RegisterTutorialTargets;
+        TutorialTarget.OnDespawned += RemoveTutorialTargets;
+
         signalBus.Subscribe<ItemTransferredSignal>(OnItemTransferred);
         signalBus.Subscribe<ItemProcessedSignal>(OnItemProcessed);
         signalBus.Subscribe<IngredientAddedToContainerSignal>(OnIngredientAddedToContainer);
@@ -30,6 +33,9 @@ public class TutorialStepManager : MonoBehaviour
 
     private void OnDisable()
     {
+        TutorialTarget.OnSpawned -= RegisterTutorialTargets;
+        TutorialTarget.OnDespawned -= RemoveTutorialTargets;
+
         signalBus.Unsubscribe<ItemTransferredSignal>(OnItemTransferred);
         signalBus.Unsubscribe<ItemProcessedSignal>(OnItemProcessed);
         signalBus.Unsubscribe<IngredientAddedToContainerSignal>(OnIngredientAddedToContainer);
@@ -40,6 +46,9 @@ public class TutorialStepManager : MonoBehaviour
     {
         GetCurrentStep();
     }
+
+    private void RegisterTutorialTargets(TutorialTarget tutorialTarget) => pointerTargets.Add(tutorialTarget);
+    private void RemoveTutorialTargets(TutorialTarget tutorialTarget) => pointerTargets.Remove(tutorialTarget);
 
     private void OnItemTransferred(ItemTransferredSignal signal)
     {

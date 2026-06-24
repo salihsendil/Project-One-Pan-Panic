@@ -3,6 +3,8 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller
 {
+    [SerializeField] private GameObject loadingCanvas;
+
     public override void InstallBindings()
     {
         Application.targetFrameRate = 60;
@@ -15,8 +17,10 @@ public class ProjectInstaller : MonoInstaller
 
         //Instantiate Object Bindings
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
+        Container.Bind<LoadingPanelHandler>().FromComponentInNewPrefab(loadingCanvas).AsSingle().NonLazy();
 
         //Signal Bindings
         SignalBusInstaller.Install(Container);
+        Container.DeclareSignal<SceneFullyLoadedSignal>();
     }
 }

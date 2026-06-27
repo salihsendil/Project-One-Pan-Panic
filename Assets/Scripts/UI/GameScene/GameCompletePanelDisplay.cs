@@ -8,8 +8,8 @@ public class GameCompletePanelDisplay : MonoBehaviour
 {
     //Zenject
     [Inject] private SignalBus signalBus;
-    [Inject] private LevelStatsService statsService;
-    [Inject] private ScoreHandler scoreHandler;
+    [Inject] private LevelStatsService levelStatsService;
+    [Inject] private LevelDataService levelDataService;
 
     //References
     private CanvasGroup panel;
@@ -46,11 +46,11 @@ public class GameCompletePanelDisplay : MonoBehaviour
 
     private void SetStatsText()
     {
-        scoreText.text = "Score: " + statsService.GetStat(StatsType.Score).ToString();
-        highscoreText.text = "High Score: " + scoreHandler.HighScore.ToString();
-        failOrderText.text = "Failed Order: " + statsService.GetStat(StatsType.FailOrder).ToString();
-        completeOrderText.text = "Completed Order: " + statsService.GetStat(StatsType.CompleteOrder).ToString();
-        earnedGoldText.text = "Earned Gold: " + statsService.GetStat(StatsType.EarnedGold).ToString();
+        scoreText.text = "Score: " + levelStatsService.GetStat(StatsType.Score).ToString();
+        highscoreText.text = "High Score: " + levelDataService.GetCurrentLevelHighscore().ToString();
+        failOrderText.text = "Failed Order: " + levelStatsService.GetStat(StatsType.FailOrder).ToString();
+        completeOrderText.text = "Completed Order: " + levelStatsService.GetStat(StatsType.CompleteOrder).ToString();
+        earnedGoldText.text = "Earned Gold: " + levelStatsService.GetStat(StatsType.EarnedGold).ToString();
     }
 
 }

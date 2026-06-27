@@ -1,30 +1,28 @@
 using System;
 using Zenject;
 
-public class ScoreHandler : IInitializable, IDisposable, ISaveable
+public class ScoreHandler : IInitializable, IDisposable
 {
     //Zenject
     [Inject] private SaveSystem saveSystem;
     [Inject] private SignalBus signalBus;
     [Inject] private LevelConfigSO levelConfig;
-    [Inject] private LevelStatsService statsService;
+    [Inject] private LevelStatsService levelStatsService;
     [Inject] private CurrencyManager currencyManager;
+    [Inject] private LevelDataService levelDataService;
 
     //Score Variables
-    private int highScore;
     private int currentScore;
 
-    ////References
+    //References
     private ComboRewardManager comboManager;
 
     //Getters
-    public int CurrentScore { get => currentScore; set => currentScore = value; }
-    public int HighScore => highScore;
+    public int CurrentScore => currentScore;
     public SaveDataType GetSaveDataType => SaveDataType.Stats;
 
     public void Initialize()
     {
-        LoadData();
         comboManager = new ComboRewardManager(levelConfig);
 
         signalBus.Subscribe<OrderDeliveredSignal>(AddScore);
@@ -58,30 +56,10 @@ public class ScoreHandler : IInitializable, IDisposable, ISaveable
 
     private void HandleGameFinish()
     {
-        int earnedGold = comboManager.GetEarnedCurrency(currentScore);
-        statsService.UpdateStats(StatsType.EarnedGold, earnedGold);
+        int earnedGold = comboManager.CalculateEarnedCurrency(currentScore);
+        levelStatsService.UpdateStats(StatsType.EarnedGold, earnedGold);
         currencyManager.Add(earnedGold);
 
-        if (currentScore <= highScore) return;
-        highScore = currentScore;
-        SaveData();
+        levelDataService.LevelCompleted(currentScore);
     }
-
-    #region SaveLoadData
-
-    public void SaveData()
-    {
-        StatsDataSave newData = new();
-        newData.HighScore = highScore;
-        saveSystem.UpdateData(GetSaveDataType, newData);
-        saveSystem.SaveData(GetSaveDataType);
-    }
-
-    public void LoadData()
-    {
-        StatsDataSave data = saveSystem.TryGetData<StatsDataSave>(GetSaveDataType);
-        highScore = data.HighScore;
-    }
-
-    #endregion
 }

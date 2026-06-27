@@ -1,0 +1,14 @@
+{
+    "LevelsData": [
+        {
+            "Level": "Tutorial_Level",
+            "HighScore": 65,
+            "IsLocked": false
+        },
+        {
+            "Level": "Level_1",
+            "HighScore": 0,
+            "IsLocked": false
+        }
+    ]
+}

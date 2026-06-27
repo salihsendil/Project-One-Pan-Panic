@@ -25,7 +25,7 @@ public class ComboRewardManager
         scoreMultiplier = 0f;
     }
 
-    public int GetEarnedCurrency(int score)
+    public int CalculateEarnedCurrency(int score)
     {
         return (int)(score * currencyMultiplier);
     }

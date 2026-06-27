@@ -19,7 +19,7 @@ public class SaveSystem : IInitializable
     //Data Models
     private SettingsDataSave settingsData = new();
     private PlayerDataSave playerData = new();
-    private StatsDataSave statsData = new();
+    private LevelSave levelData = new();
 
     #region Initialize
 
@@ -33,7 +33,7 @@ public class SaveSystem : IInitializable
     {
         dataMapping[SaveDataType.Settings] = settingsData;
         dataMapping[SaveDataType.PlayerData] = playerData;
-        dataMapping[SaveDataType.Stats] = statsData;
+        dataMapping[SaveDataType.LevelData] = levelData;
     }
 
     #endregion

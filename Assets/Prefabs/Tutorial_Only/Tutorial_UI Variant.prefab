@@ -436,7 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef602f80dd3aa374a9277924ad59c272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStepManager: {fileID: 0}
   canvasGroup: {fileID: 4278934548394323116}
   dialogueText: {fileID: 4605964711836343141}
   skipText: {fileID: 6722193539583501035}
@@ -669,6 +668,10 @@ PrefabInstance:
     - target: {fileID: 4962830322390670438, guid: 23426c61a1dda6d4d9780eb063e9f50f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801962123570016786, guid: 23426c61a1dda6d4d9780eb063e9f50f, type: 3}
+      propertyPath: sceneToLoad
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6815387092675165850, guid: 23426c61a1dda6d4d9780eb063e9f50f, type: 3}
       propertyPath: m_Name

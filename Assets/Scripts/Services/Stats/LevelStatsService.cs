@@ -2,15 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum StatsType { Score, CompleteOrder, FailOrder, EarnedGold }
+public enum StatsType { Score = 5, CompleteOrder, FailOrder, EarnedGold, }
 
 public class LevelStatsService : MonoBehaviour
 {
     //Zenject
     [Inject] private SignalBus signalBus;
+    [Inject] private LevelDataService levelDataService;
+    [Inject] private SceneService sceneService;
 
     //Data
-    public Dictionary<StatsType, int> statsDictionary = new Dictionary<StatsType, int>();
+    public Dictionary<StatsType, int> statsDictionary = new();
 
     #region SignalSubscription
 
@@ -19,7 +21,6 @@ public class LevelStatsService : MonoBehaviour
         signalBus.Subscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Subscribe<OrderExpiredSignal>(OrderExpired);
         signalBus.Subscribe<ScoreChangedSignal>(ScoreChanged);
-
     }
 
     private void OnDisable()

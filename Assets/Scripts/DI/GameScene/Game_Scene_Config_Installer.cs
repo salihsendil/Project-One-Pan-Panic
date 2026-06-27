@@ -7,6 +7,7 @@ public class Game_Scene_Config_Installer : ScriptableObjectInstaller<Game_Scene_
     [SerializeField] private LevelConfigSO levelConfigSO;
     [SerializeField] private OrderConfigSO orderConfigSO;
     [SerializeField] private UniversalPoolConfigSO poolConfigSO;
+
     public override void InstallBindings()
     {
         Container.BindInstance(levelConfigSO).AsSingle();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,14 +9,18 @@ public class SceneService : MonoBehaviour
     [Inject] private LoadingPanelHandler loadingPanel;
     [Inject] private SignalBus signalBus;
 
-    public void LoadScene(ScenesEnum sceneToLoad)
-    {
-        SceneManager.LoadScene(sceneToLoad.ToString());
-    }
+    [SerializeField] private ScenesEnum currentScene;
 
-    public void StartLoadSceneAsync(ScenesEnum scene)
+    public ScenesEnum CurrentScene => currentScene;
+
+    private void Awake()
     {
-        StartCoroutine(LoadSceneAsync(scene));
+        string activeScene = SceneManager.GetActiveScene().name;
+
+        if (!Enum.TryParse(activeScene, false, out currentScene))
+        {
+            LoadSceneAsync(ScenesEnum.MainMenuScene);
+        }
     }
 
     private IEnumerator LoadSceneAsync(ScenesEnum sceneToLoad)
@@ -24,7 +29,7 @@ public class SceneService : MonoBehaviour
         loadingPanel.SetCanvasVisibility(true, () => transitionCompleted = true);
         yield return new WaitUntil(() => transitionCompleted == true);
 
-        Scene currentScene = SceneManager.GetActiveScene();
+        Scene activeScene = SceneManager.GetActiveScene();
         yield return new WaitForSeconds(0.4f);
 
         Camera oldSceneCam = Camera.main;
@@ -64,9 +69,10 @@ public class SceneService : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
-        yield return SceneManager.UnloadSceneAsync(currentScene);
+        yield return SceneManager.UnloadSceneAsync(activeScene);
 
-        Scene newScene = SceneManager.GetSceneByName(sceneToLoad.ToString());
+        currentScene = sceneToLoad;
+        Scene newScene = SceneManager.GetSceneByName(currentScene.ToString());
         SceneManager.SetActiveScene(newScene);
 
         Camera newSceneCam = Camera.main;
@@ -83,13 +89,16 @@ public class SceneService : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
-        signalBus.Fire(new SceneFullyLoadedSignal());
+        signalBus.Fire(new SceneFullyLoadedSignal(currentScene));
+    }
+
+    public void StartLoadSceneAsync(ScenesEnum scene)
+    {
+        StartCoroutine(LoadSceneAsync(scene));
     }
 
     public void QuitGame()
     {
-        Debug.Log("quitting...");
-
         Application.Quit();
     }
 }

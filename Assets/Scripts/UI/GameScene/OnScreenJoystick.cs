@@ -9,9 +9,9 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
     [Inject] private InputHandler inputHandler;
     private RectTransform areaRectTransform;
 
-    [Header("Key Binding")]
-    [InputControl(layout = "Vector2")]
-    [SerializeField] private string controlPath = "<Gamepad>/leftStick";
+    //[Header("Key Binding")]
+    //[InputControl(layout = "Vector2")]
+    //[SerializeField] private string controlPath = "<Gamepad>/leftStick";
 
     [Header("UI")]
     [SerializeField] private RectTransform padTransform;

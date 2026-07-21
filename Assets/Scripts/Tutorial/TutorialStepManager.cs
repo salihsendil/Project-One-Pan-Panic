@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,8 @@ public class TutorialStepManager : MonoBehaviour
 
     [SerializeField] private TutorialStepSO tutorialStepData;
     [SerializeField] private int currentStepIndex = 0;
+
+    [SerializeField] private int startDelay = 2250; 
 
     private HashSet<TutorialTarget> pointerTargets = new();
 
@@ -44,6 +47,12 @@ public class TutorialStepManager : MonoBehaviour
 
     private void Start()
     {
+        StartTutorial();
+    }
+
+    private async void StartTutorial()
+    {
+        await Task.Delay(startDelay);
         GetCurrentStep();
     }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public enum SaveDataType { Settings = 0, PlayerData = 10, Stats = 20, LevelData = 30 }
+public enum SaveDataType { Settings = 0, PlayerData = 10, LevelData = 30 }
 
 #region Settings
 

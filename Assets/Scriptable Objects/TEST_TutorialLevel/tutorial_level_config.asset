@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tutorial_level_config
   m_EditorClassIdentifier: 
   StartPhase: 5
-  LevelTime: 5
+  LevelTime: 5000
   CountdownTime: 3
   StartScore: 0
   ScoreMultiplierStepAmount: 0.04

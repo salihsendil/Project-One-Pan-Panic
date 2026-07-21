@@ -73,20 +73,24 @@ public class LevelDataService : ISaveable, IInitializable, IDisposable
 
     public void LoadData()
     {
+        Debug.Log("0");
         if (levelCatalog == null) return;
-
+        Debug.Log("1");
         LevelSaveRoot saveRoot = saveSystem.TryGetData<LevelSaveRoot>(GetSaveDataType);
+        if (saveRoot == null) { Debug.Log("boþ bu"); return; }
+        Debug.Log("2");
 
-        if (saveRoot == null) return;
-
+        List<LevelMeta> levels = levelCatalog.Levels;
+        Debug.Log("count: " + levels.Count);
         foreach (var data in saveRoot.LevelsData)
         {
+            Debug.Log("3");
             LevelMeta level = levelCatalog.Levels.Find(x => x.Level.ToString() == data.Level);
-
-            if (level == null) continue;
-
+            if (level == null) { Debug.Log("boþ bu"); continue; }
+            Debug.Log("okudum: " + level.Level + level.Highscore + level.IsLocked);
             level.LoadData(data);
         }
+        Debug.Log("4");
     }
 
     public void SaveData()

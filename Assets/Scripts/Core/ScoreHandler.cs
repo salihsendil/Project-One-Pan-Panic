@@ -19,7 +19,6 @@ public class ScoreHandler : IInitializable, IDisposable
 
     //Getters
     public int CurrentScore => currentScore;
-    public SaveDataType GetSaveDataType => SaveDataType.Stats;
 
     public void Initialize()
     {

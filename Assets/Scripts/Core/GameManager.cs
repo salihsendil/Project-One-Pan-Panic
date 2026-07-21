@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [Inject] private LevelConfigSO levelConfig;
 
     //Game State
-    private GameplayPhase gameplayPhase;
+    [SerializeField] private GameplayPhase gameplayPhase;
 
     //Time Data
     private Timer timer = new();

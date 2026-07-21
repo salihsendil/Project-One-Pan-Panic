@@ -19,14 +19,16 @@ public class SaveSystem : IInitializable
     //Data Models
     private SettingsDataSave settingsData = new();
     private PlayerDataSave playerData = new();
-    private LevelSave levelData = new();
+    private LevelSaveRoot levelData = new();
 
     #region Initialize
 
     public void Initialize()
     {
         InitializeDataMapping();
+        Debug.Log("data not loaded yet");
         LoadData();
+        Debug.Log("data loaded");
     }
 
     private void InitializeDataMapping()

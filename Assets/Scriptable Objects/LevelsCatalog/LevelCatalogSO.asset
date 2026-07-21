@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - Level: 2
-    LevelFeaturedImage: {fileID: 21300000, guid: 09beb1264dda3524a96bf93818b977c4, type: 3}
-    LevelIndex: Level 0-1
+    LevelFeaturedImage: {fileID: 21300000, guid: 28fdb6bb53079fa4bbefe0fd5c7b379e, type: 3}
+    LevelIndex: Level 0-0
     LevelName: Preperation
     IsLocked: 0
     Highscore: 0

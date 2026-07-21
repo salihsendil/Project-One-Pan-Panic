@@ -11,10 +11,10 @@ public class ProjectInstaller : MonoInstaller
 
         //Interface Bindings
         Container.BindInterfacesAndSelfTo<SaveSystem>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<LevelDataService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<WardrobeManager>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<GameSettingsService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<CurrencyManager>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelDataService>().AsSingle().NonLazy();
 
         //Instantiate Object Bindings
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();

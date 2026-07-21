@@ -87,7 +87,7 @@ public class SceneService : MonoBehaviour
         loadingPanel.SetCanvasVisibility(false, () => transitionCompleted = true);
         yield return new WaitUntil(() => transitionCompleted == true);
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         signalBus.Fire(new SceneFullyLoadedSignal(currentScene));
     }

@@ -390,7 +390,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7305893896962513980}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -436,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef602f80dd3aa374a9277924ad59c272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
   canvasGroup: {fileID: 4278934548394323116}
   dialogueText: {fileID: 4605964711836343141}
   skipText: {fileID: 6722193539583501035}

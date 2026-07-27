@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fd62179cb3af44f975b3b405988ce1, type: 3}
+  m_Name: Global_Audio_Config
+  m_EditorClassIdentifier: 
+  MainMixer: {fileID: 24100000, guid: 282d2c4710a8af042880c1298cec2fad, type: 2}
+  MinVolume: 0.00001
+  MasterVolume: 0.79633933
+  MusicVolume: 0.48935726
+  AmbienceVolume: 0.44806355
+  SFXVolume: 0.54176337
+  Profiles:
+  - Scene: 0
+    Music: {fileID: 8300000, guid: 66075f8978964e247a1caa74f242689e, type: 3}
+    Ambience: {fileID: 0}
+  - Scene: 2
+    Music: {fileID: 8300000, guid: fbc39da664764b447925af9f4e9a7e50, type: 3}
+    Ambience: {fileID: 8300000, guid: de0bd8cfe00f40a4da09b094aada54c3, type: 3}
+  - Scene: 1
+    Music: {fileID: 8300000, guid: e309ec00cb250b744b4c7a6122816bc6, type: 3}
+    Ambience: {fileID: 8300000, guid: de0bd8cfe00f40a4da09b094aada54c3, type: 3}
+  SFXEntries:
+  - SFXType: 10
+    SFX: {fileID: 8300000, guid: 69ef8d6a8c5be6940b3b89bde76f500e, type: 3}
+    MinPitch: 0.65
+    MaxPitch: 0.85
+  - SFXType: 11
+    SFX: {fileID: 8300000, guid: 8fce7e083c6d7fe478204204f934069c, type: 3}
+    MinPitch: 1
+    MaxPitch: 1
+  - SFXType: 12
+    SFX: {fileID: 8300000, guid: 150aa38184cccb04fb8fa3a30376461e, type: 3}
+    MinPitch: 0.8
+    MaxPitch: 0.8
+  - SFXType: 30
+    SFX: {fileID: 8300000, guid: 1efafa33226175741bf8d894c22a8b95, type: 3}
+    MinPitch: 0.4
+    MaxPitch: 0.6
+  - SFXType: 31
+    SFX: {fileID: 8300000, guid: 43219d3e4d7f8b44093855d8aa7a54d9, type: 3}
+    MinPitch: 0.6
+    MaxPitch: 0.8
+  - SFXType: 32
+    SFX: {fileID: 8300000, guid: e1ce99823130d2e4fb377ca9228b3f76, type: 3}
+    MinPitch: 1
+    MaxPitch: 1
+  - SFXType: 33
+    SFX: {fileID: 8300000, guid: 150aa38184cccb04fb8fa3a30376461e, type: 3}
+    MinPitch: 1.8
+    MaxPitch: 1.8

@@ -8,7 +8,7 @@
         {
             "Level": "Level_1",
             "HighScore": 0,
-            "IsLocked": true
+            "IsLocked": false
         }
     ]
 }

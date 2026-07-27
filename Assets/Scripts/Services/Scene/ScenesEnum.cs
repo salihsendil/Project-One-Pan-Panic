@@ -1,6 +1,6 @@
 public enum ScenesEnum
 {
-    MainMenuScene,
+    Main_Menu_Scene,
     Level_1,
     Tutorial_Level,
 }

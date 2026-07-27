@@ -3522,8 +3522,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2204936087642969143}
   - component: {fileID: 2343794873414426108}
-  - component: {fileID: 3060503030954621342}
-  - component: {fileID: 880085590620638505}
   m_Layer: 5
   m_Name: SoundSlider
   m_TagString: Untagged
@@ -3604,31 +3602,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3060503030954621342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5714471642333119941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f0db1b39882eb74b84ff536a0da9ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 2343794873414426108}
---- !u!114 &880085590620638505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5714471642333119941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c4b6f0b7aa2a744a85644abe0b8dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5995625195036354626
 GameObject:
   m_ObjectHideFlags: 0
@@ -4140,8 +4113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6674837672115919615}
   - component: {fileID: 8396982469120939391}
-  - component: {fileID: 6600604790122720315}
-  - component: {fileID: 9125769426374989175}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -4222,31 +4193,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6600604790122720315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447698954290990960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f0db1b39882eb74b84ff536a0da9ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 8396982469120939391}
---- !u!114 &9125769426374989175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447698954290990960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f3b68fc2e71c28418020ec06dd96fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6521865860855125866
 GameObject:
   m_ObjectHideFlags: 0
@@ -5352,7 +5298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb59dfd9611fc4296f3641d24bf409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlPath: <Gamepad>/leftStick
   padTransform: {fileID: 8660306914545952622}
   nubTransform: {fileID: 3020398706579888114}
   padDefaultScreenPos: {x: 0, y: 0}

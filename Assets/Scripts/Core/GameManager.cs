@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Inject] private InputHandler inputHandler;
     [Inject] private SignalBus signalBus;
     [Inject] private LevelConfigSO levelConfig;
+    [Inject] private AudioService audioService;
 
     //Game State
     [SerializeField] private GameplayPhase gameplayPhase;

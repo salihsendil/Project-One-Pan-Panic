@@ -10,7 +10,6 @@ public class LevelSelectionPanelDisplay : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("çalýþtý");
         List<LevelMeta> levels = levelDataService.LevelCatalog.Levels;
 
         int safeLoopCount = Mathf.Min(cards.Count, levels.Count);

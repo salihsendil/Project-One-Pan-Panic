@@ -8,23 +8,25 @@ public class SceneService : MonoBehaviour
 {
     [Inject] private LoadingPanelHandler loadingPanel;
     [Inject] private SignalBus signalBus;
+    [Inject] private AudioService audioService;
 
     [SerializeField] private ScenesEnum currentScene;
 
-    public ScenesEnum CurrentScene => currentScene;
-
-    private void Awake()
+    private void Start()
     {
         string activeScene = SceneManager.GetActiveScene().name;
 
         if (!Enum.TryParse(activeScene, false, out currentScene))
         {
-            LoadSceneAsync(ScenesEnum.MainMenuScene);
+            StartCoroutine(LoadSceneAsync(ScenesEnum.Main_Menu_Scene));
+            return;
         }
     }
 
     private IEnumerator LoadSceneAsync(ScenesEnum sceneToLoad)
     {
+        audioService.FadeOut();
+
         bool transitionCompleted = false;
         loadingPanel.SetCanvasVisibility(true, () => transitionCompleted = true);
         yield return new WaitUntil(() => transitionCompleted == true);

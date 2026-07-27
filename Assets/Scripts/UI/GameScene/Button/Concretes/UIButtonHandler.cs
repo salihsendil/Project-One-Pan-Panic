@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class UIButtonHandler : MonoBehaviour
 {
     [SerializeField] private Button button;
     private BaseUIAction[] uiActions;
+
+    [Inject] private AudioService audioService;
 
     private void Awake()
     {
@@ -26,6 +29,8 @@ public class UIButtonHandler : MonoBehaviour
 
     private void ExecuteActions()
     {
+        audioService.PlaySFX(SFXType.UI_Button_Click);
+
         foreach (var action in uiActions)
         {
             if (action == null) { continue; }

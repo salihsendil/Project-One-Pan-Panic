@@ -1,4 +1,6 @@
 {
-    "MusicVolume": 0.5632410645484924,
-    "SfxVolume": 0.3379446268081665
+    "MasterVolume": 0.7963393330574036,
+    "MusicVolume": 0.48935726284980776,
+    "AmbienceVolume": 0.44806355237960818,
+    "SfxVolume": 0.5417633652687073
 }

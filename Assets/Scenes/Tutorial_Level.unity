@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoundingVolume: {fileID: 1152954964}
-  SlowingDistance: 1
+  SlowingDistance: 0.2
 --- !u!4 &540356950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1394869974669278034, guid: 3a5cbe37eedb2a34fb766bf70e4af0c4, type: 3}
@@ -1510,8 +1510,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 8, z: 6}
-  m_Center: {x: 0, y: 4, z: -1.2}
+  m_Size: {x: 2, y: 8, z: 3}
+  m_Center: {x: 0, y: 4, z: -1.8}
 --- !u!4 &1152954965
 Transform:
   m_ObjectHideFlags: 0

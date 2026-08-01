@@ -7,6 +7,8 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
     [Inject] private OrderManager orderManager;
     [Inject] private UniversalPoolManager poolManager;
 
+    [SerializeField] private ParticleSystem particle;
+
     public bool TryInteractionInstant(IInteractor interactor)
     {
         if (!interactor.HasItem) return false;
@@ -18,6 +20,7 @@ public class DeliveryModule : MonoBehaviour, IInstantModule
         {
             interactor.RemoveItem();
             poolManager.Despawn(containerItem);
+            particle.Play(true);
             return true;
         }
 

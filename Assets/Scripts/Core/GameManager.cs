@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [Inject] private InputHandler inputHandler;
     [Inject] private SignalBus signalBus;
     [Inject] private LevelConfigSO levelConfig;
-    [Inject] private AudioService audioService;
+    [Inject] private SFXService sfxService;
 
     //Game State
     [SerializeField] private GameplayPhase gameplayPhase;
@@ -61,9 +61,14 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameplayPhase.Play:
+
                 ProcessTimer(deltaTime,
                     ref gameTime,
-                    remaining => signalBus.Fire(new LevelTimerTickSignal(remaining)),
+                    remaining =>
+                    {
+                        if (timer.Remaining <= 10) sfxService.PlaySFXOneShot(SFXType.TenSecBeep);
+                        signalBus.Fire(new LevelTimerTickSignal(remaining));
+                    },
                     GameplayPhase.Finish);
                 break;
 
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
             case GameplayPhase.Countdown:
                 timer.Reset();
                 timer.Set(countdownTime);
+                sfxService.PlaySFXOneShot(SFXType.Countdown);
                 signalBus.Fire(new CountdownStartedSignal());
                 break;
 

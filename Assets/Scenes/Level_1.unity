@@ -3361,6 +3361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3649625266057055301, guid: 49eb2ce575479dc41b4e3709af8891e1, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4123106189271697963, guid: 49eb2ce575479dc41b4e3709af8891e1, type: 3}
       propertyPath: m_Name
       value: CuttingCounter

@@ -17,14 +17,10 @@ public class PlayerController : MonoBehaviour
     //Rotation Variables
     [SerializeField] private float rotationSpeed = 12f;
 
-    //Busy State
-    private bool isBusy;
-    public bool IsBusy => isBusy;
-
     
     private void FixedUpdate()
     {
-        if (movementVector != Vector3.zero && !isBusy)
+        if (movementVector != Vector3.zero)
         {
             HandleMovement();
             HandleRotation();
@@ -41,8 +37,6 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRot = Quaternion.LookRotation(movementVector);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
     }
-
-    public void SetBusyState(bool value) => isBusy = value;
 }
 
 

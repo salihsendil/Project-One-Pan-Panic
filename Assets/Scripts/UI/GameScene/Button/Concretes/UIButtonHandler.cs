@@ -8,7 +8,7 @@ public class UIButtonHandler : MonoBehaviour
     [SerializeField] private Button button;
     private BaseUIAction[] uiActions;
 
-    [Inject] private AudioService audioService;
+    [Inject] private SFXService sfxService;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class UIButtonHandler : MonoBehaviour
 
     private void ExecuteActions()
     {
-        audioService.PlaySFX(SFXType.UI_Button_Click);
+        sfxService.PlaySFXOneShot(SFXType.UIButtonClick);
 
         foreach (var action in uiActions)
         {

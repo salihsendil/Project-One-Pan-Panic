@@ -15,3 +15,4 @@ MonoBehaviour:
   levelConfigSO: {fileID: 11400000, guid: 1cb537c2d5e640547b964e9489e86bba, type: 2}
   orderConfigSO: {fileID: 11400000, guid: 66e56e117e216314abfdea5dd015d339, type: 2}
   poolConfigSO: {fileID: 11400000, guid: ef98d78e15a0205488c54703a70e704c, type: 2}
+  audioProfileSO: {fileID: 11400000, guid: 74a8d058c2ffa9440b6c8eae07c58063, type: 2}

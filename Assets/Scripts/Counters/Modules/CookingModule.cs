@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LoopSFXEmitter))]
 [RequireComponent(typeof(ItemSocket))]
 public class CookingModule : MonoBehaviour, IAutoModule
 {
@@ -14,9 +15,13 @@ public class CookingModule : MonoBehaviour, IAutoModule
     //Current Item
     private IItemProcess itemProcess;
 
+    //SFX
+    [SerializeField] private LoopSFXEmitter loopSfxEmitter;
+
     private void Awake()
     {
         interactor = GetComponent<IInteractor>();
+        loopSfxEmitter = GetComponent<LoopSFXEmitter>();
     }
 
     public bool CanProcessable(IPickable pickable)
@@ -34,6 +39,8 @@ public class CookingModule : MonoBehaviour, IAutoModule
         itemProcess.StartProcess();
         itemProcess.OnProcessFinished += CompleteProcess;
 
+        loopSfxEmitter.PlaySFX();
+
         isProcessing = true;
     }
 
@@ -42,6 +49,8 @@ public class CookingModule : MonoBehaviour, IAutoModule
         isProcessing = false;
 
         if (itemProcess == null) return;
+
+        loopSfxEmitter.StopSFX();
 
         itemProcess.PauseProcess();
         itemProcess.OnProcessFinished -= CompleteProcess;
@@ -57,7 +66,10 @@ public class CookingModule : MonoBehaviour, IAutoModule
         if (CanProcessable(interactor.GetItem))
         {
             StartProcess();
+            return;
         }
+
+        loopSfxEmitter.StopSFX();
     }
 
     private void Update()

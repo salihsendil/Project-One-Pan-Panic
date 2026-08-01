@@ -3,8 +3,9 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject loadingCanvas;
-    [SerializeField] private GameObject audioService;
+    [SerializeField] private GameObject loadingCanvasPrefab;
+    [SerializeField] private GameObject audioProfilePrefab;
+    [SerializeField] private GameObject sfxServicePrefab;
 
     public override void InstallBindings()
     {
@@ -15,21 +16,19 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<WardrobeManager>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<CurrencyManager>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<LevelDataService>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<AudioService>().FromComponentInNewPrefab(audioService).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<GameSettingsService>().AsSingle().NonLazy();
 
         //Instantiate Object Bindings
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
-        Container.Bind<LoadingPanelHandler>().FromComponentInNewPrefab(loadingCanvas).AsSingle().NonLazy();
+
+        //Prefab Instantiating
+
+        Container.Bind<LoadingPanelHandler>().FromComponentInNewPrefab(loadingCanvasPrefab).AsSingle().NonLazy();
+        Container.Bind<AudioService>().FromComponentInNewPrefab(audioProfilePrefab).AsSingle().NonLazy();
+        Container.Bind<SFXService>().FromComponentInNewPrefab(sfxServicePrefab).AsSingle().NonLazy();
 
         //Signal Bindings
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<SceneFullyLoadedSignal>();
-
-
-        //In-Game Signal (audio service subscribe to these, so they are declared here)
-        Container.DeclareSignal<ItemTransferredSignal>();
-        Container.DeclareSignal<IngredientAddedToContainerSignal>();
-        Container.DeclareSignal<CountdownStartedSignal>();
-        Container.DeclareSignal<LevelTimerTickSignal>();
     }
 }

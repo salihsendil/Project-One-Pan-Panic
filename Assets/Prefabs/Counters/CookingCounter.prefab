@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 7007895847974905121}
   - component: {fileID: 2664001310794226586}
   - component: {fileID: 2832618778697597622}
+  - component: {fileID: 9067497259711210714}
   m_Layer: 6
   m_Name: CookingCounter
   m_TagString: Untagged
@@ -327,3 +328,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f117f684dd1e6884ba138dd12c560cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9067497259711210714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170937407311508608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bfa88bfd8c11a4f85601a373d87f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 32

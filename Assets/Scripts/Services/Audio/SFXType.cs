@@ -1,11 +1,13 @@
 public enum SFXType
 {
-    None,
-    UI_Button_Click = 10,
+    UIButtonClick = 10,
     Countdown,
-    Ten_Sec_Beep,
+    TenSecBeep,
     ItemTransfer = 30,
     IngredientCut,
     IngredientCook,
-    IngredientBurn
+    IngredientBurn,
+    NewOrder = 60,
+    OrderDelivered,
+    OrderFail
 }

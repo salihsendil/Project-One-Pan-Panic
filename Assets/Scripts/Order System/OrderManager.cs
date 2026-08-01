@@ -5,6 +5,7 @@ using System.Collections;
 public class OrderManager : MonoBehaviour
 {
     [Inject] private OrderConfigSO orderConfig;
+    [Inject] private SFXService sfxService;
     [Inject] private SignalBus signalBus;
 
     [SerializeField] private int orderCounter;
@@ -74,6 +75,7 @@ public class OrderManager : MonoBehaviour
 
             if (order.IsExpired)
             {
+                sfxService.PlaySFXOneShot(SFXType.OrderFail);
                 signalBus.Fire(new OrderExpiredSignal(order.Recipe.PenaltyScore));
 
                 activeOrders.RemoveAt(i);
@@ -91,6 +93,7 @@ public class OrderManager : MonoBehaviour
         RecipeSO recipe = GetRandomRecipe();
         Order order = new(orderCounter, recipe);
         activeOrders.Add(order);
+        sfxService.PlaySFXOneShot(SFXType.NewOrder);
         signalBus.Fire(new OrderGeneratedSignal(order));
         Debug.Log(order.Recipe.RecipeID);
     }
@@ -116,6 +119,7 @@ public class OrderManager : MonoBehaviour
             if (order.Recipe == recipe)
             {
                 activeOrders.Remove(order);
+                sfxService.PlaySFXOneShot(SFXType.OrderDelivered);
                 signalBus.Fire(new OrderDeliveredSignal(GameplayEvent.OrderDelivered, order));
                 return true;
             }

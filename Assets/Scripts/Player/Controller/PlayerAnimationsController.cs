@@ -39,7 +39,7 @@ public class PlayerAnimationsController : MonoBehaviour
 
     void Update()
     {
-        isWalking = (!playerController.IsBusy) && (inputHandler.MovementVector != Vector3.zero);
+        isWalking = (inputHandler.MovementVector != Vector3.zero);
         
         currentState.UpdateState(this, stateFactory);
     }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d634cd5c31fcb94990bda0021290cfc, type: 3}
   m_Name: Project_SO_Installer
   m_EditorClassIdentifier: 
-  audioConfigSO: {fileID: 11400000, guid: 9ada8b514a382d343b9426ee7188c492, type: 2}
+  sfxLibrarySO: {fileID: 11400000, guid: 7ef437a851aff3747b9b8fd30fbebc09, type: 2}
   levelCatalogSO: {fileID: 11400000, guid: 682917e8866a545459daf4eefc4f03dd, type: 2}
+  gameSettingsSO: {fileID: 11400000, guid: bb8f7b7a355cd684a8d7064b50260e95, type: 2}

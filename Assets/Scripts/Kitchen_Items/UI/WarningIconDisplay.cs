@@ -6,7 +6,7 @@ using Zenject;
 public class WarningIconDisplay : MonoBehaviour, IProcessDisplayer
 {
     // Zenject
-    [Inject] private AudioService audioService;
+    [Inject] private SFXService sfxService;
 
     // Icon Reference
     [SerializeField] private Image icon;
@@ -15,8 +15,6 @@ public class WarningIconDisplay : MonoBehaviour, IProcessDisplayer
     private Sequence fadeSequence;
     [SerializeField] private float duration = 1f; // Pulse Duration
 
-    // Audio
-    [SerializeField] private SFXType sfxType;
 
     private void Awake()
     {
@@ -26,11 +24,11 @@ public class WarningIconDisplay : MonoBehaviour, IProcessDisplayer
         fadeSequence = DOTween.Sequence();
         fadeSequence
             .Append(icon.DOColor(Color.white, duration))
-            .AppendCallback(() => audioService.PlaySFX(sfxType))
+            .AppendCallback(() => sfxService.PlaySFXOneShot(SFXType.IngredientBurn))
             .Append(icon.DOColor(Color.clear, duration))
             .SetLoops(-1, LoopType.Restart)
-            .SetAutoKill(false)             
-            .Pause();                       
+            .SetAutoKill(false)
+            .Pause();
     }
 
     public void Initialize()
@@ -46,7 +44,7 @@ public class WarningIconDisplay : MonoBehaviour, IProcessDisplayer
 
     public void Tick(float value)
     {
-        float speedMultiplier = Mathf.Lerp(1f, 12f, value);
+        float speedMultiplier = Mathf.Lerp(1f, 10f, value);
         fadeSequence.timeScale = speedMultiplier;
     }
 

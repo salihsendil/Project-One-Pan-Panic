@@ -8,7 +8,7 @@ public class SceneService : MonoBehaviour
 {
     [Inject] private LoadingPanelHandler loadingPanel;
     [Inject] private SignalBus signalBus;
-    [Inject] private AudioService audioService;
+    [Inject] private AudioService audioService ;
 
     [SerializeField] private ScenesEnum currentScene;
 
@@ -25,11 +25,11 @@ public class SceneService : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(ScenesEnum sceneToLoad)
     {
-        audioService.FadeOut();
 
         bool transitionCompleted = false;
         loadingPanel.SetCanvasVisibility(true, () => transitionCompleted = true);
         yield return new WaitUntil(() => transitionCompleted == true);
+        audioService.FadeOut();
 
         Scene activeScene = SceneManager.GetActiveScene();
         yield return new WaitForSeconds(0.4f);

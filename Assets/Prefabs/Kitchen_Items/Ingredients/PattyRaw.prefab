@@ -407,7 +407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   processStage: 0
   processRule: {fileID: 11400000, guid: 309ef91ad20649349a06fc17564758ea, type: 2}
-  sfxType: 32
 --- !u!114 &1945012148708805461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,7 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 1016824327396713333}
   duration: 1
-  sfxType: 33
+  sfxType: 0
 --- !u!1 &7881331624036547640
 GameObject:
   m_ObjectHideFlags: 0

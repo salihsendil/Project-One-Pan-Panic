@@ -14,7 +14,7 @@ public class SaveSystem : IInitializable
 #endif
 
     //Mapping
-    public Dictionary<SaveDataType, object> dataMapping = new();
+    private Dictionary<SaveDataType, object> dataMapping = new();
 
     //Data Models
     private SettingsDataSave settingsData = new();

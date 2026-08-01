@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 2fe7aa8e5e5d10e41a60f888e0f630b8, type: 2}
   _monoInstallers:
   - {fileID: -2030128244380676130}
   _installerPrefabs: []
@@ -77,3 +78,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3e42e86462f254dbbdb9bfab4309fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioProfileServicePrefab: {fileID: 6337648283706330083, guid: bdc5ebf5360292842b4682b53f43cd04, type: 3}

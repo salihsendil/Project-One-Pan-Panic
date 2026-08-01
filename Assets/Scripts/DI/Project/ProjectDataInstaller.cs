@@ -4,12 +4,14 @@ using Zenject;
 [CreateAssetMenu(fileName = "New ProjectSOInstaller", menuName = "Installers/New ProjectDataInstaller")]
 public class ProjectDataInstaller : ScriptableObjectInstaller<ProjectDataInstaller>
 {
-    [SerializeField] private AudioConfigSO audioConfigSO;
+    [SerializeField] private SFXLibrarySO sfxLibrarySO;
     [SerializeField] private LevelCatalogSO levelCatalogSO;
+    [SerializeField] private GameSettingsSO gameSettingsSO;
 
     public override void InstallBindings()
     {
-        Container.BindInstance(audioConfigSO).AsSingle().NonLazy();
+        Container.BindInstance(sfxLibrarySO).AsSingle().NonLazy();
         Container.BindInstance(levelCatalogSO).AsSingle().NonLazy();
+        Container.BindInstance(gameSettingsSO).AsSingle().NonLazy();
     }
 }

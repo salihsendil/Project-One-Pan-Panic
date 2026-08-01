@@ -1,4 +1,4 @@
-﻿public enum AudioType
+public enum AudioType
 {
     Master,
     Music,

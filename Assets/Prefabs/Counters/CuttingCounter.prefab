@@ -275,7 +275,6 @@ GameObject:
   - component: {fileID: 2540373136975809462}
   - component: {fileID: 6129939393794698589}
   - component: {fileID: 3970758130067055829}
-  - component: {fileID: 5018045721792321763}
   m_Layer: 6
   m_Name: CuttingCounter
   m_TagString: Untagged
@@ -420,19 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943afb47740dd8843962c7b66905442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5018045721792321763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4123106189271697963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f66f813a164b0c448b64b0596890ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxType: 31
 --- !u!1 &4654584703733960269
 GameObject:
   m_ObjectHideFlags: 0

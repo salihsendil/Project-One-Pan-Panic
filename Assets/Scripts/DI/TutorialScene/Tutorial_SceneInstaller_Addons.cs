@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +8,7 @@ public class Tutorial_SceneInstaller_Addons : MonoInstaller
     public override void InstallBindings()
     {
         PrefabBindings();
-        ContainerBindings();
+        HierarchyBindings();
         SignalBindings();
     }
 
@@ -18,7 +17,7 @@ public class Tutorial_SceneInstaller_Addons : MonoInstaller
         Container.Bind<ObjectivePointer>().FromComponentInNewPrefab(objectivePointerPrefab).AsSingle().NonLazy();
     }
 
-    private void ContainerBindings()
+    private void HierarchyBindings()
     {
         Container.Bind<TutorialStepManager>().FromComponentInHierarchy().AsSingle();
     }

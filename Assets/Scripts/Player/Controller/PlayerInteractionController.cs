@@ -53,6 +53,7 @@ public class PlayerInteractionController : MonoBehaviour
             if (currentInteractable != interactable)
             {
                 currentInteractable?.HighlightInteractable(false);
+                InteractionAlternateCanceled();
                 InteractionCanceled();
                 currentInteractable = interactable;
             }
@@ -63,6 +64,7 @@ public class PlayerInteractionController : MonoBehaviour
             if (currentInteractable != null)
             {
                 currentInteractable.HighlightInteractable(false);
+                InteractionAlternateCanceled();
                 InteractionCanceled();
             }
         }

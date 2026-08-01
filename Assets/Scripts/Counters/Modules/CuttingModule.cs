@@ -1,9 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(ItemSocket))]
 [RequireComponent(typeof(CuttingCounterAnimationsController))]
 public class CuttingModule : MonoBehaviour, IHoldModule
 {
+    //Zenject
+    [Inject] private SFXService sfxService;
+
     //References
     private IInteractor interactor;
     private CuttingCounterAnimationsController animationsController;
@@ -62,6 +66,11 @@ public class CuttingModule : MonoBehaviour, IHoldModule
         itemProcess = null;
 
         interactor.GetItem.IsPickable = true;
+    }
+
+    private void PlaySFX()
+    {
+        sfxService.PlaySFXOneShot(SFXType.IngredientCut);
     }
 
     private void Update()

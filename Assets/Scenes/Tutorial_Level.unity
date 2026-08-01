@@ -2869,11 +2869,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4739940164397673903, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7399989076908481852, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
       propertyPath: tutorialWorldTarget
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4739940164397673903, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2886,6 +2891,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 809020883}
     m_Modifications:
+    - target: {fileID: 1524592042706743559, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1948563450167369721, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
       propertyPath: m_Name
       value: CuttingCounter_Tutorial-1
@@ -2930,7 +2939,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4739940164397673903, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4739940164397673903, guid: ab2b370fff2306a42a4a3acc106637e0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

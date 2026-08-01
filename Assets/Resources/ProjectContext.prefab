@@ -75,5 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110cb8a73a435b644884693982ed7dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingCanvas: {fileID: 5483985429999094874, guid: 0494b4ca77690124a9aca21f749ebc9c, type: 3}
-  audioService: {fileID: 1590965427149590021, guid: e5577a5f840a85649b5481d96ad13e16, type: 3}
+  loadingCanvasPrefab: {fileID: 5483985429999094874, guid: 0494b4ca77690124a9aca21f749ebc9c, type: 3}
+  audioProfilePrefab: {fileID: 6337648283706330083, guid: bdc5ebf5360292842b4682b53f43cd04, type: 3}
+  sfxServicePrefab: {fileID: 5621819679372308353, guid: db24467df780cae4c86ab7e2f9e01310, type: 3}

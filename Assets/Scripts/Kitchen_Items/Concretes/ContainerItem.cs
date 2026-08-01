@@ -9,6 +9,7 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
     //Zenject
     [Inject] private UniversalPoolManager poolManager;
     [Inject] private RecipeMatchEvaluator recipeMatcher;
+    [Inject] private SFXService sfxService;
     [Inject] private SignalBus signalBus;
 
     [SerializeField] private ContainerItemSO containerData;
@@ -67,6 +68,7 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
             pickable.Transform.localPosition = Vector3.zero;
         });
 
+        sfxService.PlaySFXOneShot(SFXType.ItemTransfer);
         signalBus.Fire(new IngredientAddedToContainerSignal(GameplayEvent.IngredientAddedToContainer, pickable.GetItemType()));
     }
 

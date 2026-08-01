@@ -4,9 +4,9 @@ using UnityEngine.UI;
 using Zenject;
 
 [RequireComponent(typeof(Slider))]
-public class SliderVolumeAdjuster : MonoBehaviour, IPointerUpHandler, IDragHandler
+public class SliderVolumeAdjuster : MonoBehaviour,IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    [Inject] private AudioService audioService;
+    [Inject] private GameSettingsService gameSettingsService;
 
     [SerializeField] private AudioType audioType;
     [SerializeField] private Slider slider;
@@ -14,16 +14,21 @@ public class SliderVolumeAdjuster : MonoBehaviour, IPointerUpHandler, IDragHandl
     private void Start()
     {
         slider = GetComponent<Slider>();
-        SetSliderValue(audioService.GetVolume(audioType));
+        SetSliderValue(gameSettingsService.GetVolume(audioType));
     }
 
     private void ChangeValue()
     {
-        audioService.UpdateVolume(audioType, slider.value);
+        gameSettingsService.UpdateVolume(audioType, slider.value);
     }
     public void SetSliderValue(float value)
     {
         slider.value = Mathf.Max(value, 0.00001f);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        ChangeValue();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -33,6 +38,6 @@ public class SliderVolumeAdjuster : MonoBehaviour, IPointerUpHandler, IDragHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        audioService.SaveData();
+        gameSettingsService.SaveData();
     }
 }

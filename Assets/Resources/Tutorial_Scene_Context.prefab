@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5766f2db62ba542ae94ce65b5dba79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioProfileServicePrefab: {fileID: 6337648283706330083, guid: bdc5ebf5360292842b4682b53f43cd04, type: 3}
 --- !u!114 &4646598238876483999
 MonoBehaviour:
   m_ObjectHideFlags: 0

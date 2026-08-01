@@ -4,6 +4,9 @@ using Zenject;
 
 public class ItemSocket : MonoBehaviour, IInteractor
 {
+    //Zenject
+    [Inject] private SFXService sfxService;
+
     //Type
     [SerializeField] private InteractorType interactorType;
 
@@ -49,6 +52,7 @@ public class ItemSocket : MonoBehaviour, IInteractor
             {
                 itemTransform.SetParent(holdPoint);
                 itemTransform.localPosition = offset;
+                sfxService.PlaySFXOneShot(SFXType.ItemTransfer);
             });
     }
 

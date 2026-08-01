@@ -16,5 +16,6 @@ public class Game_SceneInstaller : MonoInstaller
 
         //Interface Bindings
         Container.BindInterfacesAndSelfTo<ScoreHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<AudioServiceInitializer>().AsSingle().NonLazy();
     }
 }

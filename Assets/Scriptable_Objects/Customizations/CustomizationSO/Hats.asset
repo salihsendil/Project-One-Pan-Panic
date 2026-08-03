@@ -20,20 +20,182 @@ MonoBehaviour:
     FaceMaterial: {fileID: 0}
     Cost: 0
   - BodyPart: 2
-    Id: hat_01
-    Mesh: {fileID: 1495420504842270426, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    Id: alien
+    Mesh: {fileID: 8066301833536070062, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
     BodyColorMaterial: {fileID: 0}
     FaceMaterial: {fileID: 0}
-    Cost: 261
+    Cost: 100
   - BodyPart: 2
-    Id: hat_02
-    Mesh: {fileID: 1601736987376108287, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    Id: angle_hole
+    Mesh: {fileID: 9201480448134993971, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
     BodyColorMaterial: {fileID: 0}
     FaceMaterial: {fileID: 0}
-    Cost: 124
+    Cost: 100
   - BodyPart: 2
-    Id: hat_03
-    Mesh: {fileID: -2087009209214787242, guid: 3a4589adc24d801478ed0d8e8ebf9d1b, type: 3}
+    Id: bandage
+    Mesh: {fileID: -6888382020539434349, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
     BodyColorMaterial: {fileID: 0}
     FaceMaterial: {fileID: 0}
-    Cost: 84
+    Cost: 100
+  - BodyPart: 2
+    Id: bonus
+    Mesh: {fileID: -142009860070227621, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 100
+  - BodyPart: 2
+    Id: chef_hat
+    Mesh: {fileID: 1495420504842270426, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 100
+  - BodyPart: 2
+    Id: clown
+    Mesh: {fileID: 2311670485423561679, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 2
+    Id: cowboy_hat
+    Mesh: {fileID: 433434958892111288, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 2
+    Id: egg
+    Mesh: {fileID: -4591002169977161409, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 2
+    Id: fez
+    Mesh: {fileID: -3664949585424871292, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 2
+    Id: fireman_hat
+    Mesh: {fileID: 3607448449651267575, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 110
+  - BodyPart: 2
+    Id: goat_horns
+    Mesh: {fileID: -3595913343189129870, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 2
+    Id: hair
+    Mesh: {fileID: -5017437812508297076, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 2
+    Id: hat
+    Mesh: {fileID: 5402264371549399530, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 2
+    Id: headphone
+    Mesh: {fileID: -227199103077522378, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 2
+    Id: heart_antenna_headband
+    Mesh: {fileID: 2366195252634942056, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 120
+  - BodyPart: 2
+    Id: horn
+    Mesh: {fileID: 3121355660738098078, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 130
+  - BodyPart: 2
+    Id: king_crown
+    Mesh: {fileID: 4457151015116713933, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 130
+  - BodyPart: 2
+    Id: mushroom_hat
+    Mesh: {fileID: 6978833756422615365, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 130
+  - BodyPart: 2
+    Id: noel_hat
+    Mesh: {fileID: -5220169738956803919, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 130
+  - BodyPart: 2
+    Id: orange_fedora
+    Mesh: {fileID: 1601736987376108287, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 130
+  - BodyPart: 2
+    Id: party_crown
+    Mesh: {fileID: -8900100819137822430, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 140
+  - BodyPart: 2
+    Id: party_hat
+    Mesh: {fileID: -2087009209214787242, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 140
+  - BodyPart: 2
+    Id: pineapple
+    Mesh: {fileID: -6316266800271276957, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 140
+  - BodyPart: 2
+    Id: pump
+    Mesh: {fileID: -5178247158374993065, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 140
+  - BodyPart: 2
+    Id: soldier_hat
+    Mesh: {fileID: -8249378248763586239, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 140
+  - BodyPart: 2
+    Id: sombrero
+    Mesh: {fileID: -6563390173714762448, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 150
+  - BodyPart: 2
+    Id: top_hat
+    Mesh: {fileID: -3459120721974865944, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 150
+  - BodyPart: 2
+    Id: traffic_cone
+    Mesh: {fileID: 3984951572076470628, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 150
+  - BodyPart: 2
+    Id: viking_helmet
+    Mesh: {fileID: -5232347102795722082, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 150
+  - BodyPart: 2
+    Id: witch_hat
+    Mesh: {fileID: 8881559028893312143, guid: 3ca4b33d6f78d8c4ca25fe7bf414829d, type: 3}
+    BodyColorMaterial: {fileID: 0}
+    FaceMaterial: {fileID: 0}
+    Cost: 150

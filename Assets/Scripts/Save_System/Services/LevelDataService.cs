@@ -13,10 +13,6 @@ public class LevelDataService : ISaveable, IInitializable, IDisposable
     //Scene
     private ScenesEnum currentScene;
 
-    //Data-Getter
-    public LevelCatalogSO LevelCatalog => levelCatalog;
-
-
     public void Initialize()
     {
         LoadData();

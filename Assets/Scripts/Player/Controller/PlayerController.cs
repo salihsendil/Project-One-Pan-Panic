@@ -1,41 +1,69 @@
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(CapsuleCollider))]
+//[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController))]
+//[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     //Zenject
     [Inject] private InputHandler inputHandler;
 
-    //Movement Variables
-    private Vector3 movementVector => inputHandler.MovementVector;
+    [Header("References")]
+    [SerializeField] private CharacterController characterController;
 
+    [Header("Movement")]
+    [SerializeField] private Vector3 movementVector;
+    [SerializeField] private float verticalVelocity;
+    [SerializeField] private float speed = 3.6f;
+    [SerializeField] private float groundGravity = 1f;
+    [SerializeField] private float gravityForce = 9.81f;
 
-    [SerializeField] private float speed = 4f;
-    
-    //Rotation Variables
+    [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 12f;
 
-    
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+    }
+
     private void FixedUpdate()
     {
-        if (movementVector != Vector3.zero)
-        {
-            HandleMovement();
-            HandleRotation();
-        }
+        movementVector = inputHandler.MovementVector;
+
+        HandleRotation();
+        ApplyGravity();
+        HandleMovement();
     }
 
     private void HandleMovement()
     {
-        transform.position += movementVector * speed * Time.deltaTime;
+        movementVector *= speed;
+        movementVector.y = verticalVelocity;
+
+        characterController.Move(movementVector * Time.deltaTime);
+    }
+
+    private void ApplyGravity()
+    {
+        if (characterController.isGrounded)
+        {
+            if (verticalVelocity < 0f)
+                verticalVelocity = -groundGravity;
+        }
+
+        else
+        {
+            verticalVelocity -= gravityForce * Time.deltaTime;
+        }
     }
 
     private void HandleRotation()
     {
-        Quaternion targetRot = Quaternion.LookRotation(movementVector);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        if (movementVector == Vector3.zero) return;
+
+        Quaternion targetRot = Quaternion.LookRotation(movementVector, transform.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
     }
 }
 

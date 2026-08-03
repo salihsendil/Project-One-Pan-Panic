@@ -8,10 +8,10 @@ public class GameSettingsSO : ScriptableObject
     public AudioMixer MainMixer;
 
     [Header("Snapshot Settings")]
-    public float snapshotTransitionTime;
-    public AudioMixerSnapshot normalSnapshot;
-    public AudioMixerSnapshot muteSnapshot;
-    public AudioMixerSnapshot pauseSnapshot;
+    public float SnapshotTransitionTime;
+    public AudioMixerSnapshot NormalSnapshot;
+    public AudioMixerSnapshot MuteSnapshot;
+    public AudioMixerSnapshot PauseSnapshot;
 
     [Header("Audio Settings")]
     public float MinVolume = 0.00001f;

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1496c9dde0697ba4dbcf79385c20361d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 339036
+  packageName: Party Game Character Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pack_PartyCharacters/Animations/capsule_AC.controller
+  uploadId: 863230

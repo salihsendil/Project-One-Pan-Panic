@@ -4,13 +4,13 @@ using Zenject;
 
 public class LevelSelectionPanelDisplay : MonoBehaviour
 {
-    [Inject] private LevelDataService levelDataService;
+    [Inject] private LevelCatalogSO levelCatalog;
 
     [SerializeField] private List<LevelCardView> cards = new();
 
     private void Start()
     {
-        List<LevelMeta> levels = levelDataService.LevelCatalog.Levels;
+        List<LevelMeta> levels = levelCatalog.Levels;
 
         int safeLoopCount = Mathf.Min(cards.Count, levels.Count);
 

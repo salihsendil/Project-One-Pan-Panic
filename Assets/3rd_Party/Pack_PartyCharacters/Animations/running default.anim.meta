@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a0bd1bba8bb6c84ca6a11ad5231ef49
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 339036
+  packageName: Party Game Character Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pack_PartyCharacters/Animations/running default.anim
+  uploadId: 863230

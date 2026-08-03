@@ -3361,10 +3361,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3649625266057055301, guid: 49eb2ce575479dc41b4e3709af8891e1, type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4123106189271697963, guid: 49eb2ce575479dc41b4e3709af8891e1, type: 3}
       propertyPath: m_Name
       value: CuttingCounter
@@ -4925,19 +4921,7 @@ PrefabInstance:
       objectReference: {fileID: 323984802}
     - target: {fileID: 549675733821221650, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
       propertyPath: m_VersionIndex
-      value: 1296
-      objectReference: {fileID: 0}
-    - target: {fileID: 549675733821221650, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
-      propertyPath: m_SelectedEdges.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 549675733821221650, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
-      propertyPath: m_SelectedFaces.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 549675733821221650, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
-      propertyPath: m_SelectedVertices.Array.size
-      value: 4
+      value: 1302
       objectReference: {fileID: 0}
     - target: {fileID: 5915014688938513289, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4982,10 +4966,6 @@ PrefabInstance:
     - target: {fileID: 6903163020768578367, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
       propertyPath: m_Name
       value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6903163020768578367, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7888755622211463184, guid: e49bb18cd8e5e164a8fc6f3f4bdc2d21, type: 3}
       propertyPath: m_Mesh
@@ -5150,7 +5130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868767589990085806, guid: 96c007c4062c1d64c802df7f0534265b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5868767589990085806, guid: 96c007c4062c1d64c802df7f0534265b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6162,10 +6142,6 @@ PrefabInstance:
     - target: {fileID: 2322139727314622130, guid: edbc7fe7c6e94984baab9af084ac70f3, type: 3}
       propertyPath: m_Name
       value: Kitchen_Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2322139727314622130, guid: edbc7fe7c6e94984baab9af084ac70f3, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

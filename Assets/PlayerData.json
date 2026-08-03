@@ -1,5 +1,5 @@
 {
-    "Currency": 33,
+    "Currency": 0,
     "Outfits": [
         {
             "Key": 0,
@@ -10,10 +10,9 @@
         },
         {
             "Key": 1,
-            "EquippedItem": "face_01",
+            "EquippedItem": "default",
             "OwnedItems": [
-                "default",
-                "face_01"
+                "default"
             ]
         },
         {

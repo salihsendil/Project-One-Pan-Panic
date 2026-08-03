@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7d167284bfdd7c4ca2789ada90fa5a6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 339036
+  packageName: Party Game Character Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pack_PartyCharacters/Animations/running moving hat.anim
+  uploadId: 863230

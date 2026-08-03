@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e255e90f7a7df242ae92598caf887f6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 339036
+  packageName: Party Game Character Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pack_PartyCharacters/Animations/Win.anim
+  uploadId: 863230

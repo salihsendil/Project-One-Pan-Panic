@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 52cdf7ff0ffe42d4eaec84de7b762cb2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 339036
+  packageName: Party Game Character Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pack_PartyCharacters/Animations/Lose.anim
+  uploadId: 863230

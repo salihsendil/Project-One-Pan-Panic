@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(ItemCanvasBillboard))]
 [RequireComponent(typeof(ContainerIconDisplay))]
-public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
+public class ContainerItem : MonoBehaviour, IPickable, IPoolable, IContainer
 {
     //Zenject
     [Inject] private UniversalPoolManager poolManager;
@@ -22,16 +23,34 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
     private List<IngredientItem> plateItems = new();
     private HashSet<IngredientEntry> plateEntries = new();
 
+    [SerializeField] private MeshFilter meshFilter;
+
+    [SerializeField] protected bool isPickable = true;
+
     public RecipeSO CurrentRecipe => currentRecipe;
 
-    public override ItemType GetItemType() => containerData.ItemType;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        if (meshFilter == null)
+            meshFilter = GetComponentInChildren<MeshFilter>();
+
         iconDisplay = GetComponent<ContainerIconDisplay>();
         iconDisplay.Hide();
     }
+
+    #region IPickable
+
+    public Transform Transform => transform;
+
+    public GameObject GetGameObject => gameObject;
+
+    public ItemType GetItemType() => containerData.ItemType;
+
+
+    public bool IsPickable { get => isPickable; set => isPickable = value; }
+
+    #endregion
 
     #region IPoolable
     public ItemType GetPoolType => containerData.ItemType;
@@ -56,6 +75,12 @@ public class ContainerItem : BaseKitchenItem, IPoolable, IContainer
         signalBus.Fire(new ContainerItemDespawnSignal());
     }
     #endregion
+
+    private void UpdateMesh(Mesh newMesh)
+    {
+        if (meshFilter == null) return;
+        meshFilter.sharedMesh = newMesh;
+    }
 
     private void SetItem(IPickable pickable)
     {

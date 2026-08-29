@@ -1,21 +1,42 @@
 using UnityEngine;
 
+[RequireComponent(typeof(ItemCanvasBillboard))]
 [RequireComponent(typeof(IngredientIconDisplay))]
-public class IngredientItem : BaseKitchenItem, IPoolable
+public class IngredientItem : MonoBehaviour, IPickable, IPoolable
 {
     [SerializeField] private ItemStage itemStage;
     [SerializeField] private IngredientItemSO ingredientData;
     [SerializeField] private IngredientIconDisplay iconDisplay;
 
+    [SerializeField] private MeshFilter meshFilter;
+
+    [SerializeField] protected bool isPickable = true;
+
+
+
     public ItemStage ItemStage => itemStage;
     public IngredientItemSO IngredientData => ingredientData;
     public ItemType GetPoolType => ingredientData.ItemType;
-    public override ItemType GetItemType() => ingredientData.ItemType;
 
 
-    protected override void Awake()
+    #region IPickable
+
+    public Transform Transform => transform;
+
+    public GameObject GetGameObject => gameObject;
+
+    public ItemType GetItemType() => ingredientData.ItemType;
+
+    public bool IsPickable { get => isPickable; set => isPickable = value; }
+
+    #endregion
+
+
+    private void Awake()
     {
-        base.Awake();
+        if (meshFilter == null)
+            meshFilter = GetComponentInChildren<MeshFilter>();
+
         iconDisplay = GetComponent<IngredientIconDisplay>();
         itemStage = ingredientData.InitialStage;
         iconDisplay.SetIcon(ingredientData.Icon);
@@ -38,6 +59,12 @@ public class IngredientItem : BaseKitchenItem, IPoolable
     }
 
     #endregion
+
+    protected void UpdateMesh(Mesh newMesh)
+    {
+        if (meshFilter == null) return;
+        meshFilter.sharedMesh = newMesh;
+    }
 
     public void ItemProcessed(Mesh newMesh, ItemStage newStage)
     {

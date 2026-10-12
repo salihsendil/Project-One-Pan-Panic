@@ -2,6 +2,11 @@ using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 
+
+// This class smoothly moves the MainCam when the game starts.
+// It requires a CinemachineCamera.
+
+
 public class CameraIntroController : MonoBehaviour
 {
     [SerializeField] private int introDelay = 150;

@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(TMP_Text))]
 public class ScoreDisplay : MonoBehaviour
 {
     [Inject] private SignalBus signalBus;
@@ -11,7 +12,7 @@ public class ScoreDisplay : MonoBehaviour
 
     private void Awake()
     {
-        if (scoreText == null) { TryGetComponent(out scoreText); }
+        scoreText = GetComponent<TMP_Text>();
     }
 
     private void OnEnable()

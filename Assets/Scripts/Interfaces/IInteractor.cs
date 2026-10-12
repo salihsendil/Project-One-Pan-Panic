@@ -1,24 +1,17 @@
-using UnityEngine;
+using System;
+
+
+// Main contract for interactive classes (ItemSocket, etc.).
+// All interactive classes must implement this interface.
 
 public interface IInteractor
 {
+    public event Action<IPickable> OnItemPlaced;
+    public event Action<IPickable> OnItemRemoved;
+
     public bool HasItem { get; }
     public IPickable GetItem { get; }
-    public InteractorType InteractorType { get; }
+    public IPickable CurrentItem { set; }
     public void SetItem(IPickable pickable);
-    public void SetItemToOffset(IPickable pickable, Vector3 offset);
     public IPickable RemoveItem();
-}
-
-public enum InteractorType
-{
-    None,
-    Player = 5,
-    HoldingCounter,
-    IngredientCounter,
-    CuttingCounter,
-    CookingCounter,
-    ContainerCounter,
-    TrashCounter,
-    DeliveryCounter
 }

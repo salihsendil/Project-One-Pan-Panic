@@ -2,17 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum StatsType { Score = 5, CompleteOrder, FailOrder, EarnedGold, }
+public enum StatsType { NotSpecified, Score = 5, CompleteOrder, FailOrder, EarnedGold }
 
 public class LevelStatsService : MonoBehaviour
 {
     //Zenject
     [Inject] private SignalBus signalBus;
     [Inject] private LevelDataService levelDataService;
-    [Inject] private SceneService sceneService;
+
+    [Header("Currency Calculation")]
+    [SerializeField] private float currencyMultiplier = 0.04f;
 
     //Data
-    public Dictionary<StatsType, int> statsDictionary = new();
+    private Dictionary<StatsType, int> statsDictionary = new();
+
 
     #region SignalSubscription
 
@@ -21,6 +24,7 @@ public class LevelStatsService : MonoBehaviour
         signalBus.Subscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Subscribe<OrderExpiredSignal>(OrderExpired);
         signalBus.Subscribe<ScoreChangedSignal>(ScoreChanged);
+        //signalBus.Subscribe<GamePhaseChangedSignal>();
     }
 
     private void OnDisable()
@@ -28,11 +32,11 @@ public class LevelStatsService : MonoBehaviour
         signalBus.Unsubscribe<OrderDeliveredSignal>(OrderDelivered);
         signalBus.Unsubscribe<OrderExpiredSignal>(OrderExpired);
         signalBus.Unsubscribe<ScoreChangedSignal>(ScoreChanged);
+        //signalBus.Unsubscribe<GamePhaseChangedSignal>();
     }
 
     #endregion
 
-    #region OrderStats
 
     private void OrderDelivered(OrderDeliveredSignal signal)
     {
@@ -40,20 +44,23 @@ public class LevelStatsService : MonoBehaviour
         statValue++;
         UpdateStats(StatsType.CompleteOrder, statValue);
     }
+
     private void OrderExpired(OrderExpiredSignal signal)
     {
         int statValue = GetStat(StatsType.FailOrder);
         statValue++;
         UpdateStats(StatsType.FailOrder, statValue);
     }
+
     private void ScoreChanged(ScoreChangedSignal signal)
     {
         UpdateStats(StatsType.Score, signal.NewScore);
+
+        int earnedGold = Mathf.FloorToInt(signal.NewScore * currencyMultiplier);
+        UpdateStats(StatsType.EarnedGold, earnedGold);
     }
 
-    #endregion
-
-    public void UpdateStats(StatsType statsType, int newValue)
+    private void UpdateStats(StatsType statsType, int newValue)
     {
         if (!statsDictionary.ContainsKey(statsType))
         {
@@ -61,6 +68,12 @@ public class LevelStatsService : MonoBehaviour
         }
 
         statsDictionary[statsType] = newValue;
+    }
+
+    private void GameFinished()
+    {
+        int levelScore = GetStat(StatsType.Score);
+        levelDataService.LevelCompleted(levelScore);
     }
 
     public int GetStat(StatsType statsType)

@@ -4,20 +4,23 @@ using Zenject;
 
 public class LevelSelectionPanelDisplay : MonoBehaviour
 {
-    [Inject] private LevelCatalogSO levelCatalog;
+    [SerializeField] private LevelCatalogSO levelCatalog;
 
-    [SerializeField] private List<LevelCardView> cards = new();
+    [SerializeField] private LevelCardView cardPrefab;
+    [SerializeField] private Transform cardsParentTransform;
+
+    //zenject gelince bunu construct içine alalým onenable içinde animasyon yapalým
 
     private void Start()
     {
         List<LevelMeta> levels = levelCatalog.Levels;
 
-        int safeLoopCount = Mathf.Min(cards.Count, levels.Count);
-
-        for (int i = 0; i < safeLoopCount; i++)
+        foreach (var level in levels)
         {
-            if (cards[i] == null || levels[i] == null) continue;
-            cards[i].SetCard(levels[i]);
+            LevelCardView card = Instantiate(cardPrefab, cardsParentTransform);
+            card.Set(level);
         }
+
+        //gameObject.SetActive(false);
     }
 }

@@ -14,7 +14,7 @@ public class Tutorial_SceneInstaller_Addons : MonoInstaller
 
     private void PrefabBindings()
     {
-        Container.Bind<ObjectivePointer>().FromComponentInNewPrefab(objectivePointerPrefab).AsSingle().NonLazy();
+        Container.Bind<GuidancePointer>().FromComponentInNewPrefab(objectivePointerPrefab).AsSingle().NonLazy();
     }
 
     private void HierarchyBindings()
@@ -24,6 +24,5 @@ public class Tutorial_SceneInstaller_Addons : MonoInstaller
 
     private void SignalBindings()
     {
-        Container.DeclareSignal<NewTutorialStepSignal>();
     }
 }

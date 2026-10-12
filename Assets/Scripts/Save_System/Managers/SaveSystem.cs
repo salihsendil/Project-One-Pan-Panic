@@ -19,7 +19,7 @@ public class SaveSystem : IInitializable
     //Data Models
     private SettingsDataSave settingsData = new();
     private PlayerDataSave playerData = new();
-    private LevelSaveRoot levelData = new();
+    private LevelSaveDatabase levelData = new();
 
     #region Initialize
 

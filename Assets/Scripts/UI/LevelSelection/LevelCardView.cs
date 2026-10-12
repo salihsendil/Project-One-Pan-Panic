@@ -3,27 +3,37 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
+[RequireComponent(typeof(LoadSceneAction))]
 public class LevelCardView : MonoBehaviour
 {
+    [Header("Buttons")]
     [SerializeField] private Button button;
-    [SerializeField] private Image featuredImage;
-    [SerializeField] private TMP_Text levelIndexText;
-    [SerializeField] private TMP_Text levelNameText;
-    [SerializeField] private GameObject lockedOverlay;
-    [SerializeField] private TMP_Text highscoreText;
+    [SerializeField] private LoadSceneAction buttonAction;
+
+    [Header("Level")]
+    [SerializeField] private TMP_Text levelIndex;
+    [SerializeField] private TMP_Text levelName;
+    [SerializeField] private TMP_Text highscore;
+
+    [Header("Level Lock")]
+    [SerializeField] private GameObject lockOverlay;
 
     private void Awake()
     {
         button = GetComponent<Button>();
+        buttonAction = GetComponent<LoadSceneAction>();
     }
 
-    public void SetCard(LevelMeta meta)
+    public void Set(LevelMeta meta)
     {
         button.enabled = !meta.IsLocked;
-        featuredImage.sprite = meta.LevelFeaturedImage;
-        levelIndexText.text = meta.LevelIndex;
-        levelNameText.text = meta.LevelName;
-        lockedOverlay.SetActive(meta.IsLocked);
-        highscoreText.text = "Highscore \n " + meta.Highscore;
+        buttonAction.SceneToLoad = meta.Scene;
+
+        levelIndex.text = meta.LevelIndex;
+        levelName.text = meta.LevelName;
+
+        highscore.text = meta.Highscore.ToString();
+
+        lockOverlay.SetActive(meta.IsLocked);
     }
 }

@@ -102,7 +102,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interaction"",
+                    ""name"": ""Interact_Instant"",
                     ""type"": ""Button"",
                     ""id"": ""bb854082-0ffd-4781-b383-de254d88f7e4"",
                     ""expectedControlType"": """",
@@ -111,7 +111,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interaction_Alternate"",
+                    ""name"": ""Interact_Hold"",
                     ""type"": ""Button"",
                     ""id"": ""ca23709c-ceb1-47ca-9d93-f2e7f4aab9f8"",
                     ""expectedControlType"": """",
@@ -177,59 +177,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""6ea55ae3-4a47-4746-9e9e-b371e609c6c1"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""635955fb-8e2a-430c-9060-7e167180f8dd"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Movement"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c01b6e80-eea4-456e-a148-e8331b82a42b"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""bf5d5967-2528-48b6-a81e-86dd212098d5"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""531c9622-872c-4976-bf45-e0c559a6acb4"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0258fe81-02a0-45d0-b97d-c1f5976a51bd"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -238,7 +194,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interaction"",
+                    ""action"": ""Interact_Instant"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -249,7 +205,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interaction"",
+                    ""action"": ""Interact_Instant"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -260,7 +216,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interaction_Alternate"",
+                    ""action"": ""Interact_Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -271,7 +227,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interaction_Alternate"",
+                    ""action"": ""Interact_Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -283,8 +239,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
-        m_Player_Interaction_Alternate = m_Player.FindAction("Interaction_Alternate", throwIfNotFound: true);
+        m_Player_Interact_Instant = m_Player.FindAction("Interact_Instant", throwIfNotFound: true);
+        m_Player_Interact_Hold = m_Player.FindAction("Interact_Hold", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -366,8 +322,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Interaction;
-    private readonly InputAction m_Player_Interaction_Alternate;
+    private readonly InputAction m_Player_Interact_Instant;
+    private readonly InputAction m_Player_Interact_Hold;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -384,13 +340,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Interaction".
+        /// Provides access to the underlying input action "Player/Interact_Instant".
         /// </summary>
-        public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @Interact_Instant => m_Wrapper.m_Player_Interact_Instant;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Interaction_Alternate".
+        /// Provides access to the underlying input action "Player/Interact_Hold".
         /// </summary>
-        public InputAction @Interaction_Alternate => m_Wrapper.m_Player_Interaction_Alternate;
+        public InputAction @Interact_Hold => m_Wrapper.m_Player_Interact_Hold;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -420,12 +376,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Interaction.started += instance.OnInteraction;
-            @Interaction.performed += instance.OnInteraction;
-            @Interaction.canceled += instance.OnInteraction;
-            @Interaction_Alternate.started += instance.OnInteraction_Alternate;
-            @Interaction_Alternate.performed += instance.OnInteraction_Alternate;
-            @Interaction_Alternate.canceled += instance.OnInteraction_Alternate;
+            @Interact_Instant.started += instance.OnInteract_Instant;
+            @Interact_Instant.performed += instance.OnInteract_Instant;
+            @Interact_Instant.canceled += instance.OnInteract_Instant;
+            @Interact_Hold.started += instance.OnInteract_Hold;
+            @Interact_Hold.performed += instance.OnInteract_Hold;
+            @Interact_Hold.canceled += instance.OnInteract_Hold;
         }
 
         /// <summary>
@@ -440,12 +396,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Interaction.started -= instance.OnInteraction;
-            @Interaction.performed -= instance.OnInteraction;
-            @Interaction.canceled -= instance.OnInteraction;
-            @Interaction_Alternate.started -= instance.OnInteraction_Alternate;
-            @Interaction_Alternate.performed -= instance.OnInteraction_Alternate;
-            @Interaction_Alternate.canceled -= instance.OnInteraction_Alternate;
+            @Interact_Instant.started -= instance.OnInteract_Instant;
+            @Interact_Instant.performed -= instance.OnInteract_Instant;
+            @Interact_Instant.canceled -= instance.OnInteract_Instant;
+            @Interact_Hold.started -= instance.OnInteract_Hold;
+            @Interact_Hold.performed -= instance.OnInteract_Hold;
+            @Interact_Hold.canceled -= instance.OnInteract_Hold;
         }
 
         /// <summary>
@@ -494,18 +450,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMovement(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact_Instant" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteraction(InputAction.CallbackContext context);
+        void OnInteract_Instant(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Interaction_Alternate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact_Hold" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteraction_Alternate(InputAction.CallbackContext context);
+        void OnInteract_Hold(InputAction.CallbackContext context);
     }
 }

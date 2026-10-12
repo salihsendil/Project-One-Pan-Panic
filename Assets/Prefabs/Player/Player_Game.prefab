@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f35e488dab84d74b8254db0b2323ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputHandler: {fileID: 0}
   characterController: {fileID: 1844166742562676456}
   movementVector: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f281a4e36daff64989c9bc07e85cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputHandler: {fileID: 0}
   rayRadius: 0.15
   maxRayDistance: 0.5
   layerMask:

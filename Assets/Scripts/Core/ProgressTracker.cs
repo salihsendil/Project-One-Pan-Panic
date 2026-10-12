@@ -1,36 +1,52 @@
+using System;
 using UnityEngine;
 
+
+// This class is kind of a reversed timer. It can track a process.
+// It has Set, Tick, and Reset methods.
+
+
+[Serializable]
 public class ProgressTracker
 {
-    private float targetValue;
-    private float currentValue;
+    [SerializeField] private float current = 0f;
+    [SerializeField] private float target = 0f;
 
-    public bool IsFinished => currentValue >= targetValue /*&& TargetValue > 0*/;
-    public float ProgressRatio => targetValue > 0 ? Mathf.Clamp01(currentValue / targetValue) : 0f;
 
-    public void SetTarget(float target)
+    public float Current => current;
+    public float Target => target;
+
+
+    public bool IsFinished => current >= target && target > 0;
+    public float ProgressRatio => target > 0 ? Mathf.Clamp01(current / target) : 0f;
+
+
+    public void Set(float duration)
     {
-        targetValue = target;
-        currentValue = 0f;
+        current = 0;
+        target = duration;
     }
 
-    public void Add(float amount)
+    public void Set(float progress, float duration)
     {
-        targetValue += amount;
+        current = progress;
+        target = duration;
     }
 
     public void Tick(float deltaTime)
     {
-        if (IsFinished) return;
+        if (IsFinished)
+            return;
 
-        currentValue += deltaTime;
+        current += deltaTime;
+        Debug.Log("current time: " + current);
 
-        if (currentValue > targetValue)
-            currentValue = targetValue;
+        if (current >= target)
+            current = target;
     }
 
     public void Reset()
     {
-        targetValue = currentValue = 0f;
+        current = target = 0f;
     }
 }

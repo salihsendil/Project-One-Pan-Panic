@@ -1,18 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Level Config", menuName = "Scriptable Objects/Config/New Level Config SO")]
+[CreateAssetMenu(fileName = "New Level Config", menuName = "Scriptable Objects/Level/New Level Config SO")]
 public class LevelConfigSO : ScriptableObject
 {
     [Header("Gameplay")]
-    public GameplayPhase StartPhase;
+    public GamePhase StartPhase;
 
     [Header("Time")]
-    public int LevelTime;
     public int CountdownTime = 3;
+    public int LevelTime;
 
     [Header("Score")]
-    public int StartScore = 0;
-    public float ScoreMultiplierStepAmount = 0.04f;
+    public float ComboMultiplierIncrement = 0.04f;
 
     [Header("Currency")]
     public float ScoreCurrencyMultiplier = 0.08f;

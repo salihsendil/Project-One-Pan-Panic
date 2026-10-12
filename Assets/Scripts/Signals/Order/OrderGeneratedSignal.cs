@@ -1,4 +1,5 @@
-public struct OrderGeneratedSignal{
+public struct OrderGeneratedSignal
+{
     public Order Order;
 
     public OrderGeneratedSignal(Order order)

@@ -4,147 +4,116 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    //Zenject
-    [Inject] private InputHandler inputHandler;
     [Inject] private SignalBus signalBus;
-    [Inject] private LevelConfigSO levelConfig;
-    [Inject] private SFXService sfxService;
 
-    //Game State
-    [SerializeField] private GameplayPhase gameplayPhase;
+    [Header("Config")]
+    [SerializeField] private LevelConfigSO levelConfig;
 
-    //Time Data
-    private Timer timer = new();
-    private int countdownTime;
-    private int gameTime;
+    [Header("Timer")]
+    private const float PREPARATION_TIME = 1.5f;
+    [SerializeField] private Timer timer = new();
+    [SerializeField] private int currentLevelTime;
 
-    //Game Pause
-    private bool isPaused;
+    [Header("Game Phase")]
+    [SerializeField] private GamePhase gamePhase;
+    [SerializeField] private bool isPaused;
+
+    [Header("UI Displays")]
+    [SerializeField] private GameStatusDisplay statusDisplay;
+    [SerializeField] private TimerDisplay timerDisplay;
+
+    //Scene Service üzerinden scene fully loaded sinyalini dinleyip kamera blend hareketini ona göre yapabiliriz.
+
+    public GamePhase GamePhase
+    {
+        get => gamePhase;
+        set
+        {
+            if (gamePhase == value) return;
+            gamePhase = value;
+            SwitchGamePhase(value);
+        }
+    }
 
     private void Awake()
     {
-        Time.timeScale = 1;
         isPaused = false;
-    }
-
-    private void OnEnable()
-    {
-        signalBus.Subscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
-        signalBus.Subscribe<SceneFullyLoadedSignal>(SceneLoaded);
-    }
-
-    private void OnDisable()
-    {
-        signalBus.Unsubscribe<TogglePauseRequestSignal>(OnTogglePauseGame);
-        signalBus.Unsubscribe<SceneFullyLoadedSignal>(SceneLoaded);
+        Time.timeScale = 1;
     }
 
     private void Start()
     {
-        countdownTime = levelConfig.CountdownTime + 1;
-
-        gameTime = levelConfig.LevelTime;
-        signalBus.Fire(new LevelTimerTickSignal(gameTime));
+        GamePhase = GamePhase.Preparation;
     }
 
     private void Update()
     {
         float deltaTime = Time.deltaTime;
 
-        switch (gameplayPhase)
+        switch (GamePhase)
         {
-            case GameplayPhase.Countdown:
-                ProcessTimer(deltaTime,
-                    ref countdownTime,
-                    remaining => signalBus.Fire(new CountdownTickSignal(remaining)),
-                    GameplayPhase.Play);
+            case GamePhase.Preparation:
+
+                timer.Tick(deltaTime);
+                if (timer.IsFinished)
+                    GamePhase = levelConfig.StartPhase;
                 break;
 
-            case GameplayPhase.Play:
+            case GamePhase.Countdown:
 
-                ProcessTimer(deltaTime,
-                    ref gameTime,
-                    remaining =>
-                    {
-                        if (timer.Remaining <= 10) sfxService.PlaySFXOneShot(SFXType.TenSecBeep);
-                        signalBus.Fire(new LevelTimerTickSignal(remaining));
-                    },
-                    GameplayPhase.Finish);
+                timer.Tick(deltaTime);
+                if (timer.IsFinished)
+                    GamePhase = GamePhase.Play;
                 break;
 
-            default:
+            case GamePhase.Play:
+
+                timer.Tick(deltaTime);
+
+                int remaningtime = Mathf.CeilToInt(timer.Remaining);
+                if (remaningtime != currentLevelTime)
+                {
+                    currentLevelTime = remaningtime;
+                    timerDisplay.UpdateTimerText(currentLevelTime);
+                }
+
+                if (timer.IsFinished)
+                    GamePhase = GamePhase.Finish;
                 break;
         }
     }
 
-    private void SceneLoaded()
+    private void SwitchGamePhase(GamePhase newPhase)
     {
-        SetGameplayPhase(levelConfig.StartPhase);
-    }
-
-    private void ProcessTimer(float deltaTime, ref int lastReportedTime, Action<int> onTick, GameplayPhase nextPhase)
-    {
-        timer?.Tick(deltaTime);
-        int remainingTime = (int)timer.Remaining;
-
-        if (lastReportedTime != remainingTime)
+        switch (newPhase)
         {
-            lastReportedTime = remainingTime;
-            onTick?.Invoke(remainingTime);
+            case GamePhase.Preparation:
+                statusDisplay.Hide();
+                timer.Set(PREPARATION_TIME);
+                break;
+
+            case GamePhase.Countdown:
+                timer.Set(levelConfig.CountdownTime);
+                StartCoroutine(statusDisplay.ShowCountdown("Get Ready", "GO!", 3f));
+                break;
+
+            case GamePhase.Play:
+                statusDisplay.Hide();
+                timer.Set(levelConfig.LevelTime);
+                break;
+
+            case GamePhase.Finish:
+                statusDisplay.Show("Time's UP!");
+                break;
         }
 
-        if (timer.IsFinished)
-        {
-            SetGameplayPhase(nextPhase);
-        }
+        signalBus.Fire(new GamePhaseChangedSignal(newPhase));
     }
 
-    private void SetGameplayPhase(GameplayPhase nextPhase)
+    public void TooglePause()
     {
-        gameplayPhase = nextPhase;
-
-        switch (gameplayPhase)
-        {
-            case GameplayPhase.Tutorial:
-                inputHandler.SetInput(true);
-                break;
-
-            case GameplayPhase.Countdown:
-                timer.Reset();
-                timer.Set(countdownTime);
-                sfxService.PlaySFXOneShot(SFXType.Countdown);
-                signalBus.Fire(new CountdownStartedSignal());
-                break;
-
-            case GameplayPhase.Play:
-                timer.Reset();
-                timer.Set(gameTime);
-                signalBus.Fire(new GameStartedSignal());
-                break;
-
-            case GameplayPhase.Finish:
-                signalBus.Fire(new GameFinishedSignal());
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    private void OnTogglePauseGame()
-    {
+        //gamephase finish/prep durumunda izin vermeyebiliriz.
         isPaused = !isPaused;
-
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-            SetGameplayPhase(GameplayPhase.Pause);
-            return;
-        }
-
-        Time.timeScale = 1;
-        SetGameplayPhase(GameplayPhase.Play);
+        Time.timeScale = isPaused ? 0 : 1;
     }
-
-    public void SetPlayPhase() => SetGameplayPhase(GameplayPhase.Play);
 }

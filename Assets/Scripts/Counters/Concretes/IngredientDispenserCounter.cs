@@ -1,19 +1,36 @@
 using UnityEngine;
 
+
+// This class gives an item to the player. It can be used like a Holding Counter.
+// In this class, modules should be called in the correct order.
+// If the IngredientDispenserModule interaction method returns true,
+// the ItemInteractionModule method will not be called.
+
+
 [RequireComponent(typeof(ItemInteractionModule))]
 [RequireComponent(typeof(IngredientDispenserModule))]
 public class IngredientDispenserCounter : BaseCounter
 {
-    public override void InteractInstant(IInteractor interactor)
+    protected override void Awake()
     {
-        foreach (var module in instantModules)
-        {
-            if (module == null) { return; }
+        counterHighlighter = GetComponent<CounterHighlighter>();
 
-            if (module.TryInteractionInstant(interactor))
+        instantInteractionModules[0] = GetComponent<ItemInteractionModule>();
+        instantInteractionModules[1] = GetComponent<IngredientDispenserModule>();
+    }
+
+
+    public override void InteractInstant(IInteractor incomingInteractor)
+    {
+        foreach (var module in instantInteractionModules)
+        {
+            if (module == null) continue;
+
+            if (module.TryInteractInstant(incomingInteractor))
             {
                 break;
             }
         }
     }
+
 }

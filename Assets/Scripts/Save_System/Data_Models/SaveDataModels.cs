@@ -43,13 +43,13 @@ public class OutfitData
 #region LevelData
 
 [Serializable]
-public class LevelSaveRoot
+public class LevelSaveDatabase
 {
-    public List<LevelSave> LevelsData = new();
+    public List<LevelProgress> LevelsData = new();
 }
 
 [Serializable]
-public class LevelSave
+public class LevelProgress
 {
     public string Level;
     public int HighScore = 0;

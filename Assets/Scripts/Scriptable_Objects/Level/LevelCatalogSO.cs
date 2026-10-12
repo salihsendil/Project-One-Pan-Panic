@@ -11,14 +11,17 @@ public class LevelCatalogSO : ScriptableObject
 [Serializable]
 public class LevelMeta
 {
-    public ScenesEnum Level;
-    public Sprite LevelFeaturedImage;
+    [Header("Level Info")]
+    public ScenesEnum Scene;
     public string LevelIndex;
     public string LevelName;
+
+    [Header("UI & State")]
+    public GameObject FeaturedObject;
     public bool IsLocked;
     public int Highscore;
 
-    public void LoadData(LevelSave save)
+    public void LoadData(LevelProgress save)
     {
         Highscore = save.HighScore;
         IsLocked = save.IsLocked;

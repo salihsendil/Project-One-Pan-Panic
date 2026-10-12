@@ -1,11 +1,9 @@
 ﻿public struct OrderDeliveredSignal
 {
-    public GameplayEvent GameplayEvent;
     public Order Order;
 
-    public OrderDeliveredSignal(GameplayEvent gameplayEvent, Order order)
+    public OrderDeliveredSignal(Order order)
     {
-        GameplayEvent = gameplayEvent;
         Order = order;
     }
 }

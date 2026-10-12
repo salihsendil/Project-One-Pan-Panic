@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+// This is a simple class for controlling the Cutting Counter's knife or other animations.
+
+
 [RequireComponent(typeof(Animator))]
 public class CuttingCounterAnimationsController : MonoBehaviour
 {
@@ -12,7 +16,7 @@ public class CuttingCounterAnimationsController : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out animator);
+        animator = GetComponent<Animator>();
     }
 
     private void Start()

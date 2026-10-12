@@ -1,10 +1,17 @@
 using UnityEngine;
+using DG.Tweening;
+
+
+// This class controls the highlight effect of the counter.
+// It changes the emission color of the counter's materials when highlighted.
+// The highlight can be enabled or disabled.
+
 
 public class CounterHighlighter : MonoBehaviour
 {
     private Material[] materials = new Material[3];
     private Color originalEmission = Color.clear;
-    private Color highlightColor = new Color(0.2f, 0.2f, 0.2f, 0.4f);
+    private Color highlightColor = new Color(0.4f, 0.4f, 0.4f, 0.4f);
 
     private void Awake()
     {

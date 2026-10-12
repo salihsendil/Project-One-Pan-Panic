@@ -3,139 +3,101 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
+// This class detects inputs using the New Input System (PlayerInput.cs and input mapping).
+// It supports 4-way walking, instant interaction with the E key, and hold interaction with the F key for now.
+//
+// There is a getter method for movement and events for interactions.
+// The movement vector is not converted (X,Y to X,Z) in this class. I mean, it is not converted from 
+//
+// You can extend it easily. Just add a new action to PlayerInput.cs, then subscribe to these actions
+// in the OnEnable and OnDisable methods, create new methods for the new actions, and you're done.
+
+
 public class InputHandler : MonoBehaviour
 {
-    //Zenject
-    [Inject] private SignalBus signalBus;
+    //[Inject] private SignalBus signalBus;
 
     private PlayerInput playerInput;
-    private bool inputEnabled = false;
+
     private Vector2 inputVector;
-    private Vector3 movementVector;
 
-    public Vector3 MovementVector { get => movementVector; }
+    public Vector2 InputVector => inputVector;
 
-    public event Action OnInteractionStarted;
-    public event Action OnInteractionCanceled;
 
-    public event Action OnInteractionAlternateStarted;
-    public event Action OnInteractionAlternateCanceled;
+    public event Action OnInteractInstantPerformed;
+
+    public event Action OnInteractHoldStarted;
+    public event Action OnInteractHoldCanceled;
+
 
     private void Awake()
     {
         playerInput = new();
+        //playerInput.Disable();
+        playerInput.Enable();
     }
 
     private void OnEnable()
     {
-        SubscribeInputActions();
+        //signalBus.Subscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
 
-        signalBus.Subscribe<GameStartedSignal>(UnlockInputs);
-        signalBus.Subscribe<GameFinishedSignal>(LockInputs);
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeInputActions();
-
-        signalBus.Unsubscribe<GameStartedSignal>(UnlockInputs);
-        signalBus.Unsubscribe<GameFinishedSignal>(LockInputs);
-    }
-
-    private void UnlockInputs()
-    {
-        playerInput.Enable();
-        inputEnabled = true;
-    }
-
-    private void LockInputs()
-    {
-        inputVector = Vector2.zero;
-        movementVector = Vector3.zero;
-
-        inputEnabled = false;
-        playerInput.Disable();
-    }
-
-    public void SetInput(bool enabled)
-    {
-        if (enabled)
-        {
-            UnlockInputs();
-            return;
-        }
-
-        LockInputs();
-    }
-
-    private void SubscribeInputActions()
-    {
         playerInput.Player.Movement.started += Move;
         playerInput.Player.Movement.performed += Move;
         playerInput.Player.Movement.canceled += Move;
 
-        playerInput.Player.Interaction.started += Interaction;
-        playerInput.Player.Interaction.canceled += Interaction;
+        playerInput.Player.Interact_Instant.performed += InteractInstant;
 
-        playerInput.Player.Interaction_Alternate.started += InteractionAlternate;
-        playerInput.Player.Interaction_Alternate.canceled += InteractionAlternate;
+        playerInput.Player.Interact_Hold.started += InteractHoldStarted;
+        playerInput.Player.Interact_Hold.canceled += InteractHoldCanceled;
     }
 
-    private void UnsubscribeInputActions()
+    private void OnDisable()
     {
+        //signalBus.Unsubscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
+
         playerInput.Player.Movement.started -= Move;
         playerInput.Player.Movement.performed -= Move;
         playerInput.Player.Movement.canceled -= Move;
 
-        playerInput.Player.Interaction.started -= Interaction;
-        playerInput.Player.Interaction.canceled -= Interaction;
+        playerInput.Player.Interact_Instant.performed -= InteractInstant;
 
-        playerInput.Player.Interaction_Alternate.started -= InteractionAlternate;
-        playerInput.Player.Interaction_Alternate.canceled -= InteractionAlternate;
+        playerInput.Player.Interact_Hold.started -= InteractHoldStarted;
+        playerInput.Player.Interact_Hold.canceled -= InteractHoldCanceled;
     }
 
-    private void Move(InputAction.CallbackContext callback)
+    private void HandleGamePhaseChange(GamePhaseChangedSignal signal)
     {
-        SetMovementInput(callback.ReadValue<Vector2>());
-    }
-
-    public void SetMovementInput(Vector2 vector)
-    {
-        if (!inputEnabled) return;
-
-        movementVector = ConvertMovementVector(vector);
-    }
-
-    private Vector3 ConvertMovementVector(Vector2 input)
-    {
-        return new Vector3(input.x, 0f, input.y);
-    }
-
-    private void Interaction(InputAction.CallbackContext callback)
-    {
-        if (callback.started)
+        switch (signal.Phase)
         {
-            OnInteractionStarted?.Invoke();
-        }
+            case GamePhase.Play:
+                playerInput.Enable();
+                break;
 
-        else if (callback.canceled)
-        {
-            OnInteractionCanceled?.Invoke();
+            default:
+                inputVector = Vector2.zero;
+                OnInteractHoldCanceled?.Invoke();
+                playerInput.Disable();
+                break;
         }
     }
 
-    private void InteractionAlternate(InputAction.CallbackContext callback)
+    private void Move(InputAction.CallbackContext context)
     {
-        if (callback.started)
-        {
-            Debug.Log("alternate performed");
-            OnInteractionAlternateStarted?.Invoke();
-        }
+        inputVector = context.ReadValue<Vector2>();
+    }
 
-        else if (callback.canceled)
-        {
-            Debug.Log("alternate canceled");
-            OnInteractionAlternateCanceled?.Invoke();
-        }
+    private void InteractInstant(InputAction.CallbackContext context)
+    {
+        OnInteractInstantPerformed?.Invoke();
+    }
+
+    private void InteractHoldStarted(InputAction.CallbackContext context)
+    {
+        OnInteractHoldStarted?.Invoke();
+    }
+
+    private void InteractHoldCanceled(InputAction.CallbackContext context)
+    {
+        OnInteractHoldCanceled?.Invoke();
     }
 }

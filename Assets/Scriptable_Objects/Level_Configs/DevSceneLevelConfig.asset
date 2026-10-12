@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DevSceneLevelConfig
   m_EditorClassIdentifier: 
   StartPhase: 6
-  LevelTime: 120
   CountdownTime: 3
+  LevelTime: 120
   StartScore: 0
   ScoreMultiplierStepAmount: 0.04
   ScoreCurrencyMultiplier: 0.08

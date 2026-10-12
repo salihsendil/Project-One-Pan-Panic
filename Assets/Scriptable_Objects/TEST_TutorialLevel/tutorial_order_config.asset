@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b332c529972a3ca45975b66f2dfb525e, type: 3}
   m_Name: tutorial_order_config
   m_EditorClassIdentifier: 
-  RecipeEntries:
-  - Recipe: {fileID: 11400000, guid: fc2eccab0e5752a47abfc3b3b1f75869, type: 2}
-    StartWeight: 0
-    EndWeight: 0
-  MaxActiveOrderCount: 2
-  StartOrderSpawnDelay: 1
-  OrderSpawnDelay: 15
-  Description: 
+  MaxOrderCount: 1
+  OrderDelay: 0
+  Recipes: []

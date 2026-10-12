@@ -1,11 +1,15 @@
 public enum ItemType
 {
-    None,
-    Tomato = 5,
+    NotSpecified,
+
+    BurgerBun = 10,
+
+    Tomato,
     Lettuce,
     Cheese,
     BurgerMeat,
-    BurgerBun,
-    Plate = 20,
-    OrderCard=30
+
+    Plate = 50,
+    Pan,
+    Pot
 }

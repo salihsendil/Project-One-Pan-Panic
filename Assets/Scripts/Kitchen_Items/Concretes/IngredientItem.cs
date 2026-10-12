@@ -1,80 +1,99 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(ItemCanvasBillboard))]
-[RequireComponent(typeof(IngredientIconDisplay))]
+
+// Main class for all ingredients.
+// It provides ingredient data, displays the UI icon, and updates the mesh.
+//
+// When the preparation stage is updated externally, the displayed icon is updated accordingly.
+// The Icon Display getter is available so the icon can be hidden when the ingredient is added to a container.
+//
+// When an ingredient is processed, its mesh must be updated according to the process rule.
+// This class does not handle any processing logic; it only stores the current preparation stage.
+
+
 public class IngredientItem : MonoBehaviour, IPickable, IPoolable
 {
-    [SerializeField] private ItemStage itemStage;
-    [SerializeField] private IngredientItemSO ingredientData;
-    [SerializeField] private IngredientIconDisplay iconDisplay;
+    //References
+    private IItemIconDisplay iconDisplay;
 
+    [Header("State")]
+    [SerializeField] private bool isPickable = true;
+
+    [Header("Data")]
+    [SerializeField] private IngredientItemSO ingredientItemSO;
+
+    [Header("Process Stage")]
+    [SerializeField] private PreparationStage preparationStage;
+
+    [Header("Visual")]
     [SerializeField] private MeshFilter meshFilter;
 
-    [SerializeField] protected bool isPickable = true;
-
-
-
-    public ItemStage ItemStage => itemStage;
-    public IngredientItemSO IngredientData => ingredientData;
-    public ItemType GetPoolType => ingredientData.ItemType;
-
-
-    #region IPickable
-
-    public Transform Transform => transform;
-
-    public GameObject GetGameObject => gameObject;
-
-    public ItemType GetItemType() => ingredientData.ItemType;
 
     public bool IsPickable { get => isPickable; set => isPickable = value; }
+    public Transform Transform => transform;
 
-    #endregion
+
+    public IngredientItemSO IngredientItemSO => ingredientItemSO;
+
+    public PreparationStage PreparationStage
+    {
+        get => preparationStage;
+
+        set
+        {
+            if (preparationStage == value) return;
+            preparationStage = value;
+            OnPreparationStageChanged();
+        }
+    }
+
+    public IItemIconDisplay IconDisplay => iconDisplay;
+
+    public ItemType ItemType => ingredientItemSO.ItemType;
+
+    public GameObject GameObject => gameObject;
+
+    public event Action<IngredientItem> OnItemProcessed;
 
 
     private void Awake()
     {
-        if (meshFilter == null)
-            meshFilter = GetComponentInChildren<MeshFilter>();
+        iconDisplay = GetComponent<IItemIconDisplay>();
+        iconDisplay.Set(ingredientItemSO.Icon);
 
-        iconDisplay = GetComponent<IngredientIconDisplay>();
-        itemStage = ingredientData.InitialStage;
-        iconDisplay.SetIcon(ingredientData.Icon);
-        iconDisplay.Hide();
+        meshFilter = GetComponent<MeshFilter>();
+        //meshFilter = GetComponentInChildren<MeshFilter>();
+
+        PreparationStage = ingredientItemSO.InitialStage;
     }
 
-    #region IPoolable
-
-    public void Spawn()
+    private void OnPreparationStageChanged()
     {
-        itemStage = ingredientData.InitialStage;
+        switch (preparationStage)
+        {
+            case PreparationStage.Raw:
+            case PreparationStage.Burnt:
+                iconDisplay.Hide();
+                break;
 
-        if (itemStage == ItemStage.Instant) iconDisplay.Show();
+            default:
+                iconDisplay.Show();
+                OnItemProcessed?.Invoke(this); ////for tutorial
+                break;
+        }
     }
 
-    public void Despawn()
+    public void UpdateMesh(Mesh newMesh)
     {
-        iconDisplay.Hide();
-        UpdateMesh(ingredientData.InitialMesh);
-    }
-
-    #endregion
-
-    protected void UpdateMesh(Mesh newMesh)
-    {
-        if (meshFilter == null) return;
         meshFilter.sharedMesh = newMesh;
     }
 
-    public void ItemProcessed(Mesh newMesh, ItemStage newStage)
+    public void Spawn()
     {
-        iconDisplay.Show();
-        itemStage = newStage;
-        UpdateMesh(newMesh);
+        UpdateMesh(ingredientItemSO.InitialMesh);
+        PreparationStage = ingredientItemSO.InitialStage;
     }
 
-    public void OnAddedToContainer()
-    {
-        iconDisplay.Hide();
-    }
+    public void Despawn() { }
 }

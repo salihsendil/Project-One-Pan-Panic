@@ -1,162 +1,222 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 public class TutorialStepManager : MonoBehaviour
 {
+    //Zenject
     [Inject] private SignalBus signalBus;
     [Inject] private OrderManager orderManager;
-    [Inject] private GameManager gameManager;
-    [Inject] private ObjectivePointer pointer;
 
-    [SerializeField] private TutorialStepSO tutorialStepData;
+    //Tutorial Targets
+    private Dictionary<TutorialTargetType, List<TutorialCounterTarget>> targetPairs = new();
+
+    [Header("Step Data")]
+    [SerializeField] private TutorialStepSO tutorialSteps;
     [SerializeField] private int currentStepIndex = 0;
 
-    [SerializeField] private int startDelay = 2250; 
+    [Header("Dialogue")]
+    [SerializeField] private DialoguePanelDisplay dialoguePanel;
 
-    private HashSet<TutorialTarget> pointerTargets = new();
+    [Header("Guidance")]
+    [SerializeField] private GuidancePointer pointer;
 
-    private void Awake()
+    [Header("Modules")]
+    [SerializeField] private List<ItemInteractionModule> interactionModules;
+    [SerializeField] private List<IngredientItem> ingredients;
+    [SerializeField] private List<Plate> plates;
+
+    private void SubscribeToEvents()
     {
-        if (pointer == null) FindObjectsByType<ObjectivePointer>(FindObjectsSortMode.None);
+        signalBus.Subscribe<OrderDeliveredSignal>(OrderDelivered);
+
+        var list = FindObjectsByType<TutorialCounterTarget>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var target in list)
+        {
+            if (!targetPairs.TryGetValue(target.TargetType, out List<TutorialCounterTarget> targetList))
+            {
+                targetList = new();
+                targetPairs[target.TargetType] = targetList;
+            }
+
+            targetPairs[target.TargetType].Add(target);
+        }
+
+        var interactionModules = FindObjectsByType<ItemInteractionModule>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var interactionModule in interactionModules)
+        {
+            interactionModule.OnItemTransferred += ItemTransfferred;
+            this.interactionModules.Add(interactionModule);
+        }
+
+        var ingredients = FindObjectsByType<IngredientItem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var ingredient in ingredients)
+        {
+            ingredient.OnItemProcessed += IngredientProcessed;
+            this.ingredients.Add(ingredient);
+        }
+
+        var plates = FindObjectsByType<Plate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var plate in plates)
+        {
+            plate.OnItemAddedToPlate += ItemAddedToPlate;
+            this.plates.Add(plate);
+        }
     }
 
-    private void OnEnable()
+    private void UnsubscribeFromEvents()
     {
-        TutorialTarget.OnSpawned += RegisterTutorialTargets;
-        TutorialTarget.OnDespawned += RemoveTutorialTargets;
+        signalBus.Unsubscribe<OrderDeliveredSignal>(OrderDelivered);
 
-        signalBus.Subscribe<ItemTransferredSignal>(OnItemTransferred);
-        signalBus.Subscribe<ItemProcessedSignal>(OnItemProcessed);
-        signalBus.Subscribe<IngredientAddedToContainerSignal>(OnIngredientAddedToContainer);
-        signalBus.Subscribe<OrderDeliveredSignal>(OnOrderDelivered);
+        foreach (var interaction in interactionModules)
+        {
+            interaction.OnItemTransferred -= ItemTransfferred;
+        }
+        interactionModules.Clear();
+
+        foreach (var ingredient in ingredients)
+        {
+            ingredient.OnItemProcessed -= IngredientProcessed;
+        }
+        ingredients.Clear();
+
+        foreach (var plate in plates)
+        {
+            plate.OnItemAddedToPlate -= ItemAddedToPlate;
+        }
+        plates.Clear();
+    }
+
+    //subs to gamephasechanged signal and start tutorial after preparation
+    private void Start()
+    {
+        SubscribeToEvents();
+        StartStep();
     }
 
     private void OnDisable()
     {
-        TutorialTarget.OnSpawned -= RegisterTutorialTargets;
-        TutorialTarget.OnDespawned -= RemoveTutorialTargets;
-
-        signalBus.Unsubscribe<ItemTransferredSignal>(OnItemTransferred);
-        signalBus.Unsubscribe<ItemProcessedSignal>(OnItemProcessed);
-        signalBus.Unsubscribe<IngredientAddedToContainerSignal>(OnIngredientAddedToContainer);
-        signalBus.Unsubscribe<OrderDeliveredSignal>(OnOrderDelivered);
+        UnsubscribeFromEvents();
     }
 
-    private void Start()
+    private void StartStep()
     {
-        StartTutorial();
-    }
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
 
-    private async void StartTutorial()
-    {
-        await Task.Delay(startDelay);
-        GetCurrentStep();
-    }
-
-    private void RegisterTutorialTargets(TutorialTarget tutorialTarget) => pointerTargets.Add(tutorialTarget);
-    private void RemoveTutorialTargets(TutorialTarget tutorialTarget) => pointerTargets.Remove(tutorialTarget);
-
-    private void OnItemTransferred(ItemTransferredSignal signal)
-    {
-        if (TryCompleteCurrentStep(signal.GameplayEventType, signal.ItemType))
+        foreach (var targetList in targetPairs.Values)
         {
-            if (signal.To.InteractorType != tutorialStepData.Steps[currentStepIndex].TargetInteractor) return;
-            currentStepIndex++;
-            GetCurrentStep();
-        }
-    }
-
-    private void OnItemProcessed(ItemProcessedSignal signal)
-    {
-        if (TryCompleteCurrentStep(signal.GameplayEventType, signal.ItemType))
-        {
-            currentStepIndex++;
-            GetCurrentStep();
-        }
-    }
-
-    private void OnIngredientAddedToContainer(IngredientAddedToContainerSignal signal)
-    {
-        if (TryCompleteCurrentStep(signal.GameplayEvent, signal.ItemType))
-        {
-            currentStepIndex++;
-            GetCurrentStep();
-        }
-    }
-
-    private void OnOrderDelivered(OrderDeliveredSignal signal)
-    {
-        TutorialStep step = tutorialStepData.Steps[currentStepIndex];
-
-        if (step.CompletionCondition == TutorialCompletionCondition.GameplayEvent && signal.Order.Recipe == step.RequiredRecipe)
-        {
-            currentStepIndex++;
-            GetCurrentStep();
-        }
-    }
-
-    private bool TryCompleteCurrentStep(GameplayEvent eventType, ItemType targetType)
-    {
-        TutorialStep step = tutorialStepData.Steps[currentStepIndex];
-        return step.CompletionCondition == TutorialCompletionCondition.GameplayEvent
-               && eventType == step.GameplayEvent
-               && targetType == step.RequiredItemType;
-    }
-
-    private void CheckStepAction(TutorialStep step)
-    {
-        TutorialStepAction stepAction = step.TutorialStepAction;
-
-        switch (stepAction)
-        {
-            case TutorialStepAction.None:
-                break;
-            case TutorialStepAction.SpawnOrder:
-                orderManager.GenerateOrder(step.TargetRecipe);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void OnScreenTap()
-    {
-        TutorialStep step = tutorialStepData.Steps[currentStepIndex];
-        if (step.CompletionCondition == TutorialCompletionCondition.Tap)
-        {
-            currentStepIndex++;
-            GetCurrentStep();
-        }
-    }
-
-    public void GetCurrentStep()
-    {
-        if (currentStepIndex >= tutorialStepData.Steps.Count)
-        {
-            gameManager.SetPlayPhase();
-            enabled = false;
-            return;
-        }
-
-        TutorialStep tutorialStep = tutorialStepData.Steps[currentStepIndex];
-
-        if (tutorialStep.WorldTarget == TutorialWorldTarget.None) pointer.HidePointer();
-
-        else
-        {
-            foreach (var target in pointerTargets)
+            foreach (var target in targetList)
             {
-                if (target.TutorialWorldTarget == tutorialStep.WorldTarget)
+                target.SetInteractionsEnabled(false);
+                target.SetPointer(false);
+            }
+        }
+
+        foreach (var allowedTarget in step.AllowedTargets)
+        {
+            if (targetPairs.TryGetValue(allowedTarget, out List<TutorialCounterTarget> targetList))
+            {
+                foreach (var target in targetList)
                 {
-                    pointer.SetPointer(target.transform.position, tutorialStep.GuidanceIcon);
+                    target.SetInteractionsEnabled(true);
                 }
             }
         }
 
-        CheckStepAction(tutorialStep);
-        signalBus.Fire(new NewTutorialStepSignal(tutorialStep));
+        dialoguePanel.Show(step.Dialogue);
+
+        if (step.ShowGuidance)
+        {
+            if (targetPairs.TryGetValue(step.GuidanceType, out List<TutorialCounterTarget> targetList))
+            {
+                foreach (var target in targetList)
+                {
+                    target.SetPointer(true, step.GuidanceIcon);
+                }
+            }
+        }
+
+        if (step.IsOrderSpawnRequired)
+        {
+            orderManager.SpawnOrder(step.OrderToSpawn);
+        }
+    }
+
+    private void GetNextStep()
+    {
+        Debug.Log("Step Complete!");
+        currentStepIndex++;
+        StartStep();
+    }
+
+    private void ItemTransfferred(IInteractor from, IInteractor to, IPickable pickable)
+    {
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
+
+        if (step.CompletionCondition != TutorialCompletionCondition.GameplayEvent)
+            return;
+        if (step.GameplayEvent != GameplayEvent.ItemTransferred)
+            return;
+        if (step.RequiredItem != pickable.ItemType)
+            return;
+
+        Debug.Log($"{pickable.ItemType} is transferred from: {(from as Component).name} to: {(to as Component).name}.");
+
+        GetNextStep();
+    }
+
+    private void IngredientProcessed(IngredientItem ingredientItem)
+    {
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
+
+        if (step.CompletionCondition != TutorialCompletionCondition.GameplayEvent)
+            return;
+        if (step.GameplayEvent != GameplayEvent.ItemProcessed)
+            return;
+        if (step.RequiredItem != ingredientItem.ItemType)
+            return;
+        if (step.PreparationStage != ingredientItem.PreparationStage)
+            return;
+
+        Debug.Log($"{ingredientItem.ItemType} is processed. Current preparation stage is: {ingredientItem.PreparationStage}.");
+
+        GetNextStep();
+    }
+
+    private void ItemAddedToPlate(ContainerItem containerItem, IPickable pickable)
+    {
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
+
+        if (step.CompletionCondition != TutorialCompletionCondition.GameplayEvent)
+            return;
+        if (step.GameplayEvent != GameplayEvent.ItemAddedToContainer)
+            return;
+        if (step.RequiredItem != pickable.ItemType)
+            return;
+
+        Debug.Log($"{pickable.ItemType} is transferred to: {containerItem.name}.");
+
+        GetNextStep();
+    }
+
+    private void OrderDelivered(OrderDeliveredSignal signal)
+    {
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
+
+        if (step.RequiredRecipe != signal.Order.Recipe)
+            return;
+
+        Debug.Log($"{signal.Order.Recipe} delivered succesfully!.");
+
+        GetNextStep();
+    }
+
+    public void OnDialogueWindowSkipTap()
+    {
+        TutorialStep step = tutorialSteps.Steps[currentStepIndex];
+
+        if (step.CompletionCondition != TutorialCompletionCondition.Tap)
+            return;
+        GetNextStep();
     }
 }

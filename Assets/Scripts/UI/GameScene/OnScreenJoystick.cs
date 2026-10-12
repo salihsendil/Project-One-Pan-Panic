@@ -1,17 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
-using Zenject;
+using UnityEngine.InputSystem.OnScreen;
 
-public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class OnScreenJoystick : OnScreenControl, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    //References
-    [Inject] private InputHandler inputHandler;
+    [Header("Transform")]
     private RectTransform areaRectTransform;
 
-    //[Header("Key Binding")]
-    //[InputControl(layout = "Vector2")]
-    //[SerializeField] private string controlPath = "<Gamepad>/leftStick";
+    [Header("Key Binding")]
+    [InputControl(layout = "Vector2")]
+    [SerializeField] private string bindingPath = "<Gamepad>/leftStick";
 
     [Header("UI")]
     [SerializeField] private RectTransform padTransform;
@@ -20,6 +19,12 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     [Header("Nub Settings")]
     [SerializeField] private float nubRange = 170f;
+
+    protected override string controlPathInternal
+    {
+        get => bindingPath;
+        set => bindingPath = value;
+    }
 
     private void Start()
     {
@@ -35,6 +40,7 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
                              out Vector2 screenPos);
 
         padTransform.anchoredPosition = screenPos;
+        OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,16 +48,16 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
         RectTransformUtility.ScreenPointToLocalPointInRectangle(padTransform,
                              eventData.position,
                              eventData.pressEventCamera,
-                             out Vector2 nubPos);
+                             out Vector2 inputVector);
 
-        nubPos = Vector2.ClampMagnitude(nubPos, nubRange);
-        nubTransform.anchoredPosition = nubPos;
-        inputHandler.SetMovementInput(nubPos / nubRange);
+        inputVector = Vector2.ClampMagnitude(inputVector, nubRange);
+        nubTransform.anchoredPosition = inputVector;
+        SendValueToControl(inputVector);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        inputHandler.SetMovementInput(Vector2.zero);
+        SendValueToControl(Vector2.zero);
         padTransform.anchoredPosition = padDefaultScreenPos;
         nubTransform.anchoredPosition = Vector2.zero;
     }

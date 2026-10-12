@@ -1,4 +1,7 @@
 
+// Creates and stores animation states using the Factory pattern to avoid allocations
+// and unnecessary garbage collection on every animation switch.
+
 public class AnimationStateFactory
 {
     private readonly IdleState idleState = new();

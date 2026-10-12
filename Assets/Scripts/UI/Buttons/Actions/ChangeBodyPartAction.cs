@@ -1,0 +1,13 @@
+using UnityEngine;
+
+[RequireComponent(typeof(UIButtonHandler))]
+public class ChangeBodyPartAction : BaseUIButtonAction
+{
+    [SerializeField] private CustomizationManager customizationManager;
+    [SerializeField] private int stepSize;
+
+    public override void Execute()
+    {
+        customizationManager.ChangeBodyPart(stepSize);
+    }
+}

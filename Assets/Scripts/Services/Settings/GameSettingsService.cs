@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -110,11 +109,6 @@ public class GameSettingsService : IInitializable, ISaveable
     public void LoadData()
     {
         SettingsDataSave save = saveSystem.TryGetData<SettingsDataSave>(GetSaveDataType);
-
-        if (save==null)
-        {
-            Debug.Log("boþ");
-        }
 
         settingsSO.MasterVolume = save.MasterVolume;
         settingsSO.MusicVolume = save.MusicVolume;

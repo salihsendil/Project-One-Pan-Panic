@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad32aca8b27262458ccdfef14b49c40, type: 3}
+  m_Name: Cheese_Cut
+  m_EditorClassIdentifier: 
+  ProcessType: 10
+  VisualChangeTiming: 2
+  OutputMesh: {fileID: -33791506624762615, guid: dc394fba0c51d0d4396d6ee072dd19e2, type: 3}
+  OutputMaterial: {fileID: 2100000, guid: aee9ca5a1f9093d4ebd013758a4d5b2a, type: 2}
+  FromStage: 0
+  ToStage: 10

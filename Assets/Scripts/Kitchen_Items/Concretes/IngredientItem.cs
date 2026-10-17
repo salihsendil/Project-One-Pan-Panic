@@ -28,6 +28,7 @@ public class IngredientItem : MonoBehaviour, IPickable, IPoolable
 
     [Header("Visual")]
     [SerializeField] private MeshFilter meshFilter;
+    [SerializeField] private MeshRenderer meshRenderer;
 
 
     public bool IsPickable { get => isPickable; set => isPickable = value; }
@@ -62,8 +63,9 @@ public class IngredientItem : MonoBehaviour, IPickable, IPoolable
         iconDisplay = GetComponent<IItemIconDisplay>();
         iconDisplay.Set(ingredientItemSO.Icon);
 
+        //meshFilter = GetComponent<MeshFilter>();
         meshFilter = GetComponent<MeshFilter>();
-        //meshFilter = GetComponentInChildren<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
 
         PreparationStage = ingredientItemSO.InitialStage;
     }
@@ -84,14 +86,18 @@ public class IngredientItem : MonoBehaviour, IPickable, IPoolable
         }
     }
 
-    public void UpdateMesh(Mesh newMesh)
+    public void UpdateVisual(Mesh newMesh, Material newMat)
     {
-        meshFilter.sharedMesh = newMesh;
+        if (newMesh != null)
+            meshFilter.sharedMesh = newMesh;
+
+        if (newMesh != null)
+            meshRenderer.sharedMaterial = newMat;
     }
 
     public void Spawn()
     {
-        UpdateMesh(ingredientItemSO.InitialMesh);
+        UpdateVisual(ingredientItemSO.InitialMesh, ingredientItemSO.InitialMaterial);
         PreparationStage = ingredientItemSO.InitialStage;
     }
 

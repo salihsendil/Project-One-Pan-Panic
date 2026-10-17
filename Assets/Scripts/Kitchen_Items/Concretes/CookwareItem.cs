@@ -96,11 +96,13 @@ public class CookwareItem : ContainerItem
                     foreach (var slot in containerSlots)
                     {
                         slot.IngredientItem.PreparationStage = slot.ProcessSO.ToStage;
-                        slot.IngredientItem.UpdateMesh(slot.ProcessSO.OutputMesh);
+
+                        if (slot.ProcessSO.VisualChangeTiming == VisualChangeTiming.OnProcessComplete)
+                            slot.IngredientItem.UpdateVisual(slot.ProcessSO.OutputMesh, slot.ProcessSO.OutputMaterial);
                     }
 
                     progressTracker.Set(cookwareItemSO.TotalBurnDuration);
-                    processDisplay.Hide(); //??
+                    //processDisplay.Hide(); //??
                     currentProcessView.Hide();
                     currentProcessView = dangerAlert;
                     currentProcessView.Initialize();
@@ -175,6 +177,10 @@ public class CookwareItem : ContainerItem
             default:
                 break;
         }
+
+        if (slot.ProcessSO.VisualChangeTiming == VisualChangeTiming.OnProcessStart)
+            slot.IngredientItem.UpdateVisual(slot.ProcessSO.OutputMesh, slot.ProcessSO.OutputMaterial);
+
 
         ingredientItem.IconDisplay.Hide();
         iconDisplay.Set(ingredientItem.IngredientItemSO.Icon);

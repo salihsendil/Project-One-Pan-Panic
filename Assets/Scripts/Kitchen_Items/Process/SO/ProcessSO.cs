@@ -7,9 +7,18 @@ public class ProcessSO : ScriptableObject
     public ProcessType ProcessType;
 
     [Header("Stage")]
+    public VisualChangeTiming VisualChangeTiming;
     public Mesh OutputMesh;
+    public Material OutputMaterial;
 
     [Header("Stage")]
     public PreparationStage FromStage;
     public PreparationStage ToStage;
+}
+
+public enum VisualChangeTiming
+{
+    None,
+    OnProcessStart,
+    OnProcessComplete
 }

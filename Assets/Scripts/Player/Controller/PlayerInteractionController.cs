@@ -105,13 +105,13 @@ public class PlayerInteractionController : MonoBehaviour
         currentInteractable?.InteractHoldCanceled(currentInteractor);
     }
 
-    private void OnDrawGizmos()
-    {
-        //Ray ray = new Ray(transform.position, transform.forward);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, rayRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + (transform.forward * rayLength), rayRadius);
-        Debug.DrawRay(transform.position, transform.forward * rayLength, Color.red);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    //Ray ray = new Ray(transform.position, transform.forward);
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, rayRadius);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position + (transform.forward * rayLength), rayRadius);
+    //    Debug.DrawRay(transform.position, transform.forward * rayLength, Color.red);
+    //}
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 
 // This module provides an ingredient item to the player.
@@ -12,8 +13,8 @@ using UnityEngine;
 public class IngredientDispenserModule : MonoBehaviour, IInstantInteractionModule
 {
     private IInteractor currentInteractor;
-    [SerializeField] private IngredientItem prefab;
-    //[SerializeField] private AdvancedPoolManager poolManager;
+    [Inject] private AdvancedPoolManager poolManager;
+    [SerializeField] private IngredientItemSO ingredientItemSO;
 
     /// <summary>
     /// Invoked when an item is transferred between interactors.
@@ -33,8 +34,7 @@ public class IngredientDispenserModule : MonoBehaviour, IInstantInteractionModul
         if (currentInteractor.HasItem) return false;
         if (incomingInteractor.HasItem) return false;
 
-        //IngredientItem item = poolManager.Spawn<IngredientItem>(ItemType.BurgerBun);
-        IngredientItem item = Instantiate(prefab, transform.position, Quaternion.identity);
+        IngredientItem item = poolManager.Spawn<IngredientItem>(ingredientItemSO.ItemType);
 
         if (item == null) return false;
 

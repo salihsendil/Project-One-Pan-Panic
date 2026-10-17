@@ -18,7 +18,7 @@ public class OnScreenJoystick : OnScreenControl, IPointerDownHandler, IDragHandl
     [SerializeField] private Vector2 padDefaultScreenPos;
 
     [Header("Nub Settings")]
-    [SerializeField] private float nubRange = 170f;
+    [SerializeField] private float nubRange = 120f;
 
     protected override string controlPathInternal
     {
@@ -40,7 +40,8 @@ public class OnScreenJoystick : OnScreenControl, IPointerDownHandler, IDragHandl
                              out Vector2 screenPos);
 
         padTransform.anchoredPosition = screenPos;
-        OnDrag(eventData);
+
+        //OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,11 +49,11 @@ public class OnScreenJoystick : OnScreenControl, IPointerDownHandler, IDragHandl
         RectTransformUtility.ScreenPointToLocalPointInRectangle(padTransform,
                              eventData.position,
                              eventData.pressEventCamera,
-                             out Vector2 inputVector);
+                             out Vector2 screenPos);
 
-        inputVector = Vector2.ClampMagnitude(inputVector, nubRange);
-        nubTransform.anchoredPosition = inputVector;
-        SendValueToControl(inputVector);
+        nubTransform.anchoredPosition = Vector2.ClampMagnitude(screenPos, nubRange);
+        Vector2 input = nubTransform.anchoredPosition / nubRange;
+        SendValueToControl(input);
     }
 
     public void OnPointerUp(PointerEventData eventData)

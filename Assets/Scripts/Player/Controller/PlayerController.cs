@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         movementVector = ConvertInputToMovementVector(inputHandler.InputVector);
 
-
+        //Debug.Log(movementVector);
         HandleRotation();
         ApplyGravity();
         HandleMovement();
@@ -70,6 +70,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 ConvertInputToMovementVector(Vector2 input)
     {
-        return new Vector3(input.x, 0f, input.y).normalized;
+        return new Vector3(input.x, 0f, input.y);
     }
 }

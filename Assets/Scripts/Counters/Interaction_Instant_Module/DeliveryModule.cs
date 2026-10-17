@@ -6,8 +6,8 @@ public class DeliveryModule : MonoBehaviour
     //References
     [Inject] private OrderManager orderManager;
     [Inject] private AdvancedPoolManager poolManager;
+    [Inject] private RecipeMatcher recipeMatcher;
 
-    [SerializeField] private RecipeMatcher recipeMatcher;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private FloatingTextController floatingText;
 
@@ -22,7 +22,7 @@ public class DeliveryModule : MonoBehaviour
 
         if (!interactor.GetItem.Transform.TryGetComponent(out Plate plate))
         {
-            floatingText.Show("Tabak Gerek!");
+            floatingText.Show("!!!!");
             return false;
         }
 
@@ -32,12 +32,12 @@ public class DeliveryModule : MonoBehaviour
             {
                 interactor.RemoveItem();
                 poolManager.Despawn(plate);
-                particle.Play(true);
+                particle?.Play(true);
                 return true;
             }
         }
 
-        floatingText.Show("Yanlis Siparis!");
+        floatingText.Show("!!!!");
         return false;
     }
 }

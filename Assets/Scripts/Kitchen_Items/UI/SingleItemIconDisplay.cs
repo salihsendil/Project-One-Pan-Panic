@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SingleItemIconDisplay : MonoBehaviour, IItemIconDisplay
 {
+    [SerializeField] private BillboardCanvas billboard;
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image iconImage;
 
     private void Awake()
@@ -12,7 +14,9 @@ public class SingleItemIconDisplay : MonoBehaviour, IItemIconDisplay
 
     public void Show()
     {
+        canvasGroup.alpha = 1;
         iconImage.enabled = true;
+        billboard.Register(canvasGroup);
     }
 
     public void Set(Sprite sprite)
@@ -22,6 +26,8 @@ public class SingleItemIconDisplay : MonoBehaviour, IItemIconDisplay
 
     public void Hide()
     {
+        canvasGroup.alpha = 0;
         iconImage.enabled = false;
+        billboard.Unregister(canvasGroup);
     }
 }

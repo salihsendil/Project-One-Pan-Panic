@@ -10,6 +10,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(CuttingCounter))]
+[RequireComponent(typeof(CuttingCounterAnimationsController))]
 public class CuttingModule : MonoBehaviour, IHoldInteractionModule
 {
     [Header("References")]
@@ -110,7 +111,10 @@ public class CuttingModule : MonoBehaviour, IHoldInteractionModule
         if (progressTracker.IsFinished)
         {
             ingredientItem.PreparationStage = process.ToStage;
-            ingredientItem.UpdateMesh(process.OutputMesh);
+
+            if (process.VisualChangeTiming == VisualChangeTiming.OnProcessComplete)
+                ingredientItem.UpdateVisual(process.OutputMesh, process.OutputMaterial);
+            
             canProcessable = false;
             ingredientItem.IsPickable = true;
 

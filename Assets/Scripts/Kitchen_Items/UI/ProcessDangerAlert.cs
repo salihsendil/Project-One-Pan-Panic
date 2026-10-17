@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class ProcessDangerAlert : MonoBehaviour, IProcessView
 {
     [Header("Canvas")]
+    [SerializeField] private BillboardCanvas billboard;
+
+    [Header("Canvas")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image icon;
 
@@ -15,26 +18,21 @@ public class ProcessDangerAlert : MonoBehaviour, IProcessView
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        icon = GetComponent<Image>();
-
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-
         tween = icon
             .DOFade(0f, duration)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.Linear)
             .SetAutoKill(false)
             .Pause();
-
+        
+        Hide();
     }
 
     public void Initialize()
     {
         canvasGroup.alpha = 1;
         tween.Restart();
+        billboard.Register(canvasGroup);
     }
 
     public void Tick(float processRatio)
@@ -51,5 +49,6 @@ public class ProcessDangerAlert : MonoBehaviour, IProcessView
         canvasGroup.alpha = 0;
         tween.timeScale = 1f;
         tween.Pause();
+        billboard.Unregister(canvasGroup);
     }
 }

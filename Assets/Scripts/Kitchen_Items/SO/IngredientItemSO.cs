@@ -9,6 +9,7 @@ public class IngredientItemSO : ScriptableObject
     [Header("Visual")]
     public GameObject Prefab;
     public Mesh InitialMesh;
+    public Material InitialMaterial;
 
     [Header("UI")]
     public Sprite Icon;

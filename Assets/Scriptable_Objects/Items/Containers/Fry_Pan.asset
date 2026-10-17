@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9c73fa9cbdf9840852f78ffdeb2e1f, type: 3}
+  m_Name: Fry_Pan
+  m_EditorClassIdentifier: 
+  ItemType: 51
+  Prefab: {fileID: 6564568059213104081, guid: bf269dc184c0d91469e4de69724ca258, type: 3}
+  Capacity: 1
+  ProcessType: 20
+  ProcessTime: 5
+  DelayBeforeBurnDuration: 2
+  BurnDuration: 6
+  totalBurnDuration: 8

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 
 // If the incoming item is an ingredient, it will be returned to the pool.
@@ -8,7 +9,7 @@ using UnityEngine;
 
 public class TrashModule : MonoBehaviour, IInstantInteractionModule
 {
-    [SerializeField] private AdvancedPoolManager poolManager;
+    [Inject] private AdvancedPoolManager poolManager;
 
     public bool TryInteractInstant(IInteractor incomingInteractor)
     {

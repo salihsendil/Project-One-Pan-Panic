@@ -1471,6 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432c42d785f7d5941b9d3f30fd2d6fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &2498692602174710640
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,6 +3804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432c42d785f7d5941b9d3f30fd2d6fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &6218247858193043635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,6 +3967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432c42d785f7d5941b9d3f30fd2d6fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &6265928818289392045
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,7 +4246,6 @@ GameObject:
   - component: {fileID: 4049568701502658421}
   - component: {fileID: 8242516779821968977}
   - component: {fileID: 273451104069083623}
-  - component: {fileID: 1018251846727397008}
   m_Layer: 5
   m_Name: Game_UI
   m_TagString: Untagged
@@ -4340,19 +4342,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1018251846727397008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6815387092675165850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6e435b7a3459a46b811f72fc217ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownText: {fileID: 3007301846983414818}
 --- !u!1 &7442712730373990704
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,6 +5289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb59dfd9611fc4296f3641d24bf409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bindingPath: <Gamepad>/leftStick
   padTransform: {fileID: 8660306914545952622}
   nubTransform: {fileID: 3020398706579888114}
   padDefaultScreenPos: {x: 0, y: 0}
@@ -5754,6 +5744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa5871bb61934a4b994154ea635de12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+  openDelay: 1000
   scoreText: {fileID: 5539412859045630387}
   highscoreText: {fileID: 3194597566938896226}
   failOrderText: {fileID: 6363140791178437622}

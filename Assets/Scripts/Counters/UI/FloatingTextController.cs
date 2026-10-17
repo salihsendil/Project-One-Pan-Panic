@@ -53,6 +53,6 @@ public class FloatingTextController : MonoBehaviour
     [ContextMenu("Test Et")]
     public void TestButtonClick()
     {
-        Show("Yanlis Siparis!");
+        Show("!!!!");
     }
 }

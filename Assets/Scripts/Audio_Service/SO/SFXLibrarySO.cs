@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New SFX Library SO", menuName = "Scriptable Objects/New SFX Library SO")]
+[CreateAssetMenu(fileName = "New SFX Library SO", menuName = "Scriptable Objects/Audio/New SFX Library SO")]
 public class SFXLibrarySO : ScriptableObject
 {
     public List<SFXEntry> entries = new();

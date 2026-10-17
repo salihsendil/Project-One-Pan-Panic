@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212b1904562bbcb49b54d9c2d67f57cc, type: 3}
+  m_Name: Shrimp
+  m_EditorClassIdentifier: 
+  ItemType: 26
+  Prefab: {fileID: 4927391712277007061, guid: a4a2744bfc6d713419b37f6ea8d08a60, type: 3}
+  InitialMesh: {fileID: 4300000, guid: 3fca96da5607dd74eb9e740f0c999aba, type: 2}
+  InitialMaterial: {fileID: 2100000, guid: ad39eccb39be39f40b3ba8c2298f9fd2, type: 2}
+  Icon: {fileID: 21300000, guid: 329a7f9fc97408249adcf4273bd84d56, type: 3}
+  InitialStage: 0

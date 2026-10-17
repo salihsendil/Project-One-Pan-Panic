@@ -7,20 +7,20 @@ using UnityEngine.UI;
 
 public class ProcessDisplay : MonoBehaviour, IProcessView
 {
+    [SerializeField] private BillboardCanvas billboard;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image fillBar;
 
     private void Awake()
     {
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        Hide();
     }
 
     public void Initialize()
     {
         canvasGroup.alpha = 1;
         fillBar.fillAmount = 0;
+        billboard.Register(canvasGroup);
     }
 
     public void Tick(float processRatio)
@@ -32,5 +32,6 @@ public class ProcessDisplay : MonoBehaviour, IProcessView
     public void Hide()
     {
         canvasGroup.alpha = 0;
+        billboard.Unregister(canvasGroup);
     }
 }

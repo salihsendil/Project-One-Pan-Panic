@@ -12,7 +12,7 @@ public class Game_SceneInstaller : MonoInstaller
         Container.Bind<LevelStatsService>().FromComponentInHierarchy().AsSingle().NonLazy();
 
         //Object Bindings
-        //Container.Bind<RecipeMatchEvaluator>().AsSingle().NonLazy();
+        Container.Bind<RecipeMatcher>().AsSingle().NonLazy();
 
         //Interface Bindings
         Container.BindInterfacesAndSelfTo<ScoreHandler>().AsSingle();

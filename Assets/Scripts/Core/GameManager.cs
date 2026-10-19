@@ -1,16 +1,14 @@
-using System;
 using UnityEngine;
 using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    [Inject] private SignalBus signalBus;
+    private const float PREPARATION_TIME = 1.5f;
 
-    [Header("Config")]
-    [SerializeField] private LevelConfigSO levelConfig;
+    [Inject] private SignalBus signalBus;
+    [Inject] private LevelConfigSO levelConfig;
 
     [Header("Timer")]
-    private const float PREPARATION_TIME = 1.5f;
     [SerializeField] private Timer timer = new();
     [SerializeField] private int currentLevelTime;
 

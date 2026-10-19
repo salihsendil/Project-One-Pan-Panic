@@ -1,8 +1,8 @@
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "New LevelConfigSOInstaller", menuName = "Installers/New LevelConfigSOInstaller")]
-public class Game_Scene_Config_Installer : ScriptableObjectInstaller<Game_Scene_Config_Installer>
+[CreateAssetMenu(fileName = "New Level_SO_Installer", menuName = "Installers/New Level_SO_Installer")]
+public class Level_Data_Installer : ScriptableObjectInstaller<Level_Data_Installer>
 {
     [SerializeField] private LevelConfigSO levelConfigSO;
     [SerializeField] private OrderConfigSO orderConfigSO;

@@ -1,0 +1,130 @@
+﻿Bacon_Egg_Breakfast
+-Bacon, PanCook
+-Egg, PanCook
+
+Shrimp_Egg_Breakfast
+-Shrimp, PanCook
+-Egg, PanCook
+
+Bacon_Cheeseburger
+-Burger_Bread, Ready
+-Bacon, PanCook
+-Burger_Meat, PanCook
+-Cheese, Chopped
+
+Baconburger
+-Burger_Bread, Ready
+-Bacon, PanCook
+-Burger_Meat, PanCook
+
+Cheeseburger
+-Burger_Bread, Ready
+-Burger_Meat, PanCook
+-Cheese, Chopped
+
+Hamburger
+-Burger_Bread, Ready
+-Burger_Meat, PanCook
+
+Lettuce_Hamburger
+-Burger_Bread, Ready
+-Burger_Meat, PanCook
+-Lettuce, Chopped
+
+Lettuce_Tomato_Hamburger
+-Burger_Bread, Ready
+-Burger_Meat, PanCook
+-Lettuce, Chopped
+-Tomato, Chopped
+
+Shrimp_Lettuce_Hamburger
+-Burger_Bread, Ready
+-Shrimp, PanCook
+-Lettuce, Chopped
+
+Tomato_Hamburger
+-Burger_Bread, Ready
+-Burger_Meat, PanCook
+-Tomato, Chopped
+
+Cheese_Salad
+-Cheese, Chopped
+-Lettuce, Chopped
+-Tomato, Chopped
+
+Salad
+-Lettuce, Chopped
+-Tomato, Chopped
+
+Shrimp_Salad
+-Shrimp, Chopped
+-Lettuce, Chopped
+-Tomato, Chopped
+
+Bacon_Cheese_Sandvich
+-Toast_Bread, Ready
+-Bacon, PanCook
+-Cheese, Chopped
+
+Bacon_Egg_Sandvich
+-Toast_Bread, Ready
+-Bacon, PanCook
+-Egg, PanCook
+
+Bacon_Sandvich
+-Toast_Bread, Ready
+-Bacon, PanCook
+
+Cheese_Egg_Sandvich
+-Toast_Bread, Ready
+-Cheese, Chopped
+-Egg, PanCook
+
+Egg_Sandvich
+-Toast_Bread, Ready
+-Egg, PanCook
+
+Lettuce_Cheese_Sandvich
+-Toast_Bread, Ready
+-Lettuce, Chopped
+-Cheese, Chopped
+
+Tomato_Cheese_Sandvich
+-Toast_Bread, Ready
+-Tomato, Chopped
+-Cheese, Chopped
+
+Chopped_Lettuce
+-Lettuce, Chopped
+
+Chopped_Shrimp
+-Shrimp, Chopped
+
+Chopped_Tomato
+-Tomato, Chopped
+
+Cooked_Egg
+-Egg, PanCook
+
+Cooked_Shrimp
+-Shrimp, PanCook
+
+Mushroom_Soup
+-Mushroom, Boiled
+-Mushroom, Boiled
+-Mushroom, Boiled
+
+Onion_Soup
+-Onion, Boiled
+-Onion, Boiled
+-Onion, Boiled
+
+Tomato_Soup
+-Tomato, Boiled
+-Tomato, Boiled
+-Tomato, Boiled
+
+Veggie_Soup
+-Mushroom, Boiled
+-Onion, Boiled
+-Tomato, Boiled

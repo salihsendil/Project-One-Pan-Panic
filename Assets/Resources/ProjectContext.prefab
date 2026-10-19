@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5588458963028964341
+--- !u!1 &7325567319220111292
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2556371982930430702}
-  - component: {fileID: 642032380644790335}
-  - component: {fileID: 6787194766690744203}
+  - component: {fileID: 2445775485348572488}
+  - component: {fileID: 6100999288908663049}
+  - component: {fileID: -5268832685159511719}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2556371982930430702
+--- !u!4 &2445775485348572488
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5588458963028964341}
+  m_GameObject: {fileID: 7325567319220111292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,22 +33,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &642032380644790335
+--- !u!114 &6100999288908663049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5588458963028964341}
+  m_GameObject: {fileID: 7325567319220111292}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: 454bdf99b416aba47b060a9d0f670eac, type: 2}
+  - {fileID: 11400000, guid: 2c4c2ce559e4fc74cad038f5edd99eb5, type: 2}
   _monoInstallers:
-  - {fileID: 6787194766690744203}
+  - {fileID: -5268832685159511719}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -63,18 +63,18 @@ MonoBehaviour:
       _missingHandlerDefaultResponse: 2
       _requireStrictUnsubscribe: 0
       _defaultAsyncTickPriority: 1
---- !u!114 &6787194766690744203
+--- !u!114 &-5268832685159511719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5588458963028964341}
+  m_GameObject: {fileID: 7325567319220111292}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110cb8a73a435b644884693982ed7dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvasPrefab: {fileID: 5483985429999094874, guid: 0494b4ca77690124a9aca21f749ebc9c, type: 3}
-  audioProfilePrefab: {fileID: 6337648283706330083, guid: bdc5ebf5360292842b4682b53f43cd04, type: 3}
+  audioServicePrefab: {fileID: 6337648283706330083, guid: bdc5ebf5360292842b4682b53f43cd04, type: 3}
   sfxServicePrefab: {fileID: 5621819679372308353, guid: db24467df780cae4c86ab7e2f9e01310, type: 3}

@@ -1,9 +1,12 @@
 using Zenject;
 
-public class Game_Scene_SignalInstaller : MonoInstaller
+public class Level_Signal_Installer : MonoInstaller
 {
     public override void InstallBindings()
     {
+        //Game Phase Signal
+        Container.DeclareSignal<GamePhaseChangedSignal>();
+
         //Order Signals
         Container.DeclareSignal<OrderGeneratedSignal>();
         Container.DeclareSignal<OrderExpiredSignal>();

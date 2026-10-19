@@ -18,8 +18,8 @@ MonoBehaviour:
   PenaltyScore: 0
   Ingredients:
   - IngredientSO: {fileID: 11400000, guid: 3ad13214cdbf52448be9bb2c0ba53825, type: 2}
-    RequiredStage: 0
+    RequiredStage: 90
   - IngredientSO: {fileID: 11400000, guid: 9eb333319b56ce24f988293d9e6088eb, type: 2}
-    RequiredStage: 0
+    RequiredStage: 20
   - IngredientSO: {fileID: 11400000, guid: 28aa02808da31b248a399031b695ba2e, type: 2}
-    RequiredStage: 0
+    RequiredStage: 10

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46c1de2d0c6ea0f48b183df183f770da, type: 3}
-  m_Name: Bacon_Hamburger
+  m_Name: Lettuce_Tomato_Hamburger
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   PreparationTime: 0
@@ -19,7 +19,9 @@ MonoBehaviour:
   Ingredients:
   - IngredientSO: {fileID: 11400000, guid: 3ad13214cdbf52448be9bb2c0ba53825, type: 2}
     RequiredStage: 90
-  - IngredientSO: {fileID: 11400000, guid: d0133c6956510f746965b4d416a58f8a, type: 2}
-    RequiredStage: 20
   - IngredientSO: {fileID: 11400000, guid: 9eb333319b56ce24f988293d9e6088eb, type: 2}
     RequiredStage: 20
+  - IngredientSO: {fileID: 11400000, guid: 28aa02808da31b248a399031b695ba2e, type: 2}
+    RequiredStage: 10
+  - IngredientSO: {fileID: 11400000, guid: ce2959479c7cc8742990ae8a6afe5ce4, type: 2}
+    RequiredStage: 10

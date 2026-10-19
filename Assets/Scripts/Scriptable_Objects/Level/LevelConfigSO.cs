@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Level Config", menuName = "Scriptable Objects/Level/New Level Config SO")]
+[CreateAssetMenu(fileName = "Level_Config", menuName = "Scriptable Objects/Level/New Level Config SO")]
 public class LevelConfigSO : ScriptableObject
 {
     [Header("Gameplay")]

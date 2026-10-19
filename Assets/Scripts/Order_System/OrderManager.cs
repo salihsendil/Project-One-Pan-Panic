@@ -6,13 +6,12 @@ using Zenject;
 public class OrderManager : MonoBehaviour
 {
     [Inject] private SignalBus signalBus;
+    [Inject] private OrderConfigSO orderConfig;
 
-    [Header("Config")]
-    [SerializeField] private OrderConfigSO orderConfig;
     private WaitForSeconds orderDelay;
+    private Coroutine orderCoroutine;
 
     [Header("Orders")]
-    [SerializeField] private Coroutine orderCoroutine;
     [SerializeField] private int orderCounter;
     [SerializeField] private List<Order> activeOrders = new();
 

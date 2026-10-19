@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Pool Config SO", menuName = "Scriptable Objects/Level/New Pool Config SO")]
+[CreateAssetMenu(fileName = "Pool_Config", menuName = "Scriptable Objects/Level/New Pool Config SO")]
 public class PoolConfigSO : ScriptableObject
 {
     public List<PoolEntry> PoolEntries = new();

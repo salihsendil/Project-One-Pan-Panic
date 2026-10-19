@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Game_Settings
   m_EditorClassIdentifier: 
   MainMixer: {fileID: 24100000, guid: 282d2c4710a8af042880c1298cec2fad, type: 2}
-  snapshotTransitionTime: 0
-  normalSnapshot: {fileID: 24500006, guid: 282d2c4710a8af042880c1298cec2fad, type: 2}
-  muteSnapshot: {fileID: -4286369530469749350, guid: 282d2c4710a8af042880c1298cec2fad, type: 2}
-  pauseSnapshot: {fileID: 7784956963769251069, guid: 282d2c4710a8af042880c1298cec2fad, type: 2}
+  SnapshotTransitionTime: 0
+  NormalSnapshot: {fileID: 0}
+  MuteSnapshot: {fileID: 0}
+  PauseSnapshot: {fileID: 0}
   MinVolume: 0.00001
   fadeTime: 1
-  MasterVolume: 1
+  MasterVolume: 0.5
   MusicVolume: 0.5
   AmbienceVolume: 0.5
   SFXVolume: 0.5

@@ -1,10 +1,10 @@
 using UnityEngine;
 using Zenject;
 
-public class ProjectInstaller : MonoInstaller
+public class Project_Installer : MonoInstaller
 {
     [SerializeField] private GameObject loadingCanvasPrefab;
-    [SerializeField] private GameObject audioProfilePrefab;
+    [SerializeField] private GameObject audioServicePrefab;
     [SerializeField] private GameObject sfxServicePrefab;
 
     public override void InstallBindings()
@@ -22,9 +22,8 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<SceneService>().FromNewComponentOnNewGameObject().AsSingle();
 
         //Prefab Instantiating
-
         Container.Bind<LoadingPanelHandler>().FromComponentInNewPrefab(loadingCanvasPrefab).AsSingle().NonLazy();
-        Container.Bind<AudioService>().FromComponentInNewPrefab(audioProfilePrefab).AsSingle().NonLazy();
+        Container.Bind<AudioService>().FromComponentInNewPrefab(audioServicePrefab).AsSingle().NonLazy();
         Container.Bind<SFXService>().FromComponentInNewPrefab(sfxServicePrefab).AsSingle().NonLazy();
 
         //Signal Bindings

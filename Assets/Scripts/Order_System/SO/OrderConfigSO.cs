@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New_OrderConfigSO", menuName = "Scriptable Objects/Order/New OrderConfigSO")]
+[CreateAssetMenu(fileName = "Order_Config", menuName = "Scriptable Objects/Order/New OrderConfigSO")]
 
 public class OrderConfigSO : ScriptableObject
 {

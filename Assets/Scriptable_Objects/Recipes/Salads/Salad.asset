@@ -16,4 +16,8 @@ MonoBehaviour:
   PreparationTime: 0
   SuccessScore: 0
   PenaltyScore: 0
-  Ingredients: []
+  Ingredients:
+  - IngredientSO: {fileID: 11400000, guid: 28aa02808da31b248a399031b695ba2e, type: 2}
+    RequiredStage: 10
+  - IngredientSO: {fileID: 11400000, guid: ce2959479c7cc8742990ae8a6afe5ce4, type: 2}
+    RequiredStage: 10

@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPickable: 1
-  ingredientItemSO: {fileID: 0}
+  ingredientItemSO: {fileID: 11400000, guid: d0133c6956510f746965b4d416a58f8a, type: 2}
   preparationStage: 0
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}

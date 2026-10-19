@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6847fcebf51004940afef93bc80bf4dc, type: 3}
+  m_Name: L0_Data_Installer
+  m_EditorClassIdentifier: 
+  levelConfigSO: {fileID: 11400000, guid: 0b3f0969890c61b41bdf417de269a92c, type: 2}
+  orderConfigSO: {fileID: 11400000, guid: 7cb1d07e06c0b3742a447d9170f78d03, type: 2}
+  poolConfigSO: {fileID: 11400000, guid: 7f3a0059a29596243a3640ba7554d8c6, type: 2}
+  audioProfileSO: {fileID: 11400000, guid: 3eb6f7313ca81c54d852e81ba638c463, type: 2}

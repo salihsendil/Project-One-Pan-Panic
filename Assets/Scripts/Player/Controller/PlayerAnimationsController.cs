@@ -5,14 +5,13 @@ using UnityEngine;
 // Walk and Idle animations are available for now.
 // The animation switches to Walk based on the MovementVector property in PlayerController.cs.
 
-[RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationsController : MonoBehaviour
 {
     //References
     private Animator animator;
     private IAnimState currentState;
-    private PlayerController playerController;
+    private CharacterController characterController;
     private AnimationStateFactory stateFactory;
 
     //Animator Variables
@@ -20,15 +19,15 @@ public class PlayerAnimationsController : MonoBehaviour
     private int isWalkingHash;
 
 
-    public Animator Animator { get => animator;}
+    public Animator Animator { get => animator; }
     public bool IsWalking { get => isWalking; }
-    public int IsWalkingHash { get => isWalkingHash;}
+    public int IsWalkingHash { get => isWalkingHash; }
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -42,8 +41,8 @@ public class PlayerAnimationsController : MonoBehaviour
 
     void Update()
     {
-        isWalking = (playerController.MovementVector != Vector3.zero);
-        
+        isWalking = (characterController.velocity != Vector3.zero);
+
         currentState.UpdateState(this, stateFactory);
     }
 

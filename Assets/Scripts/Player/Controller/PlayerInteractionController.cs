@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 // This class requires InputHandler.cs and ItemSocket.cs (which implements IInteractor).
 // It controls player interactions by listening to interaction events from InputHandler.
@@ -17,10 +18,11 @@ using UnityEngine;
 [RequireComponent(typeof(ItemSocket))]
 public class PlayerInteractionController : MonoBehaviour
 {
+    [Inject] private InputHandler inputHandler;
+    
     [Header("References")]
     private IInteractor currentInteractor;
     private IInteractableCounter currentInteractable;
-    [SerializeField] private InputHandler inputHandler;
 
     [Header("Ray Config")]
     [SerializeField] private float rayLength = 1.5f;

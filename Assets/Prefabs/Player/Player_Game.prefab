@@ -98,10 +98,10 @@ PrefabInstance:
       addedObject: {fileID: 922518672843542198}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5991077615201222168}
+      addedObject: {fileID: 3070489804941854016}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3070489804941854016}
+      addedObject: {fileID: 5991077615201222168}
     - targetCorrespondingSourceObject: {fileID: 4269264002875866693, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3816807325782854301}
@@ -148,26 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f35e488dab84d74b8254db0b2323ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 0}
   characterController: {fileID: 1844166742562676456}
   movementVector: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
   speed: 3.6
-  groundGravity: 1
   gravityForce: 9.81
   rotationSpeed: 12
---- !u!114 &5991077615201222168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4541654729354282176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b8cdd3753de7541b2e01e6e0e97289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3070489804941854016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,12 +166,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f281a4e36daff64989c9bc07e85cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 0}
+  rayLength: 1.5
   rayRadius: 0.15
-  maxRayDistance: 0.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
+--- !u!114 &5991077615201222168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541654729354282176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b8cdd3753de7541b2e01e6e0e97289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3816807325782854301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,9 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f636b822ab536084c85d03c8be750fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactorType: 5
+  startItem: {fileID: 0}
   holdPoint: {fileID: 5415396957892007406}
-  testGameObject: {fileID: 0}
 --- !u!4 &5868767589990085806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6145802789416767019, guid: 42eaad3e53f7b3f448c6fa4441195f58, type: 3}

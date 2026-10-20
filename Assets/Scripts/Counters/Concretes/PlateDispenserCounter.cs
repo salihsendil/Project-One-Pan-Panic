@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 
 // This is the main class of the Plate Counter.
@@ -11,8 +12,9 @@ using UnityEngine;
 public class PlateDispenserCounter : BaseCounter
 {
     //References
+    [Inject] private SignalBus signalBus;
+    [Inject] private AdvancedPoolManager poolManager;
     private IInteractor currentInteractor;
-    private AdvancedPoolManager poolManager;
 
     [Header("Plate")]
     [SerializeField] protected PlateSO plateSO;
@@ -25,14 +27,16 @@ public class PlateDispenserCounter : BaseCounter
 
         foreach (var module in stateModules)
             module.Initialize(currentInteractor);
-        //singalBus.Subscribe<OrderDeliveredSignal>(RespawnPlate);
+
+        signalBus.Subscribe<OrderDeliveredSignal>(RespawnPlate);
     }
 
     private void OnDisable()
     {
         foreach (var module in stateModules)
             module.Dispose();
-        //singalBus.Unsubscribe<OrderDeliveredSignal>(RespawnPlate);
+
+        signalBus.Unsubscribe<OrderDeliveredSignal>(RespawnPlate);
     }
 
     private void Start()

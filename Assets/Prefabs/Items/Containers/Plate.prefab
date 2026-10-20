@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fba0f242cf52584983799d4229542d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerItemSO: {fileID: 0}
+  containerItemSO: {fileID: 11400000, guid: 1d539075f45bb9041bb931984b6b9763, type: 2}
   isPickable: 1
   holdPoint: {fileID: 8787500493033157904}
   containerSlots: []

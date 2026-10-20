@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 // It needs InputHandler.cs. It has integrated gravity, jump, and rotation.
 // Gravity depends on whether the character is on the ground or in the air.
@@ -6,8 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [Inject] private InputHandler inputHandler;
+    
     [Header("References")]
-    [SerializeField] private InputHandler inputHandler;
     [SerializeField] private CharacterController characterController;
 
     [Header("Movement")]

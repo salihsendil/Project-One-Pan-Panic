@@ -15,7 +15,7 @@ using Zenject;
 
 public class InputHandler : MonoBehaviour
 {
-    //[Inject] private SignalBus signalBus;
+    [Inject] private SignalBus signalBus;
 
     private PlayerInput playerInput;
 
@@ -33,13 +33,12 @@ public class InputHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = new();
-        //playerInput.Disable();
-        playerInput.Enable();
+        playerInput.Disable();
     }
 
     private void OnEnable()
     {
-        //signalBus.Subscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
+        signalBus.Subscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
 
         playerInput.Player.Movement.started += Move;
         playerInput.Player.Movement.performed += Move;
@@ -53,7 +52,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        //signalBus.Unsubscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
+        signalBus.Unsubscribe<GamePhaseChangedSignal>(HandleGamePhaseChange);
 
         playerInput.Player.Movement.started -= Move;
         playerInput.Player.Movement.performed -= Move;

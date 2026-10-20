@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 5441130630754390934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalPosition: {x: 0, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,7 +233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8986685648898884912}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 3961269839137162991}
-  positionSetOffset: {x: 0, y: 0.1, z: 0}
+  positionSetOffset: {x: 0, y: 0.05, z: 0}
 --- !u!114 &80176469689560680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,5 +329,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteractionEnabled: 1
-  plateSO: {fileID: 0}
+  plateSO: {fileID: 11400000, guid: 1d539075f45bb9041bb931984b6b9763, type: 2}
   plateRespawnDelay: 2

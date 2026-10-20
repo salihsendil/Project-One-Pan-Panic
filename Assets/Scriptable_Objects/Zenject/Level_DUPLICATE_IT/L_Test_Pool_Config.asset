@@ -12,4 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a628d1b81a5cc4bba05142e6c144c8, type: 3}
   m_Name: L_Test_Pool_Config
   m_EditorClassIdentifier: 
-  PoolEntries: []
+  PoolEntries:
+  - Type: 10
+    Prefab: {fileID: 6025134064580480279, guid: 6c89bacceb6c53e4aa315379f12ca84f, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 11
+    Prefab: {fileID: 5565224587203345315, guid: 8e26f3c3cf2cb6747a1af8bf8c317880, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 20
+    Prefab: {fileID: 3485756103133983962, guid: 41436330a0da5d247ab2e9c9794dc495, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 21
+    Prefab: {fileID: 5201984345604673992, guid: 38c6e2d03e8f5814393abc1dd0e56575, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 22
+    Prefab: {fileID: 8141558248208651308, guid: 6dfbcf655b43213428f0bfd9f7003575, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 23
+    Prefab: {fileID: 5663153819360797177, guid: 5c5802fbcdaf7b24698fe9a0b2ac69fa, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 24
+    Prefab: {fileID: 3556267131752492301, guid: 182db0468932df9459e029ad3ffb6db8, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 25
+    Prefab: {fileID: 7117419937714738901, guid: 822818bbcdf4f1148a8fb64cc1702809, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 26
+    Prefab: {fileID: 4927391712277007061, guid: a4a2744bfc6d713419b37f6ea8d08a60, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 27
+    Prefab: {fileID: 2481233133530338682, guid: 6a7237812037ff94eb035eb4719b4154, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 28
+    Prefab: {fileID: 7728962968606391009, guid: 7c7f89f0074c0dc4ca848e221fce0e21, type: 3}
+    Size: 3
+    HasHardLimit: 0
+  - Type: 50
+    Prefab: {fileID: 6417749154435258686, guid: 3eca688fa2f5bfc438b0fc4dbcd35a3a, type: 3}
+    Size: 3
+    HasHardLimit: 1

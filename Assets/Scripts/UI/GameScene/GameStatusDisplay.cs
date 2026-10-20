@@ -36,6 +36,9 @@ public class GameStatusDisplay : MonoBehaviour
     {
         if (canvasGroup.alpha == 0)
             canvasGroup.alpha = 1;
+
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.interactable = true;
         statusText.text = msg;
         Animate();
     }
@@ -51,6 +54,8 @@ public class GameStatusDisplay : MonoBehaviour
     public void Hide()
     {
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.interactable = false;
     }
 
     private void Animate()

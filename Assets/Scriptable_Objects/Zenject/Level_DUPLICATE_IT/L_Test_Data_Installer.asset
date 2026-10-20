@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6847fcebf51004940afef93bc80bf4dc, type: 3}
   m_Name: L_Test_Data_Installer
   m_EditorClassIdentifier: 
-  levelConfigSO: {fileID: 0}
-  orderConfigSO: {fileID: 0}
-  poolConfigSO: {fileID: 0}
-  audioProfileSO: {fileID: 0}
+  levelConfigSO: {fileID: 11400000, guid: 4eec8335a23008443a7782bb72a94c88, type: 2}
+  orderConfigSO: {fileID: 11400000, guid: 02f91ed5ce64cbb4a9248f1e2207e7b3, type: 2}
+  poolConfigSO: {fileID: 11400000, guid: 2cca10247863b0049999be29cdaaf07a, type: 2}
+  audioProfileSO: {fileID: 11400000, guid: 995a4663223d08f4db9ff339e3293de8, type: 2}

@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b332c529972a3ca45975b66f2dfb525e, type: 3}
   m_Name: L_Test_Order_Config
   m_EditorClassIdentifier: 
-  MaxOrderCount: 1
-  OrderSpawnInterval: 0
-  Recipes: []
+  MaxOrderCount: 2
+  OrderSpawnInterval: 20
+  Recipes:
+  - {fileID: 11400000, guid: f390cf5b2863dad4b98ada4f658235dc, type: 2}
+  - {fileID: 11400000, guid: 83d833e6238ea4047b4aaef65caaddf2, type: 2}
+  - {fileID: 11400000, guid: eef72aa95dd6300439516217d0449571, type: 2}
+  - {fileID: 11400000, guid: c9dd78b3261654344b3252a3eb9100a2, type: 2}
+  - {fileID: 11400000, guid: d539e58b088dec04baf9166637477937, type: 2}

@@ -14,6 +14,7 @@ public class Order
     {
         ID = id;
         Recipe = recipe;
+        timer = new();
         timer.Set(recipe.PreparationTime);
     }
 

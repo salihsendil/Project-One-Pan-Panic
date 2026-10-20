@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7349c69e044fde4e817caf4e44539a7, type: 3}
   m_Name: L_Test_Audio_Profile
   m_EditorClassIdentifier: 
-  Music: {fileID: 0}
-  Ambience: {fileID: 0}
+  Music: {fileID: 8300000, guid: 9d42a4099f7c2a74e8a86a2a5c2623d1, type: 3}
+  Ambience: {fileID: 8300000, guid: 6581cd691355d7f4e9116ec0c942e277, type: 3}

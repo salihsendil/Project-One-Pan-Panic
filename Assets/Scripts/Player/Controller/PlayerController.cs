@@ -8,7 +8,7 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     [Inject] private InputHandler inputHandler;
-    
+
     [Header("References")]
     [SerializeField] private CharacterController characterController;
 
@@ -16,25 +16,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 movementVector;
     [SerializeField] private float verticalVelocity;
     [SerializeField] private float speed = 3.2f;
-    [SerializeField] private float gravityForce = 9.81f;
+    [SerializeField] private float groundGravityForce = 2f;
+    [SerializeField] private float airGravityForce = 9.81f;
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 15f;
 
+    [Header("References")]
+    [SerializeField] private Vector3 initialSize;
 
     public Vector3 MovementVector => movementVector;
+    public Vector3 InitialSize => initialSize;
 
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        initialSize = transform.localScale;
     }
 
     private void Update()
     {
         movementVector = ConvertInputToMovementVector(inputHandler.InputVector);
 
-        //Debug.Log(movementVector);
         HandleRotation();
         ApplyGravity();
         HandleMovement();
@@ -53,12 +57,12 @@ public class PlayerController : MonoBehaviour
         if (characterController.isGrounded)
         {
             if (verticalVelocity < 0f)
-                verticalVelocity = -2f;
+                verticalVelocity = -groundGravityForce;
         }
 
         else
         {
-            verticalVelocity -= gravityForce * Time.deltaTime;
+            verticalVelocity -= airGravityForce * Time.deltaTime;
         }
     }
 
@@ -73,5 +77,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 ConvertInputToMovementVector(Vector2 input)
     {
         return new Vector3(input.x, 0f, input.y);
+    }
+
+    public void EnableGravity(bool isEnabled)
+    {
+        airGravityForce = isEnabled ? 9.81f : 0;
+        groundGravityForce = isEnabled ? 2f : 0;
+        verticalVelocity = 0f;
     }
 }

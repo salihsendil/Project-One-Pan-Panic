@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPhase: 5
   CountdownTime: 3
-  LevelTime: 60
+  LevelTime: 600
   ComboMultiplierIncrement: 0.04
   ScoreCurrencyMultiplier: 0.08

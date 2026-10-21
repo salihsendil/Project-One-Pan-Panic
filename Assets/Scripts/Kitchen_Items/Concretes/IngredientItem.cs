@@ -79,6 +79,10 @@ public class IngredientItem : MonoBehaviour, IPickable, IPoolable
                 iconDisplay.Hide();
                 break;
 
+            case PreparationStage.Boiled:
+                OnItemProcessed?.Invoke(this); ////for tutorial
+                break;
+
             default:
                 iconDisplay.Show();
                 OnItemProcessed?.Invoke(this); ////for tutorial

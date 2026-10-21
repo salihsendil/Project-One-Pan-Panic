@@ -62,6 +62,7 @@ public class CookwareItem : ContainerItem
 
     public bool IsHot { set => isHot = value; }
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -228,5 +229,14 @@ public class CookwareItem : ContainerItem
         currentProcessView = null;
         iconDisplay.Hide();
         return temp;
+    }
+
+    public override void Despawn()
+    {
+        base.Despawn();
+        cookwareState = CookwareState.Empty;
+        progressTracker.Reset();
+        currentProcessView?.Hide();
+        currentProcessView = null;
     }
 }

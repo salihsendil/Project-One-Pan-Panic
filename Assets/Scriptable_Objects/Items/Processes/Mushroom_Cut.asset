@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProcessType: 10
   VisualChangeTiming: 2
-  OutputMesh: {fileID: -1179015987825343242, guid: 4c8c2eb652be31041a3fa713065720da, type: 3}
+  OutputMesh: {fileID: 4300000, guid: 36a22fbaa2afc444d9e0e9b304442f83, type: 2}
   OutputMaterial: {fileID: 2100000, guid: ad39eccb39be39f40b3ba8c2298f9fd2, type: 2}
   FromStage: 0
   ToStage: 10

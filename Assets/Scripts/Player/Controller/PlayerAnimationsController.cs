@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 // This class controls the player animations. It uses an animation state machine and factory.
 // You can easily add new animations by adding a new AnimState class that implements IAnimState.
@@ -8,6 +9,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationsController : MonoBehaviour
 {
+    //Zenject
+    [Inject] private InputHandler inputHandler;
+
     //References
     private Animator animator;
     private IAnimState currentState;
@@ -41,7 +45,7 @@ public class PlayerAnimationsController : MonoBehaviour
 
     void Update()
     {
-        isWalking = (characterController.velocity != Vector3.zero);
+        isWalking = (characterController.velocity != Vector3.zero && inputHandler.InputVector != Vector2.zero);
 
         currentState.UpdateState(this, stateFactory);
     }

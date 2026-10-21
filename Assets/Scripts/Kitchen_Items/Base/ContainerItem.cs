@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 
 // Base class for Plate and Cookware Items.
@@ -9,8 +10,10 @@ using UnityEngine;
 // The list size is specified in the container data.
 
 
-public abstract class ContainerItem : MonoBehaviour, IPickable
+public abstract class ContainerItem : MonoBehaviour, IPickable, IPoolable
 {
+    [Inject] private AdvancedPoolManager poolManager;
+
     [Header("Data")]
     [SerializeField] protected ContainerItemSO containerItemSO;
 
@@ -57,4 +60,20 @@ public abstract class ContainerItem : MonoBehaviour, IPickable
     public abstract void ImportItems(List<ContainerSlot> items);
     public abstract bool CanExportItems();
     public abstract List<ContainerSlot> ExportItems();
+
+
+
+    public GameObject GameObject => gameObject;
+
+
+    public void Spawn() { }
+
+    public virtual void Despawn()
+    {
+        foreach (var slot in containerSlots)
+            poolManager.Despawn(slot.IngredientItem);
+
+        containerSlots.Clear();
+        iconDisplay.Hide();
+    }
 }

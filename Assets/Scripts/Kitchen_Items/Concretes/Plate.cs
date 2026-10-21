@@ -15,9 +15,6 @@ using UnityEngine;
 
 public class Plate : ContainerItem, IPoolable
 {
-
-    public GameObject GameObject => gameObject;
-
     /// <summary>
     /// Invoked when an item is added to containers.
     /// </summary>
@@ -106,19 +103,5 @@ public class Plate : ContainerItem, IPoolable
         containerSlots.Clear();
         iconDisplay.Hide();
         return temp;
-    }
-
-    public void Spawn()
-    {
-
-    }
-
-    public void Despawn()
-    {
-        foreach (var slot in containerSlots)
-            slot.IngredientItem.Despawn();
-
-        containerSlots.Clear();
-        iconDisplay.Hide();
     }
 }

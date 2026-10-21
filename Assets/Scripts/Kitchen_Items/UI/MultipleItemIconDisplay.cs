@@ -23,7 +23,6 @@ public class MultipleItemIconDisplay : MonoBehaviour, IItemIconDisplay
             if (!image.enabled && image.sprite != null)
             {
                 image.enabled = true;
-                break;
             }
         }
     }
@@ -34,6 +33,7 @@ public class MultipleItemIconDisplay : MonoBehaviour, IItemIconDisplay
         {
             if (image.sprite != null) continue;
             image.sprite = sprite;
+
             break;
         }
     }

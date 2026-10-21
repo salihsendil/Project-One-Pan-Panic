@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -12,13 +13,18 @@ using Zenject;
 public class PlateDispenserCounter : BaseCounter
 {
     //References
-    [Inject] private SignalBus signalBus;
     [Inject] private AdvancedPoolManager poolManager;
     private IInteractor currentInteractor;
 
+    //Coroutine
+    private Coroutine spawnCoroutine;
+    private WaitForSeconds spawnDelay;
+
     [Header("Plate")]
     [SerializeField] protected PlateSO plateSO;
-    [SerializeField] protected float plateRespawnDelay = 2f;
+
+    [Header("Respawn Plate")]
+    [SerializeField] protected float plateSpawnInterval = 6f;
 
 
     private void OnEnable()
@@ -28,15 +34,15 @@ public class PlateDispenserCounter : BaseCounter
         foreach (var module in stateModules)
             module.Initialize(currentInteractor);
 
-        signalBus.Subscribe<OrderDeliveredSignal>(RespawnPlate);
+        spawnDelay = new WaitForSeconds(plateSpawnInterval);
     }
 
     private void OnDisable()
     {
         foreach (var module in stateModules)
             module.Dispose();
-
-        signalBus.Unsubscribe<OrderDeliveredSignal>(RespawnPlate);
+        
+        StopCoroutine(spawnCoroutine);
     }
 
     private void Start()
@@ -48,6 +54,7 @@ public class PlateDispenserCounter : BaseCounter
             currentInteractor.SetItem(plate);
         }
 
+        spawnCoroutine = StartCoroutine(TrySpawnPlateFromPool());
 
         //for (int i = 0; i < 5; i++)
         //{
@@ -57,11 +64,18 @@ public class PlateDispenserCounter : BaseCounter
         //}
     }
 
-    private void RespawnPlate()
+    private IEnumerator TrySpawnPlateFromPool()
     {
-        Plate plate = poolManager.Spawn<Plate>(plateSO.ItemType);
-        if (plate == null) return;
-        currentInteractor.SetItem(plate);
+        while (true)
+        {
+            yield return spawnDelay;
+
+            Plate plate = poolManager.Spawn<Plate>(plateSO.ItemType);
+            if (plate != null)
+            {
+                currentInteractor.SetItem(plate);
+            }
+        }
     }
 
     public override void InteractInstant(IInteractor incomingInteractor)

@@ -10,7 +10,7 @@ public class CookwareItemSO : ContainerItemSO
     [Header("Burn Process")]
     public int DelayBeforeBurnDuration;
     public int BurnDuration;
-    [SerializeField] private int totalBurnDuration;
+    [SerializeField] [ReadOnly] private int totalBurnDuration;
 
     public int TotalBurnDuration => totalBurnDuration;
 

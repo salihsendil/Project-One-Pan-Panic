@@ -4,20 +4,17 @@ using Zenject;
 // It needs InputHandler.cs. It has integrated gravity, jump, and rotation.
 // Gravity depends on whether the character is on the ground or in the air.
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [Inject] private InputHandler inputHandler;
 
     [Header("References")]
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody rb;
 
     [Header("Movement")]
     [SerializeField] private Vector3 movementVector;
-    [SerializeField] private float verticalVelocity;
     [SerializeField] private float speed = 3.2f;
-    [SerializeField] private float groundGravityForce = 2f;
-    [SerializeField] private float airGravityForce = 9.81f;
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 15f;
@@ -31,47 +28,31 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         initialSize = transform.localScale;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        movementVector = ConvertInputToMovementVector(inputHandler.InputVector);
-
         HandleRotation();
-        ApplyGravity();
         HandleMovement();
     }
 
     private void HandleMovement()
     {
-        movementVector *= speed;
-        movementVector.y = verticalVelocity;
-
-        characterController.Move(movementVector * Time.deltaTime);
-    }
-
-    private void ApplyGravity()
-    {
-        if (characterController.isGrounded)
-        {
-            if (verticalVelocity < 0f)
-                verticalVelocity = -groundGravityForce;
-        }
-
-        else
-        {
-            verticalVelocity -= airGravityForce * Time.deltaTime;
-        }
+        movementVector = ConvertInputToMovementVector(inputHandler.InputVector);
+        Vector3 moveDir = rb.position + speed * Time.fixedDeltaTime * movementVector;
+        rb.MovePosition(moveDir);
     }
 
     private void HandleRotation()
     {
         if (movementVector == Vector3.zero) return;
 
-        Quaternion targetRot = Quaternion.LookRotation(movementVector, transform.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
+        Quaternion lookAt = Quaternion.LookRotation(movementVector, transform.up);
+        Quaternion targetLook = Quaternion.Slerp(rb.rotation, lookAt, Time.fixedDeltaTime * rotationSpeed);
+
+        rb.MoveRotation(targetLook);
     }
 
     private Vector3 ConvertInputToMovementVector(Vector2 input)
@@ -81,8 +62,6 @@ public class PlayerController : MonoBehaviour
 
     public void EnableGravity(bool isEnabled)
     {
-        airGravityForce = isEnabled ? 9.81f : 0;
-        groundGravityForce = isEnabled ? 2f : 0;
-        verticalVelocity = 0f;
+        rb.isKinematic = !isEnabled;
     }
 }

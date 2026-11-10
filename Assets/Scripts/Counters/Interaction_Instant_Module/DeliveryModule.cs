@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class DeliveryModule : MonoBehaviour
+public class DeliveryModule : MonoBehaviour, IInstantInteractionModule
 {
     //References
     [Inject] private OrderManager orderManager;
@@ -16,21 +16,23 @@ public class DeliveryModule : MonoBehaviour
         floatingText = GetComponentInChildren<FloatingTextController>();
     }
 
-    public bool TryInteractionInstant(IInteractor interactor)
+    public bool TryInteractInstant(IInteractor incomingInteractor)
     {
-        if (!interactor.HasItem) return false;
+        if (!incomingInteractor.HasItem) return false;
 
-        if (!interactor.GetItem.Transform.TryGetComponent(out Plate plate))
+        if (!incomingInteractor.GetItem.Transform.TryGetComponent(out Plate plate))
         {
             floatingText.Show("!!!!");
+            Debug.Log("tabak yok");
             return false;
         }
 
         if (recipeMatcher.TryGetRecipeMatch(plate.GetItems, out RecipeSO recipe))
         {
+            Debug.Log("buraya hiç girmedi");
             if (orderManager.TryCompleteOrder(recipe))
             {
-                interactor.RemoveItem();
+                incomingInteractor.RemoveItem();
                 poolManager.Despawn(plate);
                 particle?.Play(true);
                 return true;
@@ -38,6 +40,7 @@ public class DeliveryModule : MonoBehaviour
         }
 
         floatingText.Show("!!!!");
+        Debug.Log("tarif eþleþmedi");
         return false;
     }
 }

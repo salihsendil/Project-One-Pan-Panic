@@ -19,6 +19,7 @@ public class PlateDispenserCounter : BaseCounter
     //Coroutine
     private Coroutine spawnCoroutine;
     private WaitForSeconds spawnDelay;
+    private bool canCoroutineInitialize; // Added specifically to support the counter shuffle mechanic.
 
     [Header("Plate")]
     [SerializeField] protected PlateSO plateSO;
@@ -34,15 +35,19 @@ public class PlateDispenserCounter : BaseCounter
         foreach (var module in stateModules)
             module.Initialize(currentInteractor);
 
-        spawnDelay = new WaitForSeconds(plateSpawnInterval);
+        if (canCoroutineInitialize)
+        {
+            spawnCoroutine = StartCoroutine(TrySpawnPlateFromPool());
+        }
     }
 
     private void OnDisable()
     {
         foreach (var module in stateModules)
             module.Dispose();
-        
+
         StopCoroutine(spawnCoroutine);
+        spawnCoroutine = null;
     }
 
     private void Start()
@@ -54,6 +59,8 @@ public class PlateDispenserCounter : BaseCounter
             currentInteractor.SetItem(plate);
         }
 
+        canCoroutineInitialize = true;
+        spawnDelay = new WaitForSeconds(plateSpawnInterval);
         spawnCoroutine = StartCoroutine(TrySpawnPlateFromPool());
 
         //for (int i = 0; i < 5; i++)

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Order
@@ -6,7 +7,7 @@ public class Order
     public int ID;
     public RecipeSO Recipe;
 
-    private Timer timer;
+    [SerializeField] private Timer timer;
 
     public event Action OnOrderSetAgain;
 

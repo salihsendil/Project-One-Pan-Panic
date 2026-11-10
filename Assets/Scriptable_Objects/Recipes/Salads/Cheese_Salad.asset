@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheese_Salad
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  PreparationTime: 0
+  PreparationTime: 50
   SuccessScore: 0
   PenaltyScore: 0
   Ingredients:

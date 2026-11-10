@@ -15,7 +15,6 @@ public class PlayerAnimationsController : MonoBehaviour
     //References
     private Animator animator;
     private IAnimState currentState;
-    private CharacterController characterController;
     private AnimationStateFactory stateFactory;
 
     //Animator Variables
@@ -31,7 +30,6 @@ public class PlayerAnimationsController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        characterController = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -45,7 +43,7 @@ public class PlayerAnimationsController : MonoBehaviour
 
     void Update()
     {
-        isWalking = (characterController.velocity != Vector3.zero && inputHandler.InputVector != Vector2.zero);
+        isWalking = inputHandler.InputVector != Vector2.zero;
 
         currentState.UpdateState(this, stateFactory);
     }
